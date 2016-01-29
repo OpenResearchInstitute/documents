@@ -1,3 +1,9 @@
+This report focuses on advancements made in deciding the air interface. We're looking at DVB-S2X to receive, and OQPSK to transmit. 
+
+Repository for documents and software can be found: https://github.com/phase4ground
+
+We have nearly 50 volunteers on the mailing list and activity across the country. We're working hard to make a wonderful radio for AMSAT and terrestrial microwave, and we appreciate your support, feedback, comments, and critique. 
+
 DVB-S2 stands for Digital Video Broadcasting - Satellite - Second Generation. There is a recent extension to this standard, called DVB-S2X, that has very low SNR capabilities and a lot of other goodies. The geo project, ascent, and eventually the high earth orbit project, are expected to transmit using DVB-S2X. This is the foundation of our common air interface. 
 
 DVB-S2X specifies the modulation and coding for our received signal. There are five major landmarks. 
@@ -23,4 +29,14 @@ DVB-S2 follows the usual flow of having input data coded up to remove unnecessar
 The functional blocks of DVB-S2 include these things in parallelograms. Mode adaptation, which starts to build up the data frames by constructing the right header to go with the data. Stream adaptation, which adds in the right amount of padding and scrambling. Forward error correction, which produces coded frames that are of one of two sizes. Mapping to constellations, which is the modulation. Finally, there is physical layer framing. An open question is how minimal of a station can be supported? Driving it down as low as possible is going to be fun and challenging. 
 
 What we are anticipating is that the space teams will obtain an implementation of a DVB-S2X transmitter. Talks are already underway for this. Phase 4 ground is going to engineer the various DVB-S2X receivers. Standards documents are already in the repository and work is beginning. Get off the bench and hit the books!
+
+So let's talk a bit about some changes in the uplink for phase 4 radios. We were MSK, or minimum shift keying, but we are now OQPSK, or offset quadrature phase shift keying. That is what the payload team is currently designing for. 
+
+Like MSK, Offset QPSK has no more than a 90 degree phase shift at a time. This is good. In order to create this, you begin with a QPSK signal, where you take two data bits at a time. These two binary data bits make four distinct values. Each of these values are mapped onto four transmit phase shifts. 
+
+For offset QPSK, the odd and even bits coming into the modulator have a timing offset, of one bit period. Hence the name. That means the in-phase and quadrature signals, the I and the Q, never change at the same time. 
+
+The power spectral density of QPSK and Offset QPSK is the same. The shift in time doesn't effect that. 
+
+Uplink experiments are beginning. We started putting together Team HackRF, which will investigate the use of HackRF SDRs as one of the phase 4 radio recipes. Lots of other experiments to work out other recipes for amateurs to experiment need to happen too. If you have a set of hardware and you want to work in parallel, then speak up. The USRPs will get into the act ASAP, some people have BladeRFs, and so on.
 
