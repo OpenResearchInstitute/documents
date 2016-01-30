@@ -1,0 +1,11 @@
+Phase 4 uses github for all our documents and software. Github is an online platform based on the git spelled G I T revision control package. Github has a web interface, a desktop application, and command line interface. 
+
+GIT has a learning curve. Fortunately there is a tutorial on the gitub website. Before you do anything else, go do that tutorial. https://guides.github.com/activities/hello-world/
+
+There's a much longer and in-depth class about using git and github from Udacity. Here's the link: https://www.udacity.com/course/how-to-use-git-and-github--ud775
+
+The Udacity class is much longer than the hello world tutorial from github. The class explains in detail the reasons why git and github is superior to some of the other options for collaboration such as editing by attachment, dropbox, and so on, and goes over the more esoteric functions of git. 
+
+The rest of this video is a demonstration of how I remove and add documents to our Phase 4 Ground github account. 
+
+If you are an experienced github user, or generally clever, you might wonder if there's a better way to reverse a change that you don't want. There is, and it's called revert. If you accidentally delete something, or need to roll back a software change because it was just a really bad idea, then you would revert to a previous version, instead of manually adding and deleting. This demonstration is intended to get you off the ground in terms of adding PDFs to the repository using github desktop. For more advanced manipulation of the repository, start with a study of the hello world guide mentioned at the beginning, practice a few times with your own repository to get the hang of it, and then you'll feel more confident about submitting pull requests or adding documents to our repository. If you screw up, ask for help. We're all here to learn and add to our knowledge. Github is a powerful tool that has become immensely popular in the open source software world. It's the right tool for the job for us, and you will undoubtedly find plenty of other enjoyable projects out there using github.
