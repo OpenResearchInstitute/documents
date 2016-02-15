@@ -4,7 +4,7 @@ Tutorial PDF at http://static1.squarespace.com/static/543ae9afe4b0c3b808d72acd/t
 
 Slide presentation at http://static1.squarespace.com/static/543ae9afe4b0c3b808d72acd/t/55ddc6d6e4b09069ee81e20c/1440597718379/3.+braun_pendlum--rfnoc+2015-08-26.pdf
 
-RFNoC is for FPGAs what GNUradio is for general purpose processors. 
+RFNoC is for FPGAs what GNUradio is for general purpose processors. RFNoC is the GNUradio of FPGAs. 
 
 RFNoC is very developmental. Things may change out from under you.
 
@@ -16,27 +16,32 @@ The building blocks are all there for this. USRP available online, x310 contains
 
 Why hasn't this already been done? Because it's difficult. Takes a lot of time, requires digital design expertise, and needs transparent integration into software. 
 
-Domain vs. FPGA experts. FPGA development is not really a requirement of communications engineering curriculum. Math is hard. 
+This is a situation where you need a lot of radio Domain exports and a lot of FPGA experts, and there isn't a lot of overlap between the two groups. FPGA development is not really a requirement of communications engineering curriculum. And, the math is hard. 
 
-Simple in theory, something like a 200MHz real-time Welch's Algorithm implementation. In practice: several stumbling blocks. Highly parallellizable operations and basic math are ideal to shift to an FPGA. The FPGA is underutilized. Transport between blocks is overloaded. It's not optimized. 
+Take something simple in theory, something like a 200MHz real-time Welch's Algorithm implementation. In practice there are several stumbling blocks. Highly parallellizable operations and basic math are ideal to shift to an FPGA. The FPGA is underutilized. Transport between blocks is overloaded. It's not optimized. 
 
-Even with a high end computer, the host just can't keep up with demanding radio applications that the x310 should indeed be able to do. 
+Even with a high-end computer, the host just can't keep up with demanding radio applications that the x310 should indeed be able to do. 
 
 Goal: Heterogenous Processing. Composable and modulator designs using GPP, FPGA, and beyond. Maintain ease of use, and have tight integration with GNU Radio. Push the boundary between GPP and FPGA processing to the optimal place. Make FPGA acceleration easier 
 
 RFNoC + GNU radio is a perfect match. Ideal way to use and test RFNoC is with GNU Radio. Seamlessly interconnects (with some caveats). 
 
-RFNoC architecture. The user application is GNU Radio. USRP source +> RFNoC Source. This new source controls the radio core. 
+RFNoC architecture. The user application is GNU Radio. USRP source ==becomes==> an RFNoC Source. This new source controls the radio core. 
 
-There's a USRP hardware driver, which is on the host PC. On the USRP FPGA, there is an Ingress Egress interface, and a crossbar. Below that there is a Radio Core, plus Custom RFNoC blocks. 
+There's a USRP hardware driver, which is on the host PC. On the USRP FPGA, there is an Ingress/Egress interface, and a crossbar. Below that there is a Radio Core, plus Custom RFNoC blocks. 
 
-RFNoC provides the communication infrastructure. 
-
-The crossbar knows what to do with the data it's getting. 
-
-RFNoC provides space for user logic. 
+RFNoC provides the communication infrastructure. The crossbar knows what to do with the data it's getting. RFNoC provides space for user logic. 
 
 e.g. Implement FFT as an RFNoC block in FPGA. RFNoC shell. Put whatever you want into the shell. 
 
-So in this diagram, there's a radio core bock, a crossbar, and a FFT block. This is "anatomy of an RFNoC Block". 
+So in this example, discussed in the video, there's a radio core bock, a crossbar, and a FFT block. This is "anatomy of an RFNoC Block". 
 
+AXI-stream provides user interface to RFNoC. Industry standard (ARM), easy to use, large library of existing IP cores. 
+
+Each block is in their own clock domain. "All you need to do is fill this part"
+
+Many computation engines. Not limited to one crossbar, one device. 
+
+There's a big sticking point here with the tools available to us. FPGA tools are notoriously closed and expensive. RFNoC is all open source. All available. Hard work. Steep learning curve. 
+
+There are implications for dropping in something proprietary that you might have purchased, like Xilinx IP cores. Doing this for your own use is ok, but then if you are selling it, say, to a customer, then you have to check with Xilinx or whoever you got the IP core from.
