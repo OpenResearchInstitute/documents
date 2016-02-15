@@ -1,0 +1,42 @@
+Overview talk at https://www.youtube.com/watch?v=UwBZ8xkiTPA
+
+Tutorial PDF at http://static1.squarespace.com/static/543ae9afe4b0c3b808d72acd/t/55f85bc2e4b067b8c2af4eaf/1442339778410/3-pendlum_jonathon-rfnoc_tutorial_fpga.pdf
+
+Slide presentation at http://static1.squarespace.com/static/543ae9afe4b0c3b808d72acd/t/55ddc6d6e4b09069ee81e20c/1440597718379/3.+braun_pendlum--rfnoc+2015-08-26.pdf
+
+RFNoC is for FPGAs what GNUradio is for general purpose processors. 
+
+RFNoC is very developmental. Things may change out from under you.
+
+Entire hardware stack is treated like a reprogrammable ASIC. Features are used as-is.
+
+The basic premise is GNU radio flexibility should extend onto the FPGA all the way up to the ADC/DAC. 
+
+The building blocks are all there for this. USRP available online, x310 contains big and expensive FPGA, seems like everything is there to move flow graphs onto the FPGA.
+
+Why hasn't this already been done? Because it's difficult. Takes a lot of time, requires digital design expertise, and needs transparent integration into software. 
+
+Domain vs. FPGA experts. FPGA development is not really a requirement of communications engineering curriculum. Math is hard. 
+
+Simple in theory, something like a 200MHz real-time Welch's Algorithm implementation. In practice: several stumbling blocks. Highly parallellizable operations and basic math are ideal to shift to an FPGA. The FPGA is underutilized. Transport between blocks is overloaded. It's not optimized. 
+
+Even with a high end computer, the host just can't keep up with demanding radio applications that the x310 should indeed be able to do. 
+
+Goal: Heterogenous Processing. Composable and modulator designs using GPP, FPGA, and beyond. Maintain ease of use, and have tight integration with GNU Radio. Push the boundary between GPP and FPGA processing to the optimal place. Make FPGA acceleration easier 
+
+RFNoC + GNU radio is a perfect match. Ideal way to use and test RFNoC is with GNU Radio. Seamlessly interconnects (with some caveats). 
+
+RFNoC architecture. The user application is GNU Radio. USRP source +> RFNoC Source. This new source controls the radio core. 
+
+There's a USRP hardware driver, which is on the host PC. On the USRP FPGA, there is an Ingress Egress interface, and a crossbar. Below that there is a Radio Core, plus Custom RFNoC blocks. 
+
+RFNoC provides the communication infrastructure. 
+
+The crossbar knows what to do with the data it's getting. 
+
+RFNoC provides space for user logic. 
+
+e.g. Implement FFT as an RFNoC block in FPGA. RFNoC shell. Put whatever you want into the shell. 
+
+So in this diagram, there's a radio core bock, a crossbar, and a FFT block. This is "anatomy of an RFNoC Block". 
+
