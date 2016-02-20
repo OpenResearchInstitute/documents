@@ -1,0 +1,13 @@
+(whatever greeting you like)
+
+During the week, Team HackRF made progress in establishing development environments, getting github to cooperate, and getting on the air. Team HackRF has a mission to evaluate, develop, and document the HackRF for use as one of the ensemble of solutions for the Phase 4 Ground radio. 
+
+Members of Phase 4 Ground met with AHA on Thursday 18th of February to strength potential relationships for the purchase of IP cores for Phase 4B payload, cube quest challenge, and potentially Phase 3E payload. We are very hopeful to get a time-limited evaluation version of DVB-S2X for use in the lab in developing Phase 4 Ground receivers. 
+
+On Friday the 19th of February, AMSAT learned of the successful conclusion of the accommodation study by Millennium Space Systems. This means that the path is clear for proceeding with the Phase 4B payload. 
+
+Next week, members of Phase 4 Ground and Space will meet with Flex Radio for discussions about a manufactured version of the Phase 4 Radio. Other manufacturers and organizations are also being approached. 
+
+Documentation of all the modulation and coding options in DVB-S2X exists already in the standards documents that can be downloaded from DVB's website, however they are also being entered into a spreadsheet so that we can make calculations and evaluations of what we want or need to use. 
+
+Here's some video and stills from the lab efforts to get a DVB-T signal transmitted and received on the bench. 
