@@ -12,13 +12,13 @@ The meetings at Flex concluded with a resolution to support the Phase 5B Mars Mi
 
 Single Antenna Efforts
 
-One of the topics discussed during the Flex meetings was the dual-band feed effort. Having a single antenna was considered by Flex to be a very important requirement, especially for the emergency communication market. 
+One of the topics discussed during the Flex meetings was our dual-band feed effort. Having a single antenna was considered by Flex to be a very important requirement, especially for the emergency communication market. 
 
 There are recognized difficulties with a dual-band feed for the frequencies and power levels under consideration. This is an area of active research in Phase 4 Ground, with the challenges being much better described and explained over the past week or so. Here’s an image that might serve to show more clearly what we are concerned about. 
 
-Here is the downlink. Here is the second harmonic of the uplink. Here are the working limits of the receive LNB we expect to be using. You can see that the second harmonic of the uplink falls within the receive range of the LNB. You can see that selecting different local oscillators doesn’t really help. You can see that moving to a different 5GHz sub-band doesn’t really help, and would require some politicking. So, in order to achieve our goal of having a single antenna solution, we have to confront this signal, and we have to reduce it as much as possible. 
+The purple x is the downlink. The blue asterisk is the second harmonic of the uplink. The green triangles are the working limits of the receive LNB we expect to be using. You can see that the second harmonic of the uplink falls within the receive range of the LNB. You can see that selecting different local oscillators doesn’t really help. You can see that moving to a different 5GHz sub-band doesn’t really help, and would require some politicking. So, in order to achieve our goal of having a single antenna solution, we have to confront this signal, and we have to reduce it as much as possible. 
 
-Why do we care so much about something like a dual-band feed? Because based on market research and professional feedback, we must do our best to provide a single dish solution. A dual-band feed is one way to achieve this. It’s not the only way, as Kent Britain WA5VJB is working on a patch plus dish design, and I think several of us are thinking about some expensive phased array techniques. 
+Why do we care so much about something like a dual-band feed? Because based on market research and professional feedback, we must do our best to provide a single dish solution. A dual-band feed is one way to achieve this. It’s not the only way, as Kent Britain WA5VJB is working on a patch plus dish design, and I think several of us are thinking about some expensive phased array techniques. If you have another idea, share it. 
 
 Kent believes that 120dB of isolation would be required in order to declare success, and that a low pass filter at the uplink PA was an obvious part of the solution. Flex radio advised looking into a push-pull amplifier, as this would greatly reduce the second harmonic from the get-go. We have the uplink linear polarization orthogonal to the downlink linear polarization. There is some isolation from that. 
 
@@ -26,7 +26,7 @@ Bill Werner W3EAO proposes a power amp by CREE CGH55015xxx, which produces 10 wa
 
 He writes, “This design, while not cheap, does give a 5 watt 5.6GHz transmitter (should be more than enough) using a single dish. The use of cross polarization should give about another 10 to 20 dB. Also, need to evaluate why 10GHz pre-amp has such limited dynamic range.”
 
-Kerry Banke N6IZW shared some progress on the dual-band feed effort. He also is working on recruiting additional an additional person that has expertise in this particular area. If successful, then that would bring the number of people working on the several solutions for single-dish design to five, with Paul Wade also working on a dual-band feed design of his own. Not bad, but there’s still room for more. Paul Wade says to hang in there he’s working on it. 
+Kerry Banke N6IZW shared some progress on the dual-band feed effort. He also is working on recruiting additional an additional person that has expertise in this particular area. If successful, then that would bring the number of people working on the several solutions for single-dish design to five, with Paul Wade W1GHZ also working on a dual-band feed design of his own. Not bad, but there’s still room for more. Paul Wade says to hang in there he’s working on it and will report back soon. 
 
 Kerry Banke writes,
 “I ran a test using your LNB to see at what input level in the 11350 MHz range  the 10450 MHz starts being affected.
@@ -36,8 +36,6 @@ It looks like we need to have the PA second harmonic less than about -70 dBm at 
 He is thinking maybe a low pass filter for the PA and low loss band pass waveguide  filter at the LNB input. 
 
 One of his thoughts is to see if a waveguide post bandpass filter for 10450 MHz can be designed for 3/4" ID copper pipe as part of the dual band feed to reject the 11440 MHz Tx harmonic.
-
-Bill Werner said we should be looking harder at the LNB. Perhaps there are some alternatives here. 
 
 There is always the baseline design of two dishes with two separate feeds. Think of two dishes as the stacked HF monobander approach. You can always do this. 
 
@@ -53,6 +51,8 @@ A worthy goal in this area is to reduce the required state in the satellite to z
 So, where do you pay for all this simplicity? You pay in two ways. Each frame must be able to fully explain itself. There is increased overhead in every transmission. 
 
 This overhead is what would otherwise be stored in a “connection object”, or memory bank, or register or whatever, in the satellite. When you say you don’t want to do that, then you, as a frame or packet, have to always be ready to present proper state, or allow that state to be calculated, at any time. In other words, system complexity is reduced because we purchase the simplicity with additional overhead, and quite possibly a more complex protocol. 
+
+Another very large factor in our protocol is that our hardware is not fixed. The protocol must be adapted to intelligently handle any reasonable combination of uplink and downlink capability, and it must be able to do this without burdening the satellite hardware. If the hardware was fixed, then some of what we are talking about doing would not be necessary because one could make assumptions about the ground. Providing this adaptive capability is a challenge, but it is definitely achievable. 
 
 RFNoC Feedback
 
@@ -74,7 +74,11 @@ If you weren't already all full up of risk just by working on a space project, t
 
 Management
 
-We added many new volunteers this week possessing a diverse array of skills and experiences. It's been suggested that we develop a directory for the project volunteers. We also need a formal process for delegating technical work. Up until this week it's been mostly possible to do this in a less formal sense. However, we are ramping up, and we need processes that support you all being able to better participate in the work. 
+We added many new volunteers this week possessing a diverse array of skills and experiences. It's been suggested that we develop a directory for the project volunteers. AMSAT does not publish a list of volunteers, but does publish a directory of the points of contact for major areas of activity. 
 
-This could be a google form, a spreadsheet in github, or something else. I need some suggestions here on how to best delegate work to the team and also make it easy to report back and document. 
+It seems like it would obviously help people to better find each other if we published a directory, but as an open source and open process project, volunteer contact information really must be opt-in. 
+
+I believe that one can log in to their mailman account page for phase4@amsat.org and get a list of fellow subscribers, but a list of email addresses does not provide the sort of introduction that makes it easy to start working with each other. If you have ideas or suggestions for improvement in this area, then please share them. Making this an easy, enjoyable, and supported experience is my goal. 
+
+We also need a formal process for delegating technical work. Up until this week it's been mostly possible to do through email. However, we are ramping up, and we need processes that support you all being able to better participate in the work. This means something like a google form, or a spreadsheet in github, or something else. I need some suggestions here on how to best delegate work to the team and also make it easy to report back and document. Again, ideas and suggestions are needed here. These are not easy problems to solve, as I'm sure each of you already fully know. I will do my best to make it easy and enjoyable to be a technical volunteer for AMSAT, and finding out what work needs to be done is almost the most important thing in making forward progress.  
 
