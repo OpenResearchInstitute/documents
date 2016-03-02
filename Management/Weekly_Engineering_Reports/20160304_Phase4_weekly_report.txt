@@ -1,0 +1,33 @@
+There was activity on the dual-band feed project, with the challenges being much better described and explained over the past week or so. Here’s an image that might serve to show what we are concerned about. 
+
+Here is the downlink. Here is the second harmonic of the uplink. Here are the working limits of the receive LNB we expect to be using. You can see that the second harmonic of the uplink falls within the receive range of the LNB. You can see that selecting different local oscillators doesn’t really help. You can see that moving to a different 5GHz sub-band doesn’t really help, and would require some politicking. So, in order to achieve our goal of having a single antenna solution, we have to confront this signal, and we have to reduce it as much as possible. 
+
+Why do we care so much about something like a dual-band feed? Because based on market research and professional feedback, we must do our best to provide a single dish solution. A dual-band feed is one way to achieve this. It’s not the only way, as Kent Britain is working on a patch plus dish design, and I think several of us are thinking about some expensive phased array techniques. 
+
+Kent believes that 120dB of isolation would be required in order to declare success, and that a low pass filter at the uplink PA was an obvious part of the solution. Flex radio advised looking into a push-pull amplifier, as this would greatly reduce the second harmonic from the get-go. We have the uplink linear polarization orthogonal to the downlink linear polarization. There is some isolation from that. 
+
+Bill Werner proposes a power amp by CREE CGH55015xxx, which produces 10 watts at 6cm (+40dbm) with the second harmonic expected to be down 20dB at +20dbm. This feeds a pair of Minicircuits LFCN722+ low pass filters, 1.5dB at 6 cm, 38dB at 3cm, 3cm now at -55dBm; 6cm at 5 watts (+37dBm). This goes to DirectiveSystems dual band feed (WB5LAU design) with 70dB isolation twixt 6cm and 3cm ports (at 6cm), and assume 30 dB (at 3cm). Second harmonic is now at -85dBm, 6cm now at -33 dBm. Then, use Minicircuits ZVBP-10R5G+ filter from feed to 3 cm pre-amp. The insertion loss is 0.24 dB and 6cm rejection of additional 52+dB which puts both 5.6GHz and its 2nd harmonic at -85 dBm into the 10GHz pre-amp. He judges this to be close enough. 
+
+He writes, “This design, while not cheap, does give a 5 watt 5.6GHz transmitter (should be more than enough) using a single dish. The use of cross polarization should give about another 10 to 20 dB. Also, need to evaluate why 10GHz pre-amp has such limited dynamic range.”
+
+Kerry Banke N6IZW shared some progress on the dual-band feed effort. He also is working on recruiting additional an additional person that has expertise in this particular area. If successful, then that would bring the number of people working on the several solutions for single-dish design to five, with Paul Wade also working on a dual-band feed design of his own. Not bad, but there’s still room for more. Paul Wade says to hang in there he’s working on it. 
+
+Kerry Banke writes,
+“I ran a test using your LNB to see at what input level in the 11350 MHz range  the 10450 MHz starts being affected.
+
+It looks like we need to have the PA second harmonic less than about -70 dBm at the LNB input. I'm thinking I'll build one of Al Wards dual band feeds to get some first hand experience with the isolation subject. My general leaning at this point is to see if a circular waveguide bandpass filter can be built into the rear section (tube) of the 10 GHz portion of the feed and then  cut the horn  off an  LNB and  directly directly attach the circular LNB guide to the filter output of the feed. I'll also look at a low pass filter for the Tx PA to reduce the 2nd harmonic. I will need to dig through my stuff to see how much power I can generate at 5 GHz. I suspect 5GHz TWT amps can be had for testing.”
+
+He is thinking maybe a low pass filter for the PA and low loss band pass waveguide  filter at the LNB input. 
+
+One of his thoughts is to see if a waveguide post bandpass filter for 10450 MHz can be designed for 3/4" ID copper pipe as part of the dual band feed to reject the 11440 MHz Tx harmonic.
+
+Bill Werner raised the issue of looking harder at the LNB. What other approaches could we take in the receiver to reduce the effect of a second harmonic from the uplink? 
+
+There is always the baseline design of two dishes with two separate feeds. Think of two dishes as the stacked HF monobander approach. You can always do this. 
+
+If you have another solution that you don’t see mentioned here, or any feedback at all about any of this, then we are very interested in it! We welcome experimentation, comment, and critique. 
+
+Discussion continued and expanded on how to achieve adaptive coding and modulation for Phase 4 Ground radios. There are a lot of questions to consider, and a lot of progress to be collected for the air interface document. There are some ideas that have endured for months, and some that are shifting. The effort here is to reduce the required state in the satellite to zero. In other words, no user state is stored the satellite. This reduces the complexity of the satellite code. This is highly desirable. This also means the satellite functions are much more scaleable. This makes the radios on the ground much simpler as well, because it doesn’t have to deal with a complicated satellite. 
+
+Where do you pay for all this simplicity? You pay in two ways. Each frame must fully explain itself. There is increased overhead in every transmission. Some of that overhead could be eliminated by being stored in a “connection object”, or memory bank, or register or whatever, in the satellite. When you say you don’t want to do that, then you, as a frame or packet, have to always be ready to explain yourself at any time. IN other words, system complexity is purchased with overhead and a hard-working well-thought-out protocol. 
+
