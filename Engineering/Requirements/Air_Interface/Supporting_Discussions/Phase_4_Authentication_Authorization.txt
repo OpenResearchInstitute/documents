@@ -1,0 +1,30 @@
+I’ve read some on tQSL. There are extensive planning docs from before ARRL accepted tQSL as the basis for LotW, but the docs on what it is today are either minimal or hard to find.
+
+There is source code, though, which I haven’t looked at yet.
+
+So far, it seems like all we get from tQSL is a way to verify identity by callsign. To get that we’ll have to walk the user through a process similar to setting up a log program to use LotW, I think, which is notoriously a pain for the computer-intimidated.
+
+it is a pain, that is true. So we get authentication of some sort?
+
+we get identity. ARRL has done the work of verifying that such a callsign exists and transmitting the private key (and signed certificate) to that legit license holder. Assuming the licensee has kept the secret secret, we can ask him to sign something and then the signed something will be trustworthy as coming from him. That’s all we get.
+
+since we don’t have the certificate database (only ARRL does) the user would have to transmit the certificate to us (that’s a 5Kbyte file) as well as the signed whatever, at least initially.
+
+I’m assuming that the ARRL’s CA public key is available somewhere, probably buried in the source code. We’d need that in order to verify the legitimacy of the certificate the user sent us.
+
+So, this involves ARRL. It requires LOTW setup.
+
+yes, if we adopt LotW certificates as the only acceptable proof of identity, then every P4 operator would have to register with LotW.
+
+It could be one of multiple options, but we’d be hard pressed to set up anything better that really does verify the license-holder’s identity
+
+all this is assuming we have a need to verify identity. I am not convinced that we do.
+
+I am guessing this isn’t going to work with the stateless every-transmission-is-self-proving scheme, though. There is too much data in the certificate and too much calculation needed to verify it.
+
+We could still use it at a central authorization server on the ground, I guess. With all that implies.
+
+Um, disregard the 5K number above. The file I measured wasn’t the right kind of file.
+
+ok one cert compresses to about 1K byte. Still pretty big. The 5K file contained several of them plus my encrypted private key.
+
