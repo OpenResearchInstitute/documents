@@ -48,13 +48,15 @@ The address given to the FCC comes from the address that that license applicant 
 
 This is the limit of authentication provided to, and therefore by, the licensing authority. In the US, this is the FCC. 
 
+There are two fundamental questions.
+
 Does it make sense to exceed this level of authentication?
 
 What sort of authentication and authorization is required of Phase 4 Ground radio traffic?
 
-Each deployment should be considered separately. The default security implementation of Phase 4 Ground is the process described within this document. The Phase 4 Ground process must defer to a process selected by the Groundsat, if that security process selected by the Groundsat needs to claim priority. If there is a different process selected by the Groundsat, then a full specification must be provided to Phase 4 Ground as part of the Air Interface documentation. This serves as a “we can’t read your mind” clause. 
+The default security implementation of Phase 4 Ground is the process described within this document. The Phase 4 Ground process must defer to a process selected by the Groundsat, if that security process selected by the Groundsat needs to claim priority. If there is a different process selected by the Groundsat, then a full specification must be provided to Phase 4 Ground as part of the Air Interface documentation. This serves as a “we can’t read your mind” clause. 
 
-Phase 4B GEO
+Phase 4B GEO 
 
 Phase 4 Ground considers a process of authentication and authorization in this document. This process involves state in the Groundsat and in the Radio. 
 
@@ -64,7 +66,7 @@ The state in the Groundsat requires the following things.
 2. The ability to read from this database.
 3. The ability to write to this database.
 4. The ability to demand authentication from the Phase 4 Radio. 
-5. The ability to do some processing using the data from both communication frames and the database.
+5. The ability to do some processing using data received from uplink communication frames and information from the database.
 6. 
 
 
@@ -76,3 +78,7 @@ The state in the Radio requires the following things.
 4. Memory to store a certificate.
 5. Ability to sign a message containing the generated token with the private key. 
 6. Ability to send the signed message plus the certificate to the Groundsat when it is demanded by the Groundsat.
+
+The process is as follows. 
+
+Operators that comply with the air interface can transmit through the satellite. 
