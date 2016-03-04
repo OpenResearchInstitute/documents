@@ -28,3 +28,12 @@ Um, disregard the 5K number above. The file I measured wasn’t the right kind o
 
 ok one cert compresses to about 1K byte. Still pretty big. The 5K file contained several of them plus my encrypted private key.
 
+**********
+
+Authentication is the process of confirming a declared identity.
+
+Authorization is the process of allowing particular identities access to particular resources. 
+
+Phase 4 Ground considers a process of authentication and authorization in this document. This process involves a small amount of state in the Groundsat. The state requires memory for a database, the ability to read from and write to this database, and the ability to do some processing using the data from both communication frames and the database. 
+
+
