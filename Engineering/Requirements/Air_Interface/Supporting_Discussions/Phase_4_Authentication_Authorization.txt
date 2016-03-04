@@ -36,8 +36,23 @@ Authorization is the process of allowing particular identities access to particu
 
 Groundsat is any equipment that serves as the payload for any Phase 4 Ground system. This includes but is not limited to a satellite payload, satellite simulator (Groundsat), or terrestrial hub. 
 
-Phase 4 Ground considers a process of authentication and authorization in this document. This process involves a small amount of state in the Groundsat. The state in the Groundsat requires memory for a database, the ability to read from and write to this database, and the ability to do some processing using the data from both communication frames and the database. 
+Phase 4 Ground considers a process of authentication and authorization in this document. This process involves state in the Groundsat and in the Radio. 
+
+The state in the Groundsat requires the following things.
+
+1. Memory for a database.
+2. The ability to read from this database.
+3. The ability to write to this database.
+4. The ability to demand authentication from the Phase 4 Radio. 
+5. The ability to do some processing using the data from both communication frames and the database.
+6. 
 
 
+The state in the Radio requires the following things. 
 
-
+1. The ability to generate a token.
+2. Memory to store the token.
+3. Memory to store private key.
+4. Memory to store a certificate.
+5. Ability to sign a message containing the generated token with the private key. 
+6. Ability to send the signed message plus the certificate to the Groundsat when it is demanded by the Groundsat.
