@@ -58,11 +58,11 @@ The default security implementation of Phase 4 Ground is the process described w
 
 Phase 4B GEO 
 
-Phase 4 Ground considers a process of authentication and authorization in this document. This process involves state in the Groundsat and in the Radio. 
+Phase 4 Ground considers a process of authentication and authorization in this document. This process involves state in the Groundsat and in the Phase 4 Radio. 
 
 The state in the Groundsat requires the following things.
 
-1. Memory for a database.
+1. Memory for a database. 
 2. The ability to read from this database.
 3. The ability to write to this database.
 4. The ability to demand authentication from the Phase 4 Radio. 
@@ -81,4 +81,27 @@ The state in the Radio requires the following things.
 
 The process is as follows. 
 
-Operators that comply with the air interface can transmit through the satellite. 
+Operators that comply with the air interface can transmit through the satellite. Transmission requires a token. Phase 4 Ground radios generate a random token. This token is in each frame. 
+
+The Groundsat stores the token, the claimed call sign, the claimed SSID associated with the call sign, and a time stamp. This is a tuple that forms the rows of a database. 
+
+satellite time stamp : callsign : SSID : token
+
+Unless and until there is cause for authentication, transmissions from stations are allowed. 
+
+A request for authentication can be made to a particular row of the database, all rows that have a particular call sign, all call signs, or some other combination. 
+
+In the case of a single row, this request for authentication would be addressed to the transmitter originating the transmissions associated with one particular (call sign : SSID). As is customary, a call sign can have several active SSIDs.  
+
+Upon a request for authentication, the station or stations affected would generate a message. The message would contain a token. The token could be the same one generated to establish communications. The token could be a new one. Either way, the token is signed by the private key of that particular station. The station would send an authentication response message that consists of the signed token and the certificate associated with that call sign. (AI: what about SSID here? back off on SSID granularity or require a certificate for each SSID?)
+
+If the authentication response is not received in a timely manner, the station is blacklisted. 
+
+If the authentication response is received, the Groundsat checks that the certificate is valid by comparing with the root certificate (LoTW root certificate is through GoDaddy). If the certificate is not valid, the station is blacklisted.
+
+If the certificate is valid, then the signature is checked. If the signature is not valid, the station is blacklisted.
+
+If the signature checks out, then the row corresponding to the station in the Groundsat security database is updated. 
+
+There are several reasons for launching an authorization request. This could be time-based (like Howie mentioned). Every hour, stations could be required to authorize. An agency that has an MOU with the Groundsat, and has influence over a ground control station, could request authorization. All stations, or some subset, may be required to authorize. Certain types of stations, such as “all stations that participated in Red Cross Drills within the past 9 months”, or “stations that support a throughput of greater than 500kbps” could be allowed. Others would be blacklisted. 
+
