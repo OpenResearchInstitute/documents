@@ -34,6 +34,10 @@ Authentication is the process of confirming a declared identity.
 
 Authorization is the process of allowing particular identities access to particular resources. 
 
-Phase 4 Ground considers a process of authentication and authorization in this document. This process involves a small amount of state in the Groundsat. The state requires memory for a database, the ability to read from and write to this database, and the ability to do some processing using the data from both communication frames and the database. 
+Groundsat is any equipment that serves as the payload for any Phase 4 Ground system. This includes but is not limited to a satellite payload, satellite simulator (Groundsat), or terrestrial hub. 
+
+Phase 4 Ground considers a process of authentication and authorization in this document. This process involves a small amount of state in the Groundsat. The state in the Groundsat requires memory for a database, the ability to read from and write to this database, and the ability to do some processing using the data from both communication frames and the database. 
+
+
 
 
