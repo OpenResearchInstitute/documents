@@ -52,7 +52,7 @@ Does it make sense to exceed this level of authentication?
 
 What sort of authentication and authorization is required of Phase 4 Ground radio traffic?
 
-Each deployment should be considered separately. 
+Each deployment should be considered separately. The Phase 4 Ground process must defer to the process selected by the Groundsat, if the process selected by the Groundsat has reason to claim priority.  
 
 Phase 4B GEO
 
