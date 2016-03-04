@@ -89,7 +89,7 @@ satellite time stamp : callsign : SSID : token
 
 Unless and until there is cause for authentication, transmissions from stations are allowed. 
 
-A request for authentication can be made to a particular row of the database, all rows that have a particular call sign, all call signs, or some other combination. 
+When there is a cause for authentication, a request for authentication can be made. Requests for authentication can be made to a particular row of the database, all rows that have a particular call sign (call sign : *), all call signs (*), or some other combination. 
 
 In the case of a single row, this request for authentication would be addressed to the transmitter originating the transmissions associated with one particular (call sign : SSID). As is customary, a call sign can have several active SSIDs.  
 
