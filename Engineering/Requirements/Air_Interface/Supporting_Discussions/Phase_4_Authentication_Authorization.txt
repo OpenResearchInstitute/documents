@@ -42,9 +42,19 @@ Logbook of the World (LoTW) is an identity authentication application from ARRL.
 
 https://lotw.arrl.org
 
-Within the United States, successful LoTW account establishment confirms that the address on file at the FCC for an amateur radio licensee can receive and respond to information received at that postal address. That serves as the basis for licensee authentication. 
+Within the United States, successful LoTW account establishment confirms that the address on file at the Federal Communications Commission (FCC) for an amateur radio licensee can receive and respond to information received at that postal address. That serves as the basis for licensee authentication. 
 
-The address given to the FCC comes from the address that that license applicant submits on their form 605. The FCC does not validate this address. The FCC relies upon the volunteer examiner coordinator (VEC) to review the form 605 and ensure that the applicant’s has provided a mailing address in the United States. The applicant provides the address. The VEC is not required to independently confirm this mailing address. 
+The address given to the FCC comes from the address that that license applicant submits on their form 605. The FCC does not validate this address. The FCC relies upon the volunteer examiner coordinator (VEC) to review the form 605 and ensure that the applicant has provided a mailing address in the United States. The applicant provides the address. The VEC is not required to independently confirm this mailing address. The applicant’s name on the form 605 must match the name on accepted forms of identification.
+
+This is the limit of authentication provided to, and therefore by, the licensing authority. In the US, this is the FCC.  
+
+Does it make sense to exceed this level of authentication?
+
+What sort of authentication and authorization is required of Phase 4 Ground radio traffic?
+
+Each deployment should be considered separately. 
+
+Phase 4B GEO
 
 Phase 4 Ground considers a process of authentication and authorization in this document. This process involves state in the Groundsat and in the Radio. 
 
