@@ -65,7 +65,7 @@ The state in the Groundsat requires the following things.
 1. Memory for a database. 
 2. The ability to read from this database.
 3. The ability to write to this database.
-4. The ability to demand authentication from the Phase 4 Radio. 
+4. The ability to demand and process authentication from the Phase 4 Radio.
 5. The ability to do some processing using data received from uplink communication frames and information from the database.
 6. 
 
