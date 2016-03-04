@@ -30,7 +30,7 @@ ok one cert compresses to about 1K byte. Still pretty big. The 5K file contained
 
 **********
 
-Authentication is the process of confirming a declared identity.
+Authentication is the process of confirming a licensee's declared identity.
 
 Authorization is the process of allowing particular identities access to particular resources. 
 
