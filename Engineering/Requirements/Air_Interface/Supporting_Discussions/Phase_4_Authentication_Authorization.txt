@@ -1,3 +1,5 @@
+A conversation between KB5MU and W5NYV:
+
 I’ve read some on tQSL. There are extensive planning docs from before ARRL accepted tQSL as the basis for LotW, but the docs on what it is today are either minimal or hard to find.
 
 There is source code, though, which I haven’t looked at yet.
@@ -32,15 +34,15 @@ ok one cert compresses to about 1K byte. Still pretty big. The 5K file contained
 
 Authentication is the process of confirming a licensee's declared identity.
 
-Authorization is the process of allowing particular identities access to particular resources. 
+Authorization is the process of allowing particular identities access to particular resources.
 
-Groundsat is any equipment that serves as the payload for any Phase 4 Ground system. This includes but is not limited to a satellite payload, satellite simulator (Groundsat), or terrestrial hub. 
+Satellite is any equipment that serves as the payload for any Phase 4 Ground system. This includes but is not limited to an orbiting satellite payload, satellite simulator (Groundsat), or terrestrial hub. 
 
-Phase 4 Radio is equipment that complies with the Phase 4 Air Interface. 
+Phase 4 Radio or ground station is equipment that complies with the Phase 4 Air Interface. 
 
-Black List is a list of stations that are positively not authorized to transmit through the Groundsat.
+Black List is a list of stations that are positively not authorized to transmit through the satellite. There are probably at least two levels of blacklist: stations that have merely failed to authenticate, and stations which are permanently banned regardless of their authentication status.
 
-White List is a list of stations that are positively authorized to transmit through the Groundsat.
+White List is a list of stations that are positively authorized to transmit through the satellite.
 
 Ground Control Station is a station that can command the satellite. 
 
@@ -48,9 +50,9 @@ Misuse is communications that are illegal or damaging to the communications syst
 
 **********
 
-If the Groundsat has no state, then every frame has to speak for itself. Therefore, authentication and authorization are affected. 
+If the satellite has no state, then every frame has to speak for itself. Therefore, authentication and authorization are affected. 
 
-Logbook of the World (LoTW) is an identity authentication application from ARRL. 
+Logbook of the World (LoTW) is an QSO confirmation (QSL and awards verification) application from ARRL, built upon the OpenSSL family of cryptographic functions. In order to prevent QSL fraud, LoTW issues certificates to verified licensees that are used to cryptographically sign QSO records, certifying them as originating with the station licensee. These certificates could be used to sign other records for our purposes.
 
 https://lotw.arrl.org
 
@@ -66,13 +68,13 @@ Does it make sense to exceed this level of authentication?
 
 What sort of authentication and authorization is required of Phase 4 Ground radio traffic?
 
-The default security implementation of Phase 4 Ground is the process described within this document. The Phase 4 Ground process must defer to a process selected by the Groundsat, if that security process selected by the Groundsat needs to claim priority. If there is a different process selected by the Groundsat, then a full specification must be provided to Phase 4 Ground as part of the Air Interface documentation. This serves as a “we can’t read your mind” clause. 
+The default security implementation of Phase 4 Ground is the process described within this document. The Phase 4 Ground process must defer to a process selected by the satellite, if that security process selected by the satellite needs to claim priority. If there is a different process selected by the satellite, then a full specification must be provided to Phase 4 Ground as part of the Air Interface documentation. This serves as a “we can’t read your mind” clause. 
 
 Phase 4B GEO 
 
-Phase 4 Ground considers a process of authentication and authorization in this document. This process involves state in the Groundsat and in the Phase 4 Radio. 
+Phase 4 Ground considers a process of authentication and authorization in this document. This process involves state in the satellite and in the Phase 4 Radio. 
 
-The state in the Groundsat requires the following things.
+The state in the satellite requires the following things.
 
 1. Memory for a database. 
 2. The ability to read from this database.
@@ -89,52 +91,70 @@ The state in the Radio requires the following things.
 3. Memory to store private key.
 4. Memory to store a certificate.
 5. Ability to sign a message containing the generated token with the private key. 
-6. Ability to send the signed message plus the certificate to the Groundsat when it is demanded by the Groundsat.
+6. Ability to send the signed message plus the certificate to the satellite when it is demanded by the satellite.
 7. 
 
 The process is as follows. 
 
-Operators that comply with the air interface can transmit through the satellite. Transmission requires a token. Phase 4 Ground radios generate a random token. This token is sent from the first transmitted frame. This token is in each frame (AI: review). Frames without tokens are not transmitted (AI: review).
+Stations that comply with the air interface can transmit through the satellite. The station is configured with an amateur radio callsign, plus a Secondary Station Identifier (SSID) of TBD bits to allow a particular licensee to operate multiple simultaneous stations, and with the ARRL-issued private key and certificate for that callsign. In addition, the station must generate a token of TBD bits chosen at random. Every transmitted uplink frame contains in its header the callsign, SSID, and token.
 
-The Groundsat stores the token, the claimed call sign, the claimed SSID associated with the call sign, and a time stamp. This is a tuple that forms the rows of a database. 
+The callsign and SSID will be retransmitted in the downlink frame header, but the token is never transmitted on the downlink. Since it is fairly difficult to intercept an uplink transmission, this makes it difficult for an impostor to hear another station's authenticated callsign:SSID and start using it.
+
+The satellite stores the token, the claimed call sign, the claimed SSID associated with the call sign, and a time stamp. This is a tuple that forms the rows of a database. 
 
 (satellite time stamp : callsign : SSID : token)
 
-Unless and until there is cause for authentication, transmissions from stations are allowed without authentication. 
+When each uplink frame is received by the satellite, it decides whether to accept it for retransmission on the downlink, or discard it. It may also choose to initiate an authentication transaction with the ground station. Alternately, or in addition, a Ground Control Station may initiate an authentication transaction with any or all active station(s). Unless and until an authentication transaction with a given station has been attempted AND FAILED, the satellite must accept its frames for retransmission (unless that station has already been blacklisted for another reason).
 
 This achieves two important goals. Communication is unimpeded, and the loss of Ground Control Stations can be well-tolerated. When Ground Control Stations are not required for normal communications, system durability and reliability is greatly increased. 
 
-When authentication is not frame-by-frame, or required to initiate the process of accessing and transmitting through the satellite, efficiency and performance are greatly increased. 
+When authentication is not frame-by-frame, or required to initiate the process of accessing and transmitting through the satellite, efficiency and performance are greatly increased. In particular, the very first message from a station is not delayed for formalities or blocked entirely; in an emergency situation this could be essential.
 
-The risk of bad actors is recognized, but management of bad actors is achieved through Black Listing known bad actors after complaint or system statistics or some other method reveals that the problem is Misuse
+The risk of bad actors is recognized, but management of bad actors is achieved through Black Listing known bad actors after complaint or system statistics or some other method reveals that the problem is Misuse.
 
-Phase 4 Ground recommends that Misuse must be assumed to be misunderstanding or misconfiguration until proven otherwise. If Misuse is deliberate and there are irreconcilable differences, then Black Listing is the mechanism for resolving the Misuse. 
+Phase 4 Ground recommends that Misuse must be assumed to be misunderstanding or misconfiguration until proven otherwise. If Misuse is deliberate and there are irreconcilable differences, then Black Listing is the mechanism for resolving the Misuse.
 
-When there is a cause for authentication, a request for authentication can be made. Requests for authentication can be made to all rows with expired time stamps (time stamp < some value : * : * : *), a particular row of the database (* : call sign: SSID : *), all rows that have a particular call sign (* : call sign : * : *), all call signs (* : * : * : *), or some other combination. 
+The satellite may be configured to automatically initiate an authentication with each new station it receives, and/or periodically at some interval, or it may rely entirely on Ground Control Stations to request authentications. The satellite controls the rate at which authentication transactions can take place, so it can never be overloaded by the required calculations.
 
-In the case of a single row, this request for authentication would be addressed to the transmitter originating the transmissions associated with one particular (call sign : SSID). As is customary, a call sign can have several active SSIDs.  
+When there is a cause for authentication, a request for authentication can be made by a Ground Control Station. Requests for authentication can be made to all rows with expired time stamps (time stamp < some value : * : * : *), a particular row of the database (* : call sign: SSID : *), all rows that have a particular call sign (* : call sign : * : *), all call signs (* : * : * : *), or some other combination.
 
-Upon a request for authentication, the station or stations affected would generate a message. The message would contain a token. The token could be the same one generated to establish communications. The token could be a new one. Either way, the token is signed by the private key of that particular station. The station would send an authentication response message that consists of the signed token and the certificate associated with that call sign. (AI: what about SSID here? back off on SSID granularity or require a certificate for each SSID?)
+Regardless of how the authentication is initiated, the transaction begins with a message from the satellite addressed to one particular (call sign : SSID).
 
-If the authentication response is not received in a timely manner, the station is blacklisted. 
+Upon receiving a request for authentication, the station addressed would generate and transmit a response message with the usual header (including callsign, SSID, and token). The token could be the same one it was already using, or it could be a new one (which it would then use for future transmissions). The payload of the message is the cryptographic signature of the message header, including the certificate associated with the callsign. With this information (and its pre-programmed knowledge of the ARRL's root certificate) the satellite can verify the signature.
 
-If the authentication response is received, the Groundsat checks that the certificate is valid by comparing with the root certificate (LoTW root certificate is through GoDaddy). If the certificate is not valid, the station is blacklisted.
+If the authentication response is not received in a timely manner, after TBD number of attempts, the station is blacklisted. 
+
+If the authentication response is received, the satellite checks that the certificate is valid by comparing with the root certificate (LoTW root certificate is through GoDaddy). If the certificate is not valid, the station is blacklisted.
 
 If the certificate is valid, then the signature is checked. If the signature is not valid, the station is blacklisted.
 
-If the signature checks out, then the row corresponding to the station in the Groundsat security database is updated. 
+If the signature checks out, then the row corresponding to the station in the satellite security database is updated.
 
-There are multiple reasons for launching an authorization request. The reason could be time-based (like Howie mentioned). For example, every hour, stations could be required to authorize. For example, an agency that has an MOU with the Groundsat, and has authority over the operations of a Ground Control Station, could request authorization. 
+The result of each authentication transaction is reported on the downlink, where it is visible to the ground stations and to Ground Control Stations.
 
-For example, all stations, or some subset, may be required to authorize:
+AI: work out the rules for changing tokens. If two (or more!) stations are trying to use the same callsign:ssid with different tokens, the one(s) that can successfully authenticate should be allowed, and the other one(s) should not. But we also need to prevent a bad guy from defeating the system by simply choosing a new token for each transmission. And yet we don't want to stop a station that had to reboot from starting over with a new token.
+
+AI: work out a way for a station that is blacklisted for authentication failure to request a do-over, after the operator corrects the configuration.
+
+**********
+
+The _authentication_ procedures outlined above just verify the identity of stations trying to use the satellite. Separate _authorization_ procedures are used if not all licensed amateurs are welcome to use the satellite.
+
+For example, an agency that has an MOU with the satellite, and has authority over the operations of a Ground Control Station, could impose an authorization policy. A combination of blacklist and whitelist techniques could be used. 
+
+Examples:
 
 "All stations that participated in Red Cross Drills within the past 9 months”
 "All stations that support a throughput of greater than 500kbps” 
 "All stations that have registered to participate in the weekend contest"
 
-These stations could be allowed. Others would be blacklisted. 
+In cases where a list of authorized stations is available, the satellite could be configured with a whitelist and instructed to limit all other stations to short message transmissions only. Phase 4 Ground recommends that stations never be entirely banned from access, since (1) banned stations may have critical emergency traffic that should not be blocked, and (2) banned stations may need to message the authorities to request and justify being unbanned.
 
-Black Lists and White Lists are managed by Ground Control Stations. The controlling interest of the Ground Control Station sets Black List and White List policies. 
+Black Lists and White Lists are managed by Ground Control Stations. Ground Control Stations can also choose to implement potentially complex policies on the ground, by monitoring the downlink for any unauthorized activity and taking action to stop it. The controlling interest of the Ground Control Station sets Black List and White List policies. 
 
-Phase 4 Ground recommends that Blacklists should time out whenever possible. Blacklists should reset upon satellite reset. Blacklisting should be temporary by default. 
+Phase 4 Ground recommends that Blacklists should time out whenever possible. Blacklists should reset upon satellite reset. Blacklisting should be quite temporary by default. If the Ground Control Stations all go offline in a disaster, it is better to open up the system than to leave it locked down in a way that will eventually cause problems.
 
+AI: define uplink and downlink messages relating to authorization. Downlink messages should give non-authorized stations notice so they don't keep trying to transmit, and should ideally give them an explanation so they know why they are not authorized. Uplink messages might explicitly request authorization in certain cases. One use case we've heard is that a Served Agency distributes a secret code that can be used to gain access; that would be implemented through some messaging.
+
+AI: there may be more levels of authorization than simply authorized and not authorized. Some stations may be allowed only short text messages, while others may be allowed to use realtime voice streams, and yet others may be allowed to grab as much bandwidth as they can manage.
+ 
