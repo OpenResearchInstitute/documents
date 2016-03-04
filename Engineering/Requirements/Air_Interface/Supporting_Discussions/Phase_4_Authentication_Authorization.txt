@@ -36,6 +36,16 @@ Authorization is the process of allowing particular identities access to particu
 
 Groundsat is any equipment that serves as the payload for any Phase 4 Ground system. This includes but is not limited to a satellite payload, satellite simulator (Groundsat), or terrestrial hub. 
 
+If the Groundsat has no state, then every frame has to speak for itself. Therefore, authentication and authorization are affected. 
+
+Logbook of the World (LoTW) is an identity authentication application from ARRL. 
+
+https://lotw.arrl.org
+
+Within the United States, successful LoTW account establishment confirms that the address on file at the FCC for an amateur radio licensee can receive and respond to information received at that postal address. That serves as the basis for licensee authentication. 
+
+The address given to the FCC comes from the address that that license applicant submits on their form 605. The FCC does not validate this address. The FCC relies upon the volunteer examiner coordinator (VEC) to review the form 605 and ensure that the applicant’s has provided a mailing address in the United States. The applicant provides the address. The VEC is not required to independently confirm this mailing address. 
+
 Phase 4 Ground considers a process of authentication and authorization in this document. This process involves state in the Groundsat and in the Radio. 
 
 The state in the Groundsat requires the following things.
