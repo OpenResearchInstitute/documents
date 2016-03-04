@@ -36,6 +36,18 @@ Authorization is the process of allowing particular identities access to particu
 
 Groundsat is any equipment that serves as the payload for any Phase 4 Ground system. This includes but is not limited to a satellite payload, satellite simulator (Groundsat), or terrestrial hub. 
 
+Phase 4 Radio is equipment that complies with the Phase 4 Air Interface. 
+
+Black List is a list of stations that are positively not authorized to transmit through the Groundsat.
+
+White List is a list of stations that are positively authorized to transmit through the Groundsat.
+
+Ground Control Station is a station that can command the satellite. 
+
+Misuse is communications that are illegal or damaging to the communications system. 
+
+**********
+
 If the Groundsat has no state, then every frame has to speak for itself. Therefore, authentication and authorization are affected. 
 
 Logbook of the World (LoTW) is an identity authentication application from ARRL. 
@@ -78,18 +90,27 @@ The state in the Radio requires the following things.
 4. Memory to store a certificate.
 5. Ability to sign a message containing the generated token with the private key. 
 6. Ability to send the signed message plus the certificate to the Groundsat when it is demanded by the Groundsat.
+7. 
 
 The process is as follows. 
 
-Operators that comply with the air interface can transmit through the satellite. Transmission requires a token. Phase 4 Ground radios generate a random token. This token is in each frame. 
+Operators that comply with the air interface can transmit through the satellite. Transmission requires a token. Phase 4 Ground radios generate a random token. This token is sent from the first transmitted frame. This token is in each frame (AI: review). Frames without tokens are not transmitted (AI: review).
 
 The Groundsat stores the token, the claimed call sign, the claimed SSID associated with the call sign, and a time stamp. This is a tuple that forms the rows of a database. 
 
-satellite time stamp : callsign : SSID : token
+(satellite time stamp : callsign : SSID : token)
 
-Unless and until there is cause for authentication, transmissions from stations are allowed. 
+Unless and until there is cause for authentication, transmissions from stations are allowed without authentication. 
 
-When there is a cause for authentication, a request for authentication can be made. Requests for authentication can be made to a particular row of the database, all rows that have a particular call sign (call sign : *), all call signs (*), or some other combination. 
+This achieves two important goals. Communication is unimpeded, and the loss of Ground Control Stations can be well-tolerated. When Ground Control Stations are not required for normal communications, system durability and reliability is greatly increased. 
+
+When authentication is not frame-by-frame, or required to initiate the process of accessing and transmitting through the satellite, efficiency and performance are greatly increased. 
+
+The risk of bad actors is recognized, but management of bad actors is achieved through Black Listing known bad actors after complaint or system statistics or some other method reveals that the problem is Misuse
+
+Phase 4 Ground recommends that Misuse must be assumed to be misunderstanding or misconfiguration until proven otherwise. If Misuse is deliberate and there are irreconcilable differences, then Black Listing is the mechanism for resolving the Misuse. 
+
+When there is a cause for authentication, a request for authentication can be made. Requests for authentication can be made to all rows with expired time stamps (time stamp < some value : * : * : *), a particular row of the database (* : call sign: SSID : *), all rows that have a particular call sign (* : call sign : * : *), all call signs (* : * : * : *), or some other combination. 
 
 In the case of a single row, this request for authentication would be addressed to the transmitter originating the transmissions associated with one particular (call sign : SSID). As is customary, a call sign can have several active SSIDs.  
 
@@ -103,5 +124,17 @@ If the certificate is valid, then the signature is checked. If the signature is 
 
 If the signature checks out, then the row corresponding to the station in the Groundsat security database is updated. 
 
-There are several reasons for launching an authorization request. This could be time-based (like Howie mentioned). Every hour, stations could be required to authorize. An agency that has an MOU with the Groundsat, and has influence over a ground control station, could request authorization. All stations, or some subset, may be required to authorize. Certain types of stations, such as “all stations that participated in Red Cross Drills within the past 9 months”, or “stations that support a throughput of greater than 500kbps” could be allowed. Others would be blacklisted. 
+There are multiple reasons for launching an authorization request. The reason could be time-based (like Howie mentioned). For example, every hour, stations could be required to authorize. For example, an agency that has an MOU with the Groundsat, and has authority over the operations of a Ground Control Station, could request authorization. 
+
+For example, all stations, or some subset, may be required to authorize:
+
+"All stations that participated in Red Cross Drills within the past 9 months”
+"All stations that support a throughput of greater than 500kbps” 
+"All stations that have registered to participate in the weekend contest"
+
+These stations could be allowed. Others would be blacklisted. 
+
+Black Lists and White Lists are managed by Ground Control Stations. The controlling interest of the Ground Control Station sets Black List and White List policies. 
+
+Phase 4 Ground recommends that Blacklists should time out whenever possible. Blacklists should reset upon satellite reset. Blacklisting should be temporary by default. 
 
