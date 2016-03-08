@@ -200,21 +200,19 @@ An ongoing eavesdropper can defeat anything aside from a cryptographic solution.
 
 Jammers
 
-Jammers are stations that produce intentional interference with the goal of denying access to a communications resource. This could range from loud signals simply aimed blindly at the satellite up to and including correctly formatted frames that are designed to interfere with the normal operations of the multiplexer in the satellite. 
+Jammers are stations that produce intentional interference with the goal of denying access to a communications resource. This could range from loud signals aimed blindly at the satellite up to and including correctly formatted frames that are designed to interfere with the normal operations of the satellite. 
 
-If the satellite simply doesn't demodulate signals that do not comply with the air interface, then some jammers are eliminated simply due to the fact that the satellite doesn't demodulate waveforms that it is not programmed to receive. However, the jammer can increase the noise level at the satellite, and therefore the signal-to-noise ratio for one (or more) channels. Since the satellite is FDMA, and the channels will be known, and the occupied channel list will appear in the downlink, those channels (or all channels) can be targeted for jamming. Causing the satellite ADC to saturate will prevent the satellite from receiving. Detecting the presence and the source of this type of jammer needs to be discussed. 
+If the satellite simply doesn't demodulate signals that do not comply with the air interface, then some jammers are eliminated simply due to the fact that the satellite doesn't demodulate waveforms that it is not programmed to receive. However, by aiming loud signals at the satellite the jammer can increase the noise level at the satellite, and therefore the signal-to-noise ratio for one (or more) channels. Since the satellite is FDMA, and the channels (satellite sub-band) are well-known, and the occupied channel list will appear in the downlink, the channel (or all channels) can be targeted for jamming. Causing the satellite ADC to saturate may prevent the satellite from receiving. Detecting the presence and the source of this type of jammer needs to be discussed. Attempting to hide which channels are occupied is insufficient considering that a jammer can simply occupy the entire uplink bandwidth.  
 
-A more sophisticated jammer transmits a properly modulated waveform. If the satellite drops traffic that does not contain a token, does not contain a payload, or does not contain a call sign, SSID pair, then more potential jammers are eliminated. The traffic, while demodulated, will not appear in the downlink. 
+A more sophisticated jammer transmits a properly modulated waveform. If the satellite drops traffic that does not contain a token, does not contain a payload, or does not contain a call sign, SSID pair, then more potential jammers are eliminated. The traffic, while demodulated, will not appear in the downlink. The traffic does consume satellite resources.
 
-Signals that comply with the air interface, contain call sign, SSID, a payload, and a token, but are designed to consume authorization and authorization resources, are also jammers.
+Signals that comply with the air interface, contain a plausible call sign, SSID, a payload, and a token, but are designed to consume authorization and authorization resources, are also jammers.
 
-Potential attacks include the satellite, following either onboard rules or direction from the Ground Control Station, performs functions in excess of processing resources.
+Potential attacks include cuasing the satellite, by either following either onboard rules or upon (subverted) direction from the Ground Control Station, to perform functions in excess of processing resources.
 
-1. Traffic that uses a different token every frame forces a large amount of database activity and processing.
-2. Traffic that uses a different SSID every frame forces a large amount of database activity and processing. 
-3. Traffic that uses a different call sign every frame forces a large amount of database activity and processing. 
+Traffic that uses a different token and/or SSID and/or call sign every frame forces a large amount of database activity and processing.
  
-The Ground Control Station could be compromised or tricked into directing the satellite to re-authenticate or re-authorize in excess of processing resources. In this case, the traffic is not at fault, but instead the mechanisms that are in place for controlling agencies are subverted. 
+The Ground Control Station could be compromised or tricked into directing the satellite to re-authenticate or re-authorize in excess of processing resources. In this case, the traffic is not at fault, but instead the mechanisms that are in place at the controlling agencies are subverted or abused. 
 
 Attacks designed to cause the satellite run out of space in the database are a type of buffer overrun attack. The database is of finite size. 
 
@@ -225,6 +223,4 @@ There are several ways to address these potential threats. Some of these methods
 1. Limit the raw rate of new call sign SSIDs that are added to the database to a reasonable number (TBD) that ensures processing resources are not exceeded. Denial of service attacks are successful in computer timeframes, but not successful if the forced activity happens in human timeframes. In cases where the rate limit is exceeded due to either a large number of legitimate users attempting to transmit, or a large number of attacks, this technique negatively affects the ability of a subscribed legitimate operator to immediately participate in communications on the satellite, upon at least their first transmission and possibly all subsequent ones. This also means that new legitimate users will be dumped on the floor along with the jammers. 
 
 2. Develop an algorithm for properly removing rows with implausibly fast-changing information from the operator database. This attempts to clean out the database at the same rate that attackers are adding to it. Properly designed, the legitimate operators that attempt to transmit are unaffected. This requires enough processing to detect patterns of transmissions with rapidly changing data. There could be andom changes that run through all possible combinations (all the bits of an SSID, for example) or oscillating back and forth between two states in order to trick the satellite into doing a lot of work (for example, to force maintenance of two rows of the database by switching back and forth between two different tokens every frame). 
-
-
 
