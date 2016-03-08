@@ -162,28 +162,31 @@ AI: there may be more levels of authorization than simply authorized and not aut
 
 Threat Assessment
 
-The primary threat to Phase 4B is people outside the community using the spacecraft. If it's easy to gain illicit access then capacity is drained. Using the satellite without authorization needs to be hard enough that it is rendered rare. 
+The primary threat to Phase 4B is people outside the community using the spacecraft. If it's easy to gain illicit access then capacity is drained. Using the satellite without authorization needs to be hard enough that it is rendered rare, while also not making normal legitimate operation a miserable experience. 
 
 The community is defined as licensed ham radio operators that are cooperative.
 
-Cooperative means that the operators stop transmitting if asked, are disciplined, do not produce intentional harmful interference, address unintentional harmful interference, and defer to emergency traffic. 
+Cooperative means that the operators stop transmitting if asked, are disciplined, do not produce intentional harmful interference, rectify unintentional harmful interference, and defer to emergency traffic. 
 
-If the identification of primary threat is accurate, then LoTW cert checking is a solution. LoTW excludes non-hams. We assume that the large majority of licensed hams are cooperative. We then assume that the list of uncooperative hams is short and can be addressed through Black Listing. 
+If the identification of primary threat is accurate, then LoTW cert checking is a solution. LoTW excludes non-hams. 
+
+We assume that the large majority of licensed hams are cooperative. We then assume that the list of uncooperative hams, whether they became uncooperative, or have always been uncooperative, is short and can be effectively managed through Black Listing. 
+
+Stations can be added to a Black List by several methods including but not limited to observation, complaint, or statistical detection. Positive confirmation with a human in the review loop is ideal. 
 
 
-
-The threat can be refined. 
+The threat can be refined. The following categories are either licensed operators that became uncooperative or unlicensed operators that are by definition uncooperative. 
 
 Imposters
 
 An operator that takes on the identity of a legitimate operator that has authentication and authorization is called an Imposter. 
 
-The required information to become an Imposter must not be present in the downlink. However, it is available through eavesdropping on an uplink. If an Imposter is able to eavesdrop on an uplink, they will be able to obtain the call sign, SSID, and token of the legitimate operator. 
+The required information to become an Imposter must not be present in the downlink. However, it is available through eavesdropping on an uplink. If an Imposter is able to eavesdrop on an uplink, they will be able to obtain the call sign, SSID, and token of the legitimate operator, and form frames that appear to come from a legitimate user already in the database, and therefore would be passed as legitimate traffic by the satellite. Another potential Imposter method is to overwrite the payload part of the frame with a new payload. This requires precise timing and greater transmit power than the legitimate station. 
 
 An Imposter can be eliminated by several methods.
 
-1. Frames could be serialized, with duplicate or out-of-sequence frames discarded (small overhead). 
-2. "Signed transmission mode": Forcing the signature, by private key held within the Phase 4 radio, of every frame (large overhead)
+1. Frames could be serialized, with duplicate or out-of-sequence frames discarded. This adds some overhead. This method can be circumvented by deserializing or overwriting. 
+2. "Signed transmission mode": Forcing the signature, by private key held within the Phase 4 radio, of every frame. This adds substantial overhead. This can be circumvented by stealing the private key. 
 
 How would these methods be implemented?
 
@@ -197,7 +200,7 @@ An ongoing eavesdropper can defeat anything aside from a cryptographic solution.
 
 Jammers
 
-Jammers produce intentional interference with the goal of denying access to a communications resource. This could range from loud signals simply aimed blindly at the satellite up to and including correctly formatted frames that are designed to interfere with the normal operations of the multiplexer in the satellite. 
+Jammers are stations that produce intentional interference with the goal of denying access to a communications resource. This could range from loud signals simply aimed blindly at the satellite up to and including correctly formatted frames that are designed to interfere with the normal operations of the multiplexer in the satellite. 
 
 If the satellite simply doesn't demodulate signals that do not comply with the air interface, then some jammers are eliminated simply due to the fact that the satellite doesn't demodulate waveforms that it is not programmed to receive. However, the jammer can increase the noise level at the satellite, and therefore the signal-to-noise ratio for one (or more) channels. Since the satellite is FDMA, and the channels will be known, and the occupied channel list will appear in the downlink, those channels (or all channels) can be targeted for jamming. Causing the satellite ADC to saturate will prevent the satellite from receiving. Detecting the presence and the source of this type of jammer needs to be discussed. 
 
