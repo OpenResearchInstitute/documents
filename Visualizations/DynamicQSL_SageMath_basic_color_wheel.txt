@@ -5,4 +5,4 @@
 s =3*(x+1)*(x-i)^2*(x-1+i)^3
 complex_plot(s, (-2, 2), (-2, 2), aspect_ratio=1)
 p = complex_plot(s, (-(5.5)/2, (5.5)/2), (-(3.5)/2, (3.5)/2), aspect_ratio=1)
-p.save('test.pdf')
+p.save('test.pdf') 
