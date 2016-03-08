@@ -157,4 +157,71 @@ Phase 4 Ground recommends that Blacklists should time out whenever possible. Bla
 AI: define uplink and downlink messages relating to authorization. Downlink messages should give non-authorized stations notice so they don't keep trying to transmit, and should ideally give them an explanation so they know why they are not authorized. Uplink messages might explicitly request authorization in certain cases. One use case we've heard is that a Served Agency distributes a secret code that can be used to gain access; that would be implemented through some messaging.
 
 AI: there may be more levels of authorization than simply authorized and not authorized. Some stations may be allowed only short text messages, while others may be allowed to use realtime voice streams, and yet others may be allowed to grab as much bandwidth as they can manage.
+
+**********
+
+Threat Assessment
+
+The primary threat to Phase 4B is people outside the community using the spacecraft. If it's easy to gain illicit access then capacity is drained. Using the satellite without authorization needs to be hard enough that it is rendered rare. 
+
+The community is defined as licensed ham radio operators that are cooperative.
+
+Cooperative means that the operators stop transmitting if asked, are disciplined, do not produce intentional harmful interference, address unintentional harmful interference, and defer to emergency traffic. 
+
+If the identification of primary threat is accurate, then LoTW cert checking is a solution. LoTW excludes non-hams. We assume that the large majority of licensed hams are cooperative. We then assume that the list of uncooperative hams is short and can be addressed through Black Listing. 
+
+
+
+The threat can be refined. 
+
+Imposters
+
+An operator that takes on the identity of a legitimate operator that has authentication and authorization is called an Imposter. 
+
+The required information to become an Imposter must not be present in the downlink. However, it is available through eavesdropping on an uplink. If an Imposter is able to eavesdrop on an uplink, they will be able to obtain the call sign, SSID, and token of the legitimate operator. 
+
+An Imposter can be eliminated by several methods.
+
+1. Frames could be serialized, with duplicate or out-of-sequence frames discarded (small overhead). 
+2. "Signed transmission mode": Forcing the signature, by private key held within the Phase 4 radio, of every frame (large overhead)
+
+How would these methods be implemented?
+
+If a Phase 4 radio is able to see payloads in the downlink that it did not send, then it could send a message to the Ground Control Station. The Ground Control Station could then put the Phase 4 Radio in "signed transmission mode". This requires something like a traffic summary which would have to have enough information for either an algorithm or an operator to notice extra traffic.
+
+This could be an extension of presence awareness. This could include looking for too large of a variance in Eb/No. 
+
+Adaptive Coding and Modulation can potentially hide traffic from potential Imposters. As a side effect, ACM could make it substantially more difficult to steal the identity of a legitimate operator. 
+
+An ongoing eavesdropper can defeat anything aside from a cryptographic solution. The cost of preventing ongoing eavesdropping leading to Imposters gaining satellite access must be balanced against the probability of this type of threat. 
+
+Jammers
+
+Jammers produce intentional interference with the goal of denying access to a communications resource. This could range from loud signals simply aimed blindly at the satellite up to and including correctly formatted frames that are designed to interfere with the normal operations of the multiplexer in the satellite. 
+
+If the satellite simply doesn't demodulate signals that do not comply with the air interface, then some jammers are eliminated simply due to the fact that the satellite doesn't demodulate waveforms that it is not programmed to receive. However, the jammer can increase the noise level at the satellite, and therefore the signal-to-noise ratio for one (or more) channels. Since the satellite is FDMA, and the channels will be known, and the occupied channel list will appear in the downlink, those channels (or all channels) can be targeted for jamming. Causing the satellite ADC to saturate will prevent the satellite from receiving. Detecting the presence and the source of this type of jammer needs to be discussed. 
+
+A more sophisticated jammer transmits a properly modulated waveform. If the satellite drops traffic that does not contain a token, does not contain a payload, or does not contain a call sign, SSID pair, then more potential jammers are eliminated. The traffic, while demodulated, will not appear in the downlink. 
+
+Signals that comply with the air interface, contain call sign, SSID, a payload, and a token, but are designed to consume authorization and authorization resources, are also jammers.
+
+Potential attacks include the satellite, following either onboard rules or direction from the Ground Control Station, performs functions in excess of processing resources.
+
+1. Traffic that uses a different token every frame forces a large amount of database activity and processing.
+2. Traffic that uses a different SSID every frame forces a large amount of database activity and processing. 
+3. Traffic that uses a different call sign every frame forces a large amount of database activity and processing. 
  
+The Ground Control Station could be compromised or tricked into directing the satellite to re-authenticate or re-authorize in excess of processing resources. In this case, the traffic is not at fault, but instead the mechanisms that are in place for controlling agencies are subverted. 
+
+Attacks designed to cause the satellite run out of space in the database are a type of buffer overrun attack. The database is of finite size. 
+
+Attacks designed to cause the satellite to process itself to death are a type of denial of service attack. There is a finite amount of processing available to check tokens. There is a finite amount of processing available to provide authentication. 
+
+There are several ways to address these potential threats. Some of these methods involve keeping additional state in the satellite. Therefore, the cost of the additional state and/or additional processing must be balanced against the probability of this type of attack occurring. 
+
+1. Limit the raw rate of new call sign SSIDs that are added to the database to a reasonable number (TBD) that ensures processing resources are not exceeded. Denial of service attacks are successful in computer timeframes, but not successful if the forced activity happens in human timeframes. In cases where the rate limit is exceeded due to either a large number of legitimate users attempting to transmit, or a large number of attacks, this technique negatively affects the ability of a subscribed legitimate operator to immediately participate in communications on the satellite, upon at least their first transmission and possibly all subsequent ones. This also means that new legitimate users will be dumped on the floor along with the jammers. 
+
+2. Develop an algorithm for properly removing rows with implausibly fast-changing information from the operator database. This attempts to clean out the database at the same rate that attackers are adding to it. Properly designed, the legitimate operators that attempt to transmit are unaffected. This requires enough processing to detect patterns of transmissions with rapidly changing data. There could be andom changes that run through all possible combinations (all the bits of an SSID, for example) or oscillating back and forth between two states in order to trick the satellite into doing a lot of work (for example, to force maintenance of two rows of the database by switching back and forth between two different tokens every frame). 
+
+
+
