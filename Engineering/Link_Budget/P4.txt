@@ -1,0 +1,121 @@
+Phase-4 Satellite Link Budget (by John N2HMM)
+
+Title:  DRAFT 
+
+Description:  03/07/2016
+
+
+Frequencies
+	Uplink Freq.	5.4	GHz
+	Downlink Freq.	10.4	GHz
+	Data Rate	100	kb/s
+
+Modulation/Coding
+	FEC Decoder	RS/VA 7/15	
+	BER	1.0E-03	
+	Modulation	QPSK	
+	Theoretical Eb/No	2.89	dB
+	Imp. Loss	2.00	dB
+	PN Corr. Loss	1.00	dB
+	Eb/No Req.	5.89	dB
+	Filter Type	Rt. Raised Cos	
+	Shape Factor	0.33	
+	Limit Criteria	99% Power	
+	Guardband	0	%
+	Bandwidth	0.124	MHz
+
+Geometry
+	Sat. Lng. (East +)	-130.00	degree
+	Tx Lat. (North +)	40.78	degree
+	Tx Lng. (East +)	-111.95	degree
+	Tx Alt.	0	km
+	Tx EL Angle	39.33	degree
+	Tx Range	23507.72	sm
+	Rx Lat. (North +)	27.00	degree
+	Rx Lng. (East +)	-80.00	degree
+	Rx Alt.	0	km
+	Rx EL Angle	27.21	degree
+	Rx Range	24149.29	sm
+
+Transmitter
+	Saturated Power	10	W
+	Output Backoff	0.50	dB
+	Feed Losses	1.00	dB
+	Feed Power	8.50	dBW
+
+Tx Antenna
+	Diameter	1	m
+	ILL. Efficiency	60	%
+	Antenna Gain	32.84	dBi
+	Beamwidth	3.72	degree
+	Net EIRP	41.34	dBW
+
+Uplink Path
+	Absorptive Loss	1.00	dB
+	Non-Absorp. Loss	0.00	dB
+	FS Loss	198.65	dB
+	Total Loss	199.65	dB
+
+Satellite (INTELSAT Model)
+	Transponder BW	72	MHz
+	Purchase BW	0.124	MHz
+	Co-Chan. Intf.	120.00	dB-Hz
+	Adj-Chan. Intf.	120.00	dB-Hz
+	Intermod Intf.	120.00	dB-Hz
+	Satellite G/T	7.80	dBi/K
+	SFD	-82.30	dBW/m2
+	Sat. EIRP	48.80	dBW
+	Input Backoff	4.00	dB
+	Output Backoff	1.00	dB
+	Uplink C/No	78.08	dB-Hz
+	Net C/No	78.08	dB-Hz
+	Carr. Flux Den.	-122.21	dBW/m2
+	Carrrier IBO	39.91	dB
+	Carrier OBO	36.91	dB
+	Carrier EIRP	11.89	dBW
+	Trans. BW Used	0.172	%
+	Trans. Pwr. Used	0.0204	%
+
+Downlink Path (Extended Crane Model v2)
+	% Unavailability	1	%
+	Latitude	27.00	degree
+	Surface Altitude	0	ft
+	Surface Temp.	20.0	C
+	Surface Humidity	42	%
+	Water Vap. Den.	7.50	g/m3
+	Cloud Base	1	km
+	Cloud H2O Cont.	0.30	g/m3
+	Rain Region	D2	
+	Path Rain Rate	3.0	mm/hr
+	Frz. Iso. Height	4.147	km
+	Gaseous Attn.	0.12	dB
+	Cloud Loss	0.17	dB
+	Rain Attn.	0.84	dB
+	Combined Attn.	1.12	dB
+	FS Loss	204.58	dB
+	Total Loss	205.70	dB
+
+Rx Antenna
+	Rx Flux	-152.02	dBW/m2
+	Diameter	1	m
+	ILL. Efficiency	60	%
+	Antenna Gain	38.53	dBi
+	Beamwidth	1.93	degree
+	Rx Power	-155.29	dBW
+
+Rx System Noise (G/T Model)
+	Clear Sky G/T	16.49	dBi/K
+	Atm. Loss	1.12	dB
+	Atm. Temp.	275.0	K
+	CS Sys. Temp.	160.0	K
+	Sys. Temp.	222.7	K
+	G/T	15.05	dBi/K
+	Effective G/T	15.05	dBi/K
+	C/(No + Io)	49.83	dB
+
+Link Budget Results
+	Eb/No Required	5.89	dB
+	Uplink Eb/No	28.08	dB
+	Downlink Eb/No	-0.16	dB
+	Composite Eb/No	-0.17	dB
+	Link Margin	-6.06	dB
