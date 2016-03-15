@@ -8,3 +8,5 @@ Various specifications related to the project
 
 This is a draft copy of the VITA49 specification. The released copy is substantially unchanged from this document.
 
+The Wireshark network protocol analyzer has built-in support for analyzing VITA49 traffic.
+
