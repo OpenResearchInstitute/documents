@@ -4,7 +4,7 @@ And both VT and myself are embroiled in consecutive weeks of spring break, so th
 
 Air Interface Progress
 
-There has been some. We have progress. We have questions. It needs to be documented and we are trying. Here’s the rough drafts. A deceptively simple question is whether or not to force everything to be IP. IP is what GSE assumes. We do, however, have the option of allowing non-IP traffic through in an intelligent manner. What sort of traffic might this be? It could be traffic flagged as legacy traffic from an ARAP. It could be our own custom baseband recipe. It could be almost anything, but it has to be something worth transporting, worth differentiating, and worth processing. We're looking for feedback here for sure. 
+There has been some. We have progress. We have questions. Here’s the rough drafts. A deceptively simple question is whether or not to force everything to be IP. IP is what GSE assumes. We do, however, have the option of allowing non-IP traffic through in an intelligent manner. What sort of traffic might this be? It could be traffic flagged as legacy traffic from an ARAP. It could be our own custom baseband recipe. It could be almost anything, but it has to be something worth transporting, worth differentiating, and worth processing. We're looking for feedback here for sure. 
 
 
 Satellite Class
