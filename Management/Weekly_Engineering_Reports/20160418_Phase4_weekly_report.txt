@@ -1,0 +1,14 @@
+Greetings all!
+
+First, a dual-band feed design update from Paul Wade W1GHZ.
+
+He reports that what he’s come up with looks like it would work pretty well for an offset dish like the DSS dishes, with good efficiency at both bands. Simulation says the isolation from 5.8 GHz to the 10 GHz port is about 80 dB.
+
+Performance plots are attached. He is going to work up a sketch for 3D printing.
+
+He recommends a filter (like the ones in his QEX articles) that can easily provide 60
+dB of second harmonic rejection. He believes that the second harmonic from any decent amplifier is 20 or 30 dB down, so that's at least 80 dB down. Unless the signal is actually inband, a signal that far down won't hurt.
+
+He added that as for push-pull amps, we may be underestimating the difficulty of keeping them balanced at microwaves. Using a push-pull amplifier as part of the dual-band solution may not provide the performance we need.
+
+-Michelle W5NYV
