@@ -22,7 +22,7 @@ Importantly, the modulations that we're using already exist in GNU radio. This p
 
 We will be implementing as much as possible as RFNoC, which stands for radio frequency networks on a chip. We've gotten a lot of support and encouragement here, and it's just too amazing of an opportunity to pass up. 
 
-RFNoC is to FPGAs as GNU Radio is to general purpose processors. For most flow graphs and SDR implementations, there is limited ability to code for the FPGA. RFNoC provides a framework and workflow to partition radio designs between the processor and the FPGA in a way that actually utilizes the FPGA. The problem that we're having in SDRs right now is exactly that - an underutilization of the FPGAs. 
+RFNoC is to FPGAs as GNU Radio is to general purpose processors. For most flow graphs and SDR implementations, there is limited ability to modify the code for the FPGA. RFNoC provides a framework and workflow to partition radio designs between the processor and the FPGA in a way that actually utilizes the FPGA. The problem that we're having in SDRs right now is exactly that - an underutilization of the FPGAs. 
 
 There are expensive and there are not as expensive ways to get into FPGA design. We're actively discussing and reporting development and evaluation boards that allow entry level into FPGA radio development. Two that we discussed this week are the Kickstarter success Spartixed and the commercially available Red Pitaya. The Red Pitaya has ADC/DAC I/O - two channels in fact - and sports a small Zync system on a chip. The Zync, as you probably know, is a combination of an ARM processor and programmable logic fabric. Being on the same chip, you get a substantial performance bonus. 
 
