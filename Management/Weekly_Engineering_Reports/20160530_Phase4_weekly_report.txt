@@ -1,0 +1,32 @@
+This is a simple demo, but it's a great start for the terrestrial work. Recent positive steps have been taken in terms of coming to agreements with AHA to support the payload, ground terminal, and CQC with DVB-S2 technology.
+
+We had a very successful presence at at Dayton Hamvention in Mid-may. We helped staff the AMSAT booth on Friday and Saturday, and Phase 4 Ground was the program for the AMSAT/TAPR Friday evening annual banquet. We supported the AMSAT forums midday on Saturday, had several meetings with potential partners, did a lot of recruiting, and made substantial forward progress on several technical fronts. The upcoming issue of the AMSAT Journal has complete coverage of all the AMSAT action at Dayton Hamvention. 
+
+The next meeting and presentation was at Qualcomm Incorporated on May 27th. Bob N4HY and I spoke about the payload and ground terminal to an invited audience of ham radio enthusiasts. 
+
+The Wireless Symposium at Virginia Tech starts this coming Wednesday, and quite a few of us will be there to attend this conference. We will be able to get some work done in person with at least four other organizations that are actively involved with Phase 4 Ground. I'll share all that I can next week. I'm not presenting, but Bob definitely will be. 
+
+https://wireless.vt.edu/symposium2016.html
+
+We responded to the call for presentations from DEFCON's wireless village. DEFCON will be held in early August. This is an excellent opportunity for a demonstration and feedback. 
+
+https://defcon.org/
+
+More results were shared from the 5GHz uplink team. Mike Sequin reports that he finished building up a pair of buffer amps to use between a HackRF and Skyworks amp. The buffer is providing plenty gain.
+
+Mike is working with Paul Wade W1GHZ and they in the process of building up Paul's proposed dual band feed design. They're going to machine it up and test it out. 
+
+There are some big improvements announced for Jabberd2, which is one of the components we have identified to use in the server space of Phase 4 Radios. The Jabberd2 team is actively discussing and reviewing the updates and improvements. 
+
+Eric Nichols has expressed interest in writing up an article for AMSAT Journal about the topside ionospheric sounding scientific experiment proposal. We don't expect 4B to include this experiment, but we are looking to raise awareness about these sorts of experiments in order to improve our chances of putting together additional payloads. 
+
+Kerry Banke, who attended the Qualcomm meeting, has agreed to help design and prototype a transverter for the BladeRF, so that we can better use this particular SDR in experiments and potentially in recipes. 
+
+We have a draft web page and a design review for that coming up soon. It can only help to have a findable friendly face on the web. While some of us may be totally ok with using github, we really could use a landing page. In the future, this can provide status, manuals, links for buying hardware (yay!), a FAQ, etc. 
+
+Please give feedback on the page. You can find the draft in the github here:
+https://github.com/phase4ground/documents/tree/master/Project_Websites/phase4ground
+
+We have an offer of wordpress from AMSAT's Joe Fitzgerald, and we have an offer of hosting at both AMSAT and Virginia Tech. What we most need to do is make sure it says and does what we want.
+
+Updates to the Air Interface document were made in the areas of interoperability, 
