@@ -1,0 +1,21 @@
+Wireless@VT
+
+First the was OpSec. Then there was DevOps. And before anyone could figure out an actual definition for DevOps, we have come to precipice of OpNoc!
+
+As you recall, RFNoC is the process of writing GNU radio blocks that more fully utilize the FPGAs in powerful SDRs. Any function where improvement can be gained from doing more in the FPGA is a candidate for RFNoC.
+
+We are planning a variety of operations to advance RFNoC.
+
+From the payload perspective, discussions very successfully continued at Virginia Tech and MOUs are being drafted in order to quickly implement some existing DVB-S2X intellectual property. If all goes well with agreements and funding, then there will be a field trip to a TLA in the Pacific time zone. This is a multi organizational effort. This is not an open source effort. 
+
+How does this help the ground effort? Having a known good working payload helps us develop our receiver. If the payload effort is successful, then our groundsat can be implemented using this code, giving some advantage in terms of schedule. 
+
+This doesn't directly help get Phase 4 Ground radios completed. The receiver design is up to us. The specifications of the blocks recently began.
+
+A tutorial exists for getting started. The link is in the notes. 
+
+https://github.com/EttusResearch/uhd/wiki/RFNoC:-Getting-Started
+
+I'm going to walk through this tutorial and make a video about it. This is separate from the report. After the tutorial, we're going to specify some blocks to start working on. These will be open source versions. 
+
+The most obvious blocks to work on are those that already exist. We need QPSK, BPSK, and 8PSk demodulators. We need LDPC-BCH decoders. We need generic stream decapsulation. And other stuff I'm sure. 
