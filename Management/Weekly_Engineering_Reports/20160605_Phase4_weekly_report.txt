@@ -46,6 +46,6 @@ Details about DEFCON at the link in the notes. https://defcon.org/
 
 Payload team is deciding next steps after their preliminary design review has concluded. The PDR was May 27th. A sanitized version of the PDR slides is under construction and may be available soon. 
 
-We need Southern California hams to help with the Dixon Palomar experiments. Outreach to get the Dixon site installed continues this week.
+We need Southern California hams to help with the Dixon Palomar experiments. Outreach to get the Dixon site installed continues this week. We're going to have to go with solar power for Dixon. 
 
 Please send your input, questions, and content in to Phase 4 Ground. Join ARRL, AMSAT, TAPR if you haven't already. Pick one or more. Their support is vital for the success of this project. 
