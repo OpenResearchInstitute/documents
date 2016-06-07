@@ -1,6 +1,6 @@
 We need LDPC encoding and decoding for Phase 4 Ground.
 
-These notes are a narrative of all the LDPC-related blocks in GNU radio. 
+These notes are a narrative of the process of learning about the LDPC-related blocks in GNU radio. 
 
 First, we look at the LDPC Encoder in the DVB section. 
 
