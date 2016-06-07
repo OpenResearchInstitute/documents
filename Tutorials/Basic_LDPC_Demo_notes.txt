@@ -1,0 +1,37 @@
+We need LDPC encoding and decoding for Phase 4 Ground.
+
+These notes are a narrative of all the LDPC-related blocks in GNU radio. 
+
+First, we look at the LDPC Encoder in the DVB section. 
+
+There’s an ID field (all GNU radio blocks have one), a Standard selection (DVB-S2 or DVB-T2), FECFRAME size selection (normal or short), Code Rate (lots of choices), and Constellation (Other and 128APSK). 
+
+The medium FECFRAME size from DVB-S2X is not available.
+DVB-S2X code rates are not available.
+
+This means that this block doesn’t support the additional DVB-S2X code rates or the additional DVB-S2X frame size of 32400 bits. DVB-S2 has short (was “normal”) 16200 bits and long 64800 bits. 
+
+I’m not sure why there’s only two constellations listed in the drop-down box. There are many constellations? 
+
+So, what needs to happen with this block?
+
+First, we should understand how to use it. I’m trying to make a demo. If you already have or know of one, or are better at GNU radio, your help will be appreciated. My scheme is to create random inputs, save a copy, send the other copy to LDPC encode, then LDPC decode, and compare the before and after. This may sound pedantic, but you have to start somewhere, and I’m “GNU” at this. 
+
+At a minimum, we should update this block with DVB-S2X code rates and frame sizes. I’d like to understand why there’s “other” and “128APSK” listed as constellations. 
+
+LDPC Encoder “Documentation” tab has the following content. 
+
+--- dtv_dvb_ldpc_bb ---
+
+        make(gr::dtv::dvb_standard_t standard, gr::dtv::dvb_framesize_t framesize, gr::dtv::dvb_code_rate_t rate, gr::dtv::dvb_constellation_t constellation) -> dvb_ldpc_bb_sptr
+        Encodes a LDPC (Low-Density Parity-Check) FEC.
+        Input: Variable length FEC baseband frames with appended BCH (BCHFEC). Output: Normal or short FEC baseband frames with appended LPDC (LDPCFEC).
+        Constructor Specific Documentation:
+        Create a baseband frame LDPC encoder.
+        Args:
+            standard : DVB standard (DVB-S2 or DVB-T2).
+            framesize : FEC frame size (normal or short).
+            rate : FEC code rate.
+            constellation : DVB-S2 constellation.
+
+
