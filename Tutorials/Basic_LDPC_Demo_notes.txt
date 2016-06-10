@@ -35,3 +35,18 @@ LDPC Encoder “Documentation” tab has the following content.
             constellation : DVB-S2 constellation.
 
 
+
+The next block is LDPC Encoder Definition. 
+
+The default ID field is variable_ldpc_encoder_def_0
+
+The Parallelism drop down selector has 0, 1, and 2 as choices.
+
+The AList File is a file selector. 
+
+There is no documentation in the documentation tab.
+
+When this block is placed, then “Value "fec.ldpc_encoder_make("")" cannot be evaluated:
+Bad AList file name!” is the message in the console. 
+
+
