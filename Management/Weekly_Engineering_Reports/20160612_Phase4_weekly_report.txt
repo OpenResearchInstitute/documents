@@ -39,11 +39,16 @@ https://www.youtube.com/watch?v=vxBtTymzKSA July 2015
 
 -=-=-=-=-=-=-=-=-=-=-=-=-
 
-As you can see from the technical brief above (in the notes), the uplink frequency is 2.4GHz, not 5GHz. 4A uses a commercial DVB-S downlink. 4B uses DVB-S2X. S2X is backwards compatible with DVB-S. 
+As you can see from the technical brief above (in the notes), the uplink frequency is 2.4GHz, not 5GHz. 4A uses a commercial DVB-S downlink. 4B uses DVB-S2X. S2X is backwards compatible with DVB-S, but anyone who's ever worked with backwards compatible systems knows that this doesn't just happen. It takes work and care. 
 
-4B uses generic stream encapsulation. 4A uses 1 mpeg transport stream. The questions I have are whether or not our radio will "just work" with 4A. This is exciting stuff.
+4B uses generic stream encapsulation. 4A uses 1 mpeg transport stream. 4B downlink is up to 10MHz. 4A seems to be set to 8MHz. 
 
-If you follow the links in the 4A notes above, then you can review a list of suggested hardware. These suggestions also work for us. 
+If you follow the links in the 4A notes above, then you can review a list of suggested hardware. These suggestions may also work for us. 
+
+Modifications for a cheap LNB (in french):
+http://f1chf.free.fr/LNBPLL/
+
+sr-systems with DVB-S demodulators and decoders. This is nice commercial gear. It seems to be designed to get the mpeg transport stream and then decode it to audio and video. What we're after is something a bit different. We use the generic stream encapsulation in order to transport data. The MPEG transport stream is just that - a transport stream for television signals. GSE encapsulates IP traffic. Our traffic is mixed modes. Voice, voice memo, documents, text, data, video, whatever that can be transported. IPv4, IPv6, whatever. Commercial gear like sr-systems may not support GSE.
 
 
 
