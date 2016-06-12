@@ -1,0 +1,26 @@
+https://amsat-uk.org/2016/05/21/eshail-2-geo-p4a-transponder-freqs/
+
+Wideband digital transponder
+ 2401.500 -  2409.500 MHz Uplink
+10491.000 - 10499.000 MHz Downlink
+
+Equipment requirements:
+
+X-Band 10 GHz Downlink:
+– 89 cm dishes in rainy areas at EOC like Brazil or Thailand
+– 60 cm around coverage peak
+– 75 cm dishes at peak -2dB
+– NB: linear vertical polarisation
+– WB: linear horizontal polarisation
+
+S-Band 2.4 GHz NB-Uplink:
+– narrow band modes like SSB, CW
+– 5W nominal Uplink power (22.5 dBi antenna gain, 75cm dish)
+– RHCP polarisation
+
+S-Band 2.4 GHz WB-Uplink (DATV):
+– wide band modes, DVB-S2
+– peak EIRP of 53 dBW (2.4m dish and 100W) required
+– RHCP polarisation
+
+Presentation on Es’hail by Peter Guelzow DB2OS, President of AMSAT-DL, at the 2013 AMSAT-UK Colloquium http://www.batc.tv/streams/amsat1306
