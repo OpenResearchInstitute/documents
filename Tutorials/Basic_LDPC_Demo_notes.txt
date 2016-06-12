@@ -1,23 +1,53 @@
-We need LDPC encoding and decoding for Phase 4 Ground.
+We need LDPC encoding and decoding for Phase 4 Ground. 
 
 These notes are a narrative of the process of learning about the LDPC-related blocks in GNU radio. 
 
-First, we look at the LDPC Encoder in the DVB section. 
+LDPC stands for low density parity check. This is a type of forward error correcting code used in DVB. We're going to need both encoders and decoders. 
+
+First, we looked at the LDPC Encoder in the DVB section. 
 
 There’s an ID field (all GNU radio blocks have one), a Standard selection (DVB-S2 or DVB-T2), FECFRAME size selection (normal or short), Code Rate (lots of choices), and Constellation (Other and 128APSK). 
 
-The medium FECFRAME size from DVB-S2X is not available.
-DVB-S2X code rates are not available.
+The medium FECFRAME size from DVB-S2X is not available yet. There is an additional DVB-S2X frame size of 32400 bits. DVB-S2 has short (was “normal”) 16200 bits and long 64800 bits.  
 
-This means that this block doesn’t support the additional DVB-S2X code rates or the additional DVB-S2X frame size of 32400 bits. DVB-S2 has short (was “normal”) 16200 bits and long 64800 bits. 
+DVB-S2X Very Low SNR code rates are not available yet, but they will be!
 
-I’m not sure why there’s only two constellations listed in the drop-down box. There are many constellations? 
+I wasn't sure why there was only two constellations listed in the drop-down box. There are many constellations? Why would you need to know the constellation in the first place? An encoder shouldn't care what the constellation looks like to work, right? 
+
+Well, there is an answer! Block author Ron Economos explained that is has to do with paragraph in section 5.3.2 of the DVB-S2X spec. 
+
+"For 128APSK padding is introduced to have an integer number of constellation points and slots in a FECFRAME. 6 zeros shall be appended at the end of the FECFRAME after FEC encoding."
+
+Therefore you do actually need to know if it's 128APSK because for this particular constellation, you need to add some padding to make it the same size as all the other outputs. 
+
+Much more importantly, Ron says he's willing to add the VL-SNR DVB-S2X functionality to this block, which is hugely helpful and just plain awesome.  
+
+The code rates to be added are 2/9 for normal frames, 1/5, 11/45 and 1/3 for medium frames, and 11/45 and 4/15 for short frames. The puncturing/shortening code is something that Ron used in DVB-T2, and it can be re-used here.
+
+The DVB-S2X code rates at the other end of the spectrum (less coding) are actually already in there. 
+
+What is puncturing? Shortening? First, here's the paragraph from the standard that sets down this requirement (5.5.2.6 in part 2 of the DVB-S2X standard). 
+
+"In order for VL-SNR frames to be compatible with legacy DVB-S2 VCM receivers, the PLFRAME length including the mobile header and increased pilot symbols shall be the same as in DVB-S2 PLFRAME. 
+
+This requires reducing the information carrying symbols of VL-SNR frames through shortening and puncturing.
+
+If an LDPC block is shortened, the first Xs information bits shall be set to zero before encoding, and they will not be transmitted. If an LDPC block is punctured, every Pth parity bit starting with the first parity bit, p0, (i.e. p0, pP, p2P, …) will not be transmitted until the desired number of punctured bits, Xp, is achieved."
+
+VL-SNR stands for very low signal to noise ratio
+VCM stands for variable coding and modulation
+PLFRAME stands for physical layer frame 
+
+Essentially, when you use a lot of coding, which means that you are adding a large amount of redundancy to the information bits, and you end up with more symbols than you usually deal with or can fit into a fixed frame size, and you are not interested in changing this fixed frame size due to things like backwards compatibility, then you have to cull the herd. 
+
+There are tables beneath the paragraph quoted above that specifically call out the values of Xs, P, and Xp for each of the affected modcods.
+
+"The motivation for these operations is to make the size of VL-SNR frames, in the presence of 900 symbol mobile header and extra pilot symbols, the same as the size of a legacy DVB-S2 frame size. That way, the new VL-SNR frames can be used together with legacy S2 VCM/ACM receivers where the legacy receivers would
+just skip the VL-SNR frames." -Annex B
 
 So, what needs to happen with this block?
 
 First, we should understand how to use it. I’m trying to make a demo. If you already have or know of one, or are better at GNU radio, your help will be appreciated. My scheme is to create random inputs, save a copy, send the other copy to LDPC encode, then LDPC decode, and compare the before and after. This may sound pedantic, but you have to start somewhere, and I’m “GNU” at this. 
-
-At a minimum, we should update this block with DVB-S2X code rates and frame sizes. I’d like to understand why there’s “other” and “128APSK” listed as constellations. 
 
 LDPC Encoder “Documentation” tab has the following content. 
 
@@ -89,6 +119,10 @@ namespace gr {
 }
 
 #endif /* INCLUDED_LDPC_ENCODER_H */
+
+
+
+
 
 
 
