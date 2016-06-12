@@ -1,0 +1,49 @@
+We reached out to AMSAT-DL about the Phase 4A payload, and whether or not we can support their downlink with our Phase 4 Ground project. The contact was positive and more discussion will occur. Here's a technical brief about Es'hail Phase 4A project. This payload will not be visible from North America. If successful, a payload further east, visible from Japan, will possibly be launched. 
+
+Supporting these payloads increases our market and opportunity for technical collaboration with amateurs around the world. 
+
+-=-=-=-=-=-=-=-=-=-=-=-=-
+
+https://amsat-uk.org/2016/05/21/eshail-2-geo-p4a-transponder-freqs/
+
+Wideband digital transponder
+ 2401.500 -  2409.500 MHz Uplink
+10491.000 - 10499.000 MHz Downlink
+
+Equipment requirements:
+
+X-Band 10 GHz Downlink:
+– 89 cm dishes in rainy areas at EOC like Brazil or Thailand
+– 60 cm around coverage peak
+– 75 cm dishes at peak -2dB
+– NB: linear vertical polarisation
+– WB: linear horizontal polarisation
+
+S-Band 2.4 GHz NB-Uplink:
+– narrow band modes like SSB, CW
+– 5W nominal Uplink power (22.5 dBi antenna gain, 75cm dish)
+– RHCP polarisation
+
+S-Band 2.4 GHz WB-Uplink (DATV):
+– wide band modes, DVB-S2
+– peak EIRP of 53 dBW (2.4m dish and 100W) required
+– RHCP polarisation
+
+Presentation on Es’hail by Peter Guelzow DB2OS, President of AMSAT-DL, at the 2013 AMSAT-UK Colloquium 
+
+http://www.batc.tv/streams/amsat1306
+
+AMSAT-DL Es'hail Phase 4A update Peter Guelzow DB2OS and Achim Vollhardt DH2VA give an update of AMSAT-DLs projects at the AMSAT-UK International Space Colloquium in Guildford on July 25, 2015. 
+
+https://www.youtube.com/watch?v=vxBtTymzKSA July 2015
+
+-=-=-=-=-=-=-=-=-=-=-=-=-
+
+As you can see from the technical brief above (in the notes), the uplink frequency is 2.4GHz, not 5GHz. 4A uses a commercial DVB-S downlink. 4B uses DVB-S2X. S2X is backwards compatible with DVB-S. 
+
+4B uses generic stream encapsulation. 4A uses 1 mpeg transport stream. The questions I have are whether or not our radio will "just work" with 4A. This is exciting stuff.
+
+If you follow the links in the 4A notes above, then you can review a list of suggested hardware. These suggestions also work for us. 
+
+
+
