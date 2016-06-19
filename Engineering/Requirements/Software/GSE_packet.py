@@ -19,20 +19,19 @@ import binascii
 #label type indicator two bits
 #there's GSE-length, which is 12 bits
 #16 bits is two bytes
-#so the possible combinations? Any combo.
+#so the possible combinations?
+#11101111 is 15, 16
 
 #if start indicator == 0 and end indicator == 0 and label type indicator == 0
 # then there are four padding bits, and padding bytes?
 
 
-
-PDU_default_data = pack('!8b', 1, 2, 3, 4, 5, 6, 7, 8)
+#Protocol Data Units are the things we want to encapsulate
+PDU_default_data = pack('!2b', 15, 16)
 print "PDU_default_data is", PDU_default_data
 
-#Protocol Data Unit
 class PDU:
 	def __init__(self):
-		#self.data = pack('!8b', 1, 2, 3, 4, 5, 6, 7, 8)
 		self.data = PDU_default_data
 		self.size = (calcsize('8b'))
 
