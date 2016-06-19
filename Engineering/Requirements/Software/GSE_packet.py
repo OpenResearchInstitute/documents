@@ -33,7 +33,7 @@ print "PDU_default_data is", PDU_default_data
 class PDU:
 	def __init__(self):
 		self.data = PDU_default_data
-		self.size = (calcsize('8b'))
+		self.size = (calcsize('2b'))
 
 #Encapsulated Packet Unit = GSE Packet
 class EPU:
