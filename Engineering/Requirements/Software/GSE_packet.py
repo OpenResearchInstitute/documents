@@ -1,6 +1,8 @@
 from struct import *
 import binascii
 
+#I think you hide the binascii stuff by defining function __str__ and/or function __repr__ in your object
+
 
 ##Crash course in struct:
 #>>> from struct import *
