@@ -27,8 +27,8 @@ import binascii
 
 
 #Protocol Data Units are the things we want to encapsulate
-PDU_default_data = pack('!2b', 15, 16)
-print "PDU_default_data is", PDU_default_data
+PDU_default_data = pack('!2B', 0xef, 0xff)
+print "PDU_default_data is", binascii.hexlify(PDU_default_data)
 
 class PDU:
 	def __init__(self):
@@ -110,9 +110,9 @@ class Priority_scheduler:
 		#for example
 		
 a = PDU()
-print "PDU data is", a.data
+print "PDU data is", binascii.hexlify(a.data)
 print "PDU data size in bytes is", a.size
 
 b = EPU()
-print "EPU data is", b.data
+print "EPU data is", binascii.hexlify(b.data)
 print "EPU data size in bytes is", b.size
