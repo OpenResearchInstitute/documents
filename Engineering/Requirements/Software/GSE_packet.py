@@ -1,7 +1,9 @@
+#this is what I used first
 from struct import *
 import binascii
 
-#I think you hide the binascii stuff by defining function __str__ and/or function __repr__ in your object
+#this is what was recommended by mossman
+from bitstring import BitArray, BitStream
 
 
 ##Crash course in struct:
@@ -29,20 +31,72 @@ import binascii
 
 
 #Protocol Data Units are the things we want to encapsulate
-PDU_default_data = pack('!2B', 0xef, 0xff)
-print "PDU_default_data is", binascii.hexlify(PDU_default_data)
+#maybe these are a bitstream? Probably not? 
+
+default_start = '0b1'
+default_stop = '0b1'
+default_address_type = '0b11'
+#00 6-byte label is present and shall be used for filtering
+#01 3-byte label is present and shall be used for filtering
+#10 Broadcast. No label field present. All Rx shall process this packet.
+#   This combination shall be used also in non-broadcast systems when 
+#   no filtering is applied at Layer 2, but IP header processing is utilized.
+#11 Label re-use. No label field is present. All Rx shall reuse the label 
+#   that was present in the previous Start or Complete GSE Packet of the 
+#   same Base Band frame. This method is used for transmitting a sequence 
+#   of GSE packets with the same label without repeating the label field. 
+#   This value shall not be used for the first GSE packet in the frame. 
+default_GSE_length = '0b000000000000'
+
+
+default_fragment_ID = '0b11111111'
+
+default_total_length = '0b0000000011111111'
+
+default_protocol_type = '0b0000000011111111'
+
+#default_label presence and length depends on the address type
+if default_address_type == '0b00':
+	default_label = '0b000000001111111100000000111111110000000011111111'
+elif default_address_type == '0b01':
+	default_label = '0b000000001111111100000000'
+else:
+	default_label = None
+
+
+
+zero_prefix = '0b00000'
+H_LEN = '0b111'
+#001 optional extension header length of 2 bytes
+#010 optional extension header length of 4 bytes
+#011 optional extension header length of 6 bytes
+#100 optional extension header length of 8 bytes
+#101 optional extension header length of 10 bytes
+H_TYPE = '0b11111111'
+#represents either one of 256 Mandatory Extension Headers or
+#represents one of 256 Optional Extension Headers
+default_extension_header_1 = zero_prefix+H_LEN+H_TYPE
+
+
+#default_extension_header_2 =
 
 class PDU:
 	def __init__(self):
-		self.data = PDU_default_data
-		self.size = (calcsize('2b'))
+		start = BitArray(default_start)
+		stop = BitArray(default_stop)
+		label_type = BitArray(default_address_type)
+		GSE_length = BitArray(default_GSE_length)
+
+		fixed_header = start+stop+label_type+GSE_length
+		label = BitArray(default_label)
+
+		self.data = fixed_header+label
+		self.size = len(self.data)
 
 #Encapsulated Packet Unit = GSE Packet
 class EPU:
 	def __init__(self):
 		self.data = pack('!bb', 0xe, 0xf)
-		self.size = calcsize('!bb')
-		#demo data [0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0]
 	
 
 #Baseband frame
@@ -112,9 +166,5 @@ class Priority_scheduler:
 		#for example
 		
 a = PDU()
-print "PDU data is", binascii.hexlify(a.data)
-print "PDU data size in bytes is", a.size
-
-b = EPU()
-print "EPU data is", binascii.hexlify(b.data)
-print "EPU data size in bytes is", b.size
+print "PDU data is", a.data
+print "PDU data size is", a.size
