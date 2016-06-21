@@ -35,7 +35,7 @@ from bitstring import BitArray, BitStream
 
 default_start = '0b1'
 default_stop = '0b1'
-default_address_type = '0b11'
+default_label_type = '0b11'
 #00 6-byte label is present and shall be used for filtering
 #01 3-byte label is present and shall be used for filtering
 #10 Broadcast. No label field present. All Rx shall process this packet.
@@ -46,6 +46,7 @@ default_address_type = '0b11'
 #   same Base Band frame. This method is used for transmitting a sequence 
 #   of GSE packets with the same label without repeating the label field. 
 #   This value shall not be used for the first GSE packet in the frame. 
+
 default_GSE_length = '0b000000000000'
 
 
@@ -55,10 +56,10 @@ default_total_length = '0b0000000011111111'
 
 default_protocol_type = '0b0000000011111111'
 
-#default_label presence and length depends on the address type
-if default_address_type == '0b00':
+#default_label presence and length depends on the label type
+if default_label_type == '0b00':
 	default_label = '0b000000001111111100000000111111110000000011111111'
-elif default_address_type == '0b01':
+elif default_label_type == '0b01':
 	default_label = '0b000000001111111100000000'
 else:
 	default_label = None
@@ -84,7 +85,19 @@ class PDU:
 	def __init__(self):
 		start = BitArray(default_start)
 		stop = BitArray(default_stop)
-		label_type = BitArray(default_address_type)
+		label_type = BitArray(default_label_type)
+		
+		if start == '0b1' && end == '0b0' && label_type == '0b00':
+
+#N1 is the number of bytes until the end of the Base Band frame.
+		Padding_bits
+		for(i=0;i<N1;i++) {
+		Padding_bytes
+		
+
+		}
+		
+		
 		GSE_length = BitArray(default_GSE_length)
 
 		fixed_header = start+stop+label_type+GSE_length
