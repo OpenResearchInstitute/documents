@@ -53,4 +53,8 @@ He says "With the center frequency at 52 MHz, the SSB ends up on 50.125 MHz. You
 Speaking of AMSAT, please join! 
 
 If you want to contribute to Phase 4 Ground then join the mailing list by applying at 
-http://www.amsat.org/?page_id=1121.I found out how to get a terrain profile in google earth. Here is a set of them between some of the places we want to use for prototyping equipment. The Palomar mountain end of the control link, using Ubiquity hardware, is up and running. This is a great utility that happens to be free in google earth. 
+http://www.amsat.org/?page_id=1121.I found out how to get a terrain profile in google earth. Here is a set of them between some of the places we want to use for prototyping equipment. The Palomar mountain end of the control link, using Ubiquity hardware, is up and running. This is a great utility that happens to be free in google earth.
+
+DEFCON Wireless Village asked for more information about the project in order to evaluate us for a speaking spot. The deadline is Friday, so I'm working on that and will report back as soon as I hear anything. 
+
+More soon! Gotta catch 'em all!
