@@ -1,7 +1,25 @@
 #this is what was recommended by mossman
 from bitstring import BitArray, BitStream
 
+#A more OO way to handle this is to build a state machine using the state pattern.
 
+#Handling incoming raw data is parsing where state machines provide an elegant solution 
+#(you will have to choose between elegant and performance)
+
+#You have a data buffer to process, each state has a handle buffer method that parses 
+#and processes his part of the buffer (if already possible) and sets the next state based on the content.
+
+#If you want to go for performance, you still can use a state machine, but leave out the OO part.
+
+
+
+
+
+
+
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+#snapshot of GSE_packet.py follows
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 #Baseband frame information
 #should this be an object?
