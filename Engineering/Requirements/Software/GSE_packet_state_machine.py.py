@@ -281,10 +281,10 @@ class Priority_scheduler:
 
 
 #Two PLFRAME configurations shall be possible:
-#• Without pilots.
-#• With pilots.
+#* Without pilots.
+#* With pilots.
 #In this latter case a PILOT BLOCK shall be composed of P = 36 pilot symbols. 
-#Each pilot shall be an un-modulated symbol, identified by I = (1/√2), Q = (1/√2). 
+#Each pilot shall be an un-modulated symbol, identified by I = (1/square root of 2), Q = (1/square root of 2).
 #The first PILOT BLOCK shall be inserted 16 SLOTs after the PLHEADER, the second 
 #after 32 SLOTs and so on, as represented in figure 13. If the PILOT BLOCK 
 #position coincides with the beginning of the next SOF, then the PILOT BLOCK is not transmitted.
@@ -293,34 +293,50 @@ class Priority_scheduler:
 
 class EPU_manager:
 	def __init__(self):
-		#self.data = [0,0,0]
+		self.data = [0,0,0]
 		#for example
-	def produce_bbframe(self, trick):
-	def randomize_PLFRAME():
+	def produce_BBFRAME(stuff):
+		print "inside produce_BBFRAME method"
+	def randomize_PLFRAME(stuff):
+		print "inside randomize_PLFRAME method"
 		#Prior to modulation, each PLFRAME, excluding the PLHEADER, shall be randomized 
 		#for energy dispersal by multiplying the (I+jQ) samples by a complex randomization sequence (CI+jCQ):
-	def produce_PLHEADER():
+	def produce_PLHEADER(stuff):
 		#kick out a PLHEADER by itself
 		#The PLHEADER is intended for receiver synchronization and physical layer signalling.
 		#NOTE: After decoding the PLHEADER, the receiver knows the PLFRAME duration and structure, 
 		#the modulation and coding scheme of the XFECFRAME, the presence or absence of pilot symbols.
 		#The PLHEADER (one SLOT of 90 symbols) shall be composed of the following fields:
-		#• SOF (26 symbols), identifying the Start of Frame.
-		#• PLS code (64 symbol): PLS (Physical Layer Signalling) code shall be 
+
+
+		print "inside produce_PLHEADER method"
+		#* SOF (26 symbols), identifying the Start of Frame.
+		SOF = BitArray('0x18D2E82')
+		#* PLS code (64 symbol): PLS (Physical Layer Signalling) code shall be 
 		#a non-systematic binary code of length 64 and dimension 7 with minimum distance dmin = 32. 
 		#It is equivalent to the first order Reed-Muller under permutation. 
 		#It transmits 7 bits for physical layer signalling purpose. 
 		#These 7 bits consists of two fields: MODCOD and TYPE defined as follows:
 		#- MODCOD (5 symbols), identifying the XFECFRAME modulation and FEC rate;
+		MODCOD = ''
 		#- TYPE (2 symbols), identifying the FECFRAME length (64 800 bits or 16 200 bits) 
 		#     and the presence/absence of pilots.
+		TYPE = ''
+		
 		#The PLHEADER, represented by the binary sequence (y1, y2,...y90) shall be modulated 
-		#into 90 π/2BPSK symbols according to the rule:
-		#I.2i-1 = Q.2i-1 = (1/√2) (1-2y2i-1), I.2i = - Q.2i = - (1/√2) (1-2y2i) for i = 1, 2, ..., 45
-		return()
+		#into 90 pi/2BPSK symbols according to the rule:
+		#I.2i-1 = Q.2i-1 = (1/square root of 2) (1-2y2i-1), 
+		#I.2i = - Q.2i = - (1/square root of 2) (1-2y2i) for i = 1, 2, ..., 45
+
+		return(SOF)
 		
 		
 		
 a = GSE()
 print "GSE data is", a.data
 print "GSE data size is", a.size
+b = EPU_manager()
+b.produce_BBFRAME()
+PLHEADER = b.produce_PLHEADER()
+print PLHEADER
+b.randomize_PLFRAME()
