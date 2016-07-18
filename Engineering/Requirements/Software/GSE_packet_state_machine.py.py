@@ -306,7 +306,7 @@ class EPU_manager:
 
 
 
-	def produce_PLHEADER(self, FECFRAME_length, pilots):
+	def produce_PLHEADER(self, FECFRAME_length, pilots, XFECFRAME_modulation, FEC_rate):
 		#kick out a PLHEADER by itself
 		#The PLHEADER is intended for receiver synchronization and physical layer signalling.
 		#NOTE: After decoding the PLHEADER, the receiver knows the PLFRAME duration and structure, 
@@ -331,13 +331,34 @@ class EPU_manager:
 		[0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1],
 		[0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]])
+		[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]], dtype=bool)
 		
-		#print G
 		
-		#XFECFRAME_modulation
-		#FEC_rate
-		MODCOD = BitArray('0b01010')
+		print "the modulation is", XFECFRAME_modulation
+		print "the code rate is", FEC_rate
+		
+		MODCOD = matrix([0,0,1,0,0,0], dtype=bool)
+		
+		codeword = MODCOD*G
+		print "the codeword is a matrix", codeword
+		#print "the codeword is a matrix", (codeword.astype(int))		
+		codeword_int = codeword.astype(int)
+		print "the codeword as type int", codeword_int
+		
+		codeword_int_list = codeword_int.tolist()
+		print "the codeword type int as a list", codeword_int_list
+		
+		codeword_bitarray = BitArray()
+		
+		for i in range(0, 32):
+			print "this is element", (codeword_int_list[0][i])
+			codeword_bitarray.append([codeword_int_list[0][i]])
+		
+		print "codeword_bitarray is", codeword_bitarray
+		
+		
+		#print ((MODCODbin*Gbin).astype(int)).tolist()
+		
 		
 		#- TYPE (2 symbols), identifying the FECFRAME length (64 800 bits or 16 200 bits) 
 		#     and the presence/absence of pilots.
@@ -386,6 +407,6 @@ print "GSE data size is", a.size
 b = EPU_manager()
 #print b
 b.produce_BBFRAME()
-PLHEADER = b.produce_PLHEADER('short','yes')
+PLHEADER = b.produce_PLHEADER('short','yes', 'qpsk', '1/4')
 print "The PLHEADER is",PLHEADER
 b.randomize_PLFRAME()
