@@ -218,8 +218,11 @@ class PDU_manager:
 		self.data = [0,0,0]
 		#for example
 
-
-	
+#one of two topmost units that make GSE packets
+class EPU_manager:
+	def __init__(self):
+		self.data = [0,0,0]
+		#for example
 		
 #stores received PDU packets 
 #Provides QoS and ACM support
@@ -268,50 +271,6 @@ class Priority_scheduler:
 	def __init__(self):
 		self.data = [0,0,0]
 		#for example
-		
-		
-		
-		
-		
-
-#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-#one of two topmost units. EPU_manager Makes baseband frames.
-#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-#The PLHEADER is intended for receiver synchronization and physical layer signalling.
-
-#Prior to modulation, each PLFRAME, excluding the PLHEADER, shall be randomized 
-#for energy dispersal by multiplying the (I+jQ) samples by a complex randomization sequence (CI+jCQ):
-
-#Two PLFRAME configurations shall be possible:
-#• Without pilots.
-#• With pilots.
-#In this latter case a PILOT BLOCK shall be composed of P = 36 pilot symbols. 
-#Each pilot shall be an un-modulated symbol, identified by I = (1/√2), Q = (1/√2). 
-#The first PILOT BLOCK shall be inserted 16 SLOTs after the PLHEADER, the second 
-#after 32 SLOTs and so on, as represented in figure 13. If the PILOT BLOCK 
-#position coincides with the beginning of the next SOF, then the PILOT BLOCK is not transmitted.
-#The pilot presence/absence in VCM and ACM can be changed on a frame-by-frame basis.
-
-#NOTE: After decoding the PLHEADER, the receiver knows the PLFRAME duration and structure, 
-#the modulation and coding scheme of the XFECFRAME, the presence or absence of pilot symbols.
-#The PLHEADER (one SLOT of 90 symbols) shall be composed of the following fields:
-#• SOF (26 symbols), identifying the Start of Frame.
-#• PLS code (64 symbol): PLS (Physical Layer Signalling) code shall be a non-systematic 
-#binary code of length 64 and dimension 7 with minimum distance dmin = 32. 
-#It is equivalent to the first order Reed-Muller under permutation. 
-#It transmits 7 bits for physical layer signalling purpose. 
-#These 7 bits consists of two fields: MODCOD and TYPE defined as follows:
-#- MODCOD (5 symbols), identifying the XFECFRAME modulation and FEC rate;
-#- TYPE (2 symbols), identifying the FECFRAME length (64 800 bits or 16 200 bits) 
-#and the presence/absence of pilots.
-class EPU_manager:
-	def __init__(self):
-		#self.data = [0,0,0]
-		#for example
-	def produce_bbframe(self, trick):
-	def produce_PLHEADER():
-		#kick out a PLHEADER by itself
-		
 		
 a = GSE()
 print "GSE data is", a.data
