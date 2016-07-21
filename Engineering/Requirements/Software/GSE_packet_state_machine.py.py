@@ -320,24 +320,6 @@ class EPU_manager:
 		#(01-1000-....-0010 in binary notation, the left-side bit being the MSB of the PLHEADER).
 		SOF = BitArray('0b 01 1000 1101 0010 1110 1000 0010')
 		
-		#doing it wrong
-		#here's a better way
-		#a = np.array([[1,  0],
-		#               [1,  1],
-		#               [0,  1]], dtype=bool)
-		#b = np.array([[1,  1,  0],
-		#               [0,  1,  1]], dtype=bool)
-     #
-		#print np.dot(a,b)
-		#to see 0's and 1's simply multiply with 1
-
-		#print 1*np.dot(a,b)
-		#Answer is
-
-		#[[1 1 0]
-		# [1 1 1]
-		# [0 1 1]]
-		
 		#* PLS code (64 symbol): PLS (Physical Layer Signalling) code shall be 
 		#a non-systematic binary code of length 64 and dimension 7 with minimum distance dmin = 32. 
 		#It is equivalent to the first order Reed-Muller under permutation. 
@@ -365,11 +347,12 @@ class EPU_manager:
 		MODCOD = matrix([0,0,0,0,0,0], dtype=bool)
 		print "dummy PLFRAME normal size", (MODCOD*G).astype(int)
 		MODCOD = matrix([0,0,0,0,0,1], dtype=bool)
+		#print (MODCOD*G).astype(int)
 		print "dummy PLFRAME short size", (MODCOD*G).astype(int)
 		MODCOD = matrix([0,0,0,0,1,0], dtype=bool)
-		print "QPSK 1/4 PLFRAME normal size", (MODCOD*G).astype(int)
+		print (MODCOD*G).astype(int)
 		MODCOD = matrix([0,0,0,0,1,1], dtype=bool)
-		print "QPSK 1/3 PLFRAME short size", (MODCOD*G).astype(int)
+		print (MODCOD*G).astype(int)
 		MODCOD = matrix([0,0,0,1,0,0], dtype=bool)
 		print (MODCOD*G).astype(int)
 		MODCOD = matrix([0,0,0,1,0,1], dtype=bool)
