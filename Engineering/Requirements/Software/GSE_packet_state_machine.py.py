@@ -1,9 +1,6 @@
 #this is what was recommended by mossman
 from bitstring import BitArray, BitStream
 
-#matrix class from numpy
-from numpy import matrix
-
 #A more OO way to handle this is to build a state machine using the state pattern.
 
 #Handling incoming raw data is parsing where state machines provide an elegant solution 
@@ -296,96 +293,50 @@ class Priority_scheduler:
 
 class EPU_manager:
 	def __init__(self):
-		print "Dummy frame set here?"
-	def produce_BBFRAME(self):
+		self.data = [0,0,0]
+		#for example
+	def produce_BBFRAME(stuff):
 		print "inside produce_BBFRAME method"
-	def randomize_PLFRAME(self):
+	def randomize_PLFRAME(stuff):
 		print "inside randomize_PLFRAME method"
 		#Prior to modulation, each PLFRAME, excluding the PLHEADER, shall be randomized 
 		#for energy dispersal by multiplying the (I+jQ) samples by a complex randomization sequence (CI+jCQ):
-
-
-
-	def produce_PLHEADER(self, FECFRAME_length, pilots):
+	def produce_PLHEADER(stuff):
 		#kick out a PLHEADER by itself
 		#The PLHEADER is intended for receiver synchronization and physical layer signalling.
 		#NOTE: After decoding the PLHEADER, the receiver knows the PLFRAME duration and structure, 
 		#the modulation and coding scheme of the XFECFRAME, the presence or absence of pilot symbols.
 		#The PLHEADER (one SLOT of 90 symbols) shall be composed of the following fields:
 
+
 		print "inside produce_PLHEADER method"
-		
 		#* SOF (26 symbols), identifying the Start of Frame.
-		#SOF shall correspond to the sequence 18D2E82HEX 
-		#(01-1000-....-0010 in binary notation, the left-side bit being the MSB of the PLHEADER).
-		SOF = BitArray('0b 01 1000 1101 0010 1110 1000 0010')
-		
+		SOF = BitArray('0x18D2E82')
 		#* PLS code (64 symbol): PLS (Physical Layer Signalling) code shall be 
 		#a non-systematic binary code of length 64 and dimension 7 with minimum distance dmin = 32. 
 		#It is equivalent to the first order Reed-Muller under permutation. 
 		#It transmits 7 bits for physical layer signalling purpose. 
 		#These 7 bits consists of two fields: MODCOD and TYPE defined as follows:
 		#- MODCOD (5 symbols), identifying the XFECFRAME modulation and FEC rate;
-		G = matrix([[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
-		[0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1],
-		[0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1],
-		[0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]])
-		
-		#print G
-		
-		#XFECFRAME_modulation
-		#FEC_rate
-		MODCOD = BitArray('0b01010')
-		
+		MODCOD = ''
 		#- TYPE (2 symbols), identifying the FECFRAME length (64 800 bits or 16 200 bits) 
 		#     and the presence/absence of pilots.
-		#The MSB of the TYPE field shall identify 2 FECFRAME sizes 
-		#(0 = normal: 64 800 bits; 1 = short: 16 200 bits). 
-		#The LSB of the TYPE field shall identify the pilot configurations (see clause 5.5.3) 
-		#(0 = no pilots, 1 = pilots).
+		TYPE = ''
 		
-		print "FECFRAME_length is ", FECFRAME_length
-		print "pilots is ", pilots
-		if FECFRAME_length == 'normal' and pilots == 'no':
-			TYPE = BitArray('0b 00')
-			#print "normal and no"
-			return("SOF="+SOF.bin+"TYPE="+TYPE.bin)
-		if FECFRAME_length == 'normal' and pilots == 'yes':
-			TYPE = BitArray('0b 01')
-			#print "normal and yes"
-			return("SOF="+SOF.bin+"TYPE="+TYPE.bin)
-		if FECFRAME_length == 'short' and pilots == 'no':
-			TYPE = BitArray('0b 10')
-			#print "short and no"
-			return("SOF="+SOF.bin+"TYPE="+TYPE.bin)
-		if FECFRAME_length == 'short' and pilots == 'yes':
-			TYPE = BitArray('0b 11')
-			#print "short and yes"
-			return("SOF="+SOF.bin+"TYPE="+TYPE.bin)
-		else:
-			TYPE = BitArray(None)
-			#print "didn't match"
-			return("SOF="+SOF.bin+"TYPE="+"Invalid Result")
-
-
 		#The PLHEADER, represented by the binary sequence (y1, y2,...y90) shall be modulated 
 		#into 90 pi/2BPSK symbols according to the rule:
 		#I.2i-1 = Q.2i-1 = (1/square root of 2) (1-2y2i-1), 
 		#I.2i = - Q.2i = - (1/square root of 2) (1-2y2i) for i = 1, 2, ..., 45
 
+		return(SOF)
 		
 		
 		
 a = GSE()
 print "GSE data is", a.data
 print "GSE data size is", a.size
-
-
 b = EPU_manager()
-#print b
 b.produce_BBFRAME()
-PLHEADER = b.produce_PLHEADER('short','yes')
-print "The PLHEADER is",PLHEADER
+PLHEADER = b.produce_PLHEADER()
+print PLHEADER
 b.randomize_PLFRAME()
