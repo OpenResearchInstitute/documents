@@ -337,160 +337,21 @@ class EPU_manager:
 		print "the modulation is", XFECFRAME_modulation
 		print "the code rate is", FEC_rate
 		
-		MODCOD = matrix([1,1,1,1,1,1], dtype=bool)
-		
-		#print G
-		print MODCOD
-		
-		#print "modcod times modcode transpose is", MODCOD*MODCOD.transpose()
-		
-		MODCOD = matrix([0,0,0,0,0,0], dtype=bool)
-		print "dummy PLFRAME normal size", (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,0,0,0,1], dtype=bool)
-		#print (MODCOD*G).astype(int)
-		print "dummy PLFRAME short size", (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,0,0,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,0,0,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,0,1,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,0,1,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,0,1,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,0,1,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
 		MODCOD = matrix([0,0,1,0,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,1,0,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,1,0,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,1,0,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,1,1,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,1,1,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,0,1,1,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,0,0,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,0,0,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,0,0,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,0,0,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,0,1,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,0,1,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,0,1,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,0,1,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,1,0,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,1,0,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,1,0,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,1,0,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,1,1,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,1,1,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,1,1,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([0,1,1,1,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,0,0,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,0,0,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,0,0,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,0,0,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,0,1,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,0,1,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,0,1,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,0,1,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,1,0,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,1,0,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,1,0,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,1,0,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,1,1,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,1,1,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,0,1,1,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,0,0,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,0,0,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,0,0,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,0,0,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,0,1,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,0,1,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,0,1,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,0,1,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,1,0,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,1,0,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,1,0,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,1,0,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,1,1,0,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,1,1,0,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,1,1,1,0], dtype=bool)
-		print (MODCOD*G).astype(int)
-		MODCOD = matrix([1,1,1,1,1,1], dtype=bool)
-		print (MODCOD*G).astype(int)
-
-		
-		
-		
-		
-		
-		
-		MODCOD = matrix([0,0,0,0,1,0], dtype=bool)
 		
 		codeword = MODCOD*G
-		#print "the codeword is a boolean matrix", codeword
-
+		print "the codeword is a matrix", codeword
+		#print "the codeword is a matrix", (codeword.astype(int))		
 		codeword_int = codeword.astype(int)
-		#print "the codeword as matrix type int", codeword_int
+		print "the codeword as type int", codeword_int
 		
 		codeword_int_list = codeword_int.tolist()
-		#print "the codeword is matrix type int but as a list", codeword_int_list
+		print "the codeword type int as a list", codeword_int_list
 		
 		codeword_bitarray = BitArray()
 		
 		for i in range(0, 32):
-			#print "this is element", (codeword_int_list[0][i])
+			print "this is element", (codeword_int_list[0][i])
 			codeword_bitarray.append([codeword_int_list[0][i]])
 		
 		print "codeword_bitarray is", codeword_bitarray
@@ -511,23 +372,23 @@ class EPU_manager:
 		if FECFRAME_length == 'normal' and pilots == 'no':
 			TYPE = BitArray('0b 00')
 			#print "normal and no"
-			return("SOF="+SOF.bin+"MODCOD="+codeword_bitarray.bin+"TYPE="+TYPE.bin)
+			return("SOF="+SOF.bin+"TYPE="+TYPE.bin)
 		if FECFRAME_length == 'normal' and pilots == 'yes':
 			TYPE = BitArray('0b 01')
 			#print "normal and yes"
-			return("SOF="+SOF.bin+"MODCOD="+codeword_bitarray.bin+"TYPE="+TYPE.bin)
+			return("SOF="+SOF.bin+"TYPE="+TYPE.bin)
 		if FECFRAME_length == 'short' and pilots == 'no':
 			TYPE = BitArray('0b 10')
 			#print "short and no"
-			return("SOF="+SOF.bin+"MODCOD="+codeword_bitarray.bin+"TYPE="+TYPE.bin)
+			return("SOF="+SOF.bin+"TYPE="+TYPE.bin)
 		if FECFRAME_length == 'short' and pilots == 'yes':
 			TYPE = BitArray('0b 11')
 			#print "short and yes"
-			return("SOF="+SOF.bin+"MODCOD="+codeword_bitarray.bin+"TYPE="+TYPE.bin)
+			return("SOF="+SOF.bin+"TYPE="+TYPE.bin)
 		else:
 			TYPE = BitArray(None)
 			#print "didn't match"
-			return("SOF="+SOF.bin+"MODCOD="+codeword_bitarray.bin+"TYPE="+"Invalid Result")
+			return("SOF="+SOF.bin+"TYPE="+"Invalid Result")
 
 
 		#The PLHEADER, represented by the binary sequence (y1, y2,...y90) shall be modulated 
