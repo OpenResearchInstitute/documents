@@ -1,0 +1,11 @@
+Generic Stream Encapsulation
+
+Software architecture, additional volunteer, repository launched
+
+David kb8kzm has stepped up to help with the Python implementation of GSE. 
+
+Coding GSE in Python gives us an implementation that allows us to test our theories on making GSE better fit amateur radio and also gives us something to compare production code against. This should improve our verification and validation stages. 
+
+We are going to need GSE sooner rather than later because we are starting to evaluate parts and modules that modulate DVB. We want to be able to feed in data that is encapsulated with GSE. Either we use some other implementation of GSE that we scrape up off of github, or we make our own, with our amateur specific modifications. I think we should do the latter. 
+
+So here's the repository for Phase 4 GSE. We're starting with the encapsulation. Packetized data of any type comes in, and DVB frames go out. DVB-S2/X is what we're starting off with. We expect IP packets are what we're going to be dealing with, but that actually isn't a requirement. GSE allows us to handle pretty much any sort of data that's being thrown at us. 
