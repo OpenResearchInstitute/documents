@@ -1,6 +1,6 @@
-DEFCON
+DEFCON 24
 
-Our Talk at Wireless Village
+Our Talk at Wireless Village!
 
 Our talk at DEFCON Wireless Village was very well attended and very well received. Skunkworks, Abraxas3d, and TBD all represented Phase 4 on Saturday afternoon. We got the first speaking slot after the shock collar equipped SDR dogfight contest. If the speaker names for this talk sound unfamiliar, it's because they are our not-so-secret hacker handles. Skunkworks is Paul KB5MU. I'm Abraxas3d, and TBD is Steve Conklin. That handle literally is TBD because he hasn't told me his secret hacker handle yet. It's obviously highly classified. We talked fast about phase 4 in our 20 minute time slot. The slides are in our github repository. 
 
