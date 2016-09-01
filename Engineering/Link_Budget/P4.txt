@@ -4,7 +4,6 @@ Title:  DRAFT
 
 Description:  03/07/2016
 
-
 Frequencies
 	Uplink Freq.	5.4	GHz
 	Downlink Freq.	10.4	GHz
