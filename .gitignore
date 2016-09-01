@@ -11,3 +11,6 @@
 
 # PowerPoint temporary
 ~$*.ppt*
+
+# .DS_Store
+~$*.DS_Store
