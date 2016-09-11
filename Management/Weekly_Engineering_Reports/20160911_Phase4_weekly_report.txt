@@ -8,7 +8,7 @@ First up: LimeSDR unboxing and call for developers. Steve Conklin applied for an
 
 Steve is willing to coordinate and advise a team to figure out how to make the LimeSDR work for us. Now, the LimeSDR has a maximum frequency range of 3.8Ghz. However, there is an upcoming LMS8001 add-on module which will extended LimeSDR coverage all the way up to 12GHz. With an RF bandwidth of 61 MHz, 12 bit sampling depth, and a 61MHz sampling rate, two transmitters and two receivers, full duplex, USB 3.0, and 40,000 gates of programmable logic, excellent oscillator precision, it looks highly promising. You can see from this chart that the LimeSDR is very much a contender with all the other SDRs we've been using and talking about. 
 
-There's SiLabs EVM progress. Dr. MPEG, also known as Ron Economos W6RZ generously agreed to test an evaluation module, or EVM, for SiLabs DVB chipset. The chip in question is the Si2169. Links to SiLabs web pages about it in the notes. 
+There's SiLabs EVM progress. Dr. MPEG, also known as Ron Economos W6RZ generously agreed to test an evaluation module, or EVM, for a SiLabs DVB chip. The chip in question is the Si2169. Links to SiLabs web pages about it in the notes. 
 
 https://www.silabs.com/products/video/demodulator/Pages/Si2169.aspx
 
@@ -30,20 +30,21 @@ Ron also did some DVB-T2 testing with the EVM. It seems a little buggy in DVB-T2
 
 Steve Hicks N5AC was instrumental in getting the loan of this EVM board to Phase 4. He handled the NDAs and communications with SiLabs. 
 
-SiLabs does not usually deal with smaller projects like us. The ability to evaluate a chip for our radio like this is a an opportunity that we need to fully take advantage of. If you have the skills and equipment to test this EVM for Phase 4 then we have a very nice board for you to try out. We need to come to a decision about whether a chip like this, which is an ASIC specifically designed for DVB transceive, is a fully qualified alternative to using an FPGA. 
+SiLabs does not usually deal with smaller projects like us. The ability to evaluate a chip for our radio like this is a an opportunity that we intend to fully take advantage of. 
 
-We think it’s worth raising the discussion/awareness about asic vs. fpga and where we may end up.  One option would be to put both part footprints on the board and be able to do either — a lower cost unit without VL-SNR (using the asic) and a higher cost with an FPGA.  But I’m worried about more than one design and splitting efforts across multiple devices.  It's still too early to make a decision on this, certainly without a sized FPGA.  Perhaps we will have some more good discussions at GRcon.
+If you have the skills and equipment to test this EVM for Phase 4 then this is a very nice board that you can try out. As a result of the evaluations, we will come to a decision about whether a chip like this, which is an ASIC specifically designed for DVB transceive, is a fully qualified alternative to using an FPGA. 
 
+The ASIC vs. FPGA decision is important. One option would be to put both part footprints on the board. We'd then have a stuff option so that we can do either board — a lower cost unit without (for example) VL-SNR (using the ASIC) and a higher cost more full-featured version with an FPGA. 
 
-
-
-There's Mr. Brain's DVB-S2X demodulator coding progress.
+There's Mr. Brain's DVB-S2X demodulator coding progress. 
 
 There's 10GHz PA possibilities that I need help reviewing and deciding about. 
 
 I'm looking for updates on the 5GHz RF chain? Schematic and BOM? 
 
-I'm looking for people that are standing around waiting to do something? Let me know!
+I'm looking for people that are standing around waiting to do something? Let me know! 
+
+If you haven't joined AMSAT, TAPR, or ARRL then please do. These organizations make our project possible. Want to join Phase 4 Ground? 
 
 
 
