@@ -36,11 +36,11 @@ If you have the skills and equipment to test this EVM for Phase 4 then this is a
 
 The ASIC vs. FPGA decision is important. One option would be to put both part footprints on the board. We'd then have a stuff option so that we can do either board — a lower cost unit without (for example) VL-SNR (using the ASIC) and a higher cost more full-featured version with an FPGA. 
 
-There's Mr. Brain's DVB-S2X demodulator coding progress. 
+There's Mr. Brain's DVB-S2X demodulator coding progress. There's a lot of very good technical updates located at the link in the notes. http://g4guo.blogspot.co.uk/ Go to his blog and subscribe to the updates and follow it, you won't be disappointed. His code will be in gitlab until it's working, and then will be released to his github, which is located here. https://github.com/G4GUO
 
 There's 10GHz PA possibilities that I need help reviewing and deciding about. 
 
-I'm looking for updates on the 5GHz RF chain? Schematic and BOM? 
+I'm looking for updates on the 5GHz RF chain? Schematic and BOM? Let me know!
 
 I'm looking for people that are standing around waiting to do something? Let me know! 
 
