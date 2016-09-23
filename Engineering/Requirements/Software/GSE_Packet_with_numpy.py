@@ -14,6 +14,10 @@ from numpy import matrix
 
 #If you want to go for performance, you still can use a state machine, but leave out the OO part.
 
+#Another thing is that the numpy matrix class has been on the "going to be deprecated"
+#chopping block for a long time. We're supposed to use ndarray for new code. 
+#W5NYV finds this to be unsatisfying, since matrices are a thing. They should be a class.
+
 
 
 
@@ -21,11 +25,11 @@ from numpy import matrix
 
 
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-#snapshot of GSE_packet.py follows
+# GSE Packet creation station starts here
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 #Baseband frame information
-#should this be an object?
+#should *this* be an object?
 #N1 is the number of bytes until the end of the Base Band frame.
 N1 = 10
 
@@ -35,15 +39,26 @@ N1 = 10
 
 
 #Protocol Data Units are the things we want to encapsulate
-#maybe these are a bitstream? Probably not? 
-#How about making it a random value every time we run the code?
+#maybe these are a bitstream but let's do BitArrays read from files first. 
+#How about making it a random value every time we run the code when we find
+#both hemispheres of our derrieres with our hands
+
+#you still need a copy of the GSE standard in front of you to make much sense of this.
+#there is some documentation of the fields included but it's not complete. 
 
 default_start = '0b1'
+#start indicator
+
 default_stop = '0b0'
+#stop indicator
+
 default_label_type = '0b00'
+#label type indicator
+
 #The GSE Label Field is optional. 
 #Depending on the Label Type Indicator of the GSE Header, 
-#the Label field can have a length of 6 byte, 3 byte or be omitted.
+#the Label field can have a length of 6 bytes, 3 bytes or be omitted.
+
 #00 6-byte label is present and shall be used for filtering
 #01 3-byte label is present and shall be used for filtering
 #10 Broadcast. No label field present. All Rx shall process this packet.
@@ -130,9 +145,11 @@ H_LEN = '0b111'
 #011 optional extension header length of 6 bytes
 #100 optional extension header length of 8 bytes
 #101 optional extension header length of 10 bytes
+
 H_TYPE = '0b11111111'
 #represents either one of 256 Mandatory Extension Headers or
 #represents one of 256 Optional Extension Headers
+
 default_extension_header_1 = zero_prefix+H_LEN+H_TYPE
 
 
@@ -278,7 +295,15 @@ class Priority_scheduler:
 		
 
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-#one of two topmost units. EPU_manager Makes baseband frames.
+# The EPU Manager is one of two top tier units in the block 
+# diagram on page 19 of the GSE implementation guideline 
+# specification from ETSI.
+# This block diagram is a very useful thing. Pages 19-22 are
+# in the repo for easy reference. 
+# EPU_manager Makes baseband frames.
+# The other block is the PDU Manaager, which takes in protocol 
+# Data Units and decides the adaptive coding and modulation 
+# mapping, and then delivers things to the Scheduler Queues. 
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
@@ -292,6 +317,7 @@ class Priority_scheduler:
 #after 32 SLOTs and so on, as represented in figure 13. If the PILOT BLOCK 
 #position coincides with the beginning of the next SOF, then the PILOT BLOCK is not transmitted.
 #The pilot presence/absence in VCM and ACM can be changed on a frame-by-frame basis.
+#W5NYV believes we should always have a pilot block. 
 
 
 class EPU_manager:
@@ -361,6 +387,8 @@ class EPU_manager:
 		print MODCOD
 		
 		#print "modcod times modcode transpose is", MODCOD*MODCOD.transpose()
+		
+		#yes this is pedantic and typed out at length. I had issues.
 		
 		MODCOD = matrix([0,0,0,0,0,0], dtype=bool)
 		print "dummy PLFRAME normal size", (MODCOD*G).astype(int)
@@ -553,6 +581,8 @@ class EPU_manager:
 		#I.2i = - Q.2i = - (1/square root of 2) (1-2y2i) for i = 1, 2, ..., 45
 
 		
+		
+#ActionItem: The testbench below should be in another file, eventually, or soon		
 		
 		
 a = GSE()
