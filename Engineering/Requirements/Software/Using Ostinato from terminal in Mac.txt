@@ -1,4 +1,0 @@
-Drag BOTH 'drone' and 'Ostinato' to the Applications alias
-
-Ostinato requires elevated privileges to transmit packets. Run it from a terminal using sudo - 
-$ sudo /Applications/Ostinato.app/Contents/MacOS/Ostinato
