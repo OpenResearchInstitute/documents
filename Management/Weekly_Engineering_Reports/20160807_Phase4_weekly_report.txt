@@ -51,6 +51,7 @@ Michael Pfeuffer
 Wally Ritchie
 Eric Nichols
 Bob McGwier, his students, and myself
+Jonathan Brandenberg
 Steve Hicks? consulting services? 
 
 If your name didn't appear, and you want to contribute as a named member to Phase 4 Ground FPGA development, then speak up.
