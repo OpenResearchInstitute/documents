@@ -1,0 +1,20 @@
+[
+
+{
+"lastheard":90903490,
+"callsign":"w5nyv",
+"ssid":"",
+"location":145
+},
+
+
+
+{
+"lastheard": 82919329,
+"callsign":"kb5mu",
+"ssid":"7",
+"location":146
+}
+
+
+]
