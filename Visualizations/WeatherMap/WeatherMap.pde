@@ -105,3 +105,37 @@ int modulation_level(int my_modcod){
   }
   return index_i;
 }
+
+String grid_square(){
+ 
+//For simplicity, let's assume that West and South are negative lat/long, 
+//as is a common convention. For example purposes, I'm going to use 32.123 W, 14.321 N. 
+//The key thing is to do the following.:
+
+//Longitude
+
+//Add 180 to the longitude, and take the integer value /20, and add one. 
+//Then figure out which letter of the alphabet that corresponds to, usually written in upper case. 
+//The example will be 147.877/20=7. Adding one will give the 8th letter of the alphabet, or H. Note 7.877 is remaining.
+//Take the remainder of what is left, and divide by 2, rounding down. This is the number, no conversion required. 
+//The example will give a value of 3. Note 1.877 is remaining.
+//Take the remainder that is left, and multiply by 12, and add one. Round down to the nearest integer.. 
+//This is the letter of the alphabet, usually written in lower case. The example gives a value of 22+1=23. This will be the letter w.
+
+//Latitude
+
+//Add 90 to the longitude, and take the integer value /10, and add one. 
+//Then figure out which letter of the alphabet that corresponds to, usually written in upper case. 
+//The example will be 104.321/10=10. Adding one will give the 11th letter of the alphabet, or K. Note 4.321 is remaining.
+//Take the remainder of what is left, and round down. This is the number, no conversion required. 
+//The example will give a value of 4. Note 0.321 is remaining.
+//Take the remainder that is left, and multiply by 24, and add one. 
+//Round down to the nearest integer.. This is the letter of the alphabet, usually written in lower case. 
+//The example gives a value of 7+1=8. This will be the letter h.
+  
+  
+  
+  
+  
+  
+}
