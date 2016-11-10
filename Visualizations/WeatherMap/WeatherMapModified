@@ -1,0 +1,44 @@
+[
+  {
+    "grid": "Maidenhead Grid Square",
+    "lastheard": 1476801716,
+    "callsign": "w5nyv",
+    "ssid": "",
+    "modcod": "218"
+  },
+  {
+    "grid": "Maidenhead Grid Square",
+    "lastheard": 1478601018,
+    "callsign": "kk6ooz",
+    "ssid": "-45",
+    "modcod": "3"
+  },
+  {
+    "grid": "Maidenhead Grid Square",
+    "lastheard": 1478501018,
+    "callsign": "ad5t",
+    "ssid": "",
+    "modcod": "218"
+  },
+  {
+    "grid": "Maidenhead Grid Square",
+    "lastheard": 1478401018,
+    "callsign": "n6oe",
+    "ssid": "",
+    "modcod": "8"
+  },
+  {
+    "grid": "Maidenhead Grid Square",
+    "lastheard": 1478401018,
+    "callsign": "w6rz",
+    "ssid": "",
+    "modcod": "3"
+  },
+  {
+    "grid": "Maidenhead Grid Square",
+    "lastheard": 1478301018,
+    "callsign": "kb5mu",
+    "ssid": "-7",
+    "modcod": "6"
+  }
+]
