@@ -1,0 +1,18 @@
+Generic stream encapsulation for DVB, or DVB-GSE, is now working in GNU Radio with ping packets! Low latency, high efficiency, and it's available as an out of tree module right now at the following link. 
+
+https://github.com/drmpeg/gr-dvbgse
+
+Thank you Dr. MPEG (Ron w6rz)
+
+The testing continues with GSE and is related to our ongoing experiences with the Ayecka SR1 and SR1 Pro. The SR1s are DVB-S2 receivers that appear to do GSE. The customer service experience has left a lot to be desired. Three of us purchased the SR1 in anticipation that it would do GSE out of the box and be either a good test equipment choice or possibly one of the many recipes for a Phase 4 Ground radio. However, GSE is, if you hunt hard enough, listed as an option that requires another $220 to unlock. Aside from that, Ayecka wants to upgrade your receiver remotely, which does not fit in to many IT situations. 
+
+Dr. MPEG's early results seem to indicate that there are some bugs in Ayecka's SR1 GSE implementation. These are fixable bugs and are yet more evidence of our early adopter status. Yay us!
+
+Why is GSE important? It's our data link layer protocol and therefore binds the universe together. It's efficient and low latency. It allows us to carry packet protocols like IP, ethernet, whatever through our system. There are several addressing modes and enables adapative coding and modulation. You can do hardware filtering with it and you can add other link protocols by extension. There are no built-in integrity checks in GSE. That's left up to the physical layer to do. We are confident that the physical layer is up to the job. 
+
+GSE is also used in the terrestrial DVB protocol DVB-T2. You've heard less about this but it's what we're going to use for terrestrial radio modes. Sharing GSE function between all modes makes for a more consistent design and a bit less work. 
+
+
+"Just say no to HLS" 
+
+We are soliciting opinions about HLS from Xilinx. This is High-Level Synthesis and is part of the Vivado design environment. Is it something that you have experience with? Is it something you have an opinion about? Xilinx wants to know. Get in touch with me with your feedback.
