@@ -2,7 +2,28 @@
 <SearchIndexes Version="1.0">
     <Documents>
         <Document ID="3">
-            <Title>Untitled</Title>
+            <Title>Introduction</Title>
+            <Text>The SR1 and SR1-Pro are DVB-S2 demodulators from Ayecka Communications Systems Limited. Ayecka manufactures and sells satellite communication components. The company’s products include modems, receivers, converters, and trans-modulators. They also offer system engineering, architecture design, capacity planning, equipment selection, and site building services. Ayecka is based in Hod HaSharon, Israel. 
+The SR1 is capable of generic stream encapsulation (GSE) as well as MPEG support. Three Phase 4 Ground members purchased the SR1 in mid-November 2016 in order to progress GSE development and to have additional DVB-S2 receive hardware to experiment with.  
+At $550-$600, the SR1 is relatively expensive. To our collective disappointment, the SR1 requires an upgrade to SR1 in order to do GSE. The upgrade is a firmware build that unlocks GSE. The upgrade costs an additional $220. Once the $220 is paid, the firmware images are delivered via email attachment. The two images consist of a software image for the processor and a firmware image for the FPGA. The final step of the upgrade is to allow remote access to the SR1 for licensing. Remote access to the unit is accomplished through Teamviewer, telnet, remote desktop or SSH to the computer that the SR1 is connected to through a serial connection. Ayecka logs in and modifies a license. 
+The upgrade includes a PDF document “Ayecka Broadband Products - user manual”. The most relevant part of the document is chapter 17 Images Management. 
+</Text>
+        </Document>
+        <Document ID="6">
+            <Title>http://www.ayecka.com/products-SR1.php</Title>
+            <Text>http://www.ayecka.com/products-SR1.php</Text>
+        </Document>
+        <Document ID="4">
+            <Title>Procedure</Title>
+            <Text>We connected the SR1 to a Windows machine after a brief effort to control the SR1 via MacOS. We used the control port on the SR1 and the provided USB cable. There is a Serial over USB Cable chapter in the manual (Section 8) that describes how to get the drivers (if necessary on your machine) and what magic keystrokes to press to get the user interface to appear in the serial monitor. We used Putty. Various configurations were inspected and a few changed. The changes stuck, so the serial connection appeared to be working. We changed the 60 second timeout for telnet to an hour for convenience and added a telnet password.
+In order to load the new images to the SR1, the manual instructs setting up a TFTP server. It’s best to set one up locally, as in on the same LAN that the SR1 is on. We downloaded OpenTFTPServer for Windows and set it up. We enabled ping on the Windows machine (it’s off by default), and were able to ping the machine hosting the TFTP server, but could not move files from it to any other computer on the LAN. We investigated with Wireshark and suspected a firewall or some other configuration was at fault. The update process, accessed via the UI in the serial monitor, did erase the existing firmware and software images, so that part of the update process was working. 
+Another TFTP server was set up on a Linux machine on the LAN. This worked right away, and the new files showed up in the list on the SR1. The SR1 has an active and an inactive set of software and firmware. The software and firmware designated “active” is loaded upon cold boot. We set the new software to be the active images and then set up telnet access for the SR1, so that Ayecka could log in and modify the license file.
+We set up Wireshark to monitor the incoming traffic. A throwing star LAN tap came in handy! Within a minute, we were getting telnet attempts. Since it was the middle of the night in Israel, we left everything setup overnight. 
+In order to accomplish the license upgrade, Ayecka successfully logged in remotely, invoked the Factory Settings menu under System, and provided a password. Then, under the Production Parameters menu, they changed the Product Name from "SR1c" to "SR1g". Then they told it to save. They looked at the RX Channel 1 configuration before disconnecting. This was completed 11 January 2017. 
+SR1 GSE version supports re-assembly of up to two input stream identifier/modulation and coding/address encoding (ISI/MODCOD/Labels) combinations. This allows for some experimentation with adaptive coding and modulation, but not a whole lot. Getting an SR1-Pro, which has a larger FPGA, is required for more combinations of these configurations. </Text>
+        </Document>
+        <Document ID="5">
+            <Title>Next Steps</Title>
         </Document>
     </Documents>
 </SearchIndexes>
