@@ -1,0 +1,23 @@
+100.jpg - 850 MHz  PN 10 kHz offset 1 kHz RBW
+-58.36 - 10LOGBW = -88.36 dBc/Hz
+If I read the LMS7002M Spec sheet right, it should be down around -96 dBc/Hz? Attached pdf.
+
+101.jpg - 2850 MHz PN 10 kHz offset 1 kHz RBW
+-49 - 10LOGBW = -79 dBc/Hz spec around -87 dBc/Hz?
+
+102.jpg - 2850 MHz +/-200 kHz
+The curious 200 kHz spurs
+
+103.jpg - 2850 MHz 100 MHz Span
+A broader view - need to go digging deeper.
+
+104.jpg - 2850 MHz 388 kHz?
+small spur on the low side?
+
+Output power varies. I've seen upwards of +15 dBm. I am powering the LimeSDR board off an external supply.
+
+I'm using LimeSuite to set up the transmit output on TX1-1. There are so many settings it's possible/probable I'm missing something.
+
+I also have done rudimentary NF measurements. Paul, W1GHZ loaned me a homebrew noise head he had built from his QEX article in 1996? on Noise Figure. I used it to measure the NF, but had to rely on a chart for ENR. So assumptions!!!  I found I definitely had to use a preamp in front of the Lime. I used an AD6IW wideband pre for testing.
+
+I need to do more real world tests on the bands....
