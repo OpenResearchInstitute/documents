@@ -1,0 +1,18 @@
+Reference Designator,Description,Manufacturer,Manufacturer Part Number,Mouser Part Number
+C1 C6 C7,2 pf NP0 MLCC,AVX Corporation,08051U2R0BAT2A,
+C10 C11 C12 C18 C19 C3 C4 C8,100 nF,Kemet,C0805C104K5RACTU,80-C0805C104K5R
+C15 C16 C9,10.0 µF,Murata,GRM31CR71E106KA12L,81-GRM31CR71E106KA12
+C17,0.3pF NP0 MLCC,ATC,600F0R3BT250XT,
+C2,10 pF NP0 MLCC,American Technical Ceramics,600F100JT250XT,
+C20 C5,1.0nF,Kemet,C0805C102KDRACTU,80-C0805C102KDRACTU
+D1,LED,Lite-On,LTL-4236N,
+J1 J2,SMA FEMALE EDGE MOUNT FOR 0.062‚Äù THICK BOARD,Linx,CONSMA003.062,
+Q1,PMBT2222A,NXP,"PMBT2222A,215",
+R1 R2,110 ohm,Yageo,RC1206FR-07110RL,
+R3,0 ohm,YAGEO,RC0805JR-070RL,603-RC0805JR-070RL
+R6 R7,1K ohm,Vishay,CRCW08051K00JNEA,71-CRCW0805J-1K-E3
+U1 U2,Monolithic Amplifier 8 GHz,Mini Circuits,GALI-1+,
+U3,Three-Terminal Medium Current Positive Voltage Regulator,ON Semiconductor,MC78M08CDT,
+U4,5V 1A switching regulator,RECOM,R-78E5.0-1.0,
+U5,"100 mA  CMOS LDO with Active-Low Shutdown and Reference Bypass, 5-Pin SOT-23, Extended Temperature, Tape and Reel",Microchip,TC1015-2.85VCT713,
+U6,"5 GHz, 26dBm Power Amplifier with Power Detector",SKYWORKS,SE5004L,
