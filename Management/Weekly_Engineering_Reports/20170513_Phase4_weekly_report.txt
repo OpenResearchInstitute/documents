@@ -1,0 +1,20 @@
+ Hi all,
+just a reminder that our SDMG meeting has been moved up a week to this Monday, May 8.
+7:00 at my home in La Mesa. I plan to demo the True Position GPS 10 MHz reference with Arduino and display. A very nice system for the money. More of those GPS boards are still available. Michelle will be brnging SDR related show & tell and Brian may bring his operational loop antenna.
+ - Kerry N6IZW
+
+LDPC decode work
+
+5GHz RF work
+
+Lynch LimeSDR work
+
+B200 delivered
+
+B200 on the way
+
+HFSS license to Paul Wade
+
+Plans for Hamvention
+
+Song from JK! Don't forget that!
