@@ -28,3 +28,5 @@ Phase 4 Ground will also be at Burning Man. An upcoming video will focus on what
 If you have not got your ticket to GNU Radio Conference, then please do. Link in the notes. www.gnuradio.org
 
 Besides producing a radio for AMSAT five and dime, we all want to show how truly fun SDR and GNU Radio and embedded devices and digital communications really are. If you have questions or don't know where to start, then please write me. 
+
+https://www.youtube.com/watch?v=FZxGfh1Es_I&feature=youtu.be
