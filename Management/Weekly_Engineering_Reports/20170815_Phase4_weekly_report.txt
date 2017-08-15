@@ -4,6 +4,10 @@ As some of you know, I fell while running in the park in mid-May. Not just any d
 
 So there's quite the backlog. Let's get caught up. We have a True Position GPS 10 MHz reference with Arduino and display. A very nice system for the money, and we have a session scheduled with the local microwave club to get them up and running for some Phase 4 Ground receiver development.
 
+There has been some forward movement on the LimeSDR. Using SDRangel, Mike Seguin N1JEZ transmitted with CW and SSB. Here's a link to his Paper I did on the Lime for the Eastern VHF Conference with continuing updates for the PackRats conference and then MUD. It has links to video of CW and SSB in SDRangel.
+
+https://www.dropbox.com/s/tohnqmb1ko4xhnm/The%20LimeSDR.pdf?dl=0
+
 LDPC decode work took some strides forward primarily due to Charles Brain G4GUO and Jan Schiefer AC7TD. Check out the repository in the notes. There will be some more updates there very soon. https://github.com/phase4ground/DVB-receiver
 
 Two B200s compliments of Ettus Research have been delivered to Phase 4 Ground members for R&D. Wally Ritchie WU1Y and Mike Sprenger and Tony Stone W4UOO & W4TAS are the current responsible parties and are learning and doing. This very generous donation is greatly appreciated. If you are in the market for a lab-grade SDR, then go to Ettus and tell them I sent you. 
