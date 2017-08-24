@@ -1,0 +1,25 @@
+Greetings!
+
+Today we're talking about correlators. 
+
+Correlators help us find patterns in bitstreams. This is a very common function in digital communications. Why? 
+
+The receiver clock and the transmitter clock are independent. They may be (slightly, we hope) different. 
+
+When we send a stream of digital data over a wireless link, we have no way of knowing in advance when the snapshots of digital data were made, what phase of the carrier we're dealing with, what the exact frequency is of the carrier, and whether or not there's a frequency or phase error. That sort of thing. 
+
+This is why receivers are more complicated and more difficult to design than transmitters. An entire class of circuits and solutions for what's called the synchronization problem exists because we have to figure out the best time to take our snapshot of the received signal, and then maintain that timing throughout reception.
+
+The correlator looks for a known pattern of symbols that occurs at the start of every DVB-S2 frame. This pattern is called the Start of Frame and is defined in the standard for DVB-S2. 
+
+A lot of the blocks for DVB-S2 are already in GNU Radio. It looks like that we need our own correlator block. 
+
+Well, we have a very specific case and we have a general idea about how challenging synchronization will be. 
+
+The desired signal with the Start of Frame is 2 dB below the noise, and our signal is wideband. Low signal to noise ratios and wideband signals mean ??? 
+
+How is this usually done? Take the dot product and integrate. If the result is above a threshold value, then we declare victory. This threshold could be a static value. 
+
+Or, the threshold could be dynamically chosen based on the noise in multiple samples surrounding the peak. For low SNR and wideband modes, this may be better.
+
+The current correlation estimation block in GNU Radio does the dynamic logarithmic approach. It uses a constant false alarm rate approach, where the probability of false alarm is set equal to the negative of the log of quantity some number minus our threshold value. Not yet sure what that "some number" comes from. 
