@@ -23,3 +23,38 @@ How is this usually done? Take the dot product and integrate. If the result is a
 Or, the threshold could be dynamically chosen based on the noise in multiple samples surrounding the peak. For low SNR and wideband modes, this may be better.
 
 The current correlation estimation block in GNU Radio does the dynamic logarithmic approach. It uses a constant false alarm rate approach, where the probability of false alarm is set equal to the negative of the log of quantity some number minus our threshold value. Not yet sure what that "some number" comes from. 
+
+"Smart pointers are objects which store pointers to dynamically allocated (heap) objects. They behave much like built-in C++ pointers except that they automatically delete the object pointed to at the appropriate time. Smart pointers are particularly useful in the face of exceptions as they ensure proper destruction of dynamically allocated objects. They can also be used to keep track of dynamically allocated objects shared by multiple owners.
+
+Conceptually, smart pointers are seen as owning the object pointed to, and thus responsible for deletion of the object when it is no longer needed. As such, they are examples of the "resource acquisition is initialization" idiom described in Bjarne Stroustrup’s "The C++ Programming Language", 3rd edition, Section 14.4, Resource Management."
+
+Boost provides free portable peer-reviewed C++ libraries. The emphasis is on portable libraries which work well with the C++ Standard Library.
+
+GNU Radio Block Coding Style Guide https://wiki.gnuradio.org/index.php/BlocksCodingGuide
+
+sptr is a shared pointer
+
+We have a shared pointer that points to a vector.
+
+Vectors are sequence containers representing arrays that can change in size.
+
+Just like arrays, vectors use contiguous storage locations for their elements, which means that their elements can also be accessed using offsets on regular pointers to its elements, and just as efficiently as in arrays. But unlike arrays, their size can change dynamically, with their storage being handled automatically by the container.
+
+Internally, vectors use a dynamically allocated array to store their elements. This array may need to be reallocated in order to grow in size when new elements are inserted, which implies allocating a new array and moving all elements to it. This is a relatively expensive task in terms of processing time, and thus, vectors do not reallocate each time an element is added to the container.
+
+Instead, vector containers may allocate some extra storage to accommodate for possible growth, and thus the container may have an actual capacity greater than the storage strictly needed to contain its elements (i.e., its size). Libraries can implement different strategies for growth to balance between memory usage and reallocations, but in any case, reallocations should only happen at logarithmically growing intervals of size so that the insertion of individual elements at the end of the vector can be provided with amortized constant time complexity (see push_back).
+
+Therefore, compared to arrays, vectors consume more memory in exchange for the ability to manage storage and grow dynamically in an efficient way.
+
+Compared to the other dynamic sequence containers (deques, lists and forward_lists), vectors are very efficient accessing its elements (just like arrays) and relatively efficient adding or removing elements from its end. For operations that involve inserting or removing elements at positions other than the end, they perform worse than the others, and have less consistent iterators and references than lists and forward_lists.
+
+void
+    corr_est_cc_impl::_set_threshold(float threshold)
+    {
+      d_stashed_threshold = threshold;
+      d_pfa = -logf(1.0f-threshold);
+    }
+
+Constant False Alarm Rate(CFAR). The center is the cell under test. The two adjacent cells are added and multiplied by a constant to establish a threshold. Detection occurs when the cell under test exceeds the threshold.
+
+d_pfa is the internal variable that holds the probability of false alarm. 
