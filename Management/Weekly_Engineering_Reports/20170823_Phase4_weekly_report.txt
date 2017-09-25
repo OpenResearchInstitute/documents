@@ -58,3 +58,5 @@ void
 Constant False Alarm Rate(CFAR). The center is the cell under test. The two adjacent cells are added and multiplied by a constant to establish a threshold. Detection occurs when the cell under test exceeds the threshold.
 
 d_pfa is the internal variable that holds the probability of false alarm. 
+
+"SOF shall correspond to the sequence 18D2E82HEX (01-1000-....-0010 in binary notation, the left-side bit being the MSB of the PLHEADER)" 90 degree BPSK, so in complex notation, it's…
