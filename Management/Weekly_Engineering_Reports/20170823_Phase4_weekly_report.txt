@@ -60,3 +60,9 @@ Constant False Alarm Rate(CFAR). The center is the cell under test. The two adja
 d_pfa is the internal variable that holds the probability of false alarm. 
 
 "SOF shall correspond to the sequence 18D2E82HEX (01-1000-....-0010 in binary notation, the left-side bit being the MSB of the PLHEADER)" 90 degree BPSK, so in complex notation, it's…
+
+"The PLHEADER, represented by the binary sequence (y1, y2,...y90) shall be modulated into 90 π/2BPSK symbols according to the rule:
+ I sub 2i-1 = Q sub 2i-1 = (1/√2) (1-2y sub 2i-1), I sub 2i = - Q sub 2i = - (1/√2) (1-2y sub 2i) for i = 1, 2, ..., 45 "
+
+ 18D2E82 hex is SOF.
+
