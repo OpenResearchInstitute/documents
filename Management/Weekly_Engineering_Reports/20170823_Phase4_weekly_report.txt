@@ -51,7 +51,7 @@ We started with the definition in the spec.
 
 The information seems to be encoded as the direction that the vector moves, whether 90 degrees clockwise or 90 degrees counterclockwise, at each clock tick. The signal does not stay in the same quadrant. That would be considered an error and erased. The signal does not move 180 degrees across the center. That would be an erasure as well. The signal moves either clockwise or counterclockwise depending on whether it is encoding a zero or a one. 
 
-This really needs to be reviewed to make sure we interpreted it correctly. Code can be found at the following repository and discussed in the code review channel in Slack. 
+This really needs to be reviewed to make sure we interpreted it correctly. Code for this block can be found at the following repository and discussed in the code review channel in Slack. https://github.com/phase4ground/correlator
 
 Once we thought we understood the way pi/2 BPSK worked, we wrote quality assurance test code. The gr-modtool sets up unit testing templates for you, so that you can test first like highly evolved and successful programmers always do.*
 

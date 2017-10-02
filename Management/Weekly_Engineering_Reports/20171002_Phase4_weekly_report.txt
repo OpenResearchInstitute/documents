@@ -1,0 +1,94 @@
+Greetings!
+
+Today we're talking about our simplified pi/2 BPSK decoder, working under the assumption that symbol timing and phase have already been resolved to a single sample per symbol.
+
+This work fits into a much larger picture of acquiring phase, timing of symbols, demodulation, decoding, and correlation to the fixed patterns of the Start of Frame field in the physical layer header that helps define each DVB-S2 frame.
+
+The DVB-S2 physical layer header is sent using a modulation scheme called pi/2 BPSK. This scheme is defined in the standard. Since we're using GNU Radio as our reference design, we decided to make a custom block in GNU Radio to do this. This block will evolve to include our specific type of correlation for the Start of Frame as well. 
+
+Given that we needed a block, we had to learn how to make one. 
+
+There is a very useful GNU Radio Block Coding Style Guide here. https://wiki.gnuradio.org/index.php/BlocksCodingGuide
+
+There is a very helpful set of guided tutorials from the GNU Radio website here. https://wiki.gnuradio.org/index.php/Guided_Tutorials
+
+There's a tool built in to GNU Radio called gr-modtool. One of its functions is that it sets up a module. Another function lets you add blocks to that module. In GNU Radio a module is the category and the blocks that belong to that category are considered to be in the module. Blocks do specific DSP functions. The name of the module shows up in GNU Radio Companion as the category header for blocks that belong to the module. 
+
+Using gr-modtool is relatively easy. It sets up the right directory structure for you and it provides templates in either python or c++ for the implementation of your block. I'm not going to duplicate the tutorial here. Find this specific tutorial here https://wiki.gnuradio.org/index.php/Guided_Tutorial_GNU_Radio_in_C%2B%2B
+
+If you walk through this tutorial you will be well on your way to being able to code GNU Radio blocks. 
+
+After doing the tutorial a couple of times, we attacked the problem of demodulating pi/2 BPSK. 
+
+We started with the definition in the spec.
+
+"SOF shall correspond to the sequence 18D2E82HEX (01-1000-....-0010 in binary notation, the left-side bit being the MSB of the PLHEADER)" 90 degree BPSK, so in complex notation, it's…
+
+"The PLHEADER, represented by the binary sequence (y1, y2,...y90) shall be modulated into 90 π/2BPSK symbols according to the rule:
+ I sub 2i-1 = Q sub 2i-1 = (1/√2) (1-2y sub 2i-1), I sub 2i = - Q sub 2i = - (1/√2) (1-2y sub 2i) for i = 1, 2, ..., 45 "
+
+The information seems to be encoded as the direction that the received signal vector moves, whether 90 degrees clockwise or 90 degrees counterclockwise, with each received symbol. 
+
+The signal does not stay in the same quadrant. That would be considered an error and erased. The signal does not move 180 degrees or across the center. That would be an erasure as well. The signal moves either 90 degrees clockwise or 90 degrees counterclockwise depending on whether it is encoding a zero or a one. 
+
+This really needs to be reviewed to make sure we interpreted it correctly. Code for this block can be found at the following repository and discussed in the code review channel in Slack. https://github.com/phase4ground/correlator
+
+Once we thought we understood the way pi/2 BPSK worked, we wrote quality assurance test code. The gr-modtool sets up unit testing templates for you, so that you can test first like highly evolved and successful programmers always do.*
+
+Then we wrote some demodulation code. It didn't work. We wrote more. It didn't work either. QA tests kept failing. We went back to the drawing board and realized that it would never work. We proved that the problem couldn't be simplified combinatorially. We then wrote a table lookup for the combinations of previous and current symbols. Here's the table we started with and went back to.
+
+I_previous	Q_previous	I_current	Q_current	Result
+0		0		0		0		erasure
+0		0		0		1		clockwise
+0		0		1		0		counterclockwise
+0		0		1		1		erasure
+0		1		0		0		counterclockwise
+0		1		0		1		erasure
+0		1		1		0		erasure
+0		1		1		1		clockwise
+1		0		0		0		clockwise
+1		0		0		1		erasure
+1		0		1		0		erasure
+1		0		1		1		counterclockwise
+1		1		0		0		erasure
+1		1		0		1		counterclockwise
+1		1		1		0		clockwise
+1		1		1		1		erasure
+
+
+We receive a series of complex signal snapshots. We establish a history, where we tell GNU radio that we need to keep track of the most recently received complex signal along with the current one. This means we use the set_history function in the constructor. The history value is 2. We need the previous signal in order to tell which direction the signal moved and whether or not that move was valid. 
+
+In our complex signal world, the previous result and the current result are each composed of a real and imaginary part. The real and imaginary part are floats. 0 is positive 1.0 and 1 is negative 1.0
+
+Clockwise is positive 1
+Counterclockwise is negative 1
+Errors are erasures and result is set to zero. 
+
+The lookup is achieved by taking the signs of previous I, previous Q, current I, current Q with the signbit macro, and converting those sign bit results into an integer by multiplying each one by place values 8, 4, 2, and 1. There's a trick to using the sign bit this way, and it's a double bang. Check it out.
+
+int tesla = (!!std::signbit(previous_input.real()))*8 + (!!std::signbit(previous_input.imag()))*4 + (!!std::signbit(current_input.real()))*2 + (!!std::signbit(current_input.imag()));
+	
+out[i] = mega[tesla];
+
+Output is a table lookup.
+
+mega is a list of floats constructed as follows.
+
+float mega[] = {0.0, 1.0, -1.0, 0.0, -1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, -1.0, 0.0, -1.0, 1.0, 0.0};
+
+The index created by the integer value tesla (binary coded decimal number derived from the sign bits of the previous and current complex samples) will give the correct output value that corresponds to that combination of previous and current complex signal inputs. 
+
+After some more tests, we realized that the set_history function didn't work exactly the way we thought it did. We adjusted our thinking and fixed the indexing and it passed the tests.
+
+Assuming that the demodulation is correct, the next step from here is to take our start of frame and look for received patterns that match it. When this happens, we produce a tag. Tags in GNU Radio are synchronized chunks of information that are attached to samples. It is like metadata that can be used by other blocks. For this block, we are going to follow the conventions in the general correlation estimation block. This means that there will be several tags that can be used by downstream blocks that need them. Those downstream blocks have already implemented functions that consume the tags, so if we produce them, it makes for more useful flow graphs. 
+
+The list of tags that we are looking to produce are corr_est, phase_est, time_est, and amp_est. They stand for Correlation Estimate, Phase Estimate, Time Estimate, and Amplitude Estimate. 
+
+Amplitude Estimate provides a scaling factor for the input stream to normalize the data to +/- 1. We think of this as AGC. An older implementation of correlation block in GNU Radio required incoming samples to already be normalized by an external AGC block or function. It now appears to be built in, and we're going to do the same. 
+
+Phase Estimate is the calculated phase offset of the incoming signal. It's determined by doing a cross-correlation. Time Estimate seems to be the frequency error, but we haven't looked at this as hard as the others. Correlation Estimate is a tag that shows exactly where the start of the correlated symbols are.
+
+Look it over, check our work, and help us add the correlation next. All of this and more will be at the AMSAT Symposium demonstration room in late October. Hope to see you there!
+
+
+*Yes, we seriously wrote the unit test first this time, like you're supposed to. It helped! Learn more about test driven development here: https://en.wikipedia.org/wiki/Test-driven_development
