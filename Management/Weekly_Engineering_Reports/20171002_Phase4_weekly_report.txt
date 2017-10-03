@@ -2,7 +2,7 @@ Greetings!
 
 Today we're talking about our simplified pi/2 BPSK decoder, working under the assumption that symbol timing and phase have already been resolved to a single sample per symbol.
 
-This work fits into a much larger picture of acquiring phase, timing of symbols, demodulation, decoding, and correlation to the fixed patterns of the Start of Frame field in the physical layer header that helps define each DVB-S2 frame.
+This work fits into the much larger picture of acquiring phase, timing of symbols, demodulation, decoding, and correlation to the fixed patterns of the Start of Frame field in the physical layer header that helps define each DVB-S2 frame.
 
 The DVB-S2 physical layer header is sent using a modulation scheme called pi/2 BPSK. This scheme is defined in the standard. Since we're using GNU Radio as our reference design, we decided to make a custom block in GNU Radio to do this. This block will evolve to include our specific type of correlation for the Start of Frame as well. 
 
