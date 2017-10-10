@@ -1,0 +1,15 @@
+Greetings!
+
+Today we're talking about correlators. 
+
+Correlators help us find patterns in data streams. This is a very common function in digital communications. Why? 
+
+When we send a stream of digital data over a wireless link, we have no way of knowing in advance when the snapshots of digital data were made, what phase of the carrier we're dealing with, what the exact frequency is of the carrier, the path delay, and where in the frame we are. That sort of thing. 
+
+This is why receivers are more complicated and more difficult to design than transmitters. An entire class of circuits and solutions for what's called the synchronization problem exists because we have to figure out the best time to take our snapshot of the received signal symbol in order to get the bits. You want to sample when the received signal is definitely 1 or definitely 0, not when it's crossing over to the other value or off peak by enough to where you're not sampling anywhere close to the point where the value was set. We then have to maintain that symbol timing throughout reception. Once we know we have good symbols, then we have to figure out the edges of the frames or packets or whatever other structure the protocol has.
+
+Essentially, once we get received symbols we need to figure out where in the data stream we are. Looking for known patterns that are periodically sent in the signal is a common way to solve this problem. 
+
+Our desired correlator is a block or circuit that looks for the known pattern of symbols that occurs at the start of every DVB-S2 frame. This pattern is called the Start of Frame. It is defined in the standard for DVB-S2. The start of frame is 18D2E82 in hex. For DVB-S2, the modulation for the PLHEADER is pi/2 BPSK. 
+
+It looks like that we need our own correlator block. 
