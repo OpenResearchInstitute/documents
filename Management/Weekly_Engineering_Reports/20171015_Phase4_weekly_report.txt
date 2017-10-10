@@ -13,3 +13,13 @@ Essentially, once we get received symbols we need to figure out where in the dat
 Our desired correlator is a block or circuit that looks for the known pattern of symbols that occurs at the start of every DVB-S2 frame. This pattern is called the Start of Frame. It is defined in the standard for DVB-S2. The start of frame is 18D2E82 in hex. For DVB-S2, the modulation for the PLHEADER is pi/2 BPSK. 
 
 It looks like that we need our own correlator block. 
+
+So how is correlation usually done? Your correlator looks at the incoming received symbols. You have a pattern you are looking for. You take the dot product of some number of those symbols with the pattern and integrate. If the result is above a threshold value that you have set, then you declare victory. 
+
+This could be a fixed threshold. Or, the threshold could be dynamically chosen based on the noise in multiple samples surrounding the peak. For low SNR and wide band modes, this dynamic adaptive method offers better performance. The desired signal with the Start of Frame is like 2 dB below the noise, and our signal is wideband. Low signal to noise ratios and wideband signals mean a dynamic or adaptive threshold approach is probably what we should be doing.
+
+The current correlation estimation block in GNU Radio implements a dynamic logarithmic approach. It uses a constant false alarm rate approach, where the probability of false alarm is negative log times the quantity of 1 minus a threshold. A detection happens when the magnitude is greater than 4 times the probability of false alarm times the average of the magnitude of the noise in the surrounding samples. Source code for this implementation can be found here https://github.com/gnuradio/gnuradio/blob/master/gr-digital/lib/corr_est_cc_impl.cc
+
+From discussion on GNU Radio github, there are some unresolved concerns with this block for the following reasons.
+
+Lack of documentation, the factor of 4 seems arbitrary, the averaging time constant may not work as intended, and if you get a value of threshold equal to or greater than one, then your negative log produces some problematic numbers.
