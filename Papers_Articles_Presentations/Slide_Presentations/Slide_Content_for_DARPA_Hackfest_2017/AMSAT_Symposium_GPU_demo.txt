@@ -1,0 +1,5 @@
+Here's some of the members of our team showing off recent progress on getting an LDPC decoder working on an NVIDIA GPU. Photo taken at 2017 AMSAT Symposium. 
+
+Our mission on Phase 4 Ground is to implement DVB-S2 and DVB-S2X receivers for amateur radio use in both terrestrial and space applications. Any payload that complies with the air interface that we're developing will work with our radios. The goal is to provide everything from bespoke custom radios that you make all the way up to a manufactured solution. Getting a DVB-S2/X receiver in GNU Radio is the first step. 
+
+Help!

@@ -1,0 +1,7 @@
+Left to right Kathy Boyd K6OYD, Paul Williamson KB5MU, and Phil Karn KA9Q configure equipment for Phase 4 Ground. In Phase 4 Ground, Frequency division multiple access signals are received by a polyphase filter bank on the payload. The signals are combined into a time division multiplex signal on the downlink, and loaded into DVB-S2/X frames. 
+
+Suitable for space or ground, this system offers tremendous flexibility in terms of applications through the use of GSE, or generic stream encapsulation. This standard makes it easy to ship IP and other packetized data much more efficiently than the MPEG transport stream. GSE is a DVB standard protocol. 
+
+GitHub, Slack, and an email list keep us in communication.
+
+https://github.com/phase4ground
