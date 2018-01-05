@@ -1,0 +1,63 @@
+Phase 4 Ground home page https://phase4ground.github.io/
+
+Welcome to our weekly report! We're back after a great holiday break!
+
+We are Phase 4 Ground and our mission is to implement an open source version of the DVB-S2 and DVB-S2X protocols for amateur radio, for both space and ground. The project includes the radios and a central server, or Groundsat. It's named this way because it's a satellite simulator on the ground, providing the same functions a broadband microwave payload would in order to create a network. 
+
+All the DVB protocols that we are working with can be found for free at https://www.dvb.org/
+
+Engineering for Phase 4 Ground is on our email list and Slack accounts. 
+
+
+We have a YouTube playlist at https://www.youtube.com/playlist?list=PLavdGnjBLuiX97DAKk32NJ1bCF1a0cv01 that includes our video reports and videos that are of use or interest to Phase 4 Ground. 
+
+
+
+
+
+Phase 4 Space home page https://phase4space.github.io/
+
+Phase 4 Space is a very new open source public domain project for broadband microwave amateur radio satellites because we want a lot of payloads to talk to! 
+
+To volunteer directly for either, visit https://www.amsat.org/volunteer-for-amsat/ or send an email w5nyv@arrl.net to get started!
+
+
+
+
+We've been on break, but things have happened. We spent some time putting together some proposals for AMSAT that address new challenges that the ITAR payload projects are facing. New data security regulations have gone into effect, and there need to be some changes to the way documents and email are handled within AMSAT engineering. 
+
+Here is a link to a proposal for SVN server replacement with GitHub Enterprise: 
+https://github.com/phase4ground/documents/blob/master/Papers_Articles_Presentations/Slide_Presentations/20171208_GitHubEnterpriseProposal.pdf
+
+This GitHub Enterprise proposal has links to documents that explain the new regulations. Here they are for quicker reference:
+
+Additional regulations went into effect at the end of December 2017      https://www.law.cornell.edu/cfr/text/48/252.204-7012
+Information security standards and guidelines can be found here      http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-171.pdf
+
+Controlled Unclassified Information (CUI) compliance is the minimum standard. 
+
+Web conferencing software and email servers need to be brought into compliance as well. There are some options here and the discussion is ongoing. If you have experience and can give input on CUI compliance, then AMSAT engineering can get back to engineering much faster and more fun can be had by everyone!
+
+
+
+
+
+
+For the new year, we have a lot of major milestones. We also have a schedule. I'm committed full-time through January 2020. At that time, I hope we are clearly done or almost so. If not, we will take stock, thoroughly document, and then decide what to do. The goal is to finish an open source implementation of DVB-S2 and S2X for the amateur satellite service that will make five and dime the best possible choice for amateur satellite efforts. We have a lot to do and everyone is welcome to join. 
+
+
+
+
+
+
+Phase 4 Ground has a badge project. An early version, with a very fun gamer-oriented form factor, will be available for sale very soon. These badges are based on the Bender Badge framework. 
+
+https://hackaday.io/project/19121-andxor-dc25-badge
+
+The first version is scheduled for the JoCo Cruise in February. 
+
+https://jococruise.com/
+
+The radio-themed version, called the Trans-Ionospheric, is scheduled for Dayton. The retro styling is based on the Zenith Trans-Oceanic and it will have custom games and surprises. In the future, these badges can show Phase 4 Ground radio status, such as channel health and acquisition status, through a bluetooth connection, and are customizable and hackable. The badge effort is a very fun part of the project, but it also serves a purpose. It's given us an opportunity for many of us to work together on an electronic and software design for the first time, iron out toolchains, develop style and creative expressions, improve communications and get experience managing bills of material and build schedules. 
+
+
