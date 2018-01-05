@@ -2,14 +2,19 @@ Phase 4 Ground home page https://phase4ground.github.io/
 
 Welcome to our weekly report! We're back after a great holiday break!
 
-We are Phase 4 Ground and our mission is to implement an open source version of the DVB-S2 and DVB-S2X protocols for amateur radio, for both space and ground. The project includes the radios and a central server, or Groundsat. It's named this way because it's a satellite simulator on the ground, providing the same functions a broadband microwave payload would in order to create a network. 
+We are Phase 4 Ground and our mission is to implement an open source version of the DVB-S2 and DVB-S2X and Generic Stream Encapsulation (GSE) protocols for amateur radio, for both space and ground. The project includes the radios and a central server, or Groundsat. It's named Groundsat because it's a satellite simulator on the ground, providing the same functions a broadband microwave payload would in order to create a network. 
 
-All the DVB protocols that we are working with can be found for free at https://www.dvb.org/
+All the Digital Video Broadcasting protocols that we are working with can be found for free at https://www.dvb.org/
 
-Engineering for Phase 4 Ground is on our email list and Slack accounts. 
+Note that GSE allows any digital data to be transmitted. We are not implementing a video-only system. 
 
+Our reference design will be in GNU Radio and we have some of the blocks done. We need plenty more and upcoming videos will go into detail for each one. 
 
-We have a YouTube playlist at https://www.youtube.com/playlist?list=PLavdGnjBLuiX97DAKk32NJ1bCF1a0cv01 that includes our video reports and videos that are of use or interest to Phase 4 Ground. 
+Learn all about GNU Radio here: https://www.gnuradio.org/
+
+Engineering for Phase 4 Ground is done primarily on our email list and Slack accounts. 
+
+We have a YouTube playlist at https://www.youtube.com/playlist?list=PLavdGnjBLuiX97DAKk32NJ1bCF1a0cv01 that includes our video reports and videos that are of use or interest to Phase 4 Ground. Please subscribe and let us know what you'd like to hear about most. 
 
 
 
