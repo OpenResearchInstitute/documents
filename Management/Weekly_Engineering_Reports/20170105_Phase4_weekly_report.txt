@@ -8,6 +8,8 @@ All the Digital Video Broadcasting protocols that we are working with can be fou
 
 Note that GSE allows any digital data to be transmitted. We are not implementing a system limited to MPEG video. 
 
+DVB world conference is coming up! Anyone near Warsaw? That's where it's at for 2018.
+
 Our reference design is in GNU Radio and we have some of the blocks done. We need plenty more and upcoming videos will go into detail for each one. 
 
 Learn all about GNU Radio here: https://www.gnuradio.org/
@@ -38,9 +40,9 @@ Some of their headline projects:
 
 SatNOGS, a global open source ground station network. Non-profit, open by design (APIs etc), run by a global volunteer community. Active development, extensive stack of multiple technologies. 30+ active ground stations around the world right now with more than 10.000.000 packets gathered from 200+ satellites.
 
-UPSat, the first open source software and hardware satellite. Developed as part of the QB50 constellation, with all submodules designed from scratch and coded as open source projects. Satellite is currently in orbit and operational. This is a wonderful design for us to start working from to create a microwave broadband satellite design. 
+UPSat, the first open source software and hardware satellite. Developed as part of the QB50 constellation, with all submodules designed from scratch and coded as open source projects. Satellite is currently in orbit and operational. This is a wonderful design for us to start working from to create a microwave broadband satellite design. https://upsat.gr/
 
-Libre Space Foundation is also active in various other areas. They have invested into PocketQube reference designs (expected to be delivered 2018Q1) and assisting many satellite teams with TC&C and delivery. 
+Libre Space Foundation is also active in various other areas. They have invested into PocketQube reference designs (expected to be delivered 2018Q1) and are assisting many satellite teams with TC&C and delivery. 
 
 Libre Space Foundation also has rocketry and educational outreach activities as well, mainly in Greece. 
 
