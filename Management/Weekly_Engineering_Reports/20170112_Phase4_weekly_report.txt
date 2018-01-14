@@ -48,7 +48,7 @@ The particular policy is up to the operator of the Groundsat or payload. Perhaps
 
 The payload is using the downlink signal to noise value that you report assign you modulation and coding, so the LEDs along the top can give you an indication of how good you're doing, if you have any messages, what mode we're in, room requests, and more. 
 
-We need to make a software prototype of this type of user interface. Can you do it in python? In HTML5? In erlang? No I'm not kidding. Sign up, submit it, and let's show it off! The user interface is the product, so let's see if this idea works for us. 
+We need to make a software prototype of this type of user interface. Can you do it in python? In HTML5? In Erlang? No I'm not kidding. Sign up, submit it, and let's show it off! The user interface is the product, so let's see if this idea works for us. 
 
 Updates from Firmwarez and Steve Conklin follow! 
 
