@@ -8,7 +8,7 @@ Not all recent badges are electronic. One of these is a white vinyl 45 record. T
 
 This is a badge from the car hacking village at DEFCON. This badge plugs into the OBD-II port and talks to your car.  https://github.com/lanrat/CHVBadge_16 
 
-This is a photo badge for development of the JOCO version of the badge we are working on. Board by Steve Conklin. 
+This is a prototype badge for development of the JOCO version of the badge we are working on. Board by Steve Conklin. 
 
 Kits for the simplest electronic badge, the blinky badge. It's just LEDs and batteries.
 
