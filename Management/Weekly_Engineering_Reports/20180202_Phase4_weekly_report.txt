@@ -37,7 +37,7 @@ Since we have an adaptive coding and modulation air interface because we want to
 
 If you want to read more about adaptive coding and modulation for Phase 4 Ground, here's a link to our paper on this. 
 
-https://github.com/phase4ground/documents/blob/master/Papers_Articles_Presentations/Papers/Adaptive%20Coding%20and%20Modulation%20for%20Phase%204%20Ground.docx
+https://github.com/phase4ground/documents/blob/master/Papers_Articles_Presentations/Papers/Adaptive%20Coding%20and%20Modulation%20for%20Phase%204%20Ground.pdf
 
 So what extra accommodations for the GPU are we talking about? It may need a dedicated modcod, or it may need to be restricted to non-realtime modes. These are decisions that we believe can be made at the application layer. 
 
