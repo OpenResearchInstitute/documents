@@ -25,50 +25,35 @@ A lot of talking is going on in the private channel and we are very much looking
 
 DVB-RECEIVER
 
-So let's look at some technical work going on in #dvb-receiver. 
+So let's look at some technical work going on in the #dvb-receiver channel on the Phase 4 Ground Slack.
 
 Implementing an open source version of DVB-S2 and DVB-S2X receive is a very ambitious goal, and Charles Brain G4GUO has been particularly active here, with Jan Schiefer AC7TD, Ron Economos W6RZ, Wally Ritchie WU1Y, and many others helping and participating. 
 
-Charles' implementation is a GPU or graphical processing unit approach. GPUS are massively parallel, and this has implications for a radio based upon a GPU device. Demonstration of successful LDPC forward error correction decoding was shown at AMSAT Symposium in October 2017. 
+Charles' implementation uses a GPU -- or graphical processing unit -- to handle the heavy computation. His successful implementation of LDPC forward error correction decoding was demonstrated at the AMSAT Space Symposium in October 2017.
 
-The enormous efficiency gains of doing lots of calculations in parallel come at a cost. Charles currently has it set to do 128 frames, all of the same format, in a batch. When we say all of the same format, that means all of the same modulation and coding. 
+GPUs get their computational horsepower from massive parallelism, and this has some interesting implications for radio performance. In order to take full advantage of the parallel processors, Charles has it configured to process a batch of up to 128 frames at once. All the frames have to have the same "MODCOD" -- modulation and coding.
 
-Since we have an adaptive coding and modulation air interface because we want to take full advantage of giving a very wide variety of station types and capabilities access to the payload, this means that the GPU version may need some extra accommodations. 
+Our air interface calls for the use of "adaptive coding and modulation," ACM, so that we can accommodate a very wide variety of ground station types and capabilities and take full advantage of higher-performance ground stations. With ACM, the downlink contains a mix of frames with different modulations and coding formats. This means that the GPU version -- or any radio with parallel processing -- may need some extra accommodations. 
 
-If you want to read more about adaptive coding and modulation for Phase 4 Ground, here's a link to our paper on this. 
+If you want to read more about adaptive coding and modulation for Phase 4 Ground, here's a link to our paper on GitHub: 
 
-https://github.com/phase4ground/documents/blob/master/Papers_Articles_Presentations/Papers/Adaptive%20Coding%20and%20Modulation%20for%20Phase%204%20Ground.pdf
+https://github.com/phase4ground/documents/blob/master/Papers_Articles_Presentations/Papers/Adaptive%20Coding%20and%20Modulation%20for%20Phase%204%20Ground.docx
 
-So what extra accommodations for the GPU are we talking about? It may need a dedicated modcod, or it may need to be restricted to non-realtime modes. These are decisions that we believe can be made at the application layer. 
+// So what extra accommodations for the GPU are we talking about?
 
-If modcods are relatively stable over a period of time, or at least take a longer time to change than the time it takes to process a batch, then the GPU latency has a floor of a 128 frame delay. 
+With this kind of receiver, there's a fundamental tradeoff between GPU utilization efficiency -- how many of the CPU cores we keep busy -- and latency -- how much extra delay is caused by holding back frames until we have a full batch. If our goal is to keep the GPUs busy to maximize the compute speed, then we have to wait until 128 frames *of the same MODCOD* have arrived before we can start to process any of them. All 128 frames then come out of the receiver in a burst. The 128th frame is only delayed by the necessary minimum processing time, but the first frame has been delayed by an additional 127 frame times, *or more* if some of the intervening frames had a different MODCOD.
 
-In other words, Charles' code processes 128 frames at a time. If the 128 frame buffer is completely full this is the best case. The resulting GPU latency is a minimum 128 frames long. Processing delays like this are added to any path delays or other processing or programming delays.
+The first question is, do we *need* to keep all the GPU cores busy? Probably not. It depends on just how fast the GPU cores can process frames, compared to the frame rate on the downlink. Maybe we only need to keep a fraction of the GPUs busy in order to keep up with the downlink, so maybe the magic number isn't really 128, but something smaller. The only way we'll find out for sure is to complete the GPU-based receiver implementation and benchmark it.
 
-So let's see what that means, for the best and worst case modcods.
+The second question is, just how bad is the extra delay? If we stick with 128 frames to a batch, how much delay is that? Our air interface calls for using so-called "short frames," as recommended for near-space communications by CCSDS, the Consultative Committee for Space Data Systems. Short frames in DVB-S2 and DVB-S2X are 16,200 bits long. To turn that into a duration, we need to know the effective bit rate of the channel.
 
-We're using short frames in DVB-S2, which are 16,200 bits long. Short frames are also used in DVB-S2X as well as DVB-S2, and short frames are recommended for near-space communications by CCSDS, the Consultive Committee for Space Data Systems. 
+We've chosen a baseline bandwidth of 10 MHz and a 20% rolloff, which results in a fixed channel symbol rate of 8.333... megasymbols per second. The formula is:
 
-At 10MHz bandwidth, and 20% roll off, that's a symbol rate of 8,333 kilo samples per second. You get this with the following equation:
+bandwidth in Hz = 1.2 * carrier symbol rate in Hz
 
-symbol rate in Hz = (1.2)*Carrier Symbol Rate in Hz
+where the .2 in 1.2 comes from the 20% rolloff. By the way, 20% rolloff is a good middle-of-the-road number. Industry groups say that DVB-S2 carriers below 10 Msps really need a guard band of at least 10% rolloff. The older DVB-S standard specified a fixed rolloff of 35%. The newer DVB-S2X goes all the way down to 5% rolloff.
 
-The point 2 is from the selection of 20% roll off. 
-
-DVB-S2 carriers below 10 Msps really need a guard band of a least 10% roll off, according to several industry groups. 20% is a good number. DVB-S specified a single roll off factor of 35%, and DVB-S2X goes all the way down to 5%.
-
-So, we have our fixed symbol rate. With adaptive coding and modulation, the code rate and the modulation index change. That means the data rate changes depending on how much extra help your receiver needs to successfully decode a frame. 
-
-Using the six modcods that we are going to start out with for our implementation of ACM, 
-
-QPSK 4/15
-QPSK 2/5 
-QPSK 2/3 
-QPSK 4/5 
-8PSK 5/6 
-8PSK 8/9 
-
-the (approximate) expected data rates are:
+So, we have our fixed symbol rate. With adaptive coding and modulation, the code rate and the modulation order change. That means the data rate changes depending on how much extra help your receiver needs to successfully decode a frame. We have chosen six MODCODs for our initial implementation of ACM. If you work out the math, the nominal data rates for these MODCODs at our baseline symbol rate range from 4.054 Mbps to 21.067 Mbps. There's a table in the notes.
 
 QPSK 4/15   4.054  Mbps
 QPSK 2/5    6.205  Mbps
@@ -77,25 +62,26 @@ QPSK 4/5   12.298  Mbps
 8PSK 5/6   19.459  Mbps
 8PSK 8/9   21.067  Mbps
 
-A 128 frame delay at QPSK 4/15, if the frame is 16,200 bits long, is about half a second. 
+The delay is longest at the lowest data rate, 4.054 Mbps. 128 frames of 16,200 bits is 2,073,600 bits, or about half a second. That's assuming we transmit nothing but the slowest MODCOD. The delay could be much longer if ACM inserts lots of frames of other types.
 
-What's the worst case delay with the most heavy coding and simplest modulation?
+On the other end, 128 short frames at the highest data rate takes just a tenth of a second, but again that's a lower bound if we allow ACM to insert other frames.
 
-0.51 seconds = (128 frames * 16,200 bits per frame) / slowest data rate of 4.054 mega bits per second
+These delays are on top of all the other delays in the system. For a Phase 4 satellite in GEO, there's already a quarter of a second just in propagation delay. Adding a tenth of a second to that might not be a big deal. Adding half a second might be. It would depend on the application. For lower orbits or terrestrial systems, the calculation is different, of course.
 
-What's the best case delay the least amount of coding and the most complex modulation?
+We can't improve these lower bounds, except by decreasing the number of frames we process in parallel. And we can only do that by making the processing faster, either by even more clever coding or by waiting for GPU hardware to get faster. We can't improve latency by just arbitrarily reducing parallelism. If we go below the magic number needed to keep up with the channel rate, we will *still* end up paying the latency price for all those frames we had to skip to keep up. 
 
-0.10 seconds = (128 frames * 16,200 bits per frame) / fastest data rate of 21.067 mega bits per second
+On the other hand, we can try to avoid making the latency problem worse than it has to be. The simplest way to do that would be to fall back from ACM to CCM, constant coding and modulation. That is, transmit all frames with the same MODCOD. Unfortunately, by doing that we'd give up some very desirable flexibility in ground station designs.
 
+Another simple approach would be to just accept that the parallel GPU-based implementation is only suitable for applications that aren't sensitive to latency. Applications like file transfer care more about the overall data rate than about latency.
 
-Quite the difference! 
+There's room here for us to invent a more complicated solution to take these tradeoffs into account. Some sort of dynamic scheduling algorithm that takes the latency requirements of each data stream into account could by devised to suit our needs. That's called QoS, Quality of Service, and it's a can of worms.
 
-Join the discussion on #dvb-receiver on phase 4 ground slack!
+Join the discussion on the #dvb-receiver channel on phase 4 ground slack!
 
 
 SNICKERDOODLE
 
-Finally, here's an unboxing and setup of another option for learning and programming FPGAs. This is a Snickerdoodle Black with a breakout board. It has a Xilinx Zynq 7020 and lot of IO and plenty of GPIOs exposed.
+Finally, here's an unboxing and setup of another option for learning and programming FPGAs. This is a Snickerdoodle Black with a breakout board. It has a Xilinx Zynq 7020 and lot of interfaces and plenty of GPIOs exposed.
 
 
 WHO WE ARE
