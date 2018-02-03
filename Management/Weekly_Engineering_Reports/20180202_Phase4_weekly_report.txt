@@ -1,0 +1,131 @@
+
+Phase 4 Ground Weekly Engineering Report!
+
+Video at 
+
+SLACKALYTICS
+
+We use Slack for engineering discussion and planning. It's been a success. Here's some analytics on all our channels and an engineering update from #dvb-receiver. 
+
+This graph is messages sent since we established the account. 40,912 
+There are spikes and a trend up since early January. 
+
+On top is where people are reading. The purple is public channels. The red is direct messages between members. The black represents a private channel. This private channel is for the badge build process. We're keeping it private as to not reveal the puzzles and surprises. 
+
+The bottom graph is where messages are sent. Notice the difference? There are a lot of people following along in the public channels. 
+
+On the top is messages sent over the past 30 days.
+On the bottom is where people are reading over the past 30 days.
+
+On the top is the messages sent in public channels and direct messages.
+On the bottom is the one private channel, broken out. 
+
+A lot of talking is going on in the private channel and we are very much looking forward to everyone seeing the results very soon. 
+
+
+DVB-RECEIVER
+
+So let's look at some technical work going on in #dvb-receiver. 
+
+Implementing an open source version of DVB-S2 and DVB-S2X receive is a very ambitious goal, and Charles Brain G4GUO has been particularly active here, with Jan Schiefer AC7TD, Ron Economos W6RZ, Wally Ritchie WU1Y, and many others helping and participating. 
+
+Charles' implementation is a GPU or graphical processing unit approach. GPUS are massively parallel, and this has implications for a radio based upon a GPU device. Demonstration of successful LDPC forward error correction decoding was shown at AMSAT Symposium in October 2017. 
+
+The enormous efficiency gains of doing lots of calculations in parallel come at a cost. Charles currently has it set to do 128 frames, all of the same format, in a batch. When we say all of the same format, that means all of the same modulation and coding. 
+
+Since we have an adaptive coding and modulation air interface because we want to take full advantage of giving a very wide variety of station types and capabilities access to the payload, this means that the GPU version may need some extra accommodations. 
+
+If you want to read more about adaptive coding and modulation for Phase 4 Ground, here's a link to our paper on this. 
+
+https://github.com/phase4ground/documents/blob/master/Papers_Articles_Presentations/Papers/Adaptive%20Coding%20and%20Modulation%20for%20Phase%204%20Ground.docx
+
+So what extra accommodations for the GPU are we talking about? It may need a dedicated modcod, or it may need to be restricted to non-realtime modes. These are decisions that we believe can be made at the application layer. 
+
+If modcods are relatively stable over a period of time, or at least take a longer time to change than the time it takes to process a batch, then the GPU latency has a floor of a 128 frame delay. 
+
+In other words, Charles' code processes 128 frames at a time. If the 128 frame buffer is completely full this is the best case. The resulting GPU latency is a minimum 128 frames long. Processing delays like this are added to any path delays or other processing or programming delays.
+
+So let's see what that means, for the best and worst case modcods.
+
+We're using short frames in DVB-S2, which are 16,200 bits long. Short frames are also used in DVB-S2X as well as DVB-S2, and short frames are recommended for near-space communications by CCSDS, the Consultive Committee for Space Data Systems. 
+
+At 10MHz bandwidth, and 20% roll off, that's a symbol rate of 8,333 kilo samples per second. You get this with the following equation:
+
+symbol rate in Hz = (1.2)*Carrier Symbol Rate in Hz
+
+The point 2 is from the selection of 20% roll off. 
+
+DVB-S2 carriers below 10 Msps really need a guard band of a least 10% roll off, according to several industry groups. 20% is a good number. DVB-S specified a single roll off factor of 35%, and DVB-S2X goes all the way down to 5%.
+
+So, we have our fixed symbol rate. With adaptive coding and modulation, the code rate and the modulation index change. That means the data rate changes depending on how much extra help your receiver needs to successfully decode a frame. 
+
+Using the six modcods that we are going to start out with for our implementation of ACM, 
+
+QPSK 4/15
+QPSK 2/5 
+QPSK 2/3 
+QPSK 4/5 
+8PSK 5/6 
+8PSK 8/9 
+
+the (approximate) expected data rates are:
+
+QPSK 4/15   4.054  Mbps
+QPSK 2/5    6.205  Mbps
+QPSK 2/3   10.506  Mbps
+QPSK 4/5   12.298  Mbps
+8PSK 5/6   19.459  Mbps
+8PSK 8/9   21.067  Mbps
+
+A 128 frame delay at QPSK 4/15, if the frame is 16,200 bits long, is about half a second. 
+
+What's the worst case delay with the most heavy coding and simplest modulation?
+
+0.51 seconds = (128 frames * 16,200 bits per frame) / slowest data rate of 4.054 mega bits per second
+
+What's the best case delay the least amount of coding and the most complex modulation?
+
+0.10 seconds = (128 frames * 16,200 bits per frame) / fastest data rate of 21.067 mega bits per second
+
+
+Quite the difference! 
+
+Join the discussion on #dvb-receiver on phase 4 ground slack!
+
+
+SNICKERDOODLE
+
+Finally, here's an unboxing and setup of another option for learning and programming FPGAs. This is a Snickerdoodle Black with a breakout board. It has a Xilinx Zynq 7020 and lot of IO and plenty of GPIOs exposed.
+
+
+WHO WE ARE
+
+Phase 4 Ground home page https://phase4ground.github.io/
+
+We are Phase 4 Ground and our mission is to implement an open source version of the DVB-S2 and DVB-S2X and Generic Stream Encapsulation (GSE) protocols for amateur radio, for both space and ground. The project includes the radios and a central server, or Groundsat. It's named Groundsat because it's a satellite simulator on the ground, providing the same functions a broadband microwave payload would in order to create a network. 
+
+All the Digital Video Broadcasting protocols that we are working with can be found for free at https://www.dvb.org/ and from links on our homepage.
+
+Note that GSE allows any digital data to be transmitted. We are not implementing a system limited to MPEG video. 
+
+DVB world conference is coming up! Anyone near Warsaw? That's where it's at for 2018.
+
+Our reference design is in GNU Radio and we have some of the blocks done. We need plenty more and upcoming videos will go into detail for each one. 
+
+Learn all about GNU Radio here: https://www.gnuradio.org/
+
+Engineering for Phase 4 Ground is done primarily on our email list and Slack accounts. 
+
+We have a YouTube playlist at https://www.youtube.com/playlist?list=PLavdGnjBLuiX97DAKk32NJ1bCF1a0cv01 that includes our video reports and videos that are of use or interest to Phase 4 Ground. Please subscribe and let us know what you'd like to hear about most. 
+
+
+
+
+
+Phase 4 Space home page https://phase4space.github.io/
+
+Phase 4 Space is an open source public domain project for broadband microwave amateur radio satellites because we want a lot of payloads to talk to! We'll be using two wonderful open source resources to start. AO-10 blueprints and UPSat, the open source satellite currently operational, from Libre Space Foundation. 
+
+To volunteer directly for either, visit the AMSAT volunteer landing page https://www.amsat.org/volunteer-for-amsat/ or send an email w5nyv@arrl.net to get started!
+
+
