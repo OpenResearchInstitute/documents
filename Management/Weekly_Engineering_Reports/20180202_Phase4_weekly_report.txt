@@ -1,9 +1,7 @@
 
 Phase 4 Ground Weekly Engineering Report! #dvb-receiver update, Snickerdoodle unbox and setup, and some Slack Analytics. 
 
-Video at 
-
-
+Video at https://youtu.be/W13e0ds9HCA
 
 
 DVB-RECEIVER
