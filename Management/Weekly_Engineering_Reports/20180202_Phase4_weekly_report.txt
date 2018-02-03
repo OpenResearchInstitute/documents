@@ -37,7 +37,7 @@ Our air interface calls for the use of "adaptive coding and modulation," ACM, so
 
 If you want to read more about adaptive coding and modulation for Phase 4 Ground, here's a link to our paper on GitHub: 
 
-https://github.com/phase4ground/documents/blob/master/Papers_Articles_Presentations/Papers/Adaptive%20Coding%20and%20Modulation%20for%20Phase%204%20Ground.docx
+https://github.com/phase4ground/documents/blob/master/Papers_Articles_Presentations/Papers/Adaptive%20Coding%20and%20Modulation%20for%20Phase%204%20Ground.pdf
 
 // So what extra accommodations for the GPU are we talking about?
 
