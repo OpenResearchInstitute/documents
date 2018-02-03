@@ -3,24 +3,7 @@ Phase 4 Ground Weekly Engineering Report!
 
 Video at 
 
-SLACKALYTICS
 
-We use Slack for engineering discussion and planning. It's been a success. Here's some analytics on all our channels and an engineering update from #dvb-receiver. 
-
-This graph is messages sent since we established the account. 40,912 
-There are spikes and a trend up since early January. 
-
-On top is where people are reading. The purple is public channels. The red is direct messages between members. The black represents a private channel. This private channel is for the badge build process. We're keeping it private as to not reveal the puzzles and surprises. 
-
-The bottom graph is where messages are sent. Notice the difference? There are a lot of people following along in the public channels. 
-
-On the top is messages sent over the past 30 days.
-On the bottom is where people are reading over the past 30 days.
-
-On the top is the messages sent in public channels and direct messages.
-On the bottom is the one private channel, broken out. 
-
-A lot of talking is going on in the private channel and we are very much looking forward to everyone seeing the results very soon. 
 
 
 DVB-RECEIVER
@@ -82,6 +65,30 @@ Join the discussion on the #dvb-receiver channel on phase 4 ground slack!
 SNICKERDOODLE
 
 Finally, here's an unboxing and setup of another option for learning and programming FPGAs. This is a Snickerdoodle Black with a breakout board. It has a Xilinx Zynq 7020 and lot of interfaces and plenty of GPIOs exposed.
+
+
+
+
+SLACKALYTICS
+
+We use Slack for engineering discussion and planning. It's been a success. Here's some analytics on all our channels and an engineering update from #dvb-receiver. 
+
+This graph is messages sent since we established the account. 40,912 
+There are spikes and a trend up since early January. 
+
+On top is where people are reading. The purple is public channels. The red is direct messages between members. The black represents a private channel. This private channel is for the badge build process. We're keeping it private as to not reveal the puzzles and surprises. 
+
+The bottom graph is where messages are sent. Notice the difference? There are a lot of people following along in the public channels. 
+
+On the top is messages sent over the past 30 days.
+On the bottom is where people are reading over the past 30 days.
+
+On the top is the messages sent in public channels and direct messages.
+On the bottom is the one private channel, broken out. 
+
+A lot of talking is going on in the private channel and we are very much looking forward to everyone seeing the results very soon. 
+
+
 
 
 WHO WE ARE
