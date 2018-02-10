@@ -1,3 +1,13 @@
+Voltera available for Phase 4 Ground prototyping, 5GHz updates, Snickerdoodle Vivado, SDK, SDSoC progress and the release of our first single from @Firmwarez.
+
+https://youtu.be/moKFVagY_Ro
+
+Voltera V-one available for circuit printing, solder paste and reflow. Send your Gerbers in!
+
+5GHz updates described photographically.
+
+Xilinx SDSoC and the Snickerdoodle FPGA board.
+
 The FPGA or field programmable gate array is at the heart of many modern software defined radios. Having powerful reconfigurable digital logic realizes a lot of the promise of SDRs. Balancing the workload between the general purpose processor and the FPGA is a big challenge. We've talked about RFNoC, or Radio Frequency Network on a Chip from Ettus Research for the 300 series USRPs before. RFNoC lets you place blocks that run on the FPGA in GNU Radio as if they were being run by the host computer. This lets you use the FPGA to full advantage within GNU Radio Companion. You have to develop and properly package the FPGA code, but once you do that, your FPGA will be a lot less bored. 
 
 Well, SDSoC is somewhat similar. It's a tool from Xilinx and you get a free license with the Snickerdoodle Black. So what is it? It stands for Software Defined System on a Chip. 
