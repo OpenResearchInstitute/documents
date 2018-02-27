@@ -1,0 +1,22 @@
+funkylab (IRC) APP [10:43 AM] 
+EFR32MG1P233F256GM48-C0 <- lookitup :)
+
+
+[10:44] 
+covers exactly the 902-930 MHz band
+
+
+[10:44] 
+20.3 dBm output
+
+
+[10:46] 
+(ham bonus: covers the 70cm band just as well)
+
+
+[10:47] 
+but comes with a boring, because easy to code for, ARM Cortex-M4
+
+
+[10:48] 
+what disappoints is that it doesn't have USB or QSPI or anything fast to connect to the outside world
