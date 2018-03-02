@@ -2,9 +2,9 @@ Welcome to the Phase 4 Weekly Report for 2 March 2018!
 
 ASCENT Conference Call on Careful COTS of a Powerful SDR
 
-Phase 4 Space hosted a productive ASCENT conference call on 28 February 2018 with Nate Temple and Neel Pandeya from Ettus Research. The goal of the meeting was to explore the idea of a careful COTS of the E310 and X310 Universal Software Radio Peripheral (USRP) devices. 
+Phase 4 Space hosted a productive ASCENT conference call on 28 February 2018 with Nate Temple and Neel Pandeya from Ettus Research. The purpose of the meeting was to explore the idea of a careful COTS of the E310 and X310 Universal Software Radio Peripheral (USRP) devices. 
 
-The USRP is a range of software-defined radios designed and sold by Ettus Research and its parent company, National Instruments. Our goal is HEO or GEO with  a USRP based design. 
+The USRP is a range of software-defined radios designed and sold by Ettus Research and its parent company, National Instruments. Our goal is HEO or GEO with a USRP based design. 
 
 Nate and Neel described the USRP lineup, gave a brief history of Ettus Research, and expressed their enthusiasm for an effort in this direction. 
 
