@@ -1,0 +1,27 @@
+Welcome to the Phase 4 Weekly Report for 9 March 2018!
+
+An ASCENT Conference Call Part 2 on Careful COTS of a Powerful SDR is proposed for 14 March 2018.
+
+Phase 4 Space organized and hosted an ASCENT conference call on 28 February 2018 with Nate Temple and Neel Pandeya from Ettus Research. The purpose of the meeting was to explore the idea of a careful COTS of the E310 and X310 Universal Software Radio Peripheral (USRP) devices. 
+
+Nate and Neel described the USRP lineup, gave a brief history of Ettus Research, and expressed their enthusiasm for an effort in this direction. 
+
+The most significant action item resulting from this meeting was to include additional Ettus Research personnel for business planning and engineering scoping. 
+
+One engineering possibility discussed was to revisit and re-activate the Tritium line as a base design. Phase 4 Space is interested in a part at least as large as the 7045, and is interested in using the UNISEC electrical bus standard. The Tritium was not productized, and is not on the current Ettus Research product roadmap, but was demonstrated at GNU Radio Conference and other events. 
+
+Since the initial conference call, several conversations have occurred within Ettus Research, and a conclusion has been reached. Ettus Research is unable to provide resources or support for Tritium. This design will not be released for a careful COTS redesign. It was never fully productized and has been retired (EOL'd). The code supporting it has bit-rotted badly and will not be released. 
+
+However, Ettus Research can provide support for E310, E312, X300/X310, and the upcoming E320. The support is given enthusiastically as those are active current products. Support in this context means technical and engineering advice, primarily from Neel and Nate. 
+
+It is not yet clear whether Ettus Research could provide either the Gerber files, or the full bill of materials (BoM), or both, for the E310/E312/X300/X310/E320. 
+
+Given that re-layout is going to be required for thermal and size reasons, the Gerber files may not be necessary, and only the full BoM would be needed. A full BoM would be easier to release than Gerber.
+
+An NDA would be required in order to use the BoM. 
+
+So in between now and then, what can we do? Well, we can start a layout with what we know from the schematic. 
+
+The question now is, which schematic?
+
+E310, E312, X300/X310, or E320?
