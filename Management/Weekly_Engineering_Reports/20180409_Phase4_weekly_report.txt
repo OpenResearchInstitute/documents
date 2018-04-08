@@ -22,18 +22,53 @@ This effort is in progress and will be updated as the code is reviewed and feedb
 
 10GHz Filter
 
-We have a 10GHz filter design proposed from Northern California.
+We have a 10GHz filter design proposed from Jeffrey Pawlan. 
 
-It covers the 10GHz amateur band, has 0.1dB variation over the band, 0.1dB insertion loss, and 20-30dB return loss. It's a high-performance filter and we are talking about how to get it published, how many prototypes to build, and what the potential market might be. 
+It covers the 10GHz amateur band, has 0.1dB variation over the band, 0.1dB insertion loss, and 20-30dB return loss. It's a high-performance filter and we are talking about how to get it published, how many prototypes to build, and what the potential market might be. Here's the first four documents from Jeffrey. These are in the repository at the link in the notes. If you have feedback we want to hear it. 
 
+
+
+Block Party at GNU Radio Conference 2018
+
+We are sponsoring a Block Party at GNU Radio Conference 2018. This is a multi-day hackfest, workshop, and summit all about making an open source DVB-S2 and DVB-S2X receiver in GNU Radio. Come and help. We have five solid technical docents for the event and could use more. The goal is to bring blocks and write blocks on site, test interoperability, and leave the conference with a working DVB-S2 receiver. This is the central mission for successful continued research and development and we need all hands on deck. 
+
+If you've have never coded a block in GNU Radio, then don't worry. It wasn't until the past year that I had ever coded up a block for GNU Radio. I just had never needed to. There is a series of guided tutorials from GNU Radio's website. The link is in the notes. 
+
+https://wiki.gnuradio.org/index.php/Guided_Tutorials
+
+Go there, or search them up with "gnu radio guided tutorials", walk through them, and you will have the tools and the workflow experience to be able to contribute. 
+
+Having said that, if you are only comfortable coding in python or C++ then that's ok too. If you have an idea for getting some part of the DVB-S2 digital signal processing done, and either don't have time to work through block coding or pybombs distribution, then you can certainly still help by sharing your signal processing code. Don't let GNU Radio block configuration stop you. You're needed and appreciated.
+
+KA9Q SDR - stereo field
+
+Phil Karn has shared a work in progress with us. He calls it the KA9Q SDR. However, the module in this SDR code that I'd like to highlight is a stereo field audio adapter. 
+
+This works by taking in multicast audio streams. Each audio stream comes from an individual audio source, or participant. These participants in a round table audio conference are placed at different points in the stereo spectrum. 
+
+So, when you are listening to a roundtable or conference, you would hear each voice as if it's coming from a slightly different physical location. It will sound like you are sitting at a table talking to people in front of you. The goal here is to increase intelligibility, reduce listener fatigue, and have fun communicating with others.
+
+The code and early documentation has been uploaded to our repository. The link is in the notes!
+
+Phil has been researching sound localization, and he reports that "it seems that the time delays are actually more important than level differences. The prop delay between the ears is only about 1ms (actually a little less). One site suggests delays up to 10 ms to exaggerate the effect, but I find that the +/- 1ms values sound more realistic. Still trying to figure out the best relationship between delay and gain differences. But overall it works really well. I think this could be a good selling point for a ham voice system based on IP multicast. Each stream arrives independently at the receiver, and because it can tell them apart it can place them at a point in the stereo spectrum chosen by the user."
+
+This module augments our user interface. It provides some advantages but also incurs some additional requirements. It fits in very well with our signal acquisition process. The goal here is to make it "just work", but also be configurable. If you don't want to use this, or can't use it, then you can turn it off. 
+
+Careful COTS SDR 
+
+We are making great progress on the Careful COTS re-layout of a USRP E310 with future plans to tackle the E320. We're collaborating with AMSAT Golf on this and have gained enthusiastic support from Ettus Research engineering. The next steps are to negotiate what's needed on the business side. Scheduling talks is in progress. 
+
+If you're not familiar with the term, Careful COTS - COTS means commercial off the shelf - is taking something that wasn't designed specifically for space and making it work for space environments. This is done by selection of the right components, designing in redundancy at the system level, and testing the entire system for radiation tolerance. 
+
+We have a high degree of confidence that the Ettus USRP will work and some volunteers willing to do the work. If you are interested in this part of the project, let me know. 
 
 Badge Update
 
-The Transionospheric prototypes are being built at a contract manufacturer in San Diego right now. We are working hard to have them at Hamvention for sale. All proceeds benefit Phase 4 Ground! They aren't just for show, they will be a radio peripheral for Phase 4 Ground radios, providing a lot of visual reinforcement on what your radio is doing and the health and status of your link. Whether you have a satellite or a terrestrial system, the same information will be stylishly displayed. We are working hard to make it possible to command other radios as well. More on that as it develops!
+The Transionospheric badge prototypes are being built at a contract manufacturer in San Diego right now. We are working hard to have them at Hamvention for sale. All proceeds benefit Phase 4 Ground! They aren't just for show, they will be a radio peripheral for Phase 4 Ground radios, providing a lot of visual reinforcement on what your radio is doing and the health and status of your link. Whether you have a satellite or a terrestrial system, the same information will be stylishly displayed. We are working hard to make it possible to command other radios as well. More on that as it develops! 
 
 If you want to be part of the effort, then join our Slack and mailing list at http://lists.openresearch.institute/mailman/listinfo/ground-station
 
 Write me for an invitation to Slack. All are welcome. This project is intended to spread enjoyment, appreciation, and success in broadband digital communications at microwave for amateur radio use. A lot of what we do is complex and challenging, but we are here to help and you can contribute at any level. 
 
-
+Thank you for all the support and interest. If you have suggestions or questions or something you think we need to know about, let us know. If all goes well, we'll see you next week!
 
