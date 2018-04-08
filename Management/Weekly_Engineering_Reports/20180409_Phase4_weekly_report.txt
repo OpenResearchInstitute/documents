@@ -1,0 +1,32 @@
+Welcome to the Phase 4 Ground Weekly Report!
+
+409!
+
+2 4 6 8 Everybody Correlate!
+
+Correlator team had a conference call on Thursday 5 April 2018. Jordan, Brennan, Ed, and I talked on the conference bridge Ed set up for us for about 45 minutes. We covered a lot of ground and got some idea of next steps. We have a repository that has GNU Radio draft blocks that do the Pi/2 BPSK demodulation and decoding, and we need to get it working as a correlator.
+
+We also have a correlation estimation block in GNU Radio that has an issue. 
+
+Brennan Ashton reviewed our block and didn't see any major issues yet, and then went out to see what he could see about the correlation estimation block.
+
+Please review Brennan's pull request here:
+https://github.com/gnuradio/gnuradio/pull/1725
+
+This is an attempt to solve this issue here:
+https://github.com/gnuradio/gnuradio/issues/1207
+
+Which if successful will help us and a lot of other people. 
+
+This effort is in progress and will be updated as the code is reviewed and feedback from GNU Radio given.
+
+10GHz Filter
+
+We have a 10GHz filter design proposed from Northern California.
+
+It covers the 10GHz amateur band, has 0.1dB variation over the band, 0.1dB insertion loss, and 20-30dB return loss. It's a high-performance filter and we are talking about how to get it published, how many prototypes to build, and what the potential market might be. 
+
+
+
+
+
