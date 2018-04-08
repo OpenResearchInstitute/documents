@@ -26,7 +26,7 @@ We have a 10GHz filter design proposed from Jeffrey Pawlan.
 
 It covers the 10GHz amateur band, has 0.1dB variation over the band, 0.1dB insertion loss, and 20-30dB return loss. It's a high-performance filter and we are talking about how to get it published, how many prototypes to build, and what the potential market might be. Here's the first four documents from Jeffrey. These are in the repository at the link in the notes. If you have feedback we want to hear it. 
 
-
+https://github.com/phase4ground/DVB-receiver/tree/master/Pawlan-10GHz-Filter
 
 Block Party at GNU Radio Conference 2018
 
@@ -70,5 +70,5 @@ If you want to be part of the effort, then join our Slack and mailing list at ht
 
 Write me for an invitation to Slack. All are welcome. This project is intended to spread enjoyment, appreciation, and success in broadband digital communications at microwave for amateur radio use. A lot of what we do is complex and challenging, but we are here to help and you can contribute at any level. 
 
-Thank you for all the support and interest. If you have suggestions or questions or something you think we need to know about, let us know. If all goes well, we'll see you next week!
+Thank you for all the support and interest. If you have suggestions or questions or something you think we need to know about, let us know. If all goes well, we'll see you next week! 
 
