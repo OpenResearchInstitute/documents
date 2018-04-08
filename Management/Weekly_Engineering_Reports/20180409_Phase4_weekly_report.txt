@@ -27,6 +27,13 @@ We have a 10GHz filter design proposed from Northern California.
 It covers the 10GHz amateur band, has 0.1dB variation over the band, 0.1dB insertion loss, and 20-30dB return loss. It's a high-performance filter and we are talking about how to get it published, how many prototypes to build, and what the potential market might be. 
 
 
+Badge Update
+
+The Transionospheric prototypes are being built at a contract manufacturer in San Diego right now. We are working hard to have them at Hamvention for sale. All proceeds benefit Phase 4 Ground! They aren't just for show, they will be a radio peripheral for Phase 4 Ground radios, providing a lot of visual reinforcement on what your radio is doing and the health and status of your link. Whether you have a satellite or a terrestrial system, the same information will be stylishly displayed. We are working hard to make it possible to command other radios as well. More on that as it develops!
+
+If you want to be part of the effort, then join our Slack and mailing list at http://lists.openresearch.institute/mailman/listinfo/ground-station
+
+Write me for an invitation to Slack. All are welcome. This project is intended to spread enjoyment, appreciation, and success in broadband digital communications at microwave for amateur radio use. A lot of what we do is complex and challenging, but we are here to help and you can contribute at any level. 
 
 
 
