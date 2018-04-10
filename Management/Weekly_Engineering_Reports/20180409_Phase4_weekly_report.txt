@@ -46,13 +46,66 @@ Phil Karn has shared a work in progress with us. He calls it the KA9Q SDR. Howev
 
 This works by taking in multicast audio streams. Each audio stream comes from an individual audio source, or participant. These participants in a round table audio conference are placed at different points in the stereo spectrum. 
 
-So, when you are listening to a roundtable or conference, you would hear each voice as if it's coming from a slightly different physical location. It will sound like you are sitting at a table talking to people in front of you. The goal here is to increase intelligibility, reduce listener fatigue, and have fun communicating with others.
+Phil Writes:
+I'm writing a lightweight, modular SDR package that uses IP multicast
+for inter-module communication. Multicasting is very flexible and
+convenient for this sort of real-time application, and I really think
+it should become standard practice.
 
-The code and early documentation has been uploaded to our repository. The link is in the notes!
+One module is an audio decoder-player. I'm often running several SDRs
+at once so I wrote it to handle multiple multicast streams. Since
+several mixed audio streams can be confusing, I've been experimenting
+with ways to help the user distinguish them.
 
-Phil has been researching sound localization, and he reports that "it seems that the time delays are actually more important than level differences. The prop delay between the ears is only about 1ms (actually a little less). One site suggests delays up to 10 ms to exaggerate the effect, but I find that the +/- 1ms values sound more realistic. Still trying to figure out the best relationship between delay and gain differences. But overall it works really well. I think this could be a good selling point for a ham voice system based on IP multicast. Each stream arrives independently at the receiver, and because it can tell them apart it can place them at a point in the stereo spectrum chosen by the user."
+I started with a simple text display that lists the streams and their
+types and sources, highlighting those that are currently active. You
+can individually adjust levels or ignore those you don't want.
 
-This module augments our user interface. It provides some advantages but also incurs some additional requirements. It fits in very well with our signal acquisition process. The goal here is to make it "just work", but also be configurable. If you don't want to use this, or can't use it, then you can turn it off. 
+Since most sources are mono, I added the ability to give each one its
+place in the stereo aural image. I'm trying to recreate the famous
+"cocktail party effect" that, in person, helps you pick out one voice
+from several talking at once.
+
+Audio engineers typically place a source in a stereo image with a
+mixer "pan pot" that adjusts its gain in each channel. This works -
+sort of. I wanted to find something better.
+
+So I read up auditory perception. I learned that we distinguish the
+direction of a sound only partly by the level difference between our
+ears, as that doesn't actually change much as your head turns.  The
+*real* cue is the difference in arrival time. The speed of sound is
+about 340 m/s, so if our ears are 30 cm apart (measuring around the
+head) that's a little less than a millisecond.
+
+This didn't seem like much, but it was very easy to add these small
+delays to the "pan pots" in my player. And it works! The effect is
+almost eerie; you have to listen to each channel in turn to convince
+yourself that the levels are almost the same.
+
+Conference calls (or "round tables" as we hams call them) are very
+important in communications. I've long thought we can make them much
+better, especially in how we handle several simultaneous speakers.  If
+we use this scheme to place each participant in a round table we
+should get a lot closer to that "in person" experience that's so
+difficult to produce in electronic communications.
+
+All this requires that each participant receives every other
+participant as a separate stream -- there's no central "conference
+bridge" that mixes everybody together. This is a perfect application
+for IP multicasting. Not only can you put each participant in its
+place, the status display shows you at a glance who's talking. You can
+squelch an individual who keeps disrupting the meeting, and you can
+even have a private aside by sending unicast traffic rather than
+multicasting to the entire group.
+
+A lot of this was done as research in the early days of what became
+'voice over IP' (VoIP) but it seems to have fallen by the wayside. It
+really deserves to be more widely recognized and used.
+
+Phil Karn, KA9Q
+9 April 2018
+
+
 
 Careful COTS SDR 
 
