@@ -1,0 +1,18 @@
+Welcome to the Phase 4 Ground Weekly Report!
+
+413!
+
+Stereo Fields and Multicast
+
+Here's some captioned screenshots from the KA9Q SDR.
+
+And here's a screen shot of the 'radio' program. (Note the frequency. I'm a night owl, and that repeater is often busy through the night, so it's a good test source)
+
+Or this one, with an active signal (note detection of PL tone frequency)
+
+I measure the tone with a 10-second-long FFT so I can get 0.1 Hz precision. Works well.
+
+And here I am calibrating the HF receiver on channel 8's ATSC pilot:
+
+2 4 6 8 Everybody Correlate!
+
