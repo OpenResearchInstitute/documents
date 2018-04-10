@@ -2,6 +2,9 @@ Welcome to the Phase 4 Ground Weekly Report!
 
 409!
 
+Video link
+https://youtu.be/6tW04jWZGjM
+
 2 4 6 8 Everybody Correlate!
 
 Correlator team had a conference call on Thursday 5 April 2018. Jordan, Brennan, Ed, and I talked on the conference bridge Ed set up for us for about 45 minutes. We covered a lot of ground and got some idea of next steps. We have a repository that has GNU Radio draft blocks that do the Pi/2 BPSK demodulation and decoding, and we need to get it working as a correlator.
