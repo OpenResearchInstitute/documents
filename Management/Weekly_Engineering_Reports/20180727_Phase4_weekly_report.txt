@@ -1,0 +1,4 @@
+Ubuntu Snaps for SDR
+
+Steve Conklin, our platform lead, believes that Ubuntu Snaps are a great solution for some of our SDR work. He will be looking to work with Phil Karn's SDR package. What needs to happen next is getting the Karn SDR package updated with recent work, and getting it to reliably build. If you can help with this, then proceed. The current SDR code is here: https://github.com/phase4ground/ka9q-sdr
+
