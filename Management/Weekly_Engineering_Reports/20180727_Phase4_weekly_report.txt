@@ -61,7 +61,7 @@ This rewires the console port to come out of the console connector, adds drivers
 
 Trans-Ionospheric Badge
 
-100 production badges arrived today and another 100 will arrive next week. These hackable conference badges are amateur radio themed and are planned to interact with Phase 4 Ground radios as a wearable extension of the user interface. 
+100 production badges arrived today (Friday 27 July) and another 100 will arrive next week. These hackable conference badges are amateur radio themed and are planned to interact with Phase 4 Ground radios as a wearable extension of the user interface. 
 
 Proceeds directly benefit Phase 4 Ground radio development board efforts. Our major sales event for Trans-Ionospheric badges will be at DEFCON, which is coming right up. 
 
@@ -73,7 +73,7 @@ Phase 4 Ground, Open Research Institute, and Ettus Research will be part of WiFi
 
 Linux in the Ham Shack 
 
-Tune in to the Linux in the Ham Shack podcast episode 238 to hear me and Steve Conklin interviewed about Phase 4 Ground, Ubuntu Hams, Open Research Institute, and a few other things. Thank you to everyone at Linux in the Ham Shack for the opportunity to spread the news about open source efforts in amateur radio! http://lhspodcast.info/ 
+Tune in to the Linux in the Ham Shack podcast episode 238 to hear Michelle W5NYV and Steve Conklin interviewed about Phase 4 Ground, Ubuntu Hams, Open Research Institute, and a few other things. Thank you to everyone at Linux in the Ham Shack for the opportunity to spread the news about open source efforts in amateur radio! http://lhspodcast.info/ 
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
