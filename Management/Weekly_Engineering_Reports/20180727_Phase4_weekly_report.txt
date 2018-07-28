@@ -91,4 +91,7 @@ Open Research Institute will be at Goddard Space Center to participate in the In
 
 The goal of participating and presenting at events such as these is to advance open source hardware and software in the amateur radio satellite service. There is a lot of work to be done here and we have a lot to learn. Our views are distinct from, add to, and interact with, those of AMSAT, ARRL, and others. We advocate a strong, committed open source approach and are actively developing and refining our policy views in order to make open source work easy and accessible and effective for anyone wanting to contribute to the amateur radio satellite service. 
 
+Join our mailing list and find out more about Phase 4 Ground and other Open Research Institute projects at https://openresearch.institute/
+
+
 
