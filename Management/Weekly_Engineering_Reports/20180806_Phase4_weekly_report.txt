@@ -20,7 +20,7 @@ However, not all of the breaks have gone our way. This weekly report is dedicate
 
 Number one, is of course the aforementioned and hopefully temporary experience with AMSAT-NA. On the cusp of the launch of 4A, it's hard not to compare and contrast the experiences of the 4A team with the experiences of the 4B and Ground teams. 
 
-ORI board is confident that our understanding of the law and open source practice provides the lowest possible risk for volunteers that want to participate in amateur open source satellite design and deployment. We have put our money and reputations on the line here, and recent legal precedents appear to back up our interpretations. We are optimistic that a future AMSAT-NA will be more approachable. When that happens, we'll be there with an open mind (and clearly stated expectations). 
+ORI board is confident that our understanding of the law and open source practice provides the lowest possible risk for volunteers that want to participate in amateur open source satellite design and deployment. We have put our money and reputations on the line here, and recent legal precedents appear to back up our interpretations. We are optimistic that a future AMSAT-NA will be more approachable. When that happens, we'll be there with an open mind (and more clearly stated expectations). 
 
 Members of Phase 4 Ground are free to volunteer wherever they like. We encourage our members to volunteer for AMSAT, ARRL, IEEE, TAPR, local clubs, or any other organization that needs their skills, energy, effort, and time. 
 
