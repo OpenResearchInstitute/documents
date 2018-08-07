@@ -63,9 +63,9 @@ After DEFCON, we're going to be digging into getting the GPU LDPC code into Veri
 
 So, that is a brief tour of some of the warts, scrapes, and bruises! 
 
-Know someone that would be interested in helping with an open source implementation of DVB-S2/X for amateur radio space and terrestrial use? Let them know about us! Everyone is welcome.
+Know someone that would be interested in helping with an open source implementation of DVB-S2/X for amateur radio space and terrestrial use? Let them know about us! Everyone is welcome. 
 
-
+https://openresearch.institute/
 
 
 
