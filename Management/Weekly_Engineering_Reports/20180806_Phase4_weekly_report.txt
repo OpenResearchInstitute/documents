@@ -18,20 +18,22 @@ If you've been following along, you know that we decided to simply keep going. W
 
 However, not all of the breaks have gone our way. This weekly report is dedicated to these setbacks.
 
-Number one, is of course the aforementioned and hopefully temporary experience with AMSAT-NA. ORI board is confident that our understanding of the law and open source practice provides the lowest possible risk for volunteers that want to participate in amateur open source satellite design and deployment. We have put our money and reputations on the line here, and recent legal precedents appear to back up our interpretations. We are optimistic that a future AMSAT-NA will be more approachable. 
+Number one, is of course the aforementioned and hopefully temporary experience with AMSAT-NA. On the cusp of the launch of 4A, it's hard not to compare and contrast the experiences of the 4A team with the experiences of the 4B and Ground teams. 
+
+ORI board is confident that our understanding of the law and open source practice provides the lowest possible risk for volunteers that want to participate in amateur open source satellite design and deployment. We have put our money and reputations on the line here, and recent legal precedents appear to back up our interpretations. We are optimistic that a future AMSAT-NA will be more approachable. When that happens, we'll be there with an open mind (and clearly stated expectations). 
 
 Members of Phase 4 Ground are free to volunteer wherever they like. We encourage our members to volunteer for AMSAT, ARRL, IEEE, TAPR, local clubs, or any other organization that needs their skills, energy, effort, and time. 
 
 We know that this courtesy has not been extended in reverse. That is a disappointment.
 
-Another setback comes wrapped with some good news. We were awarded a trademark for using Trans-Ionospheric for jewelry (badges and wearables!)... but not (yet) for... radios! So, a partial success here. Work remains to be done to try and reverse the provisional decision. We have six months from late July to reply.
+Another setback comes wrapped with some good news. We were awarded a trademark for using Trans-Ionospheric for jewelry (badges and fancy wearables!)... but not (yet) for... radios! So, a partial success here. Work remains to be done to try and reverse the provisional decision. We have six months from late July to reply.
 
 One of the records can be found here: 
 https://trademarks.justia.com/878/62/transionospheric-87862022.html
 
 The idea here is to use the name Trans-Ionospheric for all the things we make to sell. We're on our way with the Trans-Ionospheric hackable conference badges. 
 
-Bruce Perens provided some suggestions about how to reply to the assertion that Trans-Ionospheric as a trademark is "merely descriptive", and I know some people in San Diego that might be able to help. We are not going to tackle this until after DEFCON. 
+Bruce Perens provided some suggestions about how to reply to the assertion that Trans-Ionospheric as a trademark is "merely descriptive". And, I know some people in San Diego that might be able to help. We are not going to tackle this until after DEFCON. 
 
 If you can pitch in with advice and strategy for responding to the USPTO then please get in touch and I'll send you then office action. This is not my area of strength and I could use some help here. 
 
@@ -39,15 +41,15 @@ Another impediment is funding. In the past, AMSAT-NA was our funding source. Wha
 
 AMSAT-NA paid for air travel from San Diego, CA to Austin, TX to meet with Flex Radio. The meeting was successful and having the travel paid for was super nice. Travel can be very expensive and I rarely ask for reimbursement.
 
-AMSAT-NA bought a set of USRPs after we pitched the power of SDRs in modern communications and asked for more Phase 4 Ground lab materials and support. AMSAT bought the equipment, but then gave the USRPs to a different team. Hopefully this was of great gain to AMSAT-NA. Since we had our own set of USRPs purchased by an individual and donated to the project, we weren't as negatively impacted as we could have been. The time spent campaigning, and the lost potential of a differential approach was a disappointing setback at the time.
+AMSAT-NA bought a set of USRPs after we pitched the power of SDRs in modern communications and asked for more Phase 4 Ground lab materials and support. AMSAT bought the equipment, but then gave the USRPs to a different team. This turned out to be of great gain to AMSAT-NA. Since we had our own set of USRPs purchased by an individual and donated to the project, we weren't as negatively impacted as we could have been. The time spent campaigning, and the lost potential of a differential approach was a disappointing setback at the time. 
 
-Fortunately, other corporate donations were received and used by Phase 4 Ground members, including two additional B200 minis, discounted Red Pitayas, multiple Xilinx Licenses, an HFSS license, DVB-S2 computer hardware discounts, and MATLAB licenses - before the hobbyist discount kicked in and made MATLAB much more accessible. If you haven't checked out the pricing for MATLAB lately, then please do. $150!
+Other corporate donations were received and used by Phase 4 Ground members, including two additional B200 minis, discounted Red Pitayas, multiple Xilinx Licenses, an HFSS license, DVB-S2 and computer hardware discounts, and MATLAB licenses - before the hobbyist discount kicked in and made MATLAB much more accessible. If you haven't checked out the pricing for MATLAB lately, then please do. $150!
 
-The real loss isn't the actual financial support, but the belief that we *had* financial support. As you all know, it doesn't take much to change something from being entirely enjoyable to being a huge drag. That change in enjoyment can hinge entirely on perception.
+The real loss isn't the actual financial support, but the belief that we *had* financial support. The idea that a larger organization was backing us up was really great. As you all know, it doesn't take much to change something from being entirely enjoyable to being a huge drag. That change in enjoyment can hinge entirely on perception.
 
-Going forward, a lot more time (at least at the director level) will have to be spent on funding, grant applications, budgeting, and selling things like badges. We are industrious group and a lot of us have and will continue to come up with creative ideas for gifts for donations, intelligent attempts at grant writing, and engaging donation discussions with people that are genuinely interested in us succeeding.
+Going forward, a lot more time (at least at the director level) will have to be spent on funding, grant applications, budgeting, and selling things like badges. We are industrious group and a lot of us have and will continue to come up with creative ideas for gifts for donations, intelligent attempts at grant writing, and engaging donation discussions with people that are genuinely interested in us succeeding. We've made the adjustment and are ready to rock and roll.
 
-The central challenge here? Raising money takes time and effort. "No money, no mission". Fundraising takes time away from technical experimentation, technical support, and other roles. It's not what I assumed I would be responsible for, but it's what it is going to take. I will do my best to see it through. I need your support and guidance and advice on fundraising!
+The central challenge here? Raising money takes time and effort. "No money, no mission". Fundraising takes time away from technical experimentation, technical support, and other roles. We need your support and guidance and advice on fundraising!
 
 The badges will fund a dev board for the radio, but only barely and only if we are spot-on with the design and the reviews and catch some breaks. I think we're good for that, as a lot of us now know that we can work with each other on a printed circuit board. Now we know that we have at least two teams that will come through on schematics and layout and manufacturing and BOM and testing and delivery. 
 
@@ -55,7 +57,7 @@ Worst case, we crowd fund through Crowd Suppy or Kickstarter and market the tar 
 
 If you can help financially support a non-profit like Open Research Institute, or know someone who can (or should!) then please help and please pass the word along. Coming from an individual it's always more powerful than from, say, an ad. 
 
-Finally, we have some holes in the documentation that need to be filled. Most of that is on me. Intention needs to transition into completion. If you can provide a critique of a particular document, then please let's hear it. If you can fix something that is broken, speak up. Critique is worth more than almost anything else. A renewed effort on closing the documentation loop is what I commit to doing this autumn. 
+Finally, we have some holes in Phase 4 Ground documentation that need to be filled. Most of that is on me. Intention needs to transition into completion. If you can provide a critique of a particular document, then please let's hear it. If you can fix something that is broken, speak up. Critique is worth more than almost anything else. A renewed effort on closing the documentation loop is what I commit to doing this autumn. 
 
 DEFCON is next week. It's a big opportunity for outreach, fun, networking, fellowship, and sales. There is nothing quite like it and we have a lot going on. The goal for the event is to do what we can to make each and every one of you proud to be part of this very ambitious and rewarding effort. 
 
@@ -67,6 +69,7 @@ Know someone that would be interested in helping with an open source implementat
 
 https://openresearch.institute/
 
+P.S. Check out the upcoming Open Cars conference at the link above! It's going to be great. 
 
 
 
