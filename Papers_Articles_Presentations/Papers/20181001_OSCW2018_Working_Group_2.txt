@@ -1,0 +1,12 @@
+Workgroup 220181001 by Abraxas3d - participants in working group, please revise and extend
+One of the activities at the Open Source CubeSat Workshop 2018 was a set of working groups. These small groups met after the presentation sessions on both of the two days of the conference. The working groups lasted between 60 and 90 minutes. Each working group had a topic or question. Discussion was free ranging, encouraged, and productive. 
+
+This working group was chaired by Manolis Surligas.
+
+The goal was information gathering from the community in order to improve SatNogs.
+
+The central questions of this working group were:
+
+What is your experience with SatNogs? 
+What needs to be improved?
+
