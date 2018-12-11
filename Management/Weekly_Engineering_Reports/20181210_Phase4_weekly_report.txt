@@ -33,9 +33,15 @@ Direct feedback and questions about the code and policies is welcome and encoura
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 Donated Dish Update and Yes There are More Dishes
 
-Doug Phelps has rescued a set of 6 foot aluminum dishes with feeds, mounting hardware, and radomes. 
+Doug Phelps will need some help with distributing the "smaller" dishes. He has everyone's names still, is putting up with my nagging about it, and has promised to give an update. 
 
-There are four available and here are the stats!
+But in addition to that, he has rescued a set of 6 foot aluminum dishes with feeds, mounting hardware, and radomes. These are safe at his friend's farm, so he's motivated to get them moving! 
+
+There are four available and here are the details:
+
+
+
+
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -68,13 +74,7 @@ A GNU Radio LDPC demonstration can be seen in a recent video report, and the GPU
 
 Until HamCation, my goal is to get the air interface into the best possible shape. We need to capture the excellent progress we've made and make it as easy as possible for upcoming payloads to say "Yes!" to Phase 4 Ground. 
 
-There's plenty else going on. Several attempts at starting a GUI for our radio have been made. So far, we have not had sufficient traction or success. That's an area that needs some attention, and in order for that to most independently happen, the air interface and system level behavior needs to be better specified. 
-
-RF hardware needs to be productized. There's some designs and some expertise here, but we don't have a standard ready-to-manufacture 5GHz RF chain yet. 
-
-We have 10GHz antenna work for high altitude balloon experiments and 10GHz receiver work that looks promising. We have a good handle on portable connected 10GHz receive stations and a path forward for 10GHz receive. We don't have a productized version of the 10GHz receiver stabilization-with-comb-filter yet, but if you're game, then step up and get it better tested. It may be necessary in order to reduce costs. 
-
-So, progress is good. Launches are part of that good news. A lot of the work is invisible during the negotiating process, but we are working as hard as we can to make it more than worth the wait.  
+There's plenty going on. Progress is good. Launch prospects are part of that good news. A lot of the work is invisible during the negotiating process, but we are working as hard as we can to make it more than worth the wait.  
 
 More soon! Happy Holidays :+)
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
