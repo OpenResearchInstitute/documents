@@ -74,8 +74,34 @@ RF hardware needs to be productized. There's some designs and some expertise her
 
 We have 10GHz antenna work for high altitude balloon experiments and 10GHz receiver work that looks promising. We have a good handle on portable connected 10GHz receive stations and a path forward for 10GHz receive. We don't have a productized version of the 10GHz receiver stabilization-with-comb-filter yet, but if you're game, then step up and get it better tested. It may be necessary in order to reduce costs. 
 
-Progress is good and launches are being worked on very hard. 
+So, progress is good. Launches are part of that good news. A lot of the work is invisible during the negotiating process, but we are working as hard as we can to make it more than worth the wait.  
 
 More soon! Happy Holidays :+)
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+
+
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Thanks to the enormous generosity of MyriadRF, we have some hardware help!
+
+Five LimeSDR Minis have bee provided to Phase 4 Ground for satellite communications development work. 
+
+We want to get these into as many hardworking hands as possible! Write me today with your need and let's get you up and running. 
+
+I recently set up a LimeSDR Mini with GNU Radio with one of our list members and it went very well. This is a really wonderful SDR. The LimeSuite GUI allows prototyping with what feels like every register setting on the controller. Performance is very good. 
+
+For a talk about LimeSDR (and the extended frequency range chip) from Microwave Update 2018 from Mike Seguin N1JEZ, please see https://youtu.be/F76BzezuCmw
+
+LDPC-BCH decode on the FPGA is an area of great interest, but so are Polar codes. There is at least one open source satellite payload project that has specified Polar forward error correcting codes. There is very little open source work here. The FPGA on the LimeSDR mini is the Intel MAX 10 (10M16SAU169C8G 169-UBGA). How far can we take it? 
+
+A SatNOGS station with the LimeSDR mini? A proof of concept of our authentication and authorization scheme? Open source polar codes? 
+
+These ideas are just the beginning. 
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+
 
