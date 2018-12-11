@@ -87,19 +87,22 @@ More soon! Happy Holidays :+)
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 Thanks to the enormous generosity of MyriadRF, we have some hardware help!
 
-Five LimeSDR Minis have bee provided to Phase 4 Ground for satellite communications development work. 
+Five LimeSDR Mini Kits have been given to Phase 4 Ground for satellite communications development work. 
 
 We want to get these into as many hardworking hands as possible! Write me today with your need and let's get you up and running. 
 
-I recently set up a LimeSDR Mini with GNU Radio with one of our list members and it went very well. This is a really wonderful SDR. The LimeSuite GUI allows prototyping with what feels like every register setting on the controller. Performance is very good. 
+I recently set up a LimeSDR Mini with GNU Radio with one of our list members and it went very well. This is a wonderful SDR. The LimeSuite GUI allows prototyping with what feels like every register setting on the controller. Performance is very good. 
 
 For a talk about LimeSDR (and the extended frequency range chip) from Microwave Update 2018 from Mike Seguin N1JEZ, please see https://youtu.be/F76BzezuCmw
 
-LDPC-BCH decode on the FPGA is an area of great interest, but so are Polar codes. There is at least one open source satellite payload project that has specified Polar forward error correcting codes. There is very little open source work here. The FPGA on the LimeSDR mini is the Intel MAX 10 (10M16SAU169C8G 169-UBGA). How far can we take it? 
+LDPC-BCH decode on the FPGA is of course an area of great interest for us. LDPC is the forward error correction for DVB-S2/X. But, we are also interested in doing more with Polar codes. There is at least one open source satellite payload project that has specified Polar forward error correcting codes. There is very little open source work here, it's cutting edge, and is specified for use in 5G communications. Polar codes are the first family of error-correcting codes that achieve the Shannon capacity for a wide range of communication channels with efficient encoding and decoding. 
 
-A SatNOGS station with the LimeSDR mini? A proof of concept of our authentication and authorization scheme? Open source polar codes? 
+The FPGA on the LimeSDR mini is the Intel MAX 10 (10M16SAU169C8G 169-UBGA). How far can we take it? 
 
-These ideas are just the beginning. 
+What else needs doing? How about a SatNOGS station with the LimeSDR mini? A proof of concept of Phase 4 Ground authentication and authorization scheme? Handling the Generic Stream Encapsulation streams properly from the downlink? Plenty to do! Dive in and we will help you.
+
+Contact Michelle W5NYV w5nyv@arrl.net to sign on and get kitted up. 
+
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
