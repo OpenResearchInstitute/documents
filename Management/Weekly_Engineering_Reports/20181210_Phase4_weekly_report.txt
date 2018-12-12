@@ -27,7 +27,7 @@ Doug Phelps will need some help with distributing the "smaller" dishes. He has e
 
 But in addition to that, he has rescued a set of 6 foot aluminum dishes with feeds, mounting hardware, and radomes. These are safe at his friend's farm, so he's motivated to get them moving! 
 
-There are four available and here are the details:
+There are four available and here are the details: 
 
 
 
@@ -108,6 +108,12 @@ What else needs doing? How about a SatNOGS station with the LimeSDR mini? A proo
 Contact Michelle W5NYV w5nyv@arrl.net to sign on and get kitted up. 
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Five Four LimeSDR Mini Kits from Myriad-RF have been made available to Phase 4 Ground for open source satellite communications development work. This donation was made possible by a generous and expansive commitment from the European Space Agency. The ESA uses and emphasizes open source technology in a variety of missions and roles. This attention, assistance, and support is a growing part of the open source space landscape. We are extremely excited to be included!
+
+Contact Michelle W5NYV w5nyv@arrl.net to sign on and get kitted up. 
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 
 
 
