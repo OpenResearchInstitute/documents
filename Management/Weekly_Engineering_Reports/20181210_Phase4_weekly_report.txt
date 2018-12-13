@@ -44,15 +44,13 @@ HEO and GEO Launches
 
 I don't like keeping secrets. However, we do have some secrets. 
 
-The Phase 4B payload, and the other related projects that we have actively supported (like CQC) all require launches. We have been been working very hard to get more launches. 
+The Phase 4B payload, and the other related projects that we have actively supported (like CQC) all require launches. 
 
-Yes, we have one with Wide Field of View payload with the Air Force. The good news is how well we did in getting engineering approval for this launch. The technical and management competence, and the quality of the design, all spoke for themselves. Unfortunately, the current integrator has decided to ask for a lot more money and guarentee a lot less mission time for that money. 
+We have one with Wide Field of View payload with the Air Force. The good news is how well we did in getting engineering approval for this launch. We have a ride. The bad news is the cost of the launch. It is $6 million and they can guarantee us about one year and not even guarantee us it will be over the United States. We have decided we cannot ask the community for $6M to support this launch. It's just not a good deal for US hams. 
 
-This means it's not a good deal for GEO coverage for US hams. 
+Fortunately there's been a lot of work going on behind the scenes for additional launches. This work has been going on for a while. 
 
-Fortunately there's been a lot going on behind the scenes. This work dates back before the satellite integrator change, and before the disappointing news about the cost. 
-
-I can't share the details. I wish I could. I can say that our prospects have never been better. Anyone following along and helping the project, anyone that has been with us through a lot of challenging experiences, deserves to know that we are absolutely serious, focused, and unrelenting in obtaining multiple launches for this technology.
+I can't share the details. I can say that our prospects have never been better. Anyone following along and helping the project, anyone that has been with us through a lot of challenging experiences, deserves to know that we are absolutely serious, focused, and unrelenting in obtaining multiple launches for this technology.
 
 Traditionally, an amateur launch would be announced and then a payload developed. With modern digital technologies taking significantly longer development time than legacy technologies, and with opportunistic short-notice launches becoming more the norm, this design pattern really can't work for us. That's one of the reasons we need to work hard, now, as if the launch was imminent. Howie DeFelice and I wrote an article for QEX about this. 
 
@@ -107,7 +105,7 @@ What else needs doing? How about a SatNOGS station with the LimeSDR mini? A proo
 
 Contact Michelle W5NYV w5nyv@arrl.net to sign on and get kitted up. 
 
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=- posted 12 December 2018
 
 Five Four LimeSDR Mini Kits from Myriad-RF have been made available to Phase 4 Ground for open source satellite communications development work. This donation was made possible by a generous and expansive commitment from the European Space Agency. The ESA uses and emphasizes open source technology in a variety of missions and roles. This attention, assistance, and support is a growing part of the open source space landscape. We are extremely excited to be included!
 
