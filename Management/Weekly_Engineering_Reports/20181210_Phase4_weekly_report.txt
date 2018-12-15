@@ -42,11 +42,11 @@ There are four available and here are the details:
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 HEO and GEO Launches
 
-I don't like keeping secrets. However, we do have some secrets. 
+We don't like keeping secrets. However, we do have some secrets. 
 
 The Phase 4B payload, and the other related projects that we have actively supported (like CQC) all require launches. 
 
-We have one with Wide Field of View payload with the Air Force. The good news is how well we did in getting engineering approval for this launch. We have a ride. The bad news is the cost of the launch. It is $6 million and they can guarantee us about one year and not even guarantee us it will be over the United States. We have decided we cannot ask the community for $6M to support this launch. It's just not a good deal for US hams. 
+We have a launch with the Wide Field of View payload with the Air Force. The good news is how well we did in getting engineering approval for this launch. We have a ride. The bad news is the cost of the launch. It is $6 million and they can guarantee us about one year and not even guarantee us it will be over the United States. We have decided we cannot ask the community for $6M to support this launch. It's just not a good deal for US hams. 
 
 Fortunately there's been a lot of work going on behind the scenes for additional launches. This work has been going on for a while. 
 
@@ -60,7 +60,7 @@ In the new year, we'll be doing just that and asking for more in terms of techno
 
 A GNU Radio LDPC demonstration can be seen in a recent video report, and the GPU version can be run by anyone with a late model Nvidia GPU. 
 
-Until HamCation, my goal is to get the air interface into the best possible shape. We need to capture the excellent progress we've made and make it as easy as possible for upcoming payloads to say "Yes!" to Phase 4 Ground. 
+Until HamCation, our goal is to get the air interface into the best possible shape. We need to capture the excellent progress we've made and make it as easy as possible for upcoming payloads to say "Yes!" to Phase 4 Ground. 
 
 There's plenty going on. Progress is good. Launch prospects are part of that good news. A lot of the work is invisible during the negotiating process, but we are working as hard as we can to make it more than worth the wait.  
 
