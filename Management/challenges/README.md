@@ -11,4 +11,8 @@ The current version can be found at https://files.frameshiftconsulting.com/books
 "How To Respond to Code of Conduct Reports"
 Written by Valerie Aurora, based on a short guide written by Mary Gardiner
 
+<h2>ITAR and EAR</h2>
+We are fully open source and open process. We comply with the public domain carve outs in ITAR and EAR. 
+Our policies can be located at https://openresearch.institute/itar-and-ear-strategy/
+
 
