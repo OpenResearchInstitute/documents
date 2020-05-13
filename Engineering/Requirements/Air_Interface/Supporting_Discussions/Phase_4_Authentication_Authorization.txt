@@ -32,6 +32,14 @@ ok one cert compresses to about 1K byte. Still pretty big. The 5K file contained
 
 **********
 
+Appendix B
+
+Authentication and Authorization in a Multiple-Access User Amateur Radio Satellite Service Digital Payload
+Michelle Thompson W5NYV
+Paul Williamson KB5MU
+
+Definitions
+
 Authentication is the process of confirming a licensee's declared identity.
 
 Authorization is the process of allowing particular identities access to particular resources.
@@ -48,7 +56,7 @@ Ground Control Station is a station that can command the satellite.
 
 Misuse is communications that are illegal or damaging to the communications system. 
 
-**********
+Introduction
 
 If the satellite has no state, then every frame has to speak for itself. Therefore, authentication and authorization are affected. 
 
@@ -70,7 +78,7 @@ What sort of authentication and authorization is required of Phase 4 Ground radi
 
 The default security implementation of Phase 4 Ground is the process described within this document. The Phase 4 Ground process must defer to a process selected by the satellite, if that security process selected by the satellite needs to claim priority. If there is a different process selected by the satellite, then a full specification must be provided to Phase 4 Ground as part of the Air Interface documentation. This serves as a “we can’t read your mind” clause. 
 
-Phase 4B GEO 
+Phase 4B Satellite State 
 
 Phase 4 Ground considers a process of authentication and authorization in this document. This process involves state in the satellite and in the Phase 4 Radio. 
 
@@ -81,8 +89,6 @@ The state in the satellite requires the following things.
 3. The ability to write to this database.
 4. The ability to demand and process authentication from the Phase 4 Radio.
 5. The ability to do some processing using data received from uplink communication frames and information from the database.
-6. 
-
 
 The state in the Radio requires the following things. 
 
@@ -92,7 +98,8 @@ The state in the Radio requires the following things.
 4. Memory to store a certificate.
 5. Ability to sign a message containing the generated token with the private key. 
 6. Ability to send the signed message plus the certificate to the satellite when it is demanded by the satellite.
-7. 
+
+Authentication Process Overview
 
 The process is as follows. 
 
@@ -109,6 +116,8 @@ When each uplink frame is received by the satellite, it decides whether to accep
 This achieves two important goals. Communication is unimpeded, and the loss of Ground Control Stations can be well-tolerated. When Ground Control Stations are not required for normal communications, system durability and reliability is greatly increased. 
 
 When authentication is not frame-by-frame, or required to initiate the process of accessing and transmitting through the satellite, efficiency and performance are greatly increased. In particular, the very first message from a station is not delayed for formalities or blocked entirely; in an emergency situation this could be essential.
+
+Mitigation of Misuse
 
 The risk of bad actors is recognized, but management of bad actors is achieved through Black Listing known bad actors after complaint or system statistics or some other method reveals that the problem is Misuse.
 
@@ -136,9 +145,9 @@ AI: work out the rules for changing tokens. If two (or more!) stations are tryin
 
 AI: work out a way for a station that is blacklisted for authentication failure to request a do-over, after the operator corrects the configuration.
 
-**********
+Authorization Process Overview
 
-The _authentication_ procedures outlined above just verify the identity of stations trying to use the satellite. Separate _authorization_ procedures are used if not all licensed amateurs are welcome to use the satellite.
+The authentication procedures outlined above just verify the identity of stations trying to use the satellite. Separate authorization procedures are used if not all licensed amateurs are welcome to use the satellite.
 
 For example, an agency that has an MOU with the satellite, and has authority over the operations of a Ground Control Station, could impose an authorization policy. A combination of blacklist and whitelist techniques could be used. 
 
@@ -158,9 +167,7 @@ AI: define uplink and downlink messages relating to authorization. Downlink mess
 
 AI: there may be more levels of authorization than simply authorized and not authorized. Some stations may be allowed only short text messages, while others may be allowed to use realtime voice streams, and yet others may be allowed to grab as much bandwidth as they can manage.
 
-**********
-
-Threat Assessment
+Threat Assessments
 
 The primary threat to Phase 4B is people outside the community using the spacecraft. If it's easy to gain illicit access then capacity is drained. Using the satellite without authorization needs to be hard enough that it is rendered rare, while also not making normal legitimate operation a miserable experience. 
 
@@ -223,4 +230,3 @@ There are several ways to address these potential threats. Some of these methods
 1. Limit the raw rate of new call sign SSIDs that are added to the database to a reasonable number (TBD) that ensures processing resources are not exceeded. Denial of service attacks are successful in computer timeframes, but not successful if the forced activity happens in human timeframes. In cases where the rate limit is exceeded due to either a large number of legitimate users attempting to transmit, or a large number of attacks, this technique negatively affects the ability of a subscribed legitimate operator to immediately participate in communications on the satellite, upon at least their first transmission and possibly all subsequent ones. This also means that new legitimate users will be dumped on the floor along with the jammers. 
 
 2. Develop an algorithm for properly removing rows with implausibly fast-changing information from the operator database. This attempts to clean out the database at the same rate that attackers are adding to it. Properly designed, the legitimate operators that attempt to transmit are unaffected. This requires enough processing to detect patterns of transmissions with rapidly changing data. There could be andom changes that run through all possible combinations (all the bits of an SSID, for example) or oscillating back and forth between two states in order to trick the satellite into doing a lot of work (for example, to force maintenance of two rows of the database by switching back and forth between two different tokens every frame). 
-
