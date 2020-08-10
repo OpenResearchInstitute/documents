@@ -4,6 +4,8 @@ From 30 July 2020 program review slides:
 
 DMT Build/Integration Team
 
+DMT Security, Authentication, Authorization Team
+
 DMT MSoC Realtime Processing Unit (ARM R5 x 2(or lockstep)) RPU Team
 
 DMT Application Processing Unit (ARM A53 x 2 or x4) APU Team
