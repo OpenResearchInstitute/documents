@@ -5,7 +5,7 @@ Welcome to the Phase 4 Ground Weekly Report!
 Video link
 https://youtu.be/6tW04jWZGjM
 
-2 4 6 8 Everybody Correlate!
+## 2 4 6 8 Everybody Correlate!
 
 Correlator team had a conference call on Thursday 5 April 2018. Jordan, Brennan, Ed, and I talked on the conference bridge Ed set up for us for about 45 minutes. We covered a lot of ground and got some idea of next steps. We have a repository that has GNU Radio draft blocks that do the Pi/2 BPSK demodulation and decoding, and we need to get it working as a correlator.
 
@@ -23,7 +23,7 @@ Which if successful will help us and a lot of other people.
 
 This effort is in progress and will be updated as the code is reviewed and feedback from GNU Radio given.
 
-10GHz Filter
+## 10GHz Filter
 
 We have a 10GHz filter design proposed from Jeffrey Pawlan. 
 
@@ -31,7 +31,7 @@ It covers the 10GHz amateur band, has 0.1dB variation over the band, 0.1dB inser
 
 https://github.com/phase4ground/DVB-receiver/tree/master/Pawlan-10GHz-Filter
 
-Block Party at GNU Radio Conference 2018
+## Block Party at GNU Radio Conference 2018
 
 We are sponsoring a Block Party at GNU Radio Conference 2018. This is a multi-day hackfest, workshop, and summit all about making an open source DVB-S2 and DVB-S2X receiver in GNU Radio. Come and help. We have five solid technical docents for the event and could use more. The goal is to bring blocks and write blocks on site, test interoperability, and leave the conference with a working DVB-S2 receiver. This is the central mission for successful continued research and development and we need all hands on deck. 
 
@@ -43,13 +43,14 @@ Go there, or search them up with "gnu radio guided tutorials", walk through them
 
 Having said that, if you are only comfortable coding in python or C++ then that's ok too. If you have an idea for getting some part of the DVB-S2 digital signal processing done, and either don't have time to work through block coding or pybombs distribution, then you can certainly still help by sharing your signal processing code. Don't let GNU Radio block configuration stop you. You're needed and appreciated.
 
-KA9Q SDR - stereo field
+## KA9Q SDR - stereo field
 
 Phil Karn has shared a work in progress with us. He calls it the KA9Q SDR. However, the module in this SDR code that I'd like to highlight is a stereo field audio adapter. 
 
 This works by taking in multicast audio streams. Each audio stream comes from an individual audio source, or participant. These participants in a round table audio conference are placed at different points in the stereo spectrum. 
 
 Phil Writes:
+
 I'm writing a lightweight, modular SDR package that uses IP multicast
 for inter-module communication. Multicasting is very flexible and
 convenient for this sort of real-time application, and I really think
@@ -105,12 +106,12 @@ A lot of this was done as research in the early days of what became
 'voice over IP' (VoIP) but it seems to have fallen by the wayside. It
 really deserves to be more widely recognized and used.
 
-Phil Karn, KA9Q
+Phil Karn, KA9Q  
 9 April 2018
 
 
 
-Careful COTS SDR 
+## Careful COTS SDR 
 
 We are making great progress on the Careful COTS re-layout of a USRP E310 with future plans to tackle the E320. We're collaborating with AMSAT Golf on this and have gained enthusiastic support from Ettus Research engineering. The next steps are to negotiate what's needed on the business side. Scheduling talks is in progress. 
 
@@ -118,7 +119,7 @@ If you're not familiar with the term, Careful COTS - COTS means commercial off t
 
 We have a high degree of confidence that the Ettus USRP will work and some volunteers willing to do the work. If you are interested in this part of the project, let me know. 
 
-Badge Update
+## Badge Update
 
 The Transionospheric badge prototypes are being built at a contract manufacturer in San Diego right now. We are working hard to have them at Hamvention for sale. All proceeds benefit Phase 4 Ground! They aren't just for show, they will be a radio peripheral for Phase 4 Ground radios, providing a lot of visual reinforcement on what your radio is doing and the health and status of your link. Whether you have a satellite or a terrestrial system, the same information will be stylishly displayed. We are working hard to make it possible to command other radios as well. More on that as it develops! 
 
