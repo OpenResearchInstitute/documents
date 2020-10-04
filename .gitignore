@@ -13,4 +13,11 @@
 ~$*.ppt*
 
 # .DS_Store
-~$.DS_Store
+.DS_Store
+.DS_Store?
+# editor debris
+*~
+.#*
+._*
+.*.sw?
+*.bak
