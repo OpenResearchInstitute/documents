@@ -24,7 +24,7 @@ Resolution of this printer setup is 0.02mm, which is good enough for 120GHz mult
 
 6) This Tormach PCNC 440 is a small, light duty 3-axis CNC milling machine capable of working to accuracies of about a thousandth of an inch (a couple hundredths of a millimeter) within a work envelope of about 6 by 10 inches (150 by 250 millimeters). We have a reasonably complete set of ordinary tooling and work holding accessories for it. We are certainly not expert machinists, but with these tools we can make prototype runs of a wide variety of parts in materials like plastic, aluminum, and steel. Not every shape is easy or even possible to make with a 3-axis mill, but for most designs we can make a part that will work.
 
-7) We have access to the large laser cutter at colab.org. Use of the machine is free for non-commercial work. 
+7) We have access to the large laser cutter at colaser.org. Use of the machine is free for non-commercial work. 
 
 <h2> Portland</h2>
 
