@@ -26,6 +26,8 @@ Resolution of this printer setup is 0.02mm, which is good enough for 120GHz mult
 
 7) We have access to the large laser cutter at colab.org. Use of the machine is free for non-commercial work. 
 
+8) Vencon UBA5 Battery Analyzer 
+
 <h2> Portland</h2>
 
 1) Creality Ender 3d printer
