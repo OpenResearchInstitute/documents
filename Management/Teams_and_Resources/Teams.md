@@ -1,6 +1,6 @@
-<h1>Teams and Members</h1>
+<h1>Teams List</h1>
 
-From 30 July 2020 program review slides:
+Update your membership in the Wiki here: https://github.com/phase4ground/documents/wiki/Phase-4-Ground-Teams
 
 DMT Build/Integration Team
 
