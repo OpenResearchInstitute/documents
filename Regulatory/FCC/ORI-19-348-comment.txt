@@ -1,0 +1,41 @@
+Open Research Institute (ORI) is a non-profit research and development organization which provides all of its work to the general public under the principles of Open Source and Open Access to Research. Our technical focus is research and development for Amateur Radio and Amateur Satellite Services.
+
+Microwave band spectrum allocation needs renovation. The continuing growth of mobile and cellular service is not the only compelling reason. Setting aside significant and globally coordinated bandwidth for  the Amateur Radio Service and Amateur Satellite Service is mission critical for an educated, creative, and competent American engineering workforce. Amateur Radio provides the best, least expensive, and most effective way of engaging students and citizens in communications theory and practice. Without an accessible way for people of all walks of life to experiment and learn with microwave-band communications, we are at a distinct competitive disadvantage at a critical time.
+
+Hundreds of volunteer developers have been working for the past three years on geosynchronous satellite uplinks on the amateur microwave bands. An amateur satellite service geosynchronous payload has been deployed at 25.9° E with coverage of Europe, Africa, and parts of Asia. This payload, called QO-100, has a 2.4 GHz uplink and a 10.5 GHz downlink. Open Research Institute was founded to design open source amateur radio satellites in the microwave bands using digital modes. There are no geosynchronous amateur satellite service payloads over North America. Open Research Institute is dedicated to correcting this. 
+
+Open Research Institute is aware of no current payload using the 3.40 to 3.41 GHz amateur satellite segment. The most recent technical effort in the Amateur Radio community that we are aware of with a 3GHz amateur satellite uplink was halted in 2009 due to unaffordable launch costs. The 3.40 to 3.41 GHz satellite segment is currently avoided by most, if not all, amateur radio satellite teams because it is not available in all ITU regions. Another significant factor is how this band is described. It is always introduced as "under threat." This is a very important factor for expensive and ambitious work such as 3 GHz amateur satellite utilization. The amateur service is non-commercial by definition. If people are going to take on enormous risk to design and build something as an avocation, then the additional risk in choosing a band that is not well-coordinated, or might be yanked out from under the engineering team, is a lot to ask. 
+
+
+Recommendations
+
+
+1) Allow the Amateur Satellite Service to keep their current allocation at 3.40 to 3.41 GHz for space-to-space communications and expand this allocation to 50MHz within the existing amateur 3.30 to 3.50 GHz allocation.
+
+Why? 
+
+This is a useful inter-satellite frequency and would in no way interfere with the ground-based 5G. 3 GHz is expected to be important for lunar to Lunar Orbiting Platform Gateway (LOP-G) relays. We expect data received on 3 GHz will be forwarded over a 10 GHz DVB-S2 downlink. 
+
+Amateur Radio use of 3.4 GHz for space-to-space links to space-based relay stations can enable development of new technologies and techniques to more efficiently utilize spectrum in space while posing negligible interference to uses on the ground.
+
+2) Amateur allocation in other bands should be increased to compensate for the loss of 3.40-3.41 GHz. 
+
+Why?
+
+To improve spectrum access for Amateur Satellite Service at 5 GHz, 10 GHz, and 24 GHz. 10 MHz of microwave spectrum in these bands would be very beneficial. Allocation won't harm the services currently or proposed to be using those frequencies.
+
+Why is this important? 
+
+Growth in mobile and cellular microwave broadband has benefited greatly from amateur radio operators. Amateur radio needs adequate access to appropriate spectrum and some degree of certainty that it will remain available. Without spectrum, amateur radio cannot continue to attract, inspire, and support interest in advanced digital communications. 
+
+The commercialization of the microwave bands has lowered the price of microwave components and test equipment. This has enabled tremendous growth in microwave-band amateur radio. The number of amateur microwave contests, new amateur microwave distance records, and the rise of organizations such as Open Research Institute are all proof of substantial high-tech activity. This volunteer technical corps provide enormous civic and technical value to culture and the economy. The only requirement is a very modest amount of reserved spectrum.
+
+If 5G can be described as golden eggs, then the geese that laid them include large numbers of amateur radio clubs, groups, mentors, experimenters, and teachers. These often-uncredited influencers helped create a generation of engineers willing to take the risks that resulted in the creation of the world's most successful communications system. 
+
+Just one example is Nobel Laureate Joe Taylor, K1JT. Some of his very influential work includes Earth-Moon-Earth communications and advanced digital signal processing modes WSJT, JT65, and FT8. Joe credits amateur radio for inspiring his interest in science.
+
+For more, see http://www.princeton.edu/~paw/archive_old/PAW95-96/02_9596/1011feat.html
+
+The FCC must be willing to pay it forward so that the next generation can benefit even more.
+
+That means increasing the commitment to educational and avocational opportunities in microwave band engineering theory and practice. The best possible way to do this is to make the microwave bands amateur-friendly to the maximum practical extent. 
