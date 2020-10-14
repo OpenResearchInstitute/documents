@@ -1,5 +1,14 @@
 # Engineering Report for 16 October 2020
 
+## Remote Lab Progress and Paper
+
+## 5 GHz RF work
+
+## Minimum Viable Product paper 
+
+## "Open Source Satellite Work Free of ITAR" Symposium Not Scheduled
+
+Multiple submissions to AMSAT Symposium were made for 2020. None were scheduled. Links to the submitted content will appear here. 
 
 
 ## The NASA Ames Small Satellite Webinar
