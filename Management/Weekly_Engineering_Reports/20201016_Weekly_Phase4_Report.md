@@ -2,7 +2,7 @@
 
 
 
-The NASA Ames Small Satellite Webinar
+## The NASA Ames Small Satellite Webinar
 13 October 2020
 1300 - 1500 US Eastern Time
 
@@ -13,7 +13,7 @@ Ames is a heart of smallest information and has a virtual resource center with a
 technology.nasa.gov
 smallsat-institute
 
-Presenter 1 Paul Wercinski
+### Presenter 1 Paul Wercinski
 ADEPT project
 Transformable heat shield umbrella style with a diameter greater than the launch vehicle. Prototyping and ground testing photos were shown. 1 meter diameter target size. The technology key is the performance of the carbon fabric. Intended for entry vehicles for planetary problems. 
 
@@ -43,7 +43,7 @@ Power requirements? Speaker dissembled somewhat.
 
 Alternate commands to mitigate field effects. First one pole, then the other, then back again, etc. 
 
-Speaker 3 Rick Alena
+### Speaker 3 Rick Alena
 Heterogenous Spacecraft Networks (HSN)
 NASA/ESA/JAXA 
 "Open Spacecraft Network"
@@ -78,7 +78,7 @@ A: DTN and other similar networks are already self-managing. What could go wrong
 Uses cFS and arduino and Linux. 
 
 
-Speaker 4 Red Chirayath
+### Speaker 4 Red Chirayath
 
 Fluidcam
 MIDAR
@@ -114,7 +114,7 @@ This is an area where I didn't quite follow if any details on "how" were reveale
 Questions ranged from "can this be used for human tissue to catch cancer" to "can you find wrecked ships". 
 
 
-Speaker 5 Stevan Spremo
+### Speaker 5 Stevan Spremo
 
 First Part:
 Low Cost Star Tracker Overview
@@ -145,7 +145,7 @@ A: Um, yeah, about that, there will have to be retail transactions and contracts
 Q: Testing? Ruggedization?
 A: audience pointed to a podcast from www.techbriefs.com for more information. 
 
-Speaker 6 Arwen Dave
+### Speaker 6 Arwen Dave
 
 Affordable Vehicle Avionics (AVA) Overview.
 
@@ -173,7 +173,7 @@ Licensees will be taking on a lot of risk to finish this project's next steps ou
 Tailored to a specific vehicle. 
 
 
-Speaker 7 Peter Goorjian
+### Speaker 7 Peter Goorjian
 
 Space Opticals for LEO and Low Lunar Orbit (LLO). 
 
@@ -192,7 +192,7 @@ Dr. Govind Agrawal mentioned.
 Cluster or array draws 150mW of power. 
 
 
-Speaker 8 Shak Ghassemich
+### Speaker 8 Shak Ghassemich
 
 Nanosat Launch Adapter System (NLAS) 
 
