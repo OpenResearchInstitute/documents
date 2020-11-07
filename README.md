@@ -11,6 +11,8 @@ Manufacturing has content that helps with any part of the manufacturing process.
 
 Papers Articles Presentations is a repository of technical papers, articles, and slide presentations that we've either found useful or have written or presented. If you use a presentation, paper, or article, please give credit to the author or team that wrote it. 
 
+Remote Labs folder contains documents pertaining to the remote labs operated by ORI in support of this project and related projects.
+
 Requirements folder contains both the discussion of and the end product of the requirements phase, where we determine the basic requirements for successful design and document them. 
 
 Specifications are the assertions of requirements. Radios compliant with the air interface are expected to be able to interoperate without difficulty. 
