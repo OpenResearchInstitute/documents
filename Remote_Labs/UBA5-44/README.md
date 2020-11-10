@@ -4,8 +4,14 @@ Brochure:
 
 http://vencon.com/wp-content/uploads/UBA5-44VBrochure.pdf
 
-Manual:
+"Getting started" guide from Vencon:
 
+http://www.vencon.com/wp-content/uploads/UBA5Manual2017-11.pdf
 
+Software and Software Manual Downloads: 
+
+https://www.vencon.com/support/
 
 ORI West How To:
+
+TBD!
