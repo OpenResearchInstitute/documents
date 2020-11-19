@@ -82,29 +82,26 @@ Phase 4 Ground finds justification in part 97 of the United States Code of Feder
 
 ### Preface
 
-Phase 4 Ground is the name of an engineering effort for the Amateur Satellite Servicesponsored by AMSAT. The focus of this effort is to produce an ensemble of open source solutions for the radio problems that the AMSAT digital microwave payload strategy posesmicrowave digital payloads.
+Phase 4 Ground and Space are engineering efforts from Open Research Institute. The focus of this effort is to produce an ensemble of open source solutions for microwave digital payloads.
 
-The amateur radio service has a space allocation in both 5GHz and 10GHz (Five and Dime), and that&#39;s where AMSAT&#39;s intial microwave satellite strategy is directed. AMSAT considered all the microwave bands, from 1.2 GHz through 24 GHz, and chose Five and Dime for a combination of technical and regulatory reasons. Choosing the right band for the job involves a lot of moving parts, with each alternative presenting various difficulties and challenges. The selection of Five and Dime resulted from substantial discussion and consideration. The choice has technical repercussions that are discussed in this document.
+The amateur radio service has a space allocation in both 5GHz and 10GHz (Five and Dime). This is where the microwave satellite strategy is directed. 
 
 Phase 4 Ground is pursuing both a manufactured solution. We are also committed to developing a set of documents to enable motivated operators in assembling their own stations. These stations can range from completely custom rigs to systems integrated from commonly available SDRs and RF chains.
 
-This document provides the information necessary to create (or appreciate) the physical waveforms that the satellite will recognize. This document also describes what is required to be done by the operator in order to comply with the default authentication and authorization schemes. For any particular deployment, additional steps may be necessary at the discretion of the controlling organization or authority. This document fully describes what is required in order to comply with the default set of authentication and authorization conditions.
+This document will provide the information necessary to create (or appreciate) the physical waveforms that the satellite will recognize. This document also describes what is required to be done by the operator in order to comply with the default authentication and authorization schemes. For any particular deployment, additional steps may be necessary at the discretion of the controlling organization or authority. This document fully describes what is required in order to comply with the default set of authentication and authorization conditions.
 
-Re-use of ground terminal equipment from one microwave digital payload to the next is accomplished by standardization. DVB-S2/X was chosen for the satellite downlink. It is also expected to be useful for terrestrial deployments. DVB-S, DVB-S2, and DVB-S2X are supported by Amateur Television networks and operators.DVB-T/2 was chosen for terrestrial deployments.
+Re-use of ground terminal equipment from one microwave digital payload to the next is accomplished by standardization. DVB-S2/X was chosen for the satellite downlink. It is also expected to be useful for terrestrial deployments. DVB-S, DVB-S2, and DVB-S2X are supported by Amateur Television networks and operators. 
 
-The reasons for choosing DVB-S2/X this choice are as follows.
+The reasons for choosing DVB-S2/X as the downlink protocol are as follows.
 
 DVB-S2/X is a widely adopted satellite standard. It is an open standard. The documentation is available free of charge from [https://www.dvb.org](https://www.dvb.org/).
 
-By adopting this standard, we enable technical volunteers to learn, implement, and engineer with an industry-standard methodology. This provides an enormous educational opportunity.
+By adopting this standard, we enable technical volunteers to learn, implement, and engineer with an industry-standard methodology. This provides many educational opportunities.
 
-By adopting a well-known, widely-deployed standard, we minimize the risk of a critical design error that could cripple the mission, or unnecessarily restrict future flexibility.
+By adopting a well-known, widely-deployed standard, we minimize the risk of a critical design error that could cripple the mission, or unnecessarily restrict future flexibility. Risk is minimized by using known-good reference platforms and reference designs in the course of development. 
 
 By adopting this standard, we increase the amount of commercial gear that can receive our amateur signals. DVB-S2 receiver cards are widely available.
 
-This document describes the functions and elements of DVB-S2/X that are selected for use by the payloads in the Five and Dime program.
-
-This document describes the functions and elements of DVB-T/2 that are selected for use by payloads in terrestrial deployment. Terrestrial microwave communications have substantially more multipath. DVB-T/2 is designed to deal with multipath.
 
 ## Chapter 2 Link Budget
 
@@ -112,17 +109,17 @@ detailed description of our environment and link budget.
 
 Current working link budgets can be found in the link budget folder at [https://github.com/phase4ground/documents/tree/master/Engineering/Requirements/Air\_Interface](https://github.com/phase4ground/documents/tree/master/Engineering/Requirements/Air_Interface)
 
- For example, we expect a common station type to consist of a 2W 5GHz uplink with a 5kHz data rate from an 18-inch DSS style dish with 1 Watt transmit power. This leaves 6dB of margin.
+For example, we expect a common station type to consist of a 2W 5GHz uplink with a 5kHz data rate from an 18-inch DSS style dish with 1 Watt transmit power to GEO. This leaves 6dB of margin.
 
 Since station types will vary, adaptive coding and modulation is available in order to allow each station to achieve optimal throughput.
 
-Adaptive coding and modulation means a dynamic link budget. Instead of a single modulation and coding selected to close a worst-case link, we can provide a set of modulations and codes that allow for a range of link budgeting. This increases the complexity of the link budget.
+Adaptive coding and modulation means a dynamic link budget. Instead of a single modulation and coding selected to close a worst-case link, we can provide a set of modulations and codes that allow for a range of performance. This adds complexity.
 
 The benefit of the added complexity is a higher performance system that provides an educational opportunity in advanced wireless digital communications techniques like variable and adaptive coding and modulation.
 
 ## Chapter 3 System Time
 
-define system time and how it&#39;s derived and used in the system.
+define system time, how it is derived, and how it is used in the system.
 
 ## Chapter 4 Tolerances
 
@@ -142,7 +139,7 @@ if there is extra room for future expansion in the message formats (and there be
 | --- | --- | --- | --- |
 | Phase 4B | 5655 – 5665 MHz | 10MHz | FDMA 100kHz channelized |
 | Phase 3E | 5655 – 5665 MHz | 10MHz | TBD |
-| Groundsat | 5655 – 5665 MHz | 10MHz | FDMA 100kHz channelized |
+| Groundsat | 5675 – 5685 MHz | 10MHz | FDMA 100kHz channelized |
 
 channel spacing and designation
 
