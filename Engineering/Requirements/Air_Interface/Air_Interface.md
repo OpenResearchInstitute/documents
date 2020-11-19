@@ -142,7 +142,7 @@ if there is extra room for future expansion in the message formats (and there be
 | --- | --- | --- | --- |
 | Phase 4B | 5655 – 5665 MHz | 10MHz | FDMA 100kHz channelized |
 | Phase 3E | 5655 – 5665 MHz | 10MHz | TBD |
-| Groundsat | 5655 – 5665 MHz | 10MHz | FDMA 100kHz channelized |
+| Groundsat | 5675 – 5685 MHz | 10MHz | FDMA 100kHz channelized |
 
 channel spacing and designation
 
