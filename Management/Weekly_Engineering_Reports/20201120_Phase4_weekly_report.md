@@ -38,6 +38,15 @@ M17 has been added to the list of Open Research Institute Projects at
 
 https://www.openresearch.institute/projects/
 
+###### Trello Boards up and running
+We are using Trello for task management. Plenty going on! 
+
+Join Phase 4 Ground Trello board:
+https://trello.com/invite/b/REasyYiZ/8de4c059e252c7c435a1dafa25f655a8/phase-4-ground
+
+Join Phase 4 Space Trello board:
+https://trello.com/invite/b/GRBWasqW/1336a1fa5b88b380c27ccf95d21fec79/phase-4-space
+
 ###### AmbaSat Inspired Sensors
 Phone conference with Dr. Alan Johnston on 2 November 2020 to answer questions and set up a tentative schedule. Work is expected to commence December 2020 through May 2021. This work is funded by an ORI grant. Project kickoff report here: https://www.openresearch.institute/2020/11/12/ambasat-inspired-sensors-project-kick-off-in-december-2020/
 
