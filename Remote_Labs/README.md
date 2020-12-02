@@ -8,3 +8,7 @@ Open Research Institute runs two labs for remote access.
 * [Whiteboard Sketch of Network](Labs-Network-Whiteboard.jpg)
 * [User Setup Instructions](ORI-Lab-User-Setup.md)
 * [Lab Manager Setup Instructions](ORI-New-User-Setup.md)
+
+## Lab Notes
+
+* [Getting Screenshots](Getting%20Screenshots.md) (Python scripting tutorial)
