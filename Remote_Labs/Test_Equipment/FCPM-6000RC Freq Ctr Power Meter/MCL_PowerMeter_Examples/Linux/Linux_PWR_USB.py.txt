@@ -1,0 +1,162 @@
+"""
+Minimalist Linux interface to Mini Circuits USB power meter.
+Copyright (C) 2017, Rigetti & Co. Inc.
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU
+General Public License as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+The GNU General Public License can be found at <http://www.gnu.org/licenses/>.
+
+Usage:
+  from MiniCircuits_PWR import MiniCircuits_PWR
+  ...
+  pwr = MiniCircuits_PWR()
+  ...
+  pwr.get_power()
+
+Installation instructions:
+  In a terminal session
+    sudo su
+    pip install --upgrade libusb1
+    echo 'ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="20ce", MODE="0666"' > /etc/udev/rules.d/70-MiniCircuits-PWR.rules
+    udevadm control --reload
+    exit
+  Disconnect and reconnect the USB cord for the power meter.
+"""
+
+import string
+import sys
+import threading
+import time
+
+try:
+    import libusb1
+    import usb1
+except:
+    print(__doc__[__doc__.index["Installation"]:-1])
+    raise RuntimeError('libusb1 and/or usb1 not installed -- resolve using the preceding instructions')
+
+################################################################################
+#
+# Class to operate the MiniCircuits power meter.
+#
+################################################################################
+
+class MiniCircuits_PWR():
+    """
+    Operate a Mini Circuits Power Meter.
+    """
+
+    _VENDOR_ID = 0x20CE
+    _PRODUCT_ID = 0x0011
+
+    _MSG_LEN = 64
+
+    _SET_MEASUREMENT_MODE       =  15
+    _GET_FIRMWARE               =  99
+    _READ_POWER                 = 102
+    _GET_INTERNAL_TEMPERATURE   = 103
+    _GET_DEVICE_MODEL_NAME      = 104
+    _GET_DEVICE_SERIAL_NUMBER   = 105
+
+    def __init__(self):
+        """
+        Connect to the power meter.
+        """
+        # Configure threading
+        self.lock = threading.Lock()
+        # Configure the USB target
+        self.context = usb1.USBContext()
+        self.handle = self.context.openByVendorIDAndProductID(0x20CE,0x0011)
+        if self.handle is None:
+            raise RuntimeError('No USB Power meter found')
+        if self.handle.kernelDriverActive(0):
+            self.handle.detachKernelDriver(0)
+        self.handle.resetDevice()
+        self.handle.claimInterface(0)
+        # Get the model number and serial number
+        self.model = self._query_string([MiniCircuits_PWR._GET_DEVICE_MODEL_NAME,])
+        self.sernum = self._query_string([MiniCircuits_PWR._GET_DEVICE_SERIAL_NUMBER,])
+        # Set to low noise measurement mode.
+        self._query([MiniCircuits_PWR._SET_MEASUREMENT_MODE, 0,])
+        # Get the device temperature
+        self.temperature = self._query_string([MiniCircuits_PWR._GET_INTERNAL_TEMPERATURE,], 7)
+        # Get the firmware version
+        resp = self._query([MiniCircuits_PWR._GET_FIRMWARE,])[4:6]
+        if not all([chr(c) in string.printable for c in resp]):
+            raise RuntimeError('Response to _GET_FIRMWARE malformed : %s' % resp[0:6])
+        self.firmware = str(resp)
+
+    def _query(self, cmd):
+        """
+        Issue the provided command, get and validate the response, and return the rest of the
+        response.
+        """
+        self.cmd = bytearray([0]*MiniCircuits_PWR._MSG_LEN)
+        self.cmd[:len(cmd)] = cmd
+        self.lock.acquire()
+        threading.Thread(target=self._write).start()
+        while self.lock.locked():
+            time.sleep(10e-6)
+        if self.nsent != len(self.cmd):
+            sys.exit(1)
+        self.lock.acquire()
+        threading.Thread(target=self._read).start()
+        while self.lock.locked():
+            time.sleep(10e-6)
+        if len(self.response) != MiniCircuits_PWR._MSG_LEN:
+            sys.exit(1)
+        return self.response
+
+    def _query_string(self, cmd, response_length=None):
+        """
+        Issue the provided command and return the string response from the device.
+        If the response length is not provided, use a terminating null character to extract the
+        string.
+        """
+        resp = self._query(cmd)
+        if response_length is None:
+            try:
+                response_length = resp.index(bytearray([0]))
+            except:
+                raise RuntimeError('No terminating null character in response: %s' % resp)
+        resp = resp[1:response_length-1]
+        if not all([chr(c) in string.printable for c in resp]):
+            raise RuntimeError('Response to command %s is not all printable: %s' % (cmd, resp,))
+        return str(resp)
+
+    def _read(self):
+        """
+        Interrupt task required to read from the USB device.
+        """
+        self.response = ''
+        try:
+            self.response = self.handle.interruptRead(endpoint=1, length=MiniCircuits_PWR._MSG_LEN, timeout=1000)
+        finally:
+            self.lock.release()
+
+    def _write(self):
+        """
+        Interrupt task required to write to the USB device.
+        """
+        self.nsent = -1
+        try:
+            self.nsent = self.handle.interruptWrite(endpoint=1, data=str(self.cmd), timeout=50)
+        finally:
+            self.lock.release()
+
+    def get_power(self, freq_MHz):
+        """
+        Read the power meter configured for the specified frequency.
+        """
+        freq_MHz = int(round(freq_MHz))
+        resp = self._query_string([MiniCircuits_PWR._READ_POWER, freq_MHz//256, freq_MHz % 256, ord('M'),], 7)
+        try:
+            return float(resp)
+        except:
+            raise RuntimeError('power readout not valid: "%s"' % resp)

@@ -1,0 +1,20 @@
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm64.dll\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\ResolveAssemblyReference.cache
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm64.dll\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Form1.resources
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm64.dll\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Properties.Resources.resources
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm64.dll\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.csproj.GenerateResource.Cache
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm64.dll\C#.NET\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.exe
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm64.dll\C#.NET\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.pdb
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm64.dll\C#.NET\WindowsApplication1\WindowsApplication1\bin\Debug\mcl_pm64.dll
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm64.dll\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.exe
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm64.dll\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.pdb
+C:\MCL_PowerMeter_ProgExamples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.exe
+C:\MCL_PowerMeter_ProgExamples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.pdb
+C:\MCL_PowerMeter_ProgExamples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.exe
+C:\MCL_PowerMeter_ProgExamples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.pdb
+C:\MCL_PowerMeter_ProgExamples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\ResolveAssemblyReference.cache
+C:\MCL_PowerMeter_ProgExamples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Form1.resources
+C:\MCL_PowerMeter_ProgExamples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Properties.Resources.resources
+C:\MCL_PowerMeter_ProgExamples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.csproj.GenerateResource.Cache
+C:\MCL_PowerMeter_ProgExamples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\bin\Debug\mcl_pm64.dll
+D:\soft\Project Examples\MCL_PowerMeter_Examples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.exe
+D:\soft\Project Examples\MCL_PowerMeter_Examples\mcl_pm64.dll_Examples\C#.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.pdb

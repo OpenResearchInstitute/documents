@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ReadPM">
+</Property><Property Name="Solution File" Value="C:\Documents and Settings\prog.RAVON\Desktop\Project Examples\MCL_PowerMeter_Examples\mcl_pm.dll_Examples\VC++(CLR)_VS2010\ReadPM\ReadPM.sln">
+</Property><Property Name="User Options File" Value="C:\Documents and Settings\prog.RAVON\Desktop\Project Examples\MCL_PowerMeter_Examples\mcl_pm.dll_Examples\VC++(CLR)_VS2010\ReadPM\ReadPM.suo">
+</Property><Property Name="Date" Value="יום חמישי 19 יוני 2014">
+</Property><Property Name="Time" Value="11:33">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="ReadPM.sln" Description="File successfully backed up as C:\Documents and Settings\prog.RAVON\Desktop\Project Examples\MCL_PowerMeter_Examples\mcl_pm.dll_Examples\VC++(CLR)_VS2010\ReadPM\ReadPM.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="ReadPM.suo" Description="File successfully backed up as C:\Documents and Settings\prog.RAVON\Desktop\Project Examples\MCL_PowerMeter_Examples\mcl_pm.dll_Examples\VC++(CLR)_VS2010\ReadPM\ReadPM.suo.old">
+</Event><Event ErrorLevel="0" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Converting project file 'C:\Documents and Settings\prog.RAVON\Desktop\Project Examples\MCL_PowerMeter_Examples\mcl_pm.dll_Examples\VC++(CLR)_VS2010\ReadPM\ReadPM\ReadPM.vcproj'.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="ActiveX references no longer support per-configuration settings.  To generate a custom interop wrapper, use tlbimp/aximp to generate the interop assembly and add it as an assembly reference.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'CopyLocalDependencies' of 'ActiveXReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'ActiveXReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Done converting to new project file 'C:\Documents and Settings\prog.RAVON\Desktop\Project Examples\MCL_PowerMeter_Examples\mcl_pm.dll_Examples\VC++(CLR)_VS2010\ReadPM\ReadPM\ReadPM.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="ReadPM" Source="ReadPM\ReadPM.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="ReadPM.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="ReadPM.sln" Description="Converted">
+</Event></UpgradeLog>

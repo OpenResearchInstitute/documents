@@ -1,0 +1,14 @@
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.exe
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.pdb
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.xml
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\bin\Debug\Interop.mcl_pm.dll
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\obj\Debug\ResolveAssemblyReference.cache
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\obj\Debug\Interop.mcl_pm.dll
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.vbproj.ResolveComReference.cache
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Form1.resources
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Resources.resources
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.vbproj.GenerateResource.Cache
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.exe
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.xml
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.pdb
+C:\MCL_PowerMeter_ProgExamples\Using_mcl_pm.dll\VB.NET\WindowsApplication1\WindowsApplication1\bin\Debug\mcl_pm64.dll

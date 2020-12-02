@@ -1,0 +1,178 @@
+(saveFormat "7.0")
+(date "Mon 30/Jun/2014 16:11:52 ")
+(veerev "9.2.13522.0")
+(platform "PC")
+(execMode v6)
+(prefExecMode v9)
+(filterNAN 0)
+(workspaceStackingOrder M)
+(sysconfig)
+(SaveCF no)
+(watchvariableslist
+(windowname Watch1
+(varname "Status")
+(varname "globalA")))
+(device 0 ROOTCONTEXT
+(automationRefs
+(automationRef 1
+(libid "{6AB041D7-21F7-4C01-9672-B3F4EE034306}")
+(desc "mcl_pm")
+(filename "C:\\WINDOWS\\system32\\mcl_pm.dll")
+(verMajor 1)
+(verMinor 0)
+(lcid 0)))
+(properties
+(variableName Main)
+(variableScope glob)
+(trigMode deg)
+(nextID 29)
+(popupTitleText "Untitled")
+(popupMoveable 1))
+(deviceList
+(device 4 LITERALCONSTANT
+(properties
+(name "Text")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Text")
+(lock name constraints)))
+(implementation
+(value Text
+(data  "1003010037"))
+(initValue Text
+(data  ""))))
+(device 5 TOGLOBAL
+(properties
+(name "Set Status")
+(variableScope cont)
+(globalName "Status"))
+(interface
+(input 1
+(name "Data")
+(tag "Data")
+(requires
+(datatype Int32)
+(shape "Scalar"))
+(lock name))))
+(device 11 DECLVAR
+(properties
+(scope glob)
+(globalName "global1"))
+(implementation
+(value Object
+(data  "COM OFF mcl_pm.USB_PM"))))
+(device 15 FORMULA
+(properties
+(name "global1 = 2")
+(variableScope cont)
+(expr 2 "SET global1 = CreateObject(\"mcl_pm.USB_PM\");"
+"global1.Open_Sensor(SN);"))
+(interface
+(input 1
+(name "SN")
+(requires
+(datatype Text))
+(optional yes))
+(output 1
+(name "Result")
+(tag "Result")
+(lock name constraints)
+(optional yes))))
+(device 16 FORMULA
+(properties
+(name "global1 = 2")
+(variableScope cont)
+(expr 1 "global1.ReadPower();"))
+(interface
+(output 1
+(name "Result")
+(tag "Result")
+(lock name constraints)
+(optional yes))))
+(device 28 TANK
+(properties
+(variableScope cont)
+(split 33)
+(split2 66)
+(range -1000 5))
+(interface
+(input 1
+(name "Data")
+(requires
+(datatype Real64)
+(shape "Scalar"))
+(lock name constraints))))
+(configuration
+(connect D3:1 D1:1)
+(connect D0:1 D3:1)
+(connect D1:0 D4:0)
+(connect D4:1 D5:1)))
+(contextCarrier
+(wndRestoredOrigin 2 2)
+(wndRestoredExtent 710 392)
+(wndState max)
+(active detail)
+(detail
+(extent 1040 760)
+(anchorPt -37 -32)
+(configuration
+(devCarrierFor 4
+(active open)
+(icon)
+(open
+(extent 174 29))
+(pinCenter 210 170))
+(devCarrierFor 5
+(active open)
+(icon
+(extent 61 0))
+(open
+(extent 73 51))
+(terminals on)
+(pinCenter 945 220))
+(devCarrierFor 11
+(active open)
+(icon)
+(open
+(extent 315 115))
+(pinCenter 280 20))
+(devCarrierFor 15
+(active open)
+(icon
+(extent 67 0))
+(open
+(extent 224 146))
+(terminals on)
+(pinCenter 570 200))
+(devCarrierFor 16
+(active open)
+(icon
+(extent 67 0))
+(open
+(extent 264 146))
+(terminals on)
+(pinCenter 500 470))
+(devCarrierFor 28
+(active open)
+(icon)
+(open
+(extent 212 253)
+(layout vertical)
+(fastmode off))
+(pinCenter 1010 620))
+(connect D3:1 D1:1
+(points 4 734 200 750 200 750 220 866 220))
+(connect D0:1 D3:1
+(points 4 299 170 320 170 320 200 425 200))
+(connect D1:0 D4:0
+(points 4 940 248 940 300 510 300 510 376))
+(connect D4:1 D5:1
+(points 4 684 470 700 470 700 620 901 620)))
+(stackingOrder 4 5 2 0 3 1))
+(numberFormats
+(realFormat standard)
+(realSigDigits 4)
+(realRadixSpec 4)
+(integerBase decimal))))
