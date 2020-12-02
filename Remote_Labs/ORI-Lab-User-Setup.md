@@ -8,15 +8,17 @@ Presently there are two ways to access the lab equipment:
 
 1. Use SSH to log in to the Raspberry Pi, and access the equipment on the LAN exclusively from the Raspberry Pi. This is similar to the intended primary access method. When the lab is fully set up, you will SSH through the Raspberry Pi into a VM running on the lab PC, and access the equipment on the LAN from the VM.
 
-2. Use Wireguard to establish a VPN connection to the private LAN, and operate the equipment on the LAN directly from your own computer. This may be handy in certain circumstances as an alternative to running everything through an SSH tunnel.
+2. Use Wireguard to establish a VPN connection to the private LAN, and operate the equipment on the LAN directly from your own computer. This may be handy in certain circumstances as an alternative to running everything through SSH.
 
 You can use either or both methods. In both cases there will be some things you need to set up on your own computer, and also some things the lab managers will have to set up on your behalf to authorize access.
 
+You can set up tunnels with SSH, but you'll find that you cannot operate most of the equipment directly through that kind of static tunnel. The VXI-11 protocol underlying the VISA instrument control protocol requires access to arbitrary TCP ports. You can get that access by being on the LAN yourself (logged in over SSH to the Raspberry Pi or to a VM on the lab computer), or by having the Wireguard VPN active, but not with SSH tunnels.
+
 ## Description of the Network
 
-The Raspberry Pi and all the network-capable test equipment in the lab are connected to an Ethernet switch (currently a TP-Link TL-SG108PE, to be upgraded to a DLink DGS-1250-28X) and assigned static IP addresses in the 10.73.1.x block. These addresses are not directly routable on the Internet. All access to the private LAN from outside the lab is mediated by the Raspberry Pi, which is known by the domain name ```sandiego.openresearch.institute``` (which goes through a dynamic IP provider).
+The Raspberry Pi and all the network-capable test equipment in the lab are connected to an Ethernet switch (currently a TP-Link TL-SG108PE, to be upgraded to a DLink DGS-1250-28X) and assigned static IP addresses in the 10.73.1.x block. These addresses are not directly routable on the Internet. All access to the private LAN from outside the lab is mediated by the Raspberry Pi, which is known by the domain name `sandiego.openresearch.institute` (which goes through a dynamic IP provider).
 
-Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like ```thing.sandiego.openresearch.institute```, where ```thing``` is a memorable name for the equipment, usually its model number. If you're running on the Raspberry Pi, you can abbreviate these names to just ```thing``` (because they're listed in _/etc/hosts_). VMs on the lab PC can be configured to support the same shortcut.
+Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like `thing.sandiego.openresearch.institute`, where `thing` is a memorable name for the equipment, usually its model number. If you're running on the Raspberry Pi, you can abbreviate these names to just `thing` (because they're listed in _/etc/hosts_). VMs on the lab PC can be configured to support the same shortcut.
 
 The Ethernet switch is capable of being set up to monitor packets flowing through it by copying those packets to another port for capture. Check with the lab managers [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) if you need this capability. The DLink switch, when it's in place, will also be capable of creating virtual LANs within the lab.
 
@@ -36,7 +38,7 @@ ssh-keygen -f ~/.ssh/id_rsa_ori_west -N ""
 
 If you need access from multiple computers, you can either copy the key pair to all your computers, or set up a separate key pair on each.
 
-Then, email your **public** key (not your private key!) to [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) and request SSH access, specifying your callsign (preferably) or other username you want to use. If you followed the procedure above, the file to send is ```~/.ssh/id_rsa_ori_west.pub```. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once. They will all access the same user account, unless you specify otherwise.
+Then, email your **public** key (not your private key!) to [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) and request SSH access, specifying your callsign (preferably) or other username you want to use. If you followed the procedure above, the file to send is `~/.ssh/id_rsa_ori_west.pub`. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once. They will all access the same user account, unless you specify otherwise.
 
 Once your login is set up, you will be able to use your SSH client to access the system. You need to give it your user name (usually your callsign), the name of the private key file corresponding to the public key file you sent in (unless it's the default one), and the non-standard SSH port number we use, 7322. Exact procedures will vary for GUI SSH clients. The following are the procedures for standard command line SSH clients.
 
@@ -44,14 +46,14 @@ You can put that all on one long command line if you don't mind the typing:
 ```
 ssh -p 7322 -i ~/.ssh/id_rsa_ori_west w1abc@sandiego.openresearch.institute
 ```
-where you'll replace ```w1abc``` with your own callsign or username.
+where you'll replace `w1abc` with your own callsign or username.
 
-Better, take the time now to configure your SSH client to provide all that info automatically. Add a stanza like this one to your ```~/.ssh/config``` file, creating a new file if there isn't one already, and substituting your username and private key file name as above.
+Better, take the time now to configure your SSH client to provide all that info automatically. Add a stanza like this one to your `~/.ssh/config` file, creating a new file if there isn't one already, and substituting your username and private key file name as above.
 ```
-Host ori-west
-    HostName sandiego.openresearch.institute
-    User w1abc
-    IdentityFile ~/.ssh/id_rsa_ori_west
+Host ori-west  
+    HostName sandiego.openresearch.institute  
+    User w1abc  
+    IdentityFile ~/.ssh/id_rsa_ori_west  
     Port 7322
 ```
 
@@ -59,7 +61,7 @@ With that stanza in the config file, your command line is much easier:
 ```
 ssh ori-west
 ```
-You can use whatever name you find memorable in place of ```ori-west``` above.
+You can use whatever name you find memorable in place of `ori-west` above.
 
 You'll end up in a standard login shell. What to do next is mostly beyond the scope of this document. As a simple _"hello, world"_ demo, try typing
 ```
@@ -93,36 +95,37 @@ Typically you will want to install Wireguard on the computer you'll use to devel
 
 Next, you will need to generate a public/private key pair, Wireguard style. Open a terminal (Linux or macOS) or a Command Prompt (not PowerShell) on Windows. Then do this:
 ```
-wg genkey > private_key
+wg genkey > private_key  
 wg pubkey < private_key > public_key
 ```
 
 Then, email your **public** key (not your private key!) to [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) and request Wireguard access. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once.
 
-We will send you a configuration file, ```sandiego.conf```. It will look something like this:
-```
-[Interface]
-Address = 10.73.0.N/24
-PrivateKey = put_your_private_key_here
+We will send you a configuration file, `sandiego.conf`. It will look something like this:
 
-[Peer]
-PublicKey = G9JLSEV6hu+RW1mMFSWB6O9iIn27HvoiyDic+kDzhQA=
-Endpoint = sandiego.openresearch.institute:51900
-AllowedIPs = 10.73.0.1/32, 10.73.1.0/24
-PersistentKeepalive = 25
+```
+[Interface]  
+Address = 10.73.0.N/24  
+PrivateKey = put_your_private_key_here  
+
+[Peer]  
+PublicKey = G9JLSEV6hu+RW1mMFSWB6O9iIn27HvoiyDic+kDzhQA=  
+Endpoint = sandiego.openresearch.institute:51900  
+AllowedIPs = 10.73.0.1/32, 10.73.1.0/24  
+PersistentKeepalive = 25  
 ```
 
 You will need to change two things in this file. First, we will assign you a unique IP address in the VPN block of 10.73.0.x, so you'll need to change the **10.73.0.N** on the Address line to your own unique IP address. Second, you'll need to replace **put_your_private_key_here** with the private key you generated above.
 
 Place the modified config file in the proper directory. On Linux:
 ```
-sudo cp sandiego.conf /etc/wireguard
+sudo cp sandiego.conf /etc/wireguard  
 sudo chmod 600 /etc/wireguard/sandiego.conf
 ```
 On macOS:
 ```
-sudo mkdir /usr/local/etc/wireguard
-sudo cp sandiego.conf /usr/local/etc/wireguard
+sudo mkdir /usr/local/etc/wireguard  
+sudo cp sandiego.conf /usr/local/etc/wireguard  
 sudo chmod 600 /usr/local/etc/wireguard
 ```
 On Windows:
@@ -185,9 +188,9 @@ You will need to change two things in this file. First, we will assign you a uni
 
 Get back into the WireGuard GUI. If there's a WireGuard icon in the menu bar (macOS) or with the notification icons (Windows), you can just click it. If not, run the WireGuard program as usual. Make sure the right tunnel is selected in the left column, and click on Edit.
 
-Now open ```sandiego.conf``` from the email you received in a text editor, select the entire thing and copy it.  Go back to the WireGuard window and paste the copied text into the big text area, after the text that's already there.
+Now open `sandiego.conf` from the email you received in a text editor, select the entire thing and copy it.  Go back to the WireGuard window and paste the copied text into the big text area, after the text that's already there.
 
-You'll have two copies of the ```[Interface]``` line and the ```PrivateKey``` line. Keep the ```[Interface]``` line at the very top, and the ```PrivateKey``` line that has your generated private key on it. Delete the extra ```[Interface]``` line and the ```PrivateKey``` with the dummy value.
+You'll have two copies of the `[Interface]` line and the `PrivateKey` line. Keep the `[Interface]` line at the very top, and the `PrivateKey` line that has your generated private key on it. Delete the extra `[Interface]` line and the `PrivateKey` with the dummy value.
 
 Click Save. You're all set up!
 
@@ -199,9 +202,9 @@ ping eez-bb3.sandiego.openresearch.institute
 ```
 You should get responses something like this:
 ```
-PING eez-bb3.sandiego.openresearch.institute (10.73.1.3): 56 data bytes
-64 bytes from 10.73.1.3: icmp_seq=0 ttl=254 time=128.255 ms
-64 bytes from 10.73.1.3: icmp_seq=1 ttl=254 time=85.934 ms
+PING eez-bb3.sandiego.openresearch.institute (10.73.1.3): 56 data bytes  
+64 bytes from 10.73.1.3: icmp_seq=0 ttl=254 time=128.255 ms  
+64 bytes from 10.73.1.3: icmp_seq=1 ttl=254 time=85.934 ms  
 64 bytes from 10.73.1.3: icmp_seq=2 ttl=254 time=74.540 ms
 ```
 On macOS (or on Windows if you install a version of netcat), you can do the same experiment as suggested in the SSH section above, but on your local machine:
