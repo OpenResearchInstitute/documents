@@ -90,6 +90,8 @@ The disposal orbit does require some tracking. However, it is slow. It also prov
 
 **AI:** Anshul to present his work.
 
+debris_mitigation Slack channel created for discussion, and relevant foundational documents have been shared there. 
+
 
 #### Virginia Tech Industrial Advisory Board Meeting Report
 Open Research Institute attended our first Virginia Tech Industrial Advisory Board Meeting on 20 November 2020. The meeting was attended by over 40 representatives from industrial, academic, amateur, and open source communities. The goal of the Industrial Advisory Board is to improve Virginia Tech's ability to educate students for roles in space exploration, science, technology, regulation, and management. 
