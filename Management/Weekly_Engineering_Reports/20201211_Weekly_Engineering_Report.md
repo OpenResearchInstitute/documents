@@ -66,7 +66,7 @@ The upper stage of the launches we expect to be able to take advantage of delive
 
 While we would like an equatorial disposal orbit, we can handle inclinations.
 
-**AI:** Wally to provide Anshul a paper about some stable orbits available in disposal.
+Wally shared some paper about some stable orbits available in disposal. 
 
 **AI:** Wally to send Anshul an edition of a good book resource on orbital mechanics. 
 
