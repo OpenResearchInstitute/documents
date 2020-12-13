@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #
-# Get a response from the EEZ-BB3 Power Supply
+# Get a screen image from the EEZ-BB3 Power Supply
 # Open Research Institute -- Remote Lab West
 # (instrument on loan from KB5MU)
 #
@@ -10,8 +10,6 @@ import pyvisa as visa
 
 rm = visa.ResourceManager('@py')
 ps = rm.open_resource('TCPIP::eez-bb3::5025::SOCKET')
-ps.write_termination = '\r'
-ps.timeout = 10000
 ps.read_termination = '\r'
 print(ps.query('*IDN?'))
 screen_data = ps.query_binary_values(':DISP:DATA?', datatype='s', container=bytes)
