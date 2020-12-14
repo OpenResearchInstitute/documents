@@ -6,7 +6,7 @@ Progress this week on detailed architecture for the exciter. The short term goal
 
 #### Remote Labs 9 December 2020
 
-Video report from Remote Lab West available here:
+Video report from Remote Lab West available here: https://youtu.be/CzRPDKn4eKo
 
 Video shows unpacking and deployment of the logic analyzer accessory for the mixed-signal oscilloscope. Device under test is an RC2014 and the signal inspected was RS232. Some concern here because we can get single characters and short bursts perfectly, but longer bursts of RS232 are not successfully decoded. Nick and others have given advice and it will be followed up on.
 
