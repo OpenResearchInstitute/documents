@@ -9,7 +9,7 @@ import pyvisa as visa
 
 rm = visa.ResourceManager('@py')
 oscope = rm.open_resource('TCPIP::ds1104.sandiego.openresearch.institute::INSTR')
-print(oscope.query('*IDN?'))
+print(oscope.query('*IDN?').strip())
 oscope.write(':STOP; *WAI')
 screen_data = oscope.query_binary_values(':DISP:DATA? ON,OFF,JPEG', datatype='s', container=bytes)
 with open('os_screen.jpg', 'wb') as f:
