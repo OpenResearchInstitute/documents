@@ -1,12 +1,16 @@
 ## Phase 4 Weekly Report for 18 December 2020
 
-#### Architecture 9 December 2020
+#### Architecture 14 - 18 December 2020
 
-Progress this week on detailed architecture for the exciter. The short term goal is to be able to write base-band frames (BBFRAMES) to the buffer and send them out. BBFRAMES are connected to ethernet on the A53 side. This will achieve our original Phase I goals. Wally Ritchie leading efforts on the modulator and the interfaces so we can integrate the existing FEC code. 
+Current focus is the detailed architecture for the exciter. The short term goal is to be able to write base-band frames (BBFRAMES) to the buffer and send them out. BBFRAMES are connected to ethernet on the A53 side. This will achieve our original Phase I goals. Wally Ritchie leading efforts on the modulator and the interfaces so we can integrate the existing FEC code. 
 
-#### Remote Labs 9 December 2020
+#### Remote Labs 14-18 December 2020
 
+Signal Generator has been integrated into Remote Lab West. Trenz gear arrived for Remote Lab West, but included both sets. Remote Lab East gear was shipped same day, should arrive 16 December 2020. Updates to remote lab authentication and authorization were checked in by Paul KB5MU. 
 
+Adafruit Feather Huzzah + Charlieplexed LED Matrix Featherwing was programmed to provide visual representation of remote lab sessions.
+
+**Action Item: put software/hardware source link here**
 
 #### Virginia Tech Industrial Advisory Board Meeting Report
 Open Research Institute attended our first Virginia Tech Industrial Advisory Board Meeting on 20 November 2020. The meeting was attended by over 40 representatives from industrial, academic, amateur, and open source communities. The goal of the Industrial Advisory Board is to improve Virginia Tech's ability to educate students for roles in space exploration, science, technology, regulation, and management. 
@@ -17,7 +21,7 @@ Open Research Institute attended our first Virginia Tech Industrial Advisory Boa
 
 Action Item closed: Thermal Desktop license successfully installed on a FlexLM server donated to the cause by the power of KN6NK. 
 
-Current status: having trouble getting the license from the server to local installation - progress on 14 december 2020!
+Current status: having trouble getting the license from the server to local installation - progress on 14 december 2020. 
 
 **New Action Item:** Tutorials need to be written, for using this function
 
@@ -46,6 +50,7 @@ We will participate in HamCation 2021. This is a virtual event. We have 45 minut
 
 Topics for presentation and short descriptions need to be drawn up. We could do a competition, quiz bowl, live demo, technical presentation, contest, or anything of the sort. 
 
-#### Regulatory Presentation
-The report is called "Minimum Viable Product" and the Debris Mitigation activities fold into this presentation. 
+Zoom Webinar will be used by HamCation for this Special Edition Event.  
 
+#### Regulatory Presentation
+Draft of Minimum Viable Product sent to counsel. 
