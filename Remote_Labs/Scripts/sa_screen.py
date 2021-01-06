@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Get a screen image from the RSA5065N Spectrum Analyzer
 # Open Research Institute -- Remote Lab West
