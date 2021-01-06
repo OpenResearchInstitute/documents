@@ -9,7 +9,7 @@
 import pyvisa as visa
 
 rm = visa.ResourceManager('@py')
-ps = rm.open_resource('TCPIP::eez-bb3::5025::SOCKET')
+ps = rm.open_resource('TCPIP::eez-bb3.sandiego.openresearch.institute::5025::SOCKET')
 ps.read_termination = '\r'
 print(ps.query('*IDN?'))
 screen_data = ps.query_binary_values(':DISP:DATA?', datatype='s', container=bytes)

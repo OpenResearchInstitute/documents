@@ -8,7 +8,7 @@
 import pyvisa as visa
 
 rm = visa.ResourceManager('@py')
-sg = rm.open_resource('TCPIP::dsg821a::INSTR')
+sg = rm.open_resource('TCPIP::dsg821a.sandiego.openresearch.institute::INSTR')
 print(sg.query('*IDN?').strip())
 
 screen_data = sg.query_binary_values(':PRIV:SNAP? BMP',datatype='B',container=bytearray,delay=0.2)
