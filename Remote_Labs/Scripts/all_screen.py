@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Get a screen image from every instrument
 # Open Research Institute -- Remote Lab West
@@ -10,11 +10,11 @@
 #
 import os
 
-os.system("bb3_screen.py")
-os.system("os_screen.py")
-os.system("ps_screen.py")
-os.system("sa_screen.py")
-os.system("sg_screen.py")
+os.system("./bb3_screen.py")
+os.system("./os_screen.py")
+os.system("./ps_screen.py")
+os.system("./sa_screen.py")
+os.system("./sg_screen.py")
 
 # make PNGs to shrink large BMP files
 os.system("convert -quiet ps_screen.bmp ps_screen.png")

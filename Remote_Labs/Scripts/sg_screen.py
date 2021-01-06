@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Get a screen image from the DSG821A Signal Generator
 # Open Research Institute -- Remote Lab West
