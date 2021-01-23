@@ -40,8 +40,15 @@ Paste in the public key(s) for this user from their email. Each is one long line
 ```
 chmod 600 authorized_keys
 exit
+```
+
+Now you're back in your own shell. One more thing to take care of: grant the user access to the video capture device(s).
+
+```
+sudo usermod -a -G video callsign
 exit
 ```
+
 Now you should be back at your local computer.
 
 ### (Can't) Test SSH Access
