@@ -1,24 +1,58 @@
 # Setting Up for Remote Access to ORI Labs
 
-DRAFT 2020-11-19 kb5mu
+DRAFT 2021-02-02 kb5mu
 
-As we start to set up the ORI remote lab in San Diego, we currently have a Raspberry Pi running Raspbian and other pieces of equipment on the private LAN for the lab bench. There will eventually be many more pieces of equipment on the bench, and a much more powerful computer running multiple Linux virtual machines (VMs) in addition to the Raspberry Pi.
+The ORI remote lab in San Diego consists of two computers and an array of test
+equipment, all sharing an isolated local area network (LAN).
 
-Presently there are two ways to access the lab equipment:
+A Raspberry Pi 4 running Raspbian, with an extra Ethernet port provided by a USB
+dongle, is responsible for all connections to and from the Internet. It, in turn,
+is isolated from other network hosts in the building by means of VLAN routing in
+an Ethernet switch. The Pi's local host name is `ori-west` and it also has the
+domain name `sandiego.openresearch.institute`. 
 
-1. Use SSH to log in to the Raspberry Pi, and access the equipment on the LAN exclusively from the Raspberry Pi. This is similar to the intended primary access method. When the lab is fully set up, you will SSH through the Raspberry Pi into a VM running on the lab PC, and access the equipment on the LAN from the VM.
+A decently powerful Windows machine named `Aperture` is connected only to the LAN.
+It has an installation of Xilinx Vivado, and is enabled for Remote Desktop access.
+There are plans to replace this machine with one with more storage and bandwidth,
+matched to our predicted needs for the P4XT project, and also matched to the
+machine in use at ORI-East. The intention is that the Windows machine will host
+a number of Linux virtual machines, and that tests will be run primarily from
+inside these VMs.
 
-2. Use Wireguard to establish a VPN connection to the private LAN, and operate the equipment on the LAN directly from your own computer. This may be handy in certain circumstances as an alternative to running everything through SSH.
+Equipment on the LAN is not directly accessible from the Internet, but each item
+has a domain name that resolves to its local address on the LAN. For example, the
+Windows machine Aperture is `aperture.sandiego.openresearch.institute`, and this
+resolves to the non-routable IPv4 address 10.73.1.73. All the instruments on the LAN
+have domain names that follow the same pattern. Their host names are generally the
+model number of the particular instrument.
 
-You can use either or both methods. In both cases there will be some things you need to set up on your own computer, and also some things the lab managers will have to set up on your behalf to authorize access.
+Presently there are two ways to access the LAN:
 
-You can set up tunnels with SSH, but you'll find that you cannot operate most of the equipment directly through that kind of static tunnel. The VXI-11 protocol underlying the VISA instrument control protocol requires access to arbitrary TCP ports. You can get that access by being on the LAN yourself (logged in over SSH to the Raspberry Pi or to a VM on the lab computer), or by having the Wireguard VPN active, but not with SSH tunnels.
+1. Use SSH to log in securely to the Raspberry Pi. While running on the Pi, you have
+direct access to everything on the LAN. You can also use SSH to set up tunnels from
+your local machine to specific addresses on the LAN. In particular, you can run SSH
+again from the Raspberry Pi to log into Aperture and operate Windows and/or the
+Linux VMs from their command lines.
+
+2. Use Wireguard to establish a VPN connection to the private LAN, and operate the
+equipment on the LAN directly from your own computer. The Raspberry Pi serves as
+endpoint for Wireguard, but you might not log into the Raspberry Pi or run anything
+on it. You can choose to operate test equipment directly from programs running on
+your own computer, which may be handy in certain circumstances. You can also use
+the VPN to connect to Aperture using Microsoft Remote Desktop, which would allow
+you to operate Aperture through the familiar Windows GUI instead of (or in addition
+to) its command line. Microsoft has Remote Desktop clients for Windows, macOS, iOS,
+and Android. There are multiple third-party open source clients for Linux.
+
+You can mix and match any of these methods. In each case there will be some things you need to set up on your own computer, and also some things the lab managers will have to set up on your behalf to authorize access.
+
+You can set up tunnels with SSH, but you'll find that you cannot operate most of the equipment directly through that kind of static tunnel. The VXI-11 protocol underlying the VISA instrument control protocol requires access to arbitrary TCP ports. You can get that access by being on the LAN yourself (logged in over SSH to the Raspberry Pi or to a VM on the lab computer), or by having the Wireguard VPN active, but not with SSH tunnels alone.
 
 ## Description of the Network
 
-The Raspberry Pi and all the network-capable test equipment in the lab are connected to an Ethernet switch (currently a TP-Link TL-SG108PE, to be upgraded to a DLink DGS-1250-28X) and assigned static IP addresses in the 10.73.1.x block. These addresses are not directly routable on the Internet. All access to the private LAN from outside the lab is mediated by the Raspberry Pi, which is known by the domain name `sandiego.openresearch.institute` (which goes through a dynamic IP provider).
+The Raspberry Pi, the Windows PC Aperture, and all the network-capable test equipment in the lab are connected to an Ethernet switch (currently a TP-Link TL-SG108PE, to be upgraded to a DLink DGS-1250-28X) and assigned static IP addresses in the 10.73.1.x block. These addresses are not directly routable on the Internet. All access to the private LAN from outside the lab is mediated by the Raspberry Pi, which is known by the domain name `sandiego.openresearch.institute` (which goes through a dynamic IP provider).
 
-Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like `thing.sandiego.openresearch.institute`, where `thing` is a memorable name for the equipment, usually its model number. If you're running on the Raspberry Pi, you can abbreviate these names to just `thing` (because they're listed in _/etc/hosts_). VMs on the lab PC can be configured to support the same shortcut.
+Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like `thing.sandiego.openresearch.institute`, where `thing` is a memorable name for the equipment, usually its model number. If you're running on the Raspberry Pi or on Aperture, you can abbreviate these names to just `thing` (because they're listed in _/etc/hosts_ or _C:\Windows\System32\drivers\etc_ respectively). VMs on the lab PC will support the same shortcut.
 
 The Ethernet switch is capable of being set up to monitor packets flowing through it by copying those packets to another port for capture. Check with the lab managers [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) if you need this capability. The DLink switch, when it's in place, will also be capable of creating virtual LANs within the lab.
 
@@ -63,7 +97,7 @@ ssh ori-west
 ```
 You can use whatever name you find memorable in place of `ori-west` above.
 
-You'll end up in a standard login shell. What to do next is mostly beyond the scope of this document. As a simple _"hello, world"_ demo, try typing
+You'll end up in a standard login shell (bash by default). What to do next is mostly beyond the scope of this document. As a simple _"hello, world"_ demo, try typing
 ```
 nc eez-bb3.sandiego.openresearch.institute 5025
 ```
@@ -77,7 +111,27 @@ Envox,EEZ BB3 (STM32),002C002C3338510738323535,1.0
 ```
 Hit Control-C to exit.
 
-We will need to work out a way to ensure that lab users don't interfere with each other. For now, that is also beyond the scope of this document.
+We will need to work out a way to ensure that lab users don't interfere with each other. For now, that is also beyond the scope of this document. Coordinate in the `remote_labs` channel on Slack.
+
+You're automatically set up to SSH from the Raspberry Pi to Aperture using a
+unique key pair (with the default name, `id_rsa`). Test your SSH access to Aperture
+by typing:
+```
+ssh aperture
+```
+You should find yourself at a Windows command prompt. If you prefer the latest
+PowerShell, you can type
+```
+pwsh
+```
+or if you like the old PowerShell,
+```
+powershell
+```
+To back out,
+```
+exit
+```
 
 The procedure for gaining access to VMs on the main PC are expected to be similar, but remain TBD for now.
 
@@ -106,7 +160,7 @@ We will send you a configuration file, `sandiego.conf`. It will look something l
 ```
 [Interface]  
 Address = 10.73.0.N/24  
-PrivateKey = put_your_private_key_here  
+PrivateKey = put-your-private-key-here  
 
 [Peer]  
 PublicKey = G9JLSEV6hu+RW1mMFSWB6O9iIn27HvoiyDic+kDzhQA=  
@@ -115,7 +169,7 @@ AllowedIPs = 10.73.0.1/32, 10.73.1.0/24
 PersistentKeepalive = 25  
 ```
 
-You will need to change two things in this file. First, we will assign you a unique IP address in the VPN block of 10.73.0.x, so you'll need to change the **10.73.0.N** on the Address line to your own unique IP address. Second, you'll need to replace **put_your_private_key_here** with the private key you generated above.
+You will need to change two things in this file. First, we will assign you a unique IP address in the VPN block of 10.73.0.x, so you'll need to change the **10.73.0.N** on the Address line to your own unique IP address. Second, you'll need to replace **put-your-private-key-here** with the private key you generated above.
 
 Place the modified config file in the proper directory. On Linux:
 ```
@@ -133,7 +187,7 @@ On Windows:
 copy sandiego.conf C:\Windows\System32\config\systemprofile\AppData\Local\WireGuard\Configurations\
 ```
 
-You'll want to be careful with sandiego.conf and with your private_key file. You don't want to lose the private key, and you also don't want anybody else to get a copy of it.
+You'll want to be careful with sandiego.conf and with your private_key file. You don't want to lose the private key, and you also don't want anybody else to get a copy of it. If your private key should leak out beyond your control, please notify the lab managers so we can disable it and set you up with a fresh one.
 
 Then when you want to activate the VPN to access the lab network, you'll say
 ```
