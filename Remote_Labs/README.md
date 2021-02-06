@@ -12,3 +12,4 @@ Open Research Institute runs two labs for remote access.
 ## Lab Notes
 
 * [Getting Screenshots](Getting%20Screenshots.md) (Python scripting tutorial)
+* [Spectrum Analyzer Video](Video-SA.md) (using X11 forwarding)

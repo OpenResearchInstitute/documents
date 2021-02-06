@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Get a screen image from the DSG821A Signal Generator
 # Open Research Institute -- Remote Lab West
@@ -8,7 +8,7 @@
 import pyvisa as visa
 
 rm = visa.ResourceManager('@py')
-sg = rm.open_resource('TCPIP::dsg821a::INSTR')
+sg = rm.open_resource('TCPIP::dsg821a.sandiego.openresearch.institute::INSTR')
 print(sg.query('*IDN?').strip())
 
 screen_data = sg.query_binary_values(':PRIV:SNAP? BMP',datatype='B',container=bytearray,delay=0.2)
