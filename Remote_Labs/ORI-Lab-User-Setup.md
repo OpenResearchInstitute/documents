@@ -1,6 +1,6 @@
 # Setting Up for Remote Access to ORI Labs
 
-DRAFT 2021-02-02 kb5mu
+DRAFT 2021-02-12 kb5mu
 
 The ORI remote lab in San Diego consists of two computers and an array of test
 equipment, all sharing an isolated local area network (LAN).
@@ -275,6 +275,61 @@ If you need to use both labs, you can set up a Wireguard configuration for each,
 If you need equipment in one lab to talk directly to equipment in the other, let us know and we can enable a tunnel to do that.
 
 If you have network-capable test equipment in your own lab and wish to integrate it with the equipment in the ORI lab(s), that's certainly possible. We can help you with Wireguard configurations to get the job done.
+
+## Windows Remote Desktop Access
+
+If you prefer to use the Windows GUI, you can do that using a Windows
+Remote Desktop client through either SSH or Wireguard. Only one user at a time
+can be connected this way.
+
+On Windows or the Mac, you probably want to use Microsoft's standard
+Remote Desktop Client. On Linux, we've had success with
+[Vinagre](https://wiki.gnome.org/Apps/Vinagre), but any Remote Desktop
+client ought to work.
+
+You'll be prompted to enter your username and password to log into the
+remote desktop. This is the username you specified to us (perhaps your
+callsign) and the password we sent back to you.
+
+### Remote Desktop via SSH
+
+From the command line of your local computer, you can say
+```
+ssh -p 7322 -i ~/.ssh/id_rsa_ori_west -L 3389:aperture:3389 w1abc@sandiego.openresearch.institute
+```
+where you'll replace `w1abc` with your own callsign or username. This sets
+up a tunnel for port 3389, which is the standard port for Remote Desktop.
+You'll end up with a terminal session to the Raspberry Pi, which needs to
+stay open while you're using the remote desktop.
+
+Better, add a second stanza like this one to your `~/.ssh/config` file:
+```
+Host aperture-rdp
+    HostName sandiego.openresearch.institute  
+    User w1abc  
+    IdentityFile ~/.ssh/id_rsa_ori_west  
+    Port 7322
+    LocalForward 3389 aperture:3389
+```
+
+With that stanza in the config file, your command line is much easier:
+```
+ssh aperture-rdp
+```
+You can use whatever name you find memorable in place of `aperture-rdp` above.
+
+Then configure your Remote Desktop client to connect to `localhost` or
+`127.0.0.1`. Bring up the SSH session first, then start the remote desktop
+session. After you're done with the remote desktop, disconnect cleanly from
+within the remote desktop client, then you may exit the SSH session.
+
+### Remote Desktop via Wireguard
+
+Configure your Remote Desktop client to connect to
+`aperture.sandiego.openresearch.institute`. Bring up the Wireguard
+connection first, then start the remote desktop session. After you're
+done with the remote desktop, disconnect cleanly from within the remote
+desktop client, then you may deactivate the Wireguard connection.
 
 ## Support
 
