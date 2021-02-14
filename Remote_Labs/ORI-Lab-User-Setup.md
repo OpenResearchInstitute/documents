@@ -280,7 +280,13 @@ If you have network-capable test equipment in your own lab and wish to integrate
 
 If you prefer to use the Windows GUI, you can do that using a Windows
 Remote Desktop client through either SSH or Wireguard. Only one user at a time
-can be connected this way.
+can be connected this way. If the Remote Desktop client warns you that another
+user is already connected, you can find out who by opening an SSH command
+line session to Aperture and typing
+```
+query user
+```
+You can then coordinate with that user on the remote_labs Slack channel.
 
 On Windows or the Mac, you probably want to use Microsoft's standard
 Remote Desktop Client. On Linux, we've had success with
