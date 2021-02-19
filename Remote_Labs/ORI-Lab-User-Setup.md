@@ -324,10 +324,28 @@ ssh aperture-rdp
 ```
 You can use whatever name you find memorable in place of `aperture-rdp` above.
 
-Then configure your Remote Desktop client to connect to `localhost` or
-`127.0.0.1`. Bring up the SSH session first, then start the remote desktop
+Then configure your Remote Desktop client to connect to `localhost:3389` or
+`127.0.0.1:3389`. Bring up the SSH session first, then start the remote desktop
 session. After you're done with the remote desktop, disconnect cleanly from
 within the remote desktop client, then you may exit the SSH session.
+
+If you get an error message that you "already have a console session in
+progress", try using a different local port. That is,
+```
+ssh -p 7322 -i ~/.ssh/id_rsa_ori_west -L 3390:aperture:3389 w1abc@sandiego.openresearch.institute
+```
+from the command line, or a stanza like this:
+```
+Host aperture-rdp
+    HostName sandiego.openresearch.institute  
+    User w1abc  
+    IdentityFile ~/.ssh/id_rsa_ori_west  
+    Port 7322
+    LocalForward 3390 aperture:3389
+```
+and then connect to `localhost:3390` or `127.0.0.1:3390`. This solved the
+problem in two known cases where the local computer was running Windows 10
+and the standard Remote Desktop Connection that comes built-in.
 
 ### Remote Desktop via Wireguard
 
