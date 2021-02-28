@@ -133,6 +133,12 @@ if there is extra room for future expansion in the message formats (and there be
 
 ## Chapter 6 Transmitters
 
+### Intermediate Frequencies
+
+A 4745 LO for the 5660 Tx/Rx with 915 MHz IF nominal band center.
+
+For 10.475 GHz, a 1270 MHz center Tx/Rx IF to stay away from the 915 MHz of the other band.
+
 ### Frequencies
 
 | Mission | Uplink Frequency Band | Bandwidth | Access Type |
