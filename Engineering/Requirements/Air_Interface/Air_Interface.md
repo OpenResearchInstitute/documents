@@ -236,7 +236,7 @@ The next header field contains the following information. The modulation, coding
 | --- | --- | --- | --- |
 | Phase 4B | 10450-10460 MHz | 10MHz | TDM |
 | Phase 3E | 10450-10460 MHz | 10MHz | TBD |
-| Groundsat | 10440-10450 MHz | up to 10MHz | TDM |
+| Groundsat | 10475 center MHz | up to 10MHz | TDM |
 
 channel spacing and designation, demodulation characteristics, voice signal stuff,
 
