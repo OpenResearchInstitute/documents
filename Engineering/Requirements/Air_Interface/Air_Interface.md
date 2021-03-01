@@ -164,7 +164,6 @@ For 10.475 GHz, a 1270 MHz center Tx/Rx IF to stay away from the 915 MHz of the 
 | Mission | Uplink Frequency Band | Bandwidth | Access Type |
 | --- | --- | --- | --- |
 | Phase 4B | 5655 – 5665 MHz | 10MHz | FDMA 100kHz channelized |
-| Phase 3E | 5655 – 5665 MHz | 10MHz | TBD |
 | Groundsat | 5675 – 5685 MHz | 10MHz | FDMA 100kHz channelized |
 
 channel spacing and designation
