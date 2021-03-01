@@ -133,6 +133,8 @@ if there is extra room for future expansion in the message formats (and there be
 
 ![Top Level System Block Diagram](Graphics_Files/ARExV6-Top-Level-Block-Diagram.png)
 
+![Interface Diagram](Graphics_Files/ARExV6-Interfaces.png)
+
 # Part 2 – Requirements for Operation
 
 ## Chapter 6 Transmitters
