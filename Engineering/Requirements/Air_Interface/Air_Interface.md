@@ -131,7 +131,7 @@ if there is extra room for future expansion in the message formats (and there be
 
 ## Chapter 6 System Block Diagrams
 
-(Graphics_Files/ARExV6-Top-Level-Block-Diagram.png)
+![Top Level System Block Diagram](Graphics_Files/ARExV6-Top-Level-Block-Diagram.png)
 
 # Part 2 – Requirements for Operation
 
