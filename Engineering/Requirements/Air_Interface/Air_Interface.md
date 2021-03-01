@@ -129,6 +129,10 @@ what parts of the system have a lot of margin and what do not have a lot of marg
 
 if there is extra room for future expansion in the message formats (and there better be) then extra bits are defined and marked as &quot;0&quot;.
 
+## Chapter 6 System Block Diagrams
+
+(Graphics_Files/ARExV6-Top-Level-Block-Diagram.png)
+
 # Part 2 – Requirements for Operation
 
 ## Chapter 6 Transmitters
