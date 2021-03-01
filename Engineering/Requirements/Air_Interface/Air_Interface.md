@@ -121,6 +121,8 @@ The benefit of the added complexity is a higher performance system that provides
 
 define system time, how it is derived, and how it is used in the system.
 
+Oscillators are coordinated by the use of a 10 MHz GPS disciplined oscillator.
+
 ## Chapter 4 Tolerances
 
 what parts of the system have a lot of margin and what do not have a lot of margin. In SDR-based systems, some parts of the system are high performance so that other parts don&#39;t have to be. This chapter defines what those are and how much slop we have. The use of the Rincon SDR for the space segment means much of this is already known, but the other parts of the system that are affected by the Rincon SDR must be well-understood in order to fully utilize the donations we have been offered.
