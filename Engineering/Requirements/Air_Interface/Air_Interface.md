@@ -133,7 +133,11 @@ if there is extra room for future expansion in the message formats (and there be
 
 ![Top Level System Block Diagram](Graphics_Files/ARExV6-Top-Level-Block-Diagram.png)
 
+Top Level System Block Diagram
+
 ![Interface Diagram](Graphics_Files/ARExV6-Interfaces.png)
+
+Interface Diagram
 
 # Part 2 – Requirements for Operation
 
