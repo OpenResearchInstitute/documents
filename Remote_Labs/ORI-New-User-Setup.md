@@ -4,20 +4,20 @@
 
 They should provide a public key and a username, which might be their callsign. There might be multiple keys, but they will all apply to a single username unless the user makes a special request. If this isn't clear from the email, reply and refer them to ```ORI-Lab-User-Setup.md```.
 
-### Log in
+### Log in to the Raspberry Pi as pi
 
 ```
-ssh pi@ori-west.local
+ssh ori-west.local
+su pi
 ```
 from a local host. Or, if out and about,
 ```
-ssh -p 7322 pi@sandiego.openresearch.institute
+ssh -p 7322 sandiego.openresearch.institute
+su pi
 ```
 Note that the host you log in from will need to have certificate credentials for SSH; password logins are disabled. You can use your own username (if you can ```sudo```) instead of pi. You may have to add ```-i path/to/credentials``` if the defaults aren't right.
 
-### Create a new user
-Once per user,
-
+### Create a new user on the Raspberry Pi
 ```
 sudo adduser callsign
 ```
@@ -39,21 +39,165 @@ Paste in the public key(s) for this user from their email. Each is one long line
 
 ```
 chmod 600 authorized_keys
-exit
 ```
 
-Now you're back in your own shell. One more thing to take care of: grant the user access to the video capture device(s).
+### Set up SSH for outgoing connections
+We will make outgoing connections to Aperture, so we need a key pair for the
+new account on the Raspberry Pi.
+```
+ssh-keygen
+cat ~/.ssh/id_rsa.pub
+exit
+```
+Now you're back in pi's shell on the Raspberry Pi. Later, we will copy and paste
+the public key you looked at with `cat`, so keep this terminal window around.
+
+### Grant access to video capture
+
+One more thing to take care of: grant the user access to the video capture device(s).
 
 ```
 sudo usermod -a -G video callsign
 exit
 ```
+Now you're back in your own shell on the Raspberry Pi.
 
-Now you should be back at your local computer.
+### Log in to Aperture
+We need to be the Administrator for this.
+```
+ssh Glados@aperture
+```
 
-### (Can't) Test SSH Access
+### Create user account on Aperture
+
+Make up a temporary password for the user.
+
+```
+net user callsign tmppassword /add /fullname:"First Last CALL"
+```
+
+### Complete User Creation
+
+The user account created above doesn't fully exist until the user
+has logged in to Windows. We can simulate that by using PsExec (from
+the PSTools package) to run a command as the new user.
+
+```
+C:\PSTools\PsExec64.exe -u callsign -p tmppassword cmd /c
+```
+
+### Authorize the Account for Remote Desktop
+```
+net localgroup "Remote Desktop Users" callsign /add
+```
+
+### Install the public key
+
+```
+mkdir ..\callsign\.ssh
+copy con ..\callsign\.ssh\authorized_keys
+```
+Go back to where you displayed `id_rsa.pub` and copy the output (one long line).
+Paste the public key here, and end with ^Z and return.
+
+Now we need to adjust permissions on `authorized_keys`. SSH requires that the file
+permissions be explicit and not inherited, and that there are exactly two: one for
+SYSTEM and one for the user. Any other permissions must be removed.
+
+Start by converting all the inherited permissions to explicit ones:
+```
+icacls c:\users\callsign\.ssh\authorized_keys /inheritance:d
+```
+
+Next, list the current permissions:
+```
+icacls c:\users\callsign\.ssh\authorized_keys
+```
+
+The output will look something like this:
+```
+c:\users\callsign\.ssh\authorized_keys NT AUTHORITY\SYSTEM:(F)
+                                       BUILTIN\Administrators:(F)
+                                       APERTURE\callsign:(F)
+                                       APERTURE\kb5mu:(F)
+
+Successfully processed 1 files; Failed processing 0 files
+```
+If you see `(I)` in any of the listings, the `inheritance` switch didn't work.
+
+We want to modify this to look like so:
+```
+c:\users\callsign\.ssh\authorized_keys NT AUTHORITY\SYSTEM:(F)
+                                       APERTURE\callsign:(F)
+
+Successfully processed 1 files; Failed processing 0 files
+```
+by removing the extra entries. In this case:
+```
+icacls c:\users\callsign\.ssh\authorized_keys /remove:g Administrators
+icacls c:\users\callsign\.ssh\authorized_keys /remove:g kb5mu
+```
+
+If you find that the user's own permission is missing, add it:
+```
+icacls c:\users\callsign\.ssh\authorized_keys /grant callsign:F
+```
+
+Make sure the command that removes YOUR permission is last. You won't be able
+to access the file's permissions after you remove your own permission, unless
+you're the Administrator.
+
+```
+exit
+```
+
+### Test SSH Access from Raspberry Pi to Aperture
+
+From your session on the Raspberry Pi, switch to the new user account
+```
+su pi
+```
+When prompted, enter pi's password.
+```
+sudo su callsign
+```
+If prompted, enter pi's password again.
+
+Now attempt an SSH session to Aperture:
+```
+ssh aperture
+```
+Say `yes` to accept the host fingerprint, if prompted. Then, you should
+see a Windows command prompt.
+```
+exit
+exit
+exit
+```
+
+### (Can't) Test SSH Access from Outside
 
 Unfortunately there's no good way to test this, since you don't have the private key. Password login by SSH is disabled, so you can't even test that.
+
+### Test Remote Desktop Access
+#### Wireguard procedure
+Enable the Wireguard VPN on your local machine.
+
+Run a Microsoft Remote Desktop client to host `aperture.sandiego.openresearch.institute` with user name callsign and password tmppassword. Disregard the security warning.
+
+#### SSH Tunnel procedure
+```
+ssh -L 3389:localhost:3389 sandiego.openresearch.institute
+```
+
+Run a Microsoft Remote Desktop client to host `localhost` with user name callsign
+and password tmppassword. Disregard the security warning.
+
+### Finish Windows Setup
+
+Windows will ask for permission to do a bunch of spying; turn off all the options and
+save. Windows will ask to set up the Edge browser; go ahead and let it. Then exit the
+browser window and log off.
 
 ### Reply to User
 

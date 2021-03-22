@@ -121,6 +121,8 @@ The benefit of the added complexity is a higher performance system that provides
 
 define system time, how it is derived, and how it is used in the system.
 
+Oscillators are coordinated by the use of a 10 MHz GPS disciplined oscillator.
+
 ## Chapter 4 Tolerances
 
 what parts of the system have a lot of margin and what do not have a lot of margin. In SDR-based systems, some parts of the system are high performance so that other parts don&#39;t have to be. This chapter defines what those are and how much slop we have. The use of the Rincon SDR for the space segment means much of this is already known, but the other parts of the system that are affected by the Rincon SDR must be well-understood in order to fully utilize the donations we have been offered.
@@ -129,16 +131,39 @@ what parts of the system have a lot of margin and what do not have a lot of marg
 
 if there is extra room for future expansion in the message formats (and there better be) then extra bits are defined and marked as &quot;0&quot;.
 
+## Chapter 6 System Block Diagrams
+
+![Top Level System Block Diagram](Graphics_Files/ARExV6-Top-Level-Block-Diagram.png)
+
+Top Level System Block Diagram
+
+&nbsp;  
+&nbsp;
+&nbsp;
+
+![Interface Diagram](Graphics_Files/ARExV6-Interfaces.png)
+
+Interface Diagram
+
+&nbsp;
+&nbsp;
+&nbsp;
+
 # Part 2 – Requirements for Operation
 
 ## Chapter 6 Transmitters
+
+### Intermediate Frequencies
+
+A 4745 LO for the 5660 Tx/Rx with 915 MHz IF nominal band center.
+
+For 10.475 GHz, a 1270 MHz center Tx/Rx IF to stay away from the 915 MHz of the other band.
 
 ### Frequencies
 
 | Mission | Uplink Frequency Band | Bandwidth | Access Type |
 | --- | --- | --- | --- |
 | Phase 4B | 5655 – 5665 MHz | 10MHz | FDMA 100kHz channelized |
-| Phase 3E | 5655 – 5665 MHz | 10MHz | TBD |
 | Groundsat | 5675 – 5685 MHz | 10MHz | FDMA 100kHz channelized |
 
 channel spacing and designation
@@ -230,7 +255,7 @@ The next header field contains the following information. The modulation, coding
 | --- | --- | --- | --- |
 | Phase 4B | 10450-10460 MHz | 10MHz | TDM |
 | Phase 3E | 10450-10460 MHz | 10MHz | TBD |
-| Groundsat | 10440-10450 MHz | up to 10MHz | TDM |
+| Groundsat | 10475 center MHz | up to 10MHz | TDM |
 
 channel spacing and designation, demodulation characteristics, voice signal stuff,
 
