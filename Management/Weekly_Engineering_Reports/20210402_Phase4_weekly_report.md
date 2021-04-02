@@ -141,9 +141,15 @@ All of these items are “To Do” with small amounts of progress or preliminary
 
 #### HTML5 Draft of radio user interface.
 
+Based on prototype from Douglas Quagliana. 
+
 #### Uplink amplifier for 5 GHz. 
 
+Skywave parts appear to be the winner here. Prototype has yet to emerge, though. 
+
 #### Dual band feed electronics creation. Take LNB and our 5/10 feed design, combine, and test. 
+
+No progress here except talking.
 
 ### Dual Band Feed Characterization
 
@@ -160,6 +166,10 @@ Initial results in GNU Radio achieved. Next, demodulate/decode/design 4-ary MSK 
 Sprint deadline date adjusted. Looking for more help here. ORI has a second development board available. 
 
 Action Item: It might be possible to remote this. 
+
+### Test Plan from Kerry Banke N6IZW
+
+Kerry Banke wrote a test plan for ground station development that Remote Lab West is following. 
 
 ## FPGA Next Steps
 
