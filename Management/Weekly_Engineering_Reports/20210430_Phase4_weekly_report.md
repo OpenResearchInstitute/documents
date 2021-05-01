@@ -186,4 +186,4 @@ https://gitlab.com/scrobotics/lsf-opensatcom-hw
 "We're in the "drafting slides" part of the process. The paper is complete but the review is not. The regulatory meeting will happen in the very near future."
 
 
-Additions, corrections, updates to ori at openresearch dot institute. 
+Additions, corrections, updates to ori@openresearch.institute 
