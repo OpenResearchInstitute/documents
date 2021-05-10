@@ -1,0 +1,19 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Roman;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::1><$Scr_Ps::0>
+\f1\b\fs36 Summary of DVB-S2/X Downlink Protocol\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::1><!$Scr_Ps::0>
+\f1\fs26 \
+DVB-S2 is the most popular protocol for commercial satellite television broadcast. The forward error correction (FEC) used is nearly ideal, approaching physical limits. \
+The protocol has a large number of code rates and modulation schemes. Why so many? The protocol was designed to maximize the number of bits transmitted across a wide variety of channel conditions. For an introduction to the basics of coding and modulation and a walk-through of design decisions for an amateur DVB-S2/X downlink, please read Adaptive Coding and Modulation for Phase 4 Ground. It\'92s in Appendix A.\
+The general approach in DVB-S2/X is to select a symbol rate that corresponds to the available bandwidth, minus a roll-off factor. That rate is fixed for the life of the system. Fixing this value controls the costs of radio frequency hardware and reduces complexity. As different codes and modulations are used, the data throughput goes up or down. Heavier coding, to counteract noise, means that more bits per fixed-length frame are used for redundancy than are used for the data. Simpler modulations transmit fewer bits per symbol than the more complex constellations. Since the symbol rate is fixed, a more complex constellation can transmit more bits per symbol, but requires higher signal to noise ratio.  \
+There are three methods for adjusting to channel conditions to maximize data throughput. First, there is constant coding and modulation (CCM). In general, a designer or operator selects the code and modulation for worst case conditions and leaves them there. This is simple and straightforward, but costs data throughput whenever signal to noise conditions improve above the worst case and limits design re-use. Second, there is variable coding and modulation, (VCM) where the decisions to change modulation and coding are an input to the system. They may be from a sensor or they may be from an operator or control station. Finally, there is adaptive coding and modulation (ACM), which automatically adjusts the code rates and modulation schemes to extract maximum bandwidth given channel conditions. The decision about which coding and which modulation to use can be made as fast as per frame in ACM. \
+The transport stream, or container format, in DVB-S2/X is MPEG. There are a variety of specifications within the MPEG standard. MPEG defines the digital codes used to represent video and associated audio for digital storage and streaming. The default transport stream of MPEG is replaced by Generic Stream Encapsulation (GSE) on AREx in order to reduce overhead, allow for maximum flexibility of data types, and to enable a wide variety of experiments and applications. \
+DVB-S2, DVB-S2X, and GSE are open standards from the DVB organization that require no intellectual property agreements to use. \
+}

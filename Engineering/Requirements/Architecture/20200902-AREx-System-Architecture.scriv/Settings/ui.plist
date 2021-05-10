@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CompileFolder</key>
+	<string>/Users/w5nyv/Documents</string>
+	<key>NotesScaleFactor</key>
+	<real>1</real>
+	<key>ToCIndent</key>
+	<real>36</real>
+	<key>ToCRightMargin</key>
+	<real>468.00000001479998</real>
+	<key>ToCUsePageWidth</key>
+	<true/>
+	<key>binderSplitFrames</key>
+	<array>
+		<string>{{0, 0}, {175, 1201}}</string>
+		<string>{{176, 0}, {2071, 1201}}</string>
+	</array>
+	<key>bookmarksSelectionInfo</key>
+	<dict>
+		<key>00F95719-5E8E-425F-9B3D-9C297A581D73</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>0B7902C3-18C9-44E4-849C-4E5716F68386</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>3919A205-3069-42BD-B2F0-F36EC937B543</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>4397AB65-96C0-4A57-AF04-A583B19A7884</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>46FD0A38-FAC0-4514-9D33-66E7B220DBAF</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>6C7A99CD-6D64-4677-A221-673430B17893</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>74FF0870-F5E6-44CE-990D-E5E6ADC437B6</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>785E66C0-F6F1-4A6C-B10E-9E69BB3E2DB7</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>8050F2BB-521A-417E-A78B-B5EC2B8A36BA</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>95BC13BA-C14B-46BD-A7F3-BF885B51FB89</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>C358D048-C5CF-4B54-99A5-6CDCF6A60761</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>F211693F-72B4-46A4-B8D1-1B739C965929</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>F7F78170-E580-4CB5-A2B4-D95E72B24F33</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+	</dict>
+	<key>collectionsRepresentedBinderDocumentsInfo</key>
+	<dict>
+		<key>MainID</key>
+		<string></string>
+		<key>SupportingID</key>
+		<string></string>
+	</dict>
+	<key>editorSplitFrames</key>
+	<array>
+		<string>{{1420, 0}, {315, 1171}}</string>
+	</array>
+	<key>fullScreenTextEditorSettings</key>
+	<dict>
+		<key>textScaleFactor</key>
+		<real>1.25</real>
+	</dict>
+	<key>inspectorSplitFrames</key>
+	<array>
+		<string>{{0, 0}, {1825, 1171}}</string>
+		<string>{{1826, 0}, {245, 1171}}</string>
+	</array>
+	<key>inspectorWidth</key>
+	<real>245</real>
+	<key>lastDocumentSplitType</key>
+	<integer>1</integer>
+	<key>mainDocumentEditor.dockedQRTextSettings</key>
+	<dict>
+		<key>textScaleFactor</key>
+		<real>1</real>
+	</dict>
+	<key>mainDocumentEditor.scrollRect</key>
+	<string>{{0, 1531.4285714285716}, {620, 637.14285714285734}}</string>
+	<key>mainDocumentEditor.textEditorState</key>
+	<dict>
+		<key>textScaleFactor</key>
+		<real>1.75</real>
+	</dict>
+	<key>mainWindowFrame</key>
+	<string>135 145 2247 1223 0 0 2560 1417 </string>
+	<key>supportingDocumentEditor.dockedQRTextSettings</key>
+	<dict>
+		<key>textScaleFactor</key>
+		<real>1</real>
+	</dict>
+	<key>supportingDocumentEditor.scrollRect</key>
+	<string>{{0, 0}, {606, 294}}</string>
+	<key>supportingDocumentEditor.textEditorState</key>
+	<dict>
+		<key>textScaleFactor</key>
+		<real>1</real>
+	</dict>
+	<key>supportingDocumentViewIsCurrent</key>
+	<false/>
+</dict>
+</plist>

@@ -1,0 +1,229 @@
+<html>
+
+<head>
+<title>20200422-AREx-System-Architecture</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Title Page</p>
+<p class="itemText">AREx System Architecture<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">2 September, 2020</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Dr. Chris Bridges M0IEB</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Michelle Thompson W5NYV</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Thomas Parry</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Previous revisions</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">May 28, 2020</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">May 12, 2020</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">April 22, 2020</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">April 17, 2020</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">June 17, 2020</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Front Matter</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Table of Contents</p>
+<p class="itemText">Table of Contents</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Introduction and Scope &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">System Model &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">System Controller &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">System Views &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Biography and Contact Information &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Appendix A: Adaptive Coding and Modulation &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Appendix B: Authentication and Authorization &lt;$p&gt;</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Introduction and Scope</p>
+<p class="itemText">Introduction and Scope</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This System Architecture document defines the models, controllers, and views of microwave band communications for Amateur Radio Experiment (AREx).<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The model defines system structures. These include hardware, software, firmware, and data.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The controller defines the logical behavior of the structures defined by the model.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The view defines the displays or interfaces. Views connect the user to the controller and allow the user to see updates from the system model. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">AREx...</p>
+</li>
+<li>
+<p class="itemTextStart">Summary of DVB-S2/X Downlink Protocol</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">DVB-S2 is the most popular protocol for commercial satellite television broadcast. The forward error correction (FEC) used is nearly ideal, approaching physical limits.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The protocol has a large number of code rates and modulation schemes. Why so many? The protocol was designed to maximize the number of bits transmitted across a wide variety of channel conditions. For an introduction to the basics of coding and modulation and a walk-through of design decisi...</p>
+</li>
+<li>
+<p class="itemTextStart">System Model</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Channel Environment</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The Earth-Moon channel for AREx is dominated by tracking requirements and path loss. Tracking requirements are explored in the GMAT AREx document.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Mean size of lunar dust is 19 microns but the size distribution is diverse. Lunar dust is 45% SiO2 and 15% Al2O3. It’s magnetic, with an Fe patina. The particles are jagged and have a high porosity. Simulated dust causes high friction on tools and equipment. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">“The unique properties of lunar regolith make for the ...</p>
+</li>
+<li>
+<p class="itemTextStart">System Controller</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Control of Coding and Modulation</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The decisions for which codes rates and which modulation schemes to use per frame depends on the signal to noise ratios reported by the ground stations. More noise on a downlink path means more coding and/or simpler modulation must be used in order to successfully decode downlink frames. This decreases the data throughput.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A low noise (clearly heard) downlink signal means less coding and/or higher order modulation schemes can be used. This inc...</p>
+</li>
+<li>
+<p class="itemTextStart">System Views</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A System View defines the displays or interfaces. Views connect the user to the controller and allow the user to see updates from the system model. There are also internal views that connect subsystems and parts to each other. The content here is intended to support an interface control document (ICD).</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">User View Definition</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The minimal guaranteed operating mode is delivered by the analog transponder hardware state. Operators may access the communications resource with legacy commun...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Biography and Contact Information</p>
+<p class="itemText">Authors and Contact Information</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Dr. Chris Bridges draws upon his experience with multiple ESA spacecraft designs and deployments AMSAT-UK activity. He has extensive academic credentials covering a broad range of modern digital communications theory and practice. Contact Dr. Bridges at c.p.bridges@surrey.ac.uk.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Thomas Parry has experience in the design and manufacture of power and communication systems for ESA, NASA and commercial small satellites.<span class="Apple-converted-space">  </span>He currently works in mixed-signal IC design ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Appendix A: Adaptive Coding and Modulation</p>
+<p class="itemText">Appendix A</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Adaptive Coding and Modulation for Phase 4 Ground</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Michelle Thompson W5NYV</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Phase 4 Ground Lead</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Phase 4 Ground provides digital radio solutions for any payload that complies with the Phase 4 Ground Air Interface document. These projects currently include but are not limited to Phase 4B Payload, Cube Quest Challenge (CQC), Phase 3E, and terrestrial Groundsats.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">An Introduction to Coding and Modulation</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In analog wireless communications, continuously varying signals are sent from transm...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Appendix B: Authentication and Authorization</p>
+<p class="itemText">Appendix B</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Authentication and Authorization in a Multiple-Access User Amateur Radio Satellite Service Digital Payload</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Michelle Thompson W5NYV</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Paul Williamson KB5MU</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Definitions</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Authentication is the process of confirming a licensee's declared identity.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Authorization is the process of allowing particular identities access to particular resources.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Satellite is any equipment that serves as the payload for any Phase 4 Ground system. This includes but is not limited to an orbiting satellite paylo...</p>
+</li>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

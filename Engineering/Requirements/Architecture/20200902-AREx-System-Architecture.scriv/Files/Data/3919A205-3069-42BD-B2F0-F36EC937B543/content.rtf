@@ -1,0 +1,115 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Roman;\f2\fnil\fcharset0 LucidaGrande;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::1><$Scr_Ps::0>
+\f1\b\fs36 System Controller\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::1><!$Scr_Ps::0>
+\f1\fs26 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Control of Coding and Modulation\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f1\fs26 \
+The decisions for which codes rates and which modulation schemes to use per frame depends on the signal to noise ratios reported by the ground stations. More noise on a downlink path means more coding and/or simpler modulation must be used in order to successfully decode downlink frames. This decreases the data throughput.\
+A low noise (clearly heard) downlink signal means less coding and/or higher order modulation schemes can be used. This increases the data throughput. \
+By varying the coding and modulation with respect to the signal to noise ratio, the maximum possible bandwidth can be maintained across a wide variety of conditions. A subset of coding and modulation pairs can be selected by the payload. In other words, the payload need not support every code rate and every modulation scheme. For example, the higher-order modulation schemes are intended for high-throughput satellites, and would not be useful for any of the currently anticipated missions. Ground stations are expected to support the entire standard, as they are intended to be re-used for all future systems, terrestrial operations, and to support laboratory and education work. \
+A finite state machine controls the transition between the code and modulation pairs. A hysteresis curve is used to transition between coding and modulation pairs in order to avoid oscillation between adjacent pairs. \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Controlled Response to FPGA Board Failure\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f1\fs26 \
+A loss of an FPGA board in most systems of this type, where received signals are digitized, processed, combined, and transmitted, often results in the loss of the entire communications resource. \
+A goal of the system architecture is to mitigate a failure of this type. Therefore, if the FPGA board fails, then received signals are routed directly from the receive board to the transmitter board. This requires additional hardware. If a \'93heartbeat\'94 is not detected, then switches are activated and RF signals are routed entirely around the FPGA board. \
+The loss of the coding gain from the FPGA board is non-trivial. However, a controlled response to FPGA board failure preserves the communications resource and increases reliability. \
+A finite state machine controls the response to a loss of the FPGA Processor Board. The two input signals are hardware heartbeat and software heartbeat. \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Acquisition Control\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f1\fs26 \
+In the Digital Transponder + Telemetry and Digital Transponder + Telemetry + Access Control User Operating Modes, station acquisition is granted if the station wishing to use the payload can hear itself in the downlink. A station receives an occupied channel list from the telemetry view (see System Views, next section). As the station is not yet on the list of stations accepted by the payload, the first transmission is treated as a probe and the candidate station is assigned an unoccupied channel. This probe is not transmitted in the general downlink, but appears in reserved frames.  \
+If the station sees its own ID show up in the list of current stations in the occupied channel list, then it reports success reception back to the payload. All subsequent frames become part of the primary data downlink.\
+Acquisition Control consumes and produces Derived and Acquisition Telemetry.\
+Receiving is unaffected by Acquisition Control. Any station can receive without being assigned an uplink channel. \
+Deliberately assigned communication access provides substantial benefits for the cost of additional complexity. \
+Blindly transmitting into the payload should not, outside of Analog Transponder and Digital Transponder User Operating Modes, result in that signal being part of the downlink. This feedback loop does not eliminate all potential problems with interference and misconfiguration, but this control structure gives a substantial benefit for a reasonable cost and advances the amateur radio state of the art. \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Access Control\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f1\fs26 \
+Authorization and authentication protocols are well-studied and can be added to Acquisition Control. These functions allow the communications resource to be reserved or controlled through mechanisms such as allowed and block listing. \
+Acquisition Control consumes and produces Derived and Acquisition Telemetry. \
+Access Control consumes and produces data related to the authentication and authorization protocols desired by the operator. \
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Hardware State Control\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f1\fs26 \
+Telemetry collection drives the state. Finite state machines and other control interfaces drive the decisions on system state based on the information collected by the telemetry. \
+\
+Examples of conditions that may drive state changes:\
+	
+\f2 \uc0\u9670 
+\f1 	If something is too hot.\
+	
+\f2 \uc0\u9670 
+\f1 	If SNR is too low.\
+	
+\f2 \uc0\u9670 
+\f1 	If voltage is too high.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Summary of Control Interfaces\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f1\fs26 \
+Transmit ON/OFF is a push-to-talk GPIO line for safety and regulatory requirements. \
+\
+SDR UART has a command line and file transfer interface.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb260\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs26 Summary of Finite State Machines\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f1\fs26 \
+A Finite State Machine in the TT&C manages Switches and GPIO\
+\
+SDR Heartbeats are GPIO ON/OFF pulses. If stopped, there is an error. A finite state machine manages attempts to reset. \
+\
+A finite state machine controls the selection of modulation and coding for adaptive coding and modulation. \
+ \
+}
