@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrivenerProject Identifier="510D2A0E-81B9-4040-AB1C-1BF5F7B6B0AA" Version="2.0" Creator="SCRMAC-3.2.2-14633" Device="Silver-Palace" Author="" Modified="2021-01-08 10:09:04 -0800" ModID="D67704DC-872D-46C7-9803-7A69A4F75196">
+<ScrivenerProject Identifier="510D2A0E-81B9-4040-AB1C-1BF5F7B6B0AA" Version="2.0" Creator="SCRMAC-3.2.2-14633" Device="Silver-Palace" Author="" Modified="2021-05-10 09:24:47 -0700" ModID="13949846-EA26-4C4A-B5B2-A22BD1D2AEF0">
     <Binder>
         <BinderItem UUID="6165556E-E41D-4333-8DF3-463761818602" Type="DraftFolder" Created="2020-04-22 18:51:13 -0700" Modified="2020-04-22 18:51:13 -0700">
             <Title>Draft</Title>
@@ -195,14 +195,14 @@
     </StatusSettings>
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2020-04-22 18:51:12 -0700" IgnoreDeadline="Yes">0</DraftTarget>
-        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2021-01-09 00:00:00 -0800" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="0" Characters="0" Date="2021-01-08 10:08:38 -0800"/>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2021-05-11 01:00:00 -0700" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="0" Characters="0" Date="2021-05-10 09:24:38 -0700"/>
     </ProjectTargets>
-    <RecentWritingHistory Date="2021-01-08 00:00:00 -0800">
+    <RecentWritingHistory Date="2021-05-10 00:00:00 -0700">
         <DraftWordCount>0</DraftWordCount>
         <DraftCharCount>0</DraftCharCount>
         <OtherWordCount>0</OtherWordCount>
         <OtherCharCount>0</OtherCharCount>
     </RecentWritingHistory>
-    <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
+    <PrintSettings PaperSize="611.999985,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
 </ScrivenerProject>

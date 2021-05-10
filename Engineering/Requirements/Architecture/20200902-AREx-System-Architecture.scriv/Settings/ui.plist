@@ -116,7 +116,7 @@
 		<real>1</real>
 	</dict>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 1531.4285714285716}, {620, 637.14285714285734}}</string>
+	<string>{{0, 0}, {620, 637.142857142857}}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>textScaleFactor</key>
