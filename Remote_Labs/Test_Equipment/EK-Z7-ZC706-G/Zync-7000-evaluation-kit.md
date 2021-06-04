@@ -1,0 +1,1 @@
+The EK-Z7-ZC706-G from Xilinx is a Zynq®-7000 all programmable SoC ZC706 evaluation kit. ... It is optimized for quickly prototyping embedded applications using Zynq-7000 SoCs, demonstrates a embedded design, targeting video pipeline.
