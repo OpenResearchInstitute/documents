@@ -173,7 +173,10 @@ You will need to change two things in this file. First, we will assign you a uni
 
 Place the modified config file in the proper directory. On Linux:
 ```
-sudo cp sandiego.conf /etc/wireguard  
+sudo cp sandiego.conf /etc/wireguard
+```
+Do not be alarmed by a warning about "writing to a world accessible file" and suggesting a umask setting. We'll take care of that with the next command:
+```
 sudo chmod 600 /etc/wireguard/sandiego.conf
 ```
 On macOS:
