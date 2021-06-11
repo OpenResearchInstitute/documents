@@ -1,8 +1,18 @@
 # Setting Up for Remote Access to ORI Labs
 
-DRAFT 2021-02-12 kb5mu
+Revised 2021-06-10 kb5mu
 
-The ORI remote lab in San Diego consists of two computers and an array of test
+* [Description of the Network](#description-of-the-network)
+* [Ways to Access the Private LAN](#ways-to-access-the-private-lan)
+* [Preparations for SSH Access](#preparations-for-ssh-access)
+* [Preparations for Wireguard VPN Access](#preparations-for-wireguard-vpn-access)
+* [Advanced Wireguard Configurations](#advanced-wireguard-configurations)
+* [Windows Remote Desktop Access](windows-remote-desktop-access)
+* [Linux Screen Sharing with VNC](linux-screen-sharing-with-vnc)
+* [Linux Screen Sharing with X11](linux-screen-sharing-with-x11)
+* [Support](#support)
+
+The ORI remote lab in San Diego consists of three computers and an array of test
 equipment, all sharing an isolated local area network (LAN).
 
 A Raspberry Pi 4 running Raspbian, with an extra Ethernet port provided by a USB
@@ -13,11 +23,38 @@ domain name `sandiego.openresearch.institute`.
 
 A decently powerful Windows machine named `Aperture` is connected only to the LAN.
 It has an installation of Xilinx Vivado, and is enabled for Remote Desktop access.
-There are plans to replace this machine with one with more storage and bandwidth,
-matched to our predicted needs for the P4XT project, and also matched to the
-machine in use at ORI-East. The intention is that the Windows machine will host
-a number of Linux virtual machines, and that tests will be run primarily from
-inside these VMs.
+This machine was installed as a temporary substitute for the third machine, but
+for now will continue to be available. It also hosts two DVB-S2 satellite receivers on PCIe cards.
+
+An extremely powerful PC named `Chonc` is connected only to the LAN. It features
+a 3970X Threadripper processor with 32 cores (64 threads), many lanes of PCIe
+interconnect, 256GB of RAM, a 16TB disk array (to be expanded to 48TB), dual
+10GB Ethernet ports, and a Nvidia GEForce RTX 3080 graphics card. The operating
+system running on the hardware is Unraid from Lime Technology. Unraid is a
+flavor of Linux, combined with a flexible NAS-like storage manager and a
+hardware-assisted virtualization host. Chonc is configured to host a number of
+virtual machines, which run Windows 10 Pro or Linux as needed.
+
+Typically, a remote lab user would log in to one of these VMs and work there,
+without needing to consider that the environment is virtual, running on top of
+Unraid, and sharing resources with other virtual machines. Users needing to set
+up a new kind of test and development environment should consult with the lab
+managers for help configuring a suitable virtual machine.
+
+* A Windows 10 Pro virtual machine named `chonc-win10` is available for general use.
+It has direct-mapped access to the Nvidia graphics card, which enables its use for
+GPU-assisted signal processing development work. (GPU usage remains untested.) This
+VM auto-starts when Chonc boots, so it should always be running unless something
+else is running that also needs to use the GPU.
+
+* An Ubuntu 18.04.5 virtual machine named `chococat` is set up for FPGA development
+using Xilinx Vivado. This VM auto-starts when Chonc boots, so it should generally
+always be running.
+
+* An Ubuntu 20.04.2 virtual machine named `chonc-a` is set up for general Linux use.
+
+* Additional virtual machines can be set up at will for any specific need. They can
+share resources, and can be started and stopped as needed.
 
 Equipment on the LAN is not directly accessible from the Internet, but each item
 has a domain name that resolves to its local address on the LAN. For example, the
@@ -26,41 +63,56 @@ resolves to the non-routable IPv4 address 10.73.1.73. All the instruments on the
 have domain names that follow the same pattern. Their host names are generally the
 model number of the particular instrument.
 
-Presently there are two ways to access the LAN:
+## Ways to Access the Private LAN
 
-1. Use SSH to log in securely to the Raspberry Pi. While running on the Pi, you have
-direct access to everything on the LAN. You can also use SSH to set up tunnels from
-your local machine to specific addresses on the LAN. In particular, you can run SSH
-again from the Raspberry Pi to log into Aperture and operate Windows and/or the
-Linux VMs from their command lines.
+Presently there are two ways to access the LAN.
 
-2. Use Wireguard to establish a VPN connection to the private LAN, and operate the
-equipment on the LAN directly from your own computer. The Raspberry Pi serves as
-endpoint for Wireguard, but you might not log into the Raspberry Pi or run anything
-on it. You can choose to operate test equipment directly from programs running on
-your own computer, which may be handy in certain circumstances. You can also use
-the VPN to connect to Aperture using Microsoft Remote Desktop, which would allow
-you to operate Aperture through the familiar Windows GUI instead of (or in addition
-to) its command line. Microsoft has Remote Desktop clients for Windows, macOS, iOS,
-and Android. There are multiple third-party open source clients for Linux.
+You can mix and match these methods. In each case there will be some things you need to set up on your own computer, and also some things the lab managers will have to set up on your behalf to authorize access.
 
-You can mix and match any of these methods. In each case there will be some things you need to set up on your own computer, and also some things the lab managers will have to set up on your behalf to authorize access.
+### 1. Access Using SSH
 
-You can set up tunnels with SSH, but you'll find that you cannot operate most of the equipment directly through that kind of static tunnel. The VXI-11 protocol underlying the VISA instrument control protocol requires access to arbitrary TCP ports. You can get that access by being on the LAN yourself (logged in over SSH to the Raspberry Pi or to a VM on the lab computer), or by having the Wireguard VPN active, but not with SSH tunnels alone.
+SSH ("secure shell") is a program originally intended for login to a terminal session on  a remote computer, over a single encrypted TCP connection. Used this way, you can use SSH to log in to the Raspberry Pi. While running on the Pi, or any other computer or virtual machine on the LAN, you have direct access to everything on the LAN.
+
+That single TCP connection doesn't have to be a login session on the Raspberry Pi. It can be configured to run any program on the Pi. In particular, it can be set to run SSH on the Pi and connect to another computer on the LAN. That session, in turn, can be a terminal login session or anything else. Using this capability to create a terminal login session, you can log on to any computer or VM on the private LAN.
+
+SSH can also be configured to create any number of additional encrypted TCP connections, to the Raspberry Pi or to any other host on the LAN. These extra connections are called _SSH tunnels_, and they exist only for the duration of the SSH session. An SSH tunnel creates a numbered port on your local computer that acts like a specific numbered port on the remote computer. Another program running on your local computer can then be configured to use the tunneled port through the loopback address 127.0.0.1 as if it were the remote port. This could be any program that uses a TCP connection. For example, we'll see how to set up Microsoft Remote Desktop to get GUI access to a Windows VM on the LAN.
+
+SSH only provides TCP connections, and only the ones that are specifically configured by you. (It is possible to forward UDP through an SSH tunnel, but this requires extra networking trickery.)
+
+It's common to do all this SSH configuration on the command line, but the syntax isn't the easiest. What's more, there are things that we want to do with SSH that simply cannot be done with command line arguments. Instead, we will use a configuration file that details all the settings for each kind of SSH session we wish to run. You give each set of settings in the config file a name. Once that's all set up, you can run a session of that type by simply entering
+```
+ssh configname
+```
+on your local terminal.
+
+### 2. Access Using Wireguard
+
+Wireguard is a relatively new way to implement virtual private networks (VPN). Instead of creating a few specific connections, it simulates a network interface on your local computer that is somehow magically connected to the remote network. You don't need to know in advance what ports will need to be connected, and it handles UDP as well as TCP connections.
+
+The Wireguard VPN can be turned on and off on demand, but it can also be left on all the time, even when connectivity is not available. You can even plug in to a different Internet connection and your VPN will seamlessly continue to work. Wireguard is fast and has low overhead.
+
+A VPN-style connection offers some advantages for some kinds of remote lab work. If you wish, you can run test scenarios on your own local computer, and it would have direct access to all the test equipment. You might use this to prototype tests that will eventually run on a lab computer, or to run one-off tests more conveniently. Of course, if performance is critical you may still need to run on an appropriately-configured VM that's physically in the remote lab.
+
+Much of what you can do with the VPN can also be done with SSH, but not everything. For instance, the VXI-11 protocol underlies the VISA instrument control protocol used by most of the remote lab test equipment. VXI-11 requires access to arbitrary TCP ports, so you have no way to configure them in advance as required by SSH. This is no problem if you're running on a lab computer or VM, and it's also no problem for remote access over a Wireguard VPN.
+
+Running programs that need access to remote resources can also be much easier with the Wireguard VPN. For instance, programs like Microsoft Remote Desktop can access the various Windows desktops without any special setup on your end.
+
 
 ## Description of the Network
 
-The Raspberry Pi, the Windows PC Aperture, and all the network-capable test equipment in the lab are connected to an Ethernet switch (currently a TP-Link TL-SG108PE, to be upgraded to a DLink DGS-1250-28X) and assigned static IP addresses in the 10.73.1.x block. These addresses are not directly routable on the Internet. All access to the private LAN from outside the lab is mediated by the Raspberry Pi, which is known by the domain name `sandiego.openresearch.institute` (which goes through a dynamic IP provider).
+The Raspberry Pi, the Windows PC Aperture, the Unraid server Chonc, and all the network-capable test equipment in the lab are connected to a Netgear GS316 16-port unmanaged gigabit Ethernet switch. We also have a fancy Netgear XS708T managed 10-gigabit Ethernet switch, which will be used to interconnect Chonc and test gear (such as FPGA development boards) with high bandwidth requirements.
 
-Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like `thing.sandiego.openresearch.institute`, where `thing` is a memorable name for the equipment, usually its model number. If you're running on the Raspberry Pi or on Aperture, you can abbreviate these names to just `thing` (because they're listed in _/etc/hosts_ or _C:\Windows\System32\drivers\etc_ respectively). VMs on the lab PC will support the same shortcut.
+Everything on the network is assigned a static IP address in the 10.73.1.x block. These addresses are not directly routable on the Internet. All access to the private LAN from outside the lab is mediated by the Raspberry Pi, which is known by the domain name `sandiego.openresearch.institute`. This domain name goes through a dynamic IP provider so that sandiego.openresearch.institute will always refer to the Raspberry Pi, even if the local ISP changes its IP address.
 
-The Ethernet switch is capable of being set up to monitor packets flowing through it by copying those packets to another port for capture. Check with the lab managers [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) if you need this capability. The DLink switch, when it's in place, will also be capable of creating virtual LANs within the lab.
+Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like `thing.sandiego.openresearch.institute`, where `thing` is a memorable name for the equipment, usually its model number for test equipment or the host name for computers and virtual machines. If you're running on one of the lab computers, you can abbreviate these names to just `thing` (because they're listed in _/etc/hosts_ or _C:\Windows\System32\drivers\etc\hosts_ as applicable). VMs on the lab PC can support the same shortcut.
+
+The XS708T Ethernet switch is capable of being set up to monitor packets flowing through it by copying those packets to another port for capture. Check with the lab managers [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) if you need this capability. It is also capable of creating virtual LANs within the lab.
 
 We expect the Eastern lab to have a similar setup. The Wireguard VPN has been designed to make it possible to operate equipment in both labs as part of the same setup, bandwidth permitting. A device in the Western lab could talk directly to a device in the Eastern lab through the VPN.
 
 ## Preparations for SSH Access
 
-First, you will need to have an SSH client program on your computer. If you're on a Mac or Linux or anything like that, or on a version of Windows 10 newer than April 2010, you already have an SSH client. On older Windows machines, download and install [PuTTY](https://www.putty.org).
+First, you will need to have an SSH client program on your computer. If you're on a Mac or Linux or anything like that, or on a version of Windows 10 newer than April 2020, you already have an SSH client. On older Windows machines, download and install [PuTTY](https://www.putty.org).
 
 Next, you need an SSH key pair. I recommend you generate a fresh key pair to use just for the ORI lab, but an existing key pair will also work. 
 
@@ -82,22 +134,68 @@ ssh -p 7322 -i ~/.ssh/id_rsa_ori_west w1abc@sandiego.openresearch.institute
 ```
 where you'll replace `w1abc` with your own callsign or username.
 
-Better, take the time now to configure your SSH client to provide all that info automatically. Add a stanza like this one to your `~/.ssh/config` file, creating a new file if there isn't one already, and substituting your username and private key file name as above.
+Better, take the time now to configure your SSH client to provide all that info automatically. Edit or create a `~/.ssh/config` file (on Windows that's `%HOMEDRIVE%%HOMEPATH%\.ssh\config`), and add a stanza to it with all the settings you use for each kind of connection you usually make. You can assign a memorable nickname to each connection. Here's a good example to start with, substituting your username and private key file name as above.
 ```
-Host ori-west  
-    HostName sandiego.openresearch.institute  
-    User w1abc  
-    IdentityFile ~/.ssh/id_rsa_ori_west  
+# Connect directly to the remote lab's Raspberry Pi.
+# This stanza also enables the Host entries below with ProxyJump settings.
+Host ori-west
+    HostName sandiego.openresearch.institute
+    User w1abc
+    IdentityFile ~/.ssh/id_rsa_ori_west
     Port 7322
+
+# Connect to the FPGA development Linux VPN. Works for terminal or VNC.
+Host chococat
+    HostName chococat.sandiego.openresearch.institute
+    User w1abc
+    IdentityFile ~/.ssh/id_rsa_ori_west
+    Port 22
+	ProxyJump ori-west
+#	LocalForward 5973 chococat:59xx # uncomment and set xx to use VNC
+
+# Connect to the general purpose Linux VPN. Works for terminal or VNC.
+Host chonc-a
+    HostName chonc-a.sandiego.openresearch.institute
+    User w1abc
+    IdentityFile ~/.ssh/id_rsa_ori_west
+    Port 22
+	ProxyJump ori-west
+#	LocalForward 5973 chonc-a:59xx # uncomment and set xx to use VNC
+
+# Connect to the Windows VM with the GPU. Works for terminal or RDP.
+Host chonc-win10
+    HostName chonc-win10.sandiego.openresearch.institute
+    User w1abc
+    IdentityFile ~/.ssh/id_rsa_ori_west
+    Port 22
+    ProxyJump ori-west
+    LocalForward 13389 chonc-win10:3389
+
+# Connect to the Windows machine Aperture. Works for terminal or RDP.
+Host aperture
+    HostName aperture.sandiego.openresearch.institute
+    User w1abc
+    IdentityFile ~/.ssh/id_rsa_ori_west
+    Port 22
+    ProxyJump ori-west
+	LocalForward 23389 aperture:3389
 ```
 
-With that stanza in the config file, your command line is much easier:
+With that in the config file, your command line is much easier, like this:
 ```
 ssh ori-west
 ```
-You can use whatever name you find memorable in place of `ori-west` above.
+or
+```
+ssh chococat
+```
+etc.
 
-You'll end up in a standard login shell (bash by default). What to do next is mostly beyond the scope of this document. As a simple _"hello, world"_ demo, try typing
+You can use whatever name you find memorable on the Host line, and use that name when you issue the ssh command.
+
+You'll end up in a standard login shell (bash by default on Linux, CMD on Windows).
+
+Now that you're connected to a machine on the private LAN, what to do next is mostly beyond the scope of this document. As a simple _"hello, world"_ demo, try connecting to ori-west and typing
 ```
 nc eez-bb3.sandiego.openresearch.institute 5025
 ```
@@ -113,35 +211,13 @@ Hit Control-C to exit.
 
 We will need to work out a way to ensure that lab users don't interfere with each other. For now, that is also beyond the scope of this document. Coordinate in the `remote_labs` channel on Slack.
 
-You're automatically set up to SSH from the Raspberry Pi to Aperture using a
-unique key pair (with the default name, `id_rsa`). Test your SSH access to Aperture
-by typing:
-```
-ssh aperture
-```
-You should find yourself at a Windows command prompt. If you prefer the latest
-PowerShell, you can type
-```
-pwsh
-```
-or if you like the old PowerShell,
-```
-powershell
-```
-To back out,
-```
-exit
-```
-
-The procedure for gaining access to VMs on the main PC are expected to be similar, but remain TBD for now.
-
 ## Preparations for Wireguard VPN Access
 
 This method is probably optional. The baseline method of access is through SSH, described in the previous section.
 
 To make the equipment in the lab act like part of your own network, you first need to install the Wireguard client program on your computer. See [Wireguard Installation](https://www.wireguard.com/install/) for more info on this. It's easy to install on almost any kind of computer.
 
-Wireguard has a command line interface on Linux. On Windows, it has a GUI (graphical user interface) program, which also installs command line tools. Install from the Microsoft Store. On macOS, you can install either the GUI or the command line tools or both. The macOS command line tools can be installed from either [Homebrew](https://brew.sh) or [MacPorts](https://www.macports.org), and the GUI is available on the Mac App Store.
+Wireguard has a command line interface on Linux. On Windows, it has a GUI (graphical user interface) program, which also installs command line tools. Install from the Microsoft Store. On macOS, you can install either the GUI or the command line tools or both. The macOS command line tools can be installed from either [Homebrew](https://brew.sh) or [MacPorts](https://www.macports.org), and the GUI is available on the Mac App Store. Users on macOS should note that the command line tools do not share configuration information with the GUI version, so you should probably pick one and stick with it.
 
 Typically you will want to install Wireguard on the computer you'll use to develop and run tests using the lab equipment. If you can't or don't wish to install Wireguard on the computer you want to use, it's also possible to use a Raspberry Pi (or other small computer) to handle the networking and serve as a gateway between your network and the private lab network. Contact the lab managers if you need details on this.
 
@@ -213,10 +289,19 @@ PING eez-bb3.sandiego.openresearch.institute (10.73.1.3): 56 data bytes
 64 bytes from 10.73.1.3: icmp_seq=1 ttl=254 time=85.934 ms
 64 bytes from 10.73.1.3: icmp_seq=2 ttl=254 time=74.540 ms
 ```
-You can also do the same experiment as suggested in the SSH section above, but on your local machine:
+You can also do the same experiment as suggested in the SSH section above, but on your local machine (if it has nc for netcat):
 ```
 nc eez-bb3.sandiego.openresearch.institute 5025
 ```
+This will connect you to the [SCPI interface](https://www.envox.hr/eez/eez-bench-box-3/bb3-scpi-reference-manual/bb3-scpi-introduction.html) of the [EEZ Bench Box 3](https://www.crowdsupply.com/envox/eez-bb3) on the lab bench. If you then type
+```
+*IDN?
+```
+and hit return, it should respond with its identification information, like this:
+```
+Envox,EEZ BB3 (STM32),002C002C3338510738323535,1.0
+```
+Hit Control-C to exit.
 
 ### GUI Procedures (macOS or Windows)
 
@@ -264,10 +349,19 @@ PING eez-bb3.sandiego.openresearch.institute (10.73.1.3): 56 data bytes
 64 bytes from 10.73.1.3: icmp_seq=1 ttl=254 time=85.934 ms  
 64 bytes from 10.73.1.3: icmp_seq=2 ttl=254 time=74.540 ms
 ```
-On macOS (or on Windows if you install a version of netcat), you can do the same experiment as suggested in the SSH section above, but on your local machine:
+You can also do the same experiment as suggested in the SSH section above, but on your local machine (if it has nc for netcat):
 ```
 nc eez-bb3.sandiego.openresearch.institute 5025
 ```
+This will connect you to the [SCPI interface](https://www.envox.hr/eez/eez-bench-box-3/bb3-scpi-reference-manual/bb3-scpi-introduction.html) of the [EEZ Bench Box 3](https://www.crowdsupply.com/envox/eez-bb3) on the lab bench. If you then type
+```
+*IDN?
+```
+and hit return, it should respond with its identification information, like this:
+```
+Envox,EEZ BB3 (STM32),002C002C3338510738323535,1.0
+```
+Hit Control-C to exit.
 
 ## Advanced Wireguard Configurations
 
@@ -281,82 +375,173 @@ If you have network-capable test equipment in your own lab and wish to integrate
 
 ## Windows Remote Desktop Access
 
-If you prefer to use the Windows GUI, you can do that using a Windows
-Remote Desktop client through either SSH or Wireguard. Only one user at a time
-can be connected this way. If the Remote Desktop client warns you that another
-user is already connected, you can find out who by opening an SSH command
-line session to Aperture and typing
-```
-query user
-```
-You can then coordinate with that user on the remote_labs Slack channel.
+If you prefer to use the Windows GUI on Aperture or Chonc-Win10, you can do that
+using a Windows Remote Desktop client through either SSH or Wireguard. See the following sections for setup details.
 
-On Windows or the Mac, you probably want to use Microsoft's standard
-Remote Desktop Client. On Linux, we've had success with
-[Vinagre](https://wiki.gnome.org/Apps/Vinagre), but any Remote Desktop
-client ought to work.
+Microsoft has Remote Desktop clients for Windows, macOS, iOS, and Android. There
+are multiple third-party open source clients for Linux. We've had success with
+[Vinagre](https://wiki.gnome.org/Apps/Vinagre), but any Remote Desktop client
+ought to work.
 
 You'll be prompted to enter your username and password to log into the
 remote desktop. This is the username you specified to us (perhaps your
-callsign) and the password we sent back to you.
+callsign) and the password we sent back to you (unless you've changed it).
+
+Only one user at a time can be connected this way. If the Remote Desktop client
+warns you that another user is already connected, you can find out who by
+opening an SSH command line session to the Windows machine and typing
+```
+query user
+```
+You can then try to coordinate with them on the Slack `remote_labs` channel. If you can't contact them, you can go ahead and connect (which will disconnect them). Windows will try to ask for permission on their remote screen. Just wait a minute and it will let you in, even if they don't answer.
 
 ### Remote Desktop via SSH
 
-From the command line of your local computer, you can say
+Use one of the settings you configured in your SSH config file with an entry for `LocalForward`. The example config settings that appeared earlier in this
+document include settings for Aperture and Chonc-Win10. If you want to use the
+desktop on Chonc-Win10, just type:
 ```
-ssh -p 7322 -i ~/.ssh/id_rsa_ori_west -L 3389:aperture:3389 w1abc@sandiego.openresearch.institute
-```
-where you'll replace `w1abc` with your own callsign or username. This sets
-up a tunnel for port 3389, which is the standard port for Remote Desktop.
-You'll end up with a terminal session to the Raspberry Pi, which needs to
-stay open while you're using the remote desktop.
-
-Better, add a second stanza like this one to your `~/.ssh/config` file:
-```
-Host aperture-rdp
-    HostName sandiego.openresearch.institute  
-    User w1abc  
-    IdentityFile ~/.ssh/id_rsa_ori_west  
-    Port 7322
-    LocalForward 3389 aperture:3389
+ssh chonc-win10
 ```
 
-With that stanza in the config file, your command line is much easier:
-```
-ssh aperture-rdp
-```
-You can use whatever name you find memorable in place of `aperture-rdp` above.
+Then configure your Remote Desktop client to connect to `localhost:13389` or
+`127.0.0.1:13389`. The number after the colon must match the number after
+`LocalForward` in the config file, so 13389 for Chonc-Win10 or 23389 for
+Aperture. These port numbers can be anything, but it's best to avoid the
+standard Remote Desktop port 3389.
 
-Then configure your Remote Desktop client to connect to `localhost:3389` or
-`127.0.0.1:3389`. Bring up the SSH session first, then start the remote desktop
-session. After you're done with the remote desktop, disconnect cleanly from
-within the remote desktop client, then you may exit the SSH session.
+Bring up the SSH session first, then start the Remote Desktop session. After
+you're done with the remote desktop, you will probably want to log out of
+Windows. Whether or not you log out, please disconnect cleanly from within the
+Remote Desktop client program. Then you may exit the SSH session.
 
-If you get an error message that you "already have a console session in
-progress", try using a different local port. That is,
-```
-ssh -p 7322 -i ~/.ssh/id_rsa_ori_west -L 3390:aperture:3389 w1abc@sandiego.openresearch.institute
-```
-from the command line, or a stanza like this:
-```
-Host aperture-rdp
-    HostName sandiego.openresearch.institute  
-    User w1abc  
-    IdentityFile ~/.ssh/id_rsa_ori_west  
-    Port 7322
-    LocalForward 3390 aperture:3389
-```
-and then connect to `localhost:3390` or `127.0.0.1:3390`. This solved the
-problem in two known cases where the local computer was running Windows 10
-and the standard Remote Desktop Connection that comes built-in.
 
 ### Remote Desktop via Wireguard
 
 Configure your Remote Desktop client to connect to
-`aperture.sandiego.openresearch.institute`. Bring up the Wireguard
-connection first, then start the remote desktop session. After you're
-done with the remote desktop, disconnect cleanly from within the remote
-desktop client, then you may deactivate the Wireguard connection.
+`aperture.sandiego.openresearch.institute` or `chonc-win10.sandiego.openresearch.institute`.
+
+You don't need to do anything with SSH or use any special port numbers. Bring up
+the Wireguard connection first, if you don't leave it up all the time, and then
+start the Remote Desktop session. After you're done with the remote desktop, you
+will probably want to log out of Windows. Whether or not you log out, please
+disconnect cleanly from within the Remote desktop client program, then you may
+deactivate the Wireguard connection (or leave it up).
+
+
+## Linux Screen Sharing with VNC
+
+If you prefer to use a GUI on a Linux VM, you can do that using VNC through either SSH or Wireguard. You have to run a VNC server on the VM, and then run a VNC client on your local machine.
+
+The client finds the server through the VM's IP address (10.73.1.xx) and a port number. Port numbers start at 5900 and go up, 5901, 5902, etc. Unfortunately, two VNC servers on the same (virtual) machine cannot use the same port number. If they try, the second VNC server to be started will fail to start. To avoid that, we need each user to choose a different port number. Each remote lab user already has a unique number assignment, the last number in their Wireguard IP address. So if your Wireguard IP address is 10.73.0.23, you should set up your VNC server to use port 5923.
+
+Access to screen sharing through VNC can be controlled by a password. This is a separate password, distinct from your login password on the VM. You can choose your own password when you set up your VNC server. We recommend that you do use a password, though, as some VNC clients refuse to connect to a server that doesn't require a password.
+
+When you're done using the screen sharing, you can choose to disconnect or log out. If you disconnect the VNC client, the session will continue to run on the VM, and when you return with a new screen sharing session, you can resume where you left off. If you log out, your session ends, and when you return you'll need to log in again. You may also have the option to restart the virtual machine. You can do that if you're the only one using the VM. You may even be able to shut down or power off the machine. Please don't do that, because then a remote lab admin will have to restart it.
+
+
+### Choosing a VNC Client Program
+
+In theory, any VNC client ought to work. In practice, there are some problems.
+
+If your local machine runs Linux and does not have a GUI desktop, you'll need to install the GUI parts of Linux before VNC can work. Search the web for information on how to do that.
+
+On Linux, we've had success with a VNC client called Remmina.
+```
+sudo apt install remmina
+```
+If you use a different VNC client, try it and see. It'll probably be fine.
+
+If your local machine is a Mac, there's a built-in VNC client that works well. It's called `Screen Sharing`, and it's a little bit hidden. The easiest way to find it is to use Spotlight search (command-spacebar) and type "Screen Sharing". Another good choice on the Mac is VNC Viewer from RealVNC.
+
+If your local machine runs Windows, we've had success with VNC Viewer from RealVNC.
+
+### Running the VNC Server
+
+We use TigerVNC server on the Ubuntu Linux VMs in the remote lab. It's probably already installed on your VM. If not, it can be installed by anyone with sudo permission by
+```
+sudo apt update && sudo apt install tigervnc-standalone-server
+```
+
+Set up a startup file named `~/.vnc/xstartup` and put this in it to start with:
+```
+#!/bin/sh 
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+vncconfig -iconic &
+gnome-terminal --working-directory=~ &
+dbus-launch --exit-with-session gnome-session &
+```
+That tells the VNC server how to start up your desktop for the VNC session. You can change what programs are run at startup by editing this file.
+
+To set up your VNC password, type:
+```
+vncpasswd
+```
+and enter the password when prompted (twice).
+
+That completes the initial setup.
+
+Now whenever you want to use VNC, you'll use the program `vncserver`. It can be used in several ways, including:
+```
+vncserver -list
+```
+to see what VNC servers might already be running (in your account).
+```
+vncserver -kill :23
+```
+to stop the VNC server on display `:23` (that is, port 5923). Anybody currently using that VNC server will lose their session.
+```
+vncserver -localhost no :23
+```
+to start a new VNC server on display `:23` (that is, port 5923). The `-localhost no` tells the VNC server to accept connections from other machines on the network.
+
+
+### VNC using Wireguard
+
+Run the VNC client of your choice. Choose a connection type of VNC (if necessary) and enter the domain name of the VM you wish to connect to, a colon, and the port number you use. Here's an example:
+```
+chococat.sandiego.openresearch.institute:5923
+```
+The first time (or every time in some VNC clients) you will be prompted to enter your VNC password. This is the one you set with vncpasswd, not the one you use to log in to the VM.
+
+You should see a graphical desktop. If you left a session running, it should appear. If not, you will be at the system login screen. You might have to hit Enter to wake it up. Log in with your username and password for the VM.
+
+You might find that the colors are crazy. In that case, look for a setting to set the color mode to 24 bits. In VNC Viewer from RealVNC, you can click on the slim white bar at the top of the screen, choose the gear icon, and on the Options tab change the "Picture Quality" from "Automatic" to "High" and click "OK". Some simple VNC clients only have automatic mode. For those clients, click around a little, maybe move a window or bring up a menu, and eventually it should sync up to high quality mode.
+
+You might see an error about an invalid message type. Try the "Picture Quality" setting described in the previous paragraph. I know, that doesn't make any sense, but I've found it works sometimes.
+
+
+### VNC using SSH
+
+Some VNC programs can handle tunneling over SSH by themselves. Others will require you to set up the SSH tunnel manually.
+
+Remmina is one that can handle the SSH tunneling for you, if you use a "connection profile" instead of just entering the info in the Quick Connect bar. Add a connection profile using the icon in the top left corner. Give it a memorable name, perhaps the short name of the VM you're connecting to. Set the Protocol to "Remmina VNC Plugin". Under the Basic tab, set the server to the domain name of the VM you wish to connect to, a colon, and the port number you use. Here's an example:
+```
+chococat.sandiego.openresearch.institute:5923
+```
+Set the Color depth to "True Color (32 bpp)". Set the Quality to what you want, I suggest "Best (slowest)" unless your Internet connection is slow.
+
+Now go to the "SSH Tunnel" tab. Click "Enable SSH tunnel" and choose "Custom". Next to Custom enter `sandiego.openresearch.institute:7322`. Under "SSH Authentication", fill in your remote lab user name (maybe your callsign) for Username, and select "Public key (automatic)".
+
+Save the profile.
+
+You should now be able to double-click the profile and get connected to VNC. The rest of the procedures are just like those detailed for Wireguard above.
+
+If you're using some other VNC client program that can handle SSH tunneling for you, the settings should be similar.
+
+If your VNC client can't handle SSH tunneling, then you'll need to edit the `LocalForward` line in the settings for the remote host in your SSH config file. It should look like this:
+```
+#    LocalForward 5973 chococat.sandiego.openresearch.institute:59xx
+```
+
+Remove the `#` to uncomment the line. Change 59xx on the above line to your port number.
+
+Then in your VNC client, set the server to `127.0.0.1:5973`. Start an SSH session with the modified settings, then connect the VNC client. The SSH session will need to stay open as long as you're using the VNC connection. The rest of the procedures are just like those detailed for Wireguard above.
+
+## Linux Screen Sharing with X11
+
+Not recommended. If you insist, details can be found in [Setting Up for X11 Forwarding](https://github.com/phase4ground/documents/blob/master/Remote_Labs/ORI-Lab-X11-Setup.md)
 
 ## Support
 
