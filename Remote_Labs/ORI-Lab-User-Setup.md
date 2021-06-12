@@ -7,9 +7,9 @@ Revised 2021-06-10 kb5mu
 * [Preparations for SSH Access](#preparations-for-ssh-access)
 * [Preparations for Wireguard VPN Access](#preparations-for-wireguard-vpn-access)
 * [Advanced Wireguard Configurations](#advanced-wireguard-configurations)
-* [Windows Remote Desktop Access](windows-remote-desktop-access)
-* [Linux Screen Sharing with VNC](linux-screen-sharing-with-vnc)
-* [Linux Screen Sharing with X11](linux-screen-sharing-with-x11)
+* [Windows Remote Desktop Access](#windows-remote-desktop-access)
+* [Linux Screen Sharing with VNC](#linux-screen-sharing-with-vnc)
+* [Linux Screen Sharing with X11](#linux-screen-sharing-with-x11)
 * [Support](#support)
 
 The ORI remote lab in San Diego consists of three computers and an array of test
