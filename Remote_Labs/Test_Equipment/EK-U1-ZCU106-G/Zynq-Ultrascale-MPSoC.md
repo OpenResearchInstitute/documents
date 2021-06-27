@@ -2,5 +2,5 @@ The ZCU106 Evaluation Kit enables designers to jumpstart designs for video confe
 
 xczu4cg-sfvc784-1LV-i is the target of https://github.com/phase4ground/dvb_fpga
 
-
+ZCU106 Evaluation Board User Guide is https://www.xilinx.com/support/documentation/boards_and_kits/zcu106/ug1244-zcu106-eval-bd.pdf
 
