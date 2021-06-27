@@ -4,3 +4,10 @@ xczu4cg-sfvc784-1LV-i is the target of https://github.com/phase4ground/dvb_fpga
 
 ZCU106 Evaluation Board User Guide is https://www.xilinx.com/support/documentation/boards_and_kits/zcu106/ug1244-zcu106-eval-bd.pdf
 
+Constraints file available from well-hidden link on Xilinx website. Found this in forum post: https://forums.xilinx.com/t5/Xilinx-Evaluation-Boards/ZCU106-Dev-Board-Master-Constraints-File-xdc/td-p/1085933
+
+IP Integrator Guide is here: https://www.xilinx.com/support/documentation/sw_manuals/xilinx2013_2/ug994-vivado-ip-subsystems.pdf
+
+We might want to package this up with IP Integrator? 
+
+Next, there's an example design (above constraints are correct for this example) at: https://www.xilinx.com/support/documentation/ip_documentation/v_hdmi_tx_ss/v3_1/pg235-v-hdmi-tx-ss.pdf#page=67
