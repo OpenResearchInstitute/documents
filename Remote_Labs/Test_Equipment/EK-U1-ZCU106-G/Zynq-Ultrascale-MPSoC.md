@@ -15,3 +15,5 @@ Next, there's an example design (above constraints are correct for this example)
 For installing Petalinux on the Chococat VM on CHONC, the following was referenced: https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_2/ug1144-petalinux-tools-reference-guide.pdf
 
 Embedded Design Tutorial for UltraScale+ MPSoC at this link: https://xilinx.github.io/Embedded-Design-Tutorials/master/docs/Introduction/ZynqMPSoC-EDT/README.html
+
+The ZCU106 shows up in Unraid as "Future Technology Devices International FT232H Single HS USB-UART/FIFO IC (0403:6014)"
