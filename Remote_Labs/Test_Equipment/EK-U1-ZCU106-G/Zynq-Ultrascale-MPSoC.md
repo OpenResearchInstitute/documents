@@ -25,4 +25,7 @@ The ZCU106 shows up in Unraid as "Future Technology Devices International FT232H
 ### Tutorial Videos for Vivado
 
 How to connect Programmable Logic to Processing System
-https://www.youtube.com/watch?v=_odNhKOZjEo
+
+Part 1 https://www.youtube.com/watch?v=_odNhKOZjEo
+
+Part 2 https://www.youtube.com/watch?v=AOy5l36DroY
