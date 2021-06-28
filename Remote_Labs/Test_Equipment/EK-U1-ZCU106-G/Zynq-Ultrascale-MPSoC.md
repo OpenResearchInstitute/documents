@@ -11,3 +11,5 @@ IP Integrator Guide is here: https://www.xilinx.com/support/documentation/sw_man
 We might want to package this up with IP Integrator? 
 
 Next, there's an example design (above constraints are correct for this example) at: https://www.xilinx.com/support/documentation/ip_documentation/v_hdmi_tx_ss/v3_1/pg235-v-hdmi-tx-ss.pdf#page=67
+
+For installing Petalinux on the Chococat VM on CHONC, the following was referenced: https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_2/ug1144-petalinux-tools-reference-guide.pdf
