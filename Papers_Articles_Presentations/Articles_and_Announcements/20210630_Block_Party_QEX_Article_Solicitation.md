@@ -36,24 +36,40 @@ Provide or reference an example flowgraph.
 Use some, all, or none of the following Writing Prompts. These are suggestions to spark your creativity and are not coverage requirements. 
 
 What does this block "really" do? 
-Is the function "under the hood" not exactly the same as what people assume it to be?
-Is this block designed for a particular type of communication or for a particular community?
-What would the equivalent hardware circuit look like?
-Does the block have no achievable equivalent in hardware?
-What is the advantage to using a software component instead of the equivalent hardware?
-Who are the primary contributors? Why did they write this block? If they had to do it over, what would they do differently?
-Are there any open issues with this block? If someone wanted to help with this block, how would they contribute?
-How do digital samples get into and/or out of this block?
-Does this block require other blocks to work properly?
-What is configurable in the block?
-What things can't be changed in this block?
-Are there any quirks?
-Are there any "war stories" in this block's history? 
-Have there been any major bugs with this block?
-Is there a way this block can be mis-used or create unexpected results? 
-Is the block computationally efficient, or not? Why?
-Does the block use any notable or unusual programming or mathmatic techniques?
 
+Is the function "under the hood" not exactly the same as what people assume it to be?
+
+Is this block designed for a particular type of communication or for a particular community?
+
+What would the equivalent hardware circuit look like?
+
+Does the block have no achievable equivalent in hardware?
+
+What is the advantage to using a software component instead of the equivalent hardware?
+
+Who are the primary contributors? Why did they write this block? If they had to do it over, what would they do differently?
+
+Are there any open issues with this block? If someone wanted to help with this block, how would they contribute?
+
+How do digital samples get into and/or out of this block?
+
+Does this block require other blocks to work properly?
+
+What is configurable in the block?
+
+What things can't be changed in this block?
+
+Are there any quirks?
+
+Are there any "war stories" in this block's history? 
+
+Have there been any major bugs with this block?
+
+Is there a way this block can be mis-used or create unexpected results? 
+
+Is the block computationally efficient, or not? Why?
+
+Does the block use any notable or unusual programming or mathmatic techniques?
 
 ## D. Questions? Comments? Critique? Please let me know at:
 
