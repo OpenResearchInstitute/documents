@@ -10,8 +10,11 @@ Python scripts are provided to demonstrate this function. Once you understand ho
 |:--|:--|:--|
 | RSA5065N Spectrum Analyzer | VISA/VXI-11 | `sa_screen.py` |
 | DS1104Z Oscilloscope | VISA/VXI-11 | `os_screen.py` |
-| EEZ-BB3 Power Supply | SCPI/TCPIP | TBD |
+| EEZ-BB3 Power Supply | SCPI/TCPIP | `bb3_screen.py` |
+| DP832 Power Supply | VISA/VXI-11 | `ps_screen.py` |
+| DSG821A Signal Generator | VISA/VXI-11 | `sg_screen.py` |
 | others TBD | | |
+| All instruments | | `all_screen.py` |
 
 The scripts have to be run on a computer with access to the instruments on the lab LAN. Usually, that will be a VM running on the main lab PC. It can also be the Raspberry Pi that handles network access for the lab. If you've set up the Wireguard VPN on your computer at home, you can set up to run the scripts directly on your computer.
 
