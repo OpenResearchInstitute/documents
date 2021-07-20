@@ -199,6 +199,40 @@ Windows will ask for permission to do a bunch of spying; turn off all the option
 save. Windows will ask to set up the Edge browser; go ahead and let it. Then exit the
 browser window and log off.
 
+### Repeat for Chonc-Win10
+
+Repeat all the Windows setup procedures above on the Chonc-Win10 VM.
+
+### Linux VM Access
+
+If the user requests access to specific Linux VMs, on each VM:
+
+```
+sudo adduser callsign
+```
+
+It prompts for a password. Make up a random one and paste it in, hit return. It prompts for the password again. Paste it in again, hit return. You can now discard the password, it won't be used (unless the new user will be using ```sudo```).
+
+Enter the user's Full Name. Leave the other fields blank.
+
+```
+sudo su callsign
+cd /home/callsign
+ssh-keygen
+cd .ssh
+cat >authorized_keys
+```
+
+Paste in the public key for this user's account on the Raspberry Pi. Hit ^D to end.
+
+```
+chmod 600 authorized_keys
+exit
+sudo usermod -a -G dialout callsign
+```
+
+Test that the user can log in without password from the Raspberry Pi to the VM.
+
 ### Reply to User
 
 Reply to the user's email and tell them that they should now be able to log in to the system by following the instructions in ```ORI-Lab-User-Setup.md``` (aka _Setting Up for Remote Access to ORI Labs_).
