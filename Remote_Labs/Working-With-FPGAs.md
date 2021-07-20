@@ -158,7 +158,7 @@ Each development board has many other interfaces, and may be connected to additi
 
 In order to use the equipment in the remote labs, you must first set up access to the labs. This is covered in detail in [Setting Up for Remote Access to ORI Labs](https://github.com/phase4ground/documents/blob/master/Remote_Labs/ORI-Lab-User-Setup.md). This involves some setup on your own computer, and an email sent to sandiego-lab@openresearch.institute. When you send that email, or later when the need arises, include a request to be set up for access to whichever VM you need to use. We will set you up with a login on the VM.
 
-At the San Diego lab, the overall PC is called Chonc, and the VMs for FPGA development are called chococat and keroppi. Chococat is connected to the ZC706 dev board, which is equipped with an Analog Devices ADRV9371 transceiver board. It has a single-port Cygnal UART bridge that shows up as /dev/ttyUSB1. Keroppi is connected to the ZCU106 dev board, which has a four-port Cygnal UART bridge (/dev/ttyUSB1 through /dev/ttyUSB4). On both boards, /dev/ttyUSB0 is the JTAG port, but the device /dev/ttyUSB0 disappears when the port is in use for JTAG.
+At the San Diego lab, the overall PC is called Chonc, and the VMs for FPGA development are called chococat and keroppi. Chococat is connected to the ZC706 dev board, which is equipped with an Analog Devices ADRV9371 transceiver board. It has a single-port Cygnal UART bridge that shows up as /dev/zc706_uart1. Keroppi is connected to the ZCU106 dev board, which has a four-port Cygnal UART bridge (/dev/zcu106_uart1 through /dev/zcu106_uart4).
 
 ### Vivado Remote or Local?
 
@@ -202,7 +202,7 @@ It's common to use a UART on the dev board to output test results or to control 
 Screen is the simpler of the two options. All you need to do is put the device name and the baud rate on the command line, like this:
 
 ```
-screen /dev/ttyUSB1 115200
+screen /dev/zc706_uart1 115200
 ```
 
 To exit the terminal emulation, hit `Control-A` and then `k`, then `y` to confirm. That's all you need to know for basic operation; you can use `man screen` to learn more.
