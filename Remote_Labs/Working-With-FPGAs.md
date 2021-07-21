@@ -166,9 +166,40 @@ Many Vivado operations can be completed without access to the hardware. These ca
 
 Other Vivado operations do require access to the hardware. The most obvious way to handle this is to run Vivado on the VM in the lab PC, which has direct access to the hardware. In this case, you'd use your local computer as a way to remotely view the GUI screen of the VM. That works, but is subject to certain limitations. The virtual screen size of the VM is limited to 1920x1080, and operating a GUI through remote access can be a bit clunky, especially on slow or unreliable Internet connections.
 
-A better way may be to split Vivado into two pieces. The only part that actually requires access to the hardware is called `hw_server`. It's possible to run hw_server on the VM, and the rest of Vivado on your local computer. In this case, you'd have a local GUI running on your own computer like any other program, and only rely on the network for communication with hw_server. This is likely to be much smoother and more reliable than running the whole Vivado GUI through screen sharing.
+A better way may be to split Vivado into two pieces. The only part that actually requires access to the hardware is called `hw_server`. It's possible to run hw_server on the VM, and the rest of Vivado on your local computer. In this case, you'd have a local GUI running on your own computer like any other program, and only rely on the network for communication with hw_server. This is likely to be much smoother and more reliable than running the whole Vivado GUI through screen sharing. (We don't have much experience with this yet, so there may be disadvantages we have yet to discover.)
 
-Details on setting up for split operation with hw_server running on the VM will be provided here as soon as we figure them out.
+The hw_server function is normally run on port 3121, as part of running Vivado. That's where the "local" hardware targets show up. It seems best to run our hw_server on a different port; we will use 3122. On the VM, this is as simple as:
+```
+hw_server -s TCP::3122
+```
+Notice there are TWO colons between TCP and the port number. If you haven't sourced the settings64.sh script, you may need to specify the complete path to hw_server, like this:
+```
+/tools/Xilinx/Vivado/2020.2/bin/hw_server -s TCP::3122
+```
+
+You'll need to start the hw_server on the VM when you need it, and then shut it down when you're done. You can use either an SSH session or a terminal window in a GUI screen sharing session. To shut it down, just come back to the window where hw_server is running and hit Control-C. (If you choose to run hw_server in the background with the `-d` switch, you'll have to explicitly kill its process, by running a command like `killall hw_server`).
+
+Next, establish connectivity between your local computer (where you want to run Vivado) and the VM. As usual, this can be done in two ways. If you're set up for WireGuard, you can just activate the WireGuard connection, and the remote host name will be the VM's name, such as `chococat.sandiego.openresearch.institute`. If you're using SSH tunnels, you need to add a port forward to your SSH configuration, and the remote host name will be `localhost`.
+
+If you're using an SSH port forward, it can be set up on the command line or added to the config file. Here's the command line syntax for the chococat VM, assuming you already have a chococat stanza set up in your `~/.ssh/config` file:
+```
+ssh -L 3122:localhost:3122 chococat
+```
+If you don't want to type all that, you can add this line to the VM's stanza in your `~/.ssh/config` file:
+```
+LocalForward 3122 localhost:3122
+```
+and then you can just type
+```
+ssh chococat
+```
+as usual. It's generally harmless to have this port forward enabled even when you're not using the remote hw_server.
+
+Now run Vivado on your local computer. Open the Hardware Manager (it's in the Flow menu on the welcome screen). Open a new target (from the Tools menu or using the link Vivado offers if you have no target open). Under "Connect to" choose "Remote server". Fill in the port number, 3122. Fill in the host name, either the VM's name for WireGuard or `localhost` for SSH forwarding. Complete the new hardware target wizard, and you should find you can connect to the remote target.
+
+Vivado will remember your remote target for the next session, unless you explicitly delete it, so you don't need to configure the Hardware Manager each time. Just select the remote target and connect to it.
+
+This procedure does not remote the cs_server. I don't know whether we need to worry about that or not.
 
 ### Vivado Licenses on VMs
 
