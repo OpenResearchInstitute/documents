@@ -19,3 +19,7 @@ https://vimeo.com/536463719
 ### Third, documents relating to Open Source and Debris Mitigation Rules. 
 
 Slide deck and position paper are included. A video presentation will be linked as soon as the Ham Expo August 2021 embargo has expired. 
+
+### Get Involved
+
+Support our work, get involved, and donate to keep the regulatory battles funded at https://www.openresearch.institute/getting-started/
