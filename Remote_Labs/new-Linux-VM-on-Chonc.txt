@@ -1,0 +1,53 @@
+Setting up a Linux VM on Chonc
+2021-07-20 Paul Williamson KB5MU
+
+This isn't a complete tutorial, just a set of reminders for myself
+on how to set up a new Linux VM of the type we use for FPGA development
+at the ORI San Diego remote lab.
+
+
+Log in to Unraid on the web
+
+Add new VM and fill out the settings
+
+Be in a browser window that doesn't block pop-ups
+
+Click create
+
+When it appears in the VM list, open NoVNC to it
+
+Double-click the install shortcut on the desktop
+
+Follow the prompts
+
+When it says to remove installation media and restart, force stop the VM and remove the Linux ISO from the VM's settings. Restart the VM and refresh the noVNC connection.
+
+Open network settings and set up fixed IP address, etc.
+
+Open a terminal and apt update/upgrade
+
+apt install openssh-server
+
+ssh-keygen -t ed25519
+
+cd /etc/update-motd.d and use chmod -x to disable noisy login messages.
+
+sudo addgroup ori dialout
+
+sudo apt install mesa-utils (support for glxgears)
+
+set up /etc/hosts (copy from ori-west and edit)
+
+sudo apt install tigervnc-standalone-server xfonts-100dpi xfonts-75dpi
+
+Copy this into ~/.vnc/xstartup
+#!/bin/sh 
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+vncconfig -iconic &
+gnome-terminal --working-directory=~ &
+dbus-launch --exit-with-session gnome-session &
+
+download and install Xilinx tools if needed
+
+set up udev rules for devices if needed
