@@ -34,3 +34,18 @@ Next week is getting signals over the air in the lab from the Analog Devices dev
 
 At this point, roadblocks are primarily logistics.
 
+### Space and Satellite Symposium with IEEE
+
+The San Diego Chapter of IEEE Information Theory Society is proud to announce a virtual Space and Satellite Symposium featuring amateur radio and amateur satellite.
+
+This half-day event will be held online 8am-12pm 30 October 2021. Information and registration can be found at https://events.vtools.ieee.org/m/280774
+
+Thank you to Open Research Institute, a 501(c)(3) dedicated to open source amateur radio work, for co-hosting and being the financial and logistics sponsor for the event.
+
+This is an interdisciplinary and accessible event. Topics such as forward error correction, voice codecs, and other mathematically intensive subjects are welcome, but the event also features space and satellite themed music, inspiring talks about amateur radio's role in successful space exploration, and a forum for *your* opinions and input on the future of high-tech amateur radio digital communications.
+
+The event will be recorded and available online after the Symposium. Registration is required for links to the content. The call for presentations is still open, but space is filling fast.
+
+Want to support the event as a volunteer? Volunteer sign up is here.
+
+Thank you to IEEE, IEEE San Diego, ORI, and the many volunteers that have made this event possible. Connecting academia to amateurs to operators has been a great honor and privilege, and we are all looking forward to a unique and fun event for the amateur community.
