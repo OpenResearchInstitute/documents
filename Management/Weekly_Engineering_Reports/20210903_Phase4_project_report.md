@@ -25,3 +25,10 @@ Work was funded by ARDC and executed by Open Research Institute. Legal assistanc
 All documents and links to presentations about the work are freely available at https://github.com/phase4ground/documents/tree/master/Regulatory
 
 *Thank you so much* to everyone that has helped with this. We should not understate or underestimate how important this is for ORI to continue freely operating. 
+
+### AmbaSat Inspired Sensors
+
+Demonstration of a candidate device for 10GHz beacon addition: 
+https://youtu.be/x-2Hm6uWETY
+
+This is the HB100 breakout board. 
