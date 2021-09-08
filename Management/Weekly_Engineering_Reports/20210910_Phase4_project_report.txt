@@ -4,4 +4,38 @@
 
 ### Regulatory Work
 
-Implementation guideline meeting with legal team for ITAR/EAR work will be scheduled ASAP. 
+Implementation guideline meeting with legal team for ITAR/EAR work 9 September 2021. 
+
+### Open Source FPGA Webinar attended 9 September 2021
+
+Topic
+Deep Learning and FPGAs, Today and Future Direction: A Wide-Ranging Discussion on Design Trade-offs, Open Source Benchmarks, and CAD Research
+
+Description
+Deep learning (DL) is rapidly becoming the cornerstone of many applications, creating an ever-increasing demand for efficient DL processing. FPGAs offer unique properties such as their fine-grained reconfigurability and diverse IOs which allow the use of arbitrary precision, direct hardware execution and low-latency connection to sensors and networks. These features make FPGAs appealing for DL acceleration in both datacenter and edge use cases.
+
+In order to realize the full potential of FPGAs as Deep Learning (DL) accelerators, optimization of FPGA architectures and CAD algorithms is required. Benchmarks play an important role in this optimization process, but current open-source benchmarks are not representative of today's DL workloads.
+
+In this webinar, we will discuss the trade-off between design customization and time-to-solution for DL acceleration on FPGAs. Then, we will present recent innovations and future trends in FPGA architecture and tools driven by DL as a key workload. One such tool is the Koios open-source benchmark suite specifically targeted for DL. These benchmark circuits cover a wide variety of accelerated neural networks, design sizes, implementation styles, abstraction levels, and numerical precisions.
+
+Moderator: Xifan Tang, Research Assistant Professor at University of Utah & Lead Developer of OpenFPGA Project
+
+Presenters:
+Aman Arora is a PhD candidate at the University of Texas at Austin.
+
+Andrew Boutros is a research scientist at the CTO office of Intel's Programmable Solutions Group
+
+
+Notes: 
+
+
+### Space and Satellite Symposium - Amateur Radio and Information Theory
+
+Planning progress and CFP at https://www.openresearch.institute/space-and-satellite-symposium-the-role-of-information-theory-in-space-with-special-emphasis-on-amateur-radio-and-amateur-satellite/
+
+Volunteer signup at https://forms.gle/DZbtKGB4WzCTfWKv7
+
+Registration open at https://events.vtools.ieee.org/m/280774
+
+Thank you to IEEE Information Theory Society San Diego Chapter for hosting this event. Additional co-hosts from Computer Society and Aerospace Society are in the works, and an application has been made to designate the event as an Information Theory Society co-sponsored event. There are no proceedings for this event. All talks will be recorded and available to registrants after the event concludes.
+
