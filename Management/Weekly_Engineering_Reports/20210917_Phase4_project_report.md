@@ -6,6 +6,8 @@
 
 Engineer General is a scaleable concept for a corps of highly competent open source workers that broadly serve a community. This initiative was kicked off with two grant applications to ARDC. More are in development. This initiative pays for full and part time open source positions (1099 proposed) *and also* produces a white paper on 1) motivations 2) concerns 3) compensation requirements and 4) retention of paid open source workers. This area of inquiry and documentation is understudied and underappreciated, but could be the key to improving sustainability, diversity, and health of open source work. As open source work increases as a presence in critical infrastructure and also in the economy, it becomes crucial to understand what it takes to hire and retain quality open source workers. 
 
+We will have a big challenge funding this work. Do you know of a Foundation that would be interested? 
+
 ### Regulatory Work
 
 Implementation guideline meeting with legal team for ITAR/EAR work was held on 9 September 2021, with draft FAQ, notice, and training proposal expected this week. 
@@ -55,5 +57,7 @@ Slide decks continue to come out from the SCC held in late August. A collection 
 
 We need to have regular meet-ups for this part of the project. We need a volunteer to take this on. There's progress on the initial mechanical review and on narrowing the focus on parts. 
 
+### Badge with DC619/858
 
+Conference badge project implementing SPARROW Protocol in LoRa kicked off 8 September 2021. Join Phase 4 Badge channel in Slack for details. 
 
