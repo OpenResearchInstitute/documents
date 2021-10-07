@@ -36,7 +36,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2021-10-07 19:24:15 +0000</string>
+	<string>2021-10-07 19:28:05 +0000</string>
 	<key>Modifier</key>
 	<string>Michelle Thompson</string>
 	<key>NotesVisible</key>
@@ -7131,27 +7131,26 @@ for Transmit}</string>
 						BAtzdHJlYW10eXBlZIHoA4QBQISE
 						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
 						hIQITlNPYmplY3QAhZKEhIQITlNT
-						dHJpbmcBlIQBKydXNkRGVyBTbG90
-						dGVkIFdhdmVndWlkZSAKMTBHSHog
-						QW50ZW5uYQqGhAJpSQEnkoSEhAxO
-						U0RpY3Rpb25hcnkAlIQBaQOShJaW
-						B05TQ29sb3KGkoSEhAdOU0NvbG9y
-						AJSEAWMBhARmZmZmg2GOjj6DW7a2
-						PoNIxMQ+AYaShJaWEE5TUGFyYWdy
-						YXBoU3R5bGWGkoSEhBdOU011dGFi
-						bGVQYXJhZ3JhcGhTdHlsZQCEhBBO
-						U1BhcmFncmFwaFN0eWxlAJSEBEND
-						QFMCAISEhAdOU0FycmF5AJSZDJKE
-						hIQJTlNUZXh0VGFiAJSEAkNmAByG
-						koSjogA4hpKEo6IAVIaShKOiAHCG
-						koSjogCBjACGkoSjogCBqACGkoSj
-						ogCBxACGkoSjogCB4ACGkoSjogCB
-						/ACGkoSjogCBGAGGkoSjogCBNAGG
-						koSjogCBUAGGhgCGkoSWlgZOU0Zv
-						bnSGkoSEhAZOU0ZvbnQelJkkhAVb
-						MzZjXQYAAAAcAAAA//5IAGUAbAB2
-						AGUAdABpAGMAYQBOAGUAdQBlAIQB
-						ZgqbAJsBmwCbAIaGhg==
+						dHJpbmcBlIQBKxdYMiBicmFuZCBM
+						TkIgd2l0aCBQTEwuIIaEAmlJAReS
+						hISEDE5TRGljdGlvbmFyeQCUhAFp
+						A5KElpYHTlNDb2xvcoaShISEB05T
+						Q29sb3IAlIQBYwGEBGZmZmaDYY6O
+						PoNbtrY+g0jExD4BhpKElpYQTlNQ
+						YXJhZ3JhcGhTdHlsZYaShISEF05T
+						TXV0YWJsZVBhcmFncmFwaFN0eWxl
+						AISEEE5TUGFyYWdyYXBoU3R5bGUA
+						lIQEQ0NAUwIAhISEB05TQXJyYXkA
+						lJkMkoSEhAlOU1RleHRUYWIAlIQC
+						Q2YAHIaShKOiADiGkoSjogBUhpKE
+						o6IAcIaShKOiAIGMAIaShKOiAIGo
+						AIaShKOiAIHEAIaShKOiAIHgAIaS
+						hKOiAIH8AIaShKOiAIEYAYaShKOi
+						AIE0AYaShKOiAIFQAYaGAIaShJaW
+						Bk5TRm9udIaShISEBk5TRm9udB6U
+						mSSEBVszNmNdBgAAABwAAAD//kgA
+						ZQBsAHYAZQB0AGkAYwBhAE4AZQB1
+						AGUAhAFmCpsAmwGbAJsAhoaG
 						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
@@ -7160,9 +7159,7 @@ for Transmit}</string>
 {\*\expandedcolortbl;;\csgenericrgb\c27843\c35686\c38431;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f0\fs20 \cf2 W6DFW Slotted Waveguide \
-10GHz Antenna\
-}</string>
+\f0\fs20 \cf2 X2 brand LNB with PLL. }</string>
 					</dict>
 				</dict>
 				<dict>
