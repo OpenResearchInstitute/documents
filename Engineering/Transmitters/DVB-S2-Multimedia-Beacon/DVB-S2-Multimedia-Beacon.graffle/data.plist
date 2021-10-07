@@ -36,7 +36,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2021-10-07 19:18:29 +0000</string>
+	<string>2021-10-07 19:24:15 +0000</string>
 	<key>Modifier</key>
 	<string>Michelle Thompson</string>
 	<key>NotesVisible</key>
@@ -819,7 +819,7 @@ http://johnscullen.com}</string>
 {\*\expandedcolortbl;;\csgenericrgb\c27843\c35686\c38431;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f0\fs16 \cf2 1.1}</string>
+\f0\fs16 \cf2 1.2}</string>
 							</dict>
 						</dict>
 						<dict>
@@ -10303,6 +10303,10 @@ for Transmit}</string>
 			</dict>
 			<key>HPages</key>
 			<integer>2</integer>
+			<key>HorizontalGuides</key>
+			<array>
+				<real>-39.685040473937988</real>
+			</array>
 			<key>KeepToScale</key>
 			<false/>
 			<key>Layers</key>
@@ -10389,7 +10393,7 @@ for Transmit}</string>
 		<key>TopSlabHeight</key>
 		<real>617</real>
 		<key>VisibleRegion</key>
-		<string>{{-169, -25.087719111121149}, {1457.01756214281, 848.24562467916758}}</string>
+		<string>{{-169, -40}, {1457.01756214281, 863.15790556804643}}</string>
 		<key>Zoom</key>
 		<real>1.1399999856948853</real>
 		<key>ZoomValues</key>
