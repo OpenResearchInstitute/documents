@@ -18,7 +18,7 @@ https://vimeo.com/536463719
 
 ### Third, documents relating to Open Source and Debris Mitigation Rules. 
 
-Slide deck and position paper are included. A video presentation will be linked as soon as the Ham Expo August 2021 embargo has expired. 
+Slide deck and position paper are included. Ham Expo August 2021 video: https://vimeo.com/610998209 
 
 ### Get Involved
 
