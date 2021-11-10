@@ -211,7 +211,7 @@ If the user requests access to specific Linux VMs, on each VM:
 sudo adduser callsign
 ```
 
-It prompts for a password. Make up a random one and paste it in, hit return. It prompts for the password again. Paste it in again, hit return. You can now discard the password, it won't be used (unless the new user will be using ```sudo```).
+It prompts for a password. Make up a random one, record it, paste it in, hit return. It prompts for the password again. Paste it in again, hit return.
 
 Enter the user's Full Name. Leave the other fields blank.
 
@@ -228,14 +228,25 @@ Paste in the public key for this user's account on the Raspberry Pi. Hit ^D to e
 ```
 chmod 600 authorized_keys
 exit
+```
+
+If the user is a developer who will need access to the USB serial ports connected to hardware,
+
+```
 sudo usermod -a -G dialout callsign
+```
+
+If the user is a developer who will need permission to install software and configure the system,
+
+```
+sudo adduser callsign sudo
 ```
 
 Test that the user can log in without password from the Raspberry Pi to the VM.
 
 ### Reply to User
 
-Reply to the user's email and tell them that they should now be able to log in to the system by following the instructions in ```ORI-Lab-User-Setup.md``` (aka _Setting Up for Remote Access to ORI Labs_).
+Reply to the user's email and tell them that they should now be able to log in to the system by following the instructions in ```ORI-Lab-User-Setup.md``` (aka _Setting Up for Remote Access to ORI Labs_). Provide their login password if they were given `sudo` permission.
 
 ## 2. User Requests Wireguard Access
 
