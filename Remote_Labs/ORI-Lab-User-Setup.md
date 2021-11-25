@@ -1,6 +1,8 @@
 # Setting Up for Remote Access to ORI Labs
 
-Revised 2021-06-10 kb5mu
+Revised 2021-11-24 kb5mu
+
+Note: the Little Rock lab is not yet online at this time.
 
 * [Description of the Network](#description-of-the-network)
 * [Ways to Access the Private LAN](#ways-to-access-the-private-lan)
@@ -13,26 +15,30 @@ Revised 2021-06-10 kb5mu
 * [Support](#support)
 
 The ORI remote lab in San Diego consists of three computers and an array of test
-equipment, all sharing an isolated local area network (LAN).
+equipment, all sharing an isolated local area network (LAN). The ORI remote lab
+in Little Rock consists of two computers and a similar array of test equipment,
+all sharing another isolated LAN.
 
-A Raspberry Pi 4 running Raspbian, with an extra Ethernet port provided by a USB
-dongle, is responsible for all connections to and from the Internet. It, in turn,
-is isolated from other network hosts in the building by means of VLAN routing in
-an Ethernet switch. The Pi's local host name is `ori-west` and it also has the
-domain name `sandiego.openresearch.institute`. 
+At each lab, a Raspberry Pi 4 running Raspberry Pi OS, with an extra Ethernet
+port provided by a USB dongle, is responsible for all connections to and from
+the Internet. It, in turn, is isolated from other network hosts in the building
+by means of VLAN routing in an Ethernet switch. The San Diego Pi's local host
+name is `ori-west` and it also has the domain name `sandiego.openresearch.institute`. 
+Likewise, the Little Rock Pi is named `ori-south` and `littlerock.openresearch.institute`.
 
-A decently powerful Windows machine named `Aperture` is connected only to the LAN.
+In San Diego, a decently powerful Windows machine named `Aperture` is connected only to the LAN.
 It has an installation of Xilinx Vivado, and is enabled for Remote Desktop access.
 This machine was installed as a temporary substitute for the third machine, but
 for now will continue to be available. It also hosts two DVB-S2 satellite receivers on PCIe cards.
 
-An extremely powerful PC named `Chonc` is connected only to the LAN. It features
+At each lab, an extremely powerful PC is connected only to the LAN.
+In San Diego, it is named `Chonc`; in Little Rock, `Chubb`. It features
 a 3970X Threadripper processor with 32 cores (64 threads), many lanes of PCIe
-interconnect, 256GB of RAM, a 16TB disk array (to be expanded to 48TB), dual
+interconnect, 256GB of RAM, a 32TB disk array with double parity protection, dual
 10GB Ethernet ports, and a Nvidia GEForce RTX 3080 graphics card. The operating
 system running on the hardware is Unraid from Lime Technology. Unraid is a
 flavor of Linux, combined with a flexible NAS-like storage manager and a
-hardware-assisted virtualization host. Chonc is configured to host a number of
+hardware-assisted virtualization host. Each machine is configured to host a number of
 virtual machines, which run Windows 10 Pro or Linux as needed.
 
 Typically, a remote lab user would log in to one of these VMs and work there,
@@ -41,13 +47,15 @@ Unraid, and sharing resources with other virtual machines. Users needing to set
 up a new kind of test and development environment should consult with the lab
 managers for help configuring a suitable virtual machine.
 
-* A Windows 10 Pro virtual machine named `chonc-win10` is available for general use.
+* A Windows 10 Pro virtual machine named `chonc-win10` is available for general use
+in the San Diego lab.
 It has direct-mapped access to the Nvidia graphics card, which enables its use for
 GPU-assisted signal processing development work. (GPU usage remains untested.) This
 VM auto-starts when Chonc boots, so it should always be running unless something
 else is running that also needs to use the GPU.
 
-* An Ubuntu 18.04.5 virtual machine named `chococat` is set up for FPGA development
+* An Ubuntu 18.04.5 virtual machine named `chococat` is set up in the San Diego
+lab for FPGA development
 using Xilinx Vivado. This VM auto-starts when Chonc boots, so it should generally
 always be running.
 
@@ -100,15 +108,17 @@ Running programs that need access to remote resources can also be much easier wi
 
 ## Description of the Network
 
-The Raspberry Pi, the Windows PC Aperture, the Unraid server Chonc, and all the network-capable test equipment in the lab are connected to a Netgear GS316 16-port unmanaged gigabit Ethernet switch. We also have a fancy Netgear XS708T managed 10-gigabit Ethernet switch, which will be used to interconnect Chonc and test gear (such as FPGA development boards) with high bandwidth requirements.
+The Raspberry Pi ori-west, the Windows PC Aperture, the Unraid server Chonc, and all the network-capable test equipment in the San Diego lab are connected to a Netgear GS316 16-port unmanaged gigabit Ethernet switch. We also have a fancy Netgear XS708T managed 10-gigabit Ethernet switch, which will be used to interconnect Chonc and test gear (such as FPGA development boards) with high bandwidth requirements.
 
-Everything on the network is assigned a static IP address in the 10.73.1.x block. These addresses are not directly routable on the Internet. All access to the private LAN from outside the lab is mediated by the Raspberry Pi, which is known by the domain name `sandiego.openresearch.institute`. This domain name goes through a dynamic IP provider so that sandiego.openresearch.institute will always refer to the Raspberry Pi, even if the local ISP changes its IP address.
+The Raspberry Pi ori-south, the Unraid server Chubb, and all the network-capable test equipment in the Little Rock lab are connected to TBD switches.
 
-Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like `thing.sandiego.openresearch.institute`, where `thing` is a memorable name for the equipment, usually its model number for test equipment or the host name for computers and virtual machines. If you're running on one of the lab computers, you can abbreviate these names to just `thing` (because they're listed in _/etc/hosts_ or _C:\Windows\System32\drivers\etc\hosts_ as applicable). VMs on the lab PC can support the same shortcut.
+Everything on the network is assigned a static IP address. These addresses are in the 10.73.1.x block in San Diego and the 10.73.2.x block in Little Rock. These addresses are not directly routable on the Internet. All access to the private LAN from outside the labs is mediated by the Raspberry Pi, known by the domain name `sandiego.openresearch.institute` or `littlerock.openresearch.institute` respectively. This domain name goes through a dynamic IP provider so that sandiego.openresearch.institute or littlerock.openresearch.institute will always refer to the Raspberry Pi at the corresponding lab, even if the local ISP changes its IP address.
 
-The XS708T Ethernet switch is capable of being set up to monitor packets flowing through it by copying those packets to another port for capture. Check with the lab managers [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) if you need this capability. It is also capable of creating virtual LANs within the lab.
+Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like `thing.sandiego.openresearch.institute`, where `thing` is a memorable name for the equipment, usually its model number for test equipment or the host name for computers and virtual machines. If you're running on one of the lab computers, you can abbreviate these names to just `thing` (because they're listed in _/etc/hosts_ or _C:\Windows\System32\drivers\etc\hosts_ as applicable). VMs on the lab PC can support the same shortcut. Likewise, names in the Little Rock lab look like `thing.littlerock.openresearch.institute`.
 
-We expect the Eastern lab to have a similar setup. The Wireguard VPN has been designed to make it possible to operate equipment in both labs as part of the same setup, bandwidth permitting. A device in the Western lab could talk directly to a device in the Eastern lab through the VPN.
+The XS708T Ethernet switch in San Diego is capable of being set up to monitor packets flowing through it by copying those packets to another port for capture. Check with the lab managers [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) if you need this capability. It is also capable of creating virtual LANs within the lab.
+
+The Wireguard VPN has been designed to make it possible to operate equipment in both labs as part of the same setup, bandwidth permitting. A device in the San Diego lab could talk directly to a device in the Little Rock lab through the VPN.
 
 ## Preparations for SSH Access
 
@@ -118,37 +128,45 @@ Next, you need an SSH key pair. I recommend you generate a fresh key pair to use
 
 To generate a fresh key pair, type in a terminal:
 ```
-ssh-keygen -f ~/.ssh/id_rsa_ori_west -N ""
+ssh-keygen -f ~/.ssh/id_rsa_ori -N ""
 ```
 (or run PuTTYgen if you're using PuTTY). If you need more help with any of this, try searching for "SSH login without password" on the web.
 
 If you need access from multiple computers, you can either copy the key pair to all your computers, or set up a separate key pair on each.
 
-Then, email your **public** key (not your private key!) to [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) and request SSH access, specifying your callsign (preferably) or other username you want to use. If you followed the procedure above, the file to send is `~/.ssh/id_rsa_ori_west.pub`. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once. They will all access the same user account, unless you specify otherwise.
+Then, email your **public** key (not your private key!) to [remote-labs@openresearch.institute](mailto:remote-labs@openresearch.institute) and request SSH access, specifying your callsign (preferably) or other username you want to use. If you followed the procedure above, the file to send is `~/.ssh/id_rsa_ori.pub`. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once. They will all access the same user account, unless you specify otherwise.
 
 Once your login is set up, you will be able to use your SSH client to access the system. You need to give it your user name (usually your callsign), the name of the private key file corresponding to the public key file you sent in (unless it's the default one), and the non-standard SSH port number we use, 7322. Exact procedures will vary for GUI SSH clients. The following are the procedures for standard command line SSH clients.
 
 You can put that all on one long command line if you don't mind the typing:
 ```
-ssh -p 7322 -i ~/.ssh/id_rsa_ori_west w1abc@sandiego.openresearch.institute
+ssh -p 7322 -i ~/.ssh/id_rsa_ori w1abc@sandiego.openresearch.institute
 ```
 where you'll replace `w1abc` with your own callsign or username.
 
 Better, take the time now to configure your SSH client to provide all that info automatically. Edit or create a `~/.ssh/config` file (on Windows that's `%HOMEDRIVE%%HOMEPATH%\.ssh\config`), and add a stanza to it with all the settings you use for each kind of connection you usually make. You can assign a memorable nickname to each connection. Here's a good example to start with, substituting your username and private key file name as above.
 ```
-# Connect directly to the remote lab's Raspberry Pi.
+# Connect directly to the remote lab's Raspberry Pi in San Diego.
 # This stanza also enables the Host entries below with ProxyJump settings.
 Host ori-west
     HostName sandiego.openresearch.institute
     User w1abc
-    IdentityFile ~/.ssh/id_rsa_ori_west
+    IdentityFile ~/.ssh/id_rsa_ori
     Port 7322
+
+# Connect directly to the remote lab's Raspberry Pi in Little Rock.
+# This stanza also enables the Host entries below with ProxyJump settings.
+Host ori-south
+	HostName littlerock.openresearch.institute
+	User w1abc
+	IdentityFile ~/.ssh/id_rsa_ori
+	Port 7322
 
 # Connect to the FPGA development Linux VPN. Works for terminal or VNC.
 Host chococat
     HostName chococat.sandiego.openresearch.institute
     User w1abc
-    IdentityFile ~/.ssh/id_rsa_ori_west
+    IdentityFile ~/.ssh/id_rsa_ori
     Port 22
 	ProxyJump ori-west
 #	LocalForward 5973 chococat:59xx # uncomment and set xx to use VNC
@@ -157,7 +175,7 @@ Host chococat
 Host chonc-a
     HostName chonc-a.sandiego.openresearch.institute
     User w1abc
-    IdentityFile ~/.ssh/id_rsa_ori_west
+    IdentityFile ~/.ssh/id_rsa_ori
     Port 22
 	ProxyJump ori-west
 #	LocalForward 5973 chonc-a:59xx # uncomment and set xx to use VNC
@@ -166,7 +184,7 @@ Host chonc-a
 Host chonc-win10
     HostName chonc-win10.sandiego.openresearch.institute
     User w1abc
-    IdentityFile ~/.ssh/id_rsa_ori_west
+    IdentityFile ~/.ssh/id_rsa_ori
     Port 22
     ProxyJump ori-west
     LocalForward 13389 chonc-win10:3389
@@ -175,7 +193,7 @@ Host chonc-win10
 Host aperture
     HostName aperture.sandiego.openresearch.institute
     User w1abc
-    IdentityFile ~/.ssh/id_rsa_ori_west
+    IdentityFile ~/.ssh/id_rsa_ori
     Port 22
     ProxyJump ori-west
 	LocalForward 23389 aperture:3389
@@ -229,9 +247,9 @@ wg genkey > private_key
 wg pubkey < private_key > public_key
 ```
 
-Then, email your **public** key (not your private key!) to [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) and request Wireguard access. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once.
+Then, email your **public** key (not your private key!) to [remote-labs@openresearch.institute](mailto:remote-labs@openresearch.institute) and request Wireguard access. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once.
 
-We will send you a configuration file, `sandiego.conf`. It will look something like this:
+We will send you a configuration file, `oriremote.conf`, which is set up to connect you to both labs simultaneously. It will look something like this:
 
 ```
 [Interface]  
@@ -243,40 +261,50 @@ PublicKey = G9JLSEV6hu+RW1mMFSWB6O9iIn27HvoiyDic+kDzhQA=
 Endpoint = sandiego.openresearch.institute:51900  
 AllowedIPs = 10.73.0.1/32, 10.73.1.0/24  
 PersistentKeepalive = 25  
+
+[Peer]  
+PublicKey = yroEStqN6hDNeKImAeVhC9pY0MB3er9JO6UZBjNAdXI=
+Endpoint = littlerock.openresearch.institute:51900  
+AllowedIPs = 10.73.0.250/32, 10.73.2.0/24  
+PersistentKeepalive = 25  
 ```
 
 You will need to change two things in this file. First, we will assign you a unique IP address in the VPN block of 10.73.0.x, so you'll need to change the **10.73.0.N** on the Address line to your own unique IP address. Second, you'll need to replace **put-your-private-key-here** with the private key you generated above.
 
+If you only want to use one lab or the other, you can delete the [Peer] stanza for the lab you don't want. You can keep multiple config files around if you use different configurations at different times.
+
 Place the modified config file in the proper directory. On Linux:
 ```
-sudo cp sandiego.conf /etc/wireguard
+sudo cp oriremote.conf /etc/wireguard
 ```
 Do not be alarmed by a warning about "writing to a world accessible file" and suggesting a umask setting. We'll take care of that with the next command:
 ```
-sudo chmod 600 /etc/wireguard/sandiego.conf
+sudo chmod 600 /etc/wireguard/oriremote.conf
 ```
-On macOS:
+On macOS (if you use the command line procedures):
 ```
 sudo mkdir /usr/local/etc/wireguard  
-sudo cp sandiego.conf /usr/local/etc/wireguard  
+sudo cp oriremote.conf /usr/local/etc/wireguard  
 sudo chmod 600 /usr/local/etc/wireguard
 ```
 On Windows:
 ```
-copy sandiego.conf C:\Windows\System32\config\systemprofile\AppData\Local\WireGuard\Configurations\
+copy oriremote.conf C:\Windows\System32\config\systemprofile\AppData\Local\WireGuard\Configurations\
 ```
 
-You'll want to be careful with sandiego.conf and with your private_key file. You don't want to lose the private key, and you also don't want anybody else to get a copy of it. If your private key should leak out beyond your control, please notify the lab managers so we can disable it and set you up with a fresh one.
+You'll want to be careful with oriremote.conf and with your private_key file. You don't want to lose the private key, and you also don't want anybody else to get a copy of it. If your private key should leak out beyond your control, please notify the lab managers so we can disable it and set you up with a fresh one.
 
 Then when you want to activate the VPN to access the lab network, you'll say
 ```
-wg-quick up sandiego
+wg-quick up oriremote
 ```
 
 Likewise, to deactivate the VPN on Linux or the macOS command line, it's
 ```
-wg-quick down sandiego
+wg-quick down oriremote
 ```
+
+You can substitute whatever .conf file name you want in place of oriremote in these commands. Leave off the .conf part.
 
 You should now have access to the test equipment. You can do a very simple check like this:
 ```
@@ -307,22 +335,28 @@ Hit Control-C to exit.
 
 Run the WireGuard program installed from the store.
 
-At the bottom left, look for a plus sign button and click it, then select *Add Empty Tunnel...*. Type in a distinctive name for this tunnel, such as **ori_west**. Click Save.
+At the bottom left, look for a plus sign button and click it, then select *Add Empty Tunnel...*. Type in a distinctive name for this tunnel, such as **ori_remote**. Click Save.
 
 Make sure your tunnel is selected in the left column, and then copy the Public Key value from the right part of the screen.
 
-Paste this **public key** into an email to [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) and request Wireguard access. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once.
+Paste this **public key** into an email to [remote-labs@openresearch.institute](mailto:remote-labs@openresearch.institute) and request Wireguard access. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once.
 
-We will send you a configuration file, ```sandiego.conf```. It will look something like this:
+We will send you a configuration file, ```oriremote.conf```, which is set up to connect you to both labs simultaneously. It will look something like this:
 ```
-[Interface]
-Address = 10.73.0.N/24
-PrivateKey = put_your_private_key_here
+[Interface]  
+Address = 10.73.0.N/24  
+PrivateKey = put-your-private-key-here  
 
-[Peer]
-PublicKey = G9JLSEV6hu+RW1mMFSWB6O9iIn27HvoiyDic+kDzhQA=
-Endpoint = sandiego.openresearch.institute:51900
-AllowedIPs = 10.73.0.1/32, 10.73.1.0/24
+[Peer]  
+PublicKey = G9JLSEV6hu+RW1mMFSWB6O9iIn27HvoiyDic+kDzhQA=  
+Endpoint = sandiego.openresearch.institute:51900  
+AllowedIPs = 10.73.0.1/32, 10.73.1.0/24  
+PersistentKeepalive = 25  
+
+[Peer]  
+PublicKey = yroEStqN6hDNeKImAeVhC9pY0MB3er9JO6UZBjNAdXI=
+Endpoint = littlerock.openresearch.institute:51900  
+AllowedIPs = 10.73.0.250/32, 10.73.2.0/24  
 PersistentKeepalive = 25
 ```
 
@@ -330,11 +364,13 @@ You will need to change two things in this file. First, we will assign you a uni
 
 Get back into the WireGuard GUI. If there's a WireGuard icon in the menu bar (macOS) or with the notification icons (Windows), you can just click it. If not, run the WireGuard program as usual. Make sure the right tunnel is selected in the left column, and click on Edit.
 
-Now open `sandiego.conf` from the email you received in a text editor, select the entire thing and copy it.  Go back to the WireGuard window and paste the copied text into the big text area, after the text that's already there.
+Now open `oriremote.conf` from the email you received in a text editor, select the entire thing and copy it.  Go back to the WireGuard window and paste the copied text into the big text area, after the text that's already there.
 
 You'll have two copies of the `[Interface]` line and the `PrivateKey` line. Keep the `[Interface]` line at the very top, and the `PrivateKey` line that has your generated private key on it. Delete the extra `[Interface]` line and the `PrivateKey` with the dummy value.
 
 Click Save. You're all set up!
+
+If you only want to use one lab at a time, you can create another tunnel using the same procedures. Just delete [Peer] stanza for the lab you don't need.
 
 Then when you want to activate the VPN to access the lab network, you'll find the WireGuard icon in the menu bar (macOS) or with the notification icons (Windows), right click it, and select the name of the tunnel you want to activate. Repeat the same procedure to deactivate the tunnel.
 
@@ -366,8 +402,6 @@ Hit Control-C to exit.
 ## Advanced Wireguard Configurations
 
 Depending on your network, you might not need the keepalive that's enabled in the configuration file we provide. Try it and see, if you like. Just delete the **PersistentKeepalive** line from the configuration file (or set it to 0), deactivate the tunnel, and reactivate it. If you find that your VPN connection isn't staying up without the keepalive, put that line back in.
-
-If you need to use both labs, you can set up a Wireguard configuration for each, exactly as described above. You can activate one tunnel or the other. You can even activate both at the same time, except on Windows where that is not currently supported.
 
 If you need equipment in one lab to talk directly to equipment in the other, let us know and we can enable a tunnel to do that.
 
@@ -522,7 +556,7 @@ chococat.sandiego.openresearch.institute:5923
 ```
 Set the Color depth to "True Color (32 bpp)". Set the Quality to what you want, I suggest "Best (slowest)" unless your Internet connection is slow.
 
-Now go to the "SSH Tunnel" tab. Click "Enable SSH tunnel" and choose "Custom". Next to Custom enter `sandiego.openresearch.institute:7322`. Under "SSH Authentication", fill in your remote lab user name (maybe your callsign) for Username, and select "Public key (automatic)".
+Now go to the "SSH Tunnel" tab. Click "Enable SSH tunnel" and choose "Custom". Next to Custom enter `sandiego.openresearch.institute:7322` or `littlerock.openresearch.institute`, whichever is applicable. Under "SSH Authentication", fill in your remote lab user name (maybe your callsign) for Username, and select "Public key (automatic)".
 
 Save the profile.
 
@@ -545,4 +579,4 @@ Not recommended. If you insist, details can be found in [Setting Up for X11 Forw
 
 ## Support
 
-You can always email the lab managers at [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) with any questions or suggestions. You can also find us, more often than not, in the **Phase 4 Ground** Slack in the **remote_labs** channel.
+You can always email the lab managers at [remote-labs@openresearch.institute](mailto:remote-labs@openresearch.institute) with any questions or suggestions. You can also find us, more often than not, in the **Phase 4 Ground** Slack in the **remote_labs** channel.
