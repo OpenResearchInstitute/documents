@@ -60,3 +60,11 @@ Need to use `xsdb` (provided with Vivado) to reset the PS.
 [dvb_fpga_zc706]: https://github.com/phase4ground/dvb_fpga/tree/master/build/vivado/zc706
 [petalinux download]: https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools.html
 [vivado download]: https://www.xilinx.com/support/download.html
+
+### `meta-user` layer is ignored
+
+Need to set YOCTO_MACHINE_NAME to zc706-zynq7, accordingly to [UG1144](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1144-petalinux-tools-reference-guide.pdf) page 144.
+
+1. Run `petalinux-config` from a bash shell after sourced petalinux settings.sh
+2. Select `Yocto Settings`
+3. Select `YOCTO_MACHINE_NAME` 
