@@ -1,1 +1,3 @@
-Matlab files for the P4DX Uplink
+## Matlab files for the M17 Protocol P4DX Uplink
+Modulator
+Demodulator
