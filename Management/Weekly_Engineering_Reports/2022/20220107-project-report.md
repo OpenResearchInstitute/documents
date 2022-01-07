@@ -2,9 +2,9 @@
 
 ### AmbaSat
 
-Boards back, recruitment of firmware and software volunteers continues.
+Boards back, recruitment of firmware and software volunteers continues for next phase of work.
 
-Sounding rocket planning continues and we're in good shape. 
+Sounding rocket planning continues and we're in good shape schedule-wise.
 
 ### P4DX
 
