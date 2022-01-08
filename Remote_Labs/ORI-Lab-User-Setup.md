@@ -1,8 +1,8 @@
 # Setting Up for Remote Access to ORI Labs
 
-Revised 2021-11-24 kb5mu
+Revised 2022-01-07 kb5mu
 
-Note: the Little Rock lab is not yet online at this time.
+Note: the Little Rock lab is not yet available for general use at this time.
 
 * [Description of the Network](#description-of-the-network)
 * [Ways to Access the Private LAN](#ways-to-access-the-private-lan)
@@ -54,12 +54,29 @@ GPU-assisted signal processing development work. (GPU usage remains untested.) T
 VM auto-starts when Chonc boots, so it should always be running unless something
 else is running that also needs to use the GPU.
 
-* An Ubuntu 18.04.5 virtual machine named `chococat` is set up in the San Diego
+* An Ubuntu 18.04.6 virtual machine named `chococat` is set up in the San Diego
 lab for FPGA development
 using Xilinx Vivado. This VM auto-starts when Chonc boots, so it should generally
-always be running.
+always be running. It is connected to a Xilinx ZC706 via two USB serial ports,
+one connected to the JTAG port and the other connected to the UART port. The ZC706
+is also connected to the lab LAN, and hosts an Analog Devices ADRV9371 transceiver
+development board.
 
-* An Ubuntu 20.04.2 virtual machine named `chonc-a` is set up for general Linux use.
+* Another Ubuntu 18.04.6 virtual machine named `keroppi` is also set up in the
+San Diego lab for FPGA development using Xilinx Vivado. This VM also auto-starts
+when Chonc boots, so it should generally always be running. It is connected to a
+Xilinx ZCU106 via five USB serial ports, one connected to the JTAG port and the
+other four connected to UART ports. The ZCU106 is also connect to the lab LAN.
+
+* An Ubuntu 20.04.2 virtual machine named `chonc-a` is set up in the San Diego lab for general Linux use.
+
+* An Ubuntu 20.04 virtual machine named `chubb-xxl` is set up in the Little Rock lab
+for general Linux use. It is configured with the maximum number of cores (31) and a
+large RAM allocation (144GB), so it should be quite fast. It has only 200GB of disk
+storage allocated for general use, but the `/tools` directory is allocated on the
+main disk array and has disk space limited only by the total array size (32TB).
+The idea is the `/tools` contains installations of large development toolchains
+(such as Xilinx Vitis/Vivado) that can be shared among a number of Linux VMs.
 
 * Additional virtual machines can be set up at will for any specific need. They can
 share resources, and can be started and stopped as needed.
@@ -71,17 +88,17 @@ resolves to the non-routable IPv4 address 10.73.1.73. All the instruments on the
 have domain names that follow the same pattern. Their host names are generally the
 model number of the particular instrument.
 
-## Ways to Access the Private LAN
+## Ways to Access the Private LANs
 
-Presently there are two ways to access the LAN.
+Presently there are two ways to access the LANs.
 
 You can mix and match these methods. In each case there will be some things you need to set up on your own computer, and also some things the lab managers will have to set up on your behalf to authorize access.
 
 ### 1. Access Using SSH
 
-SSH ("secure shell") is a program originally intended for login to a terminal session on  a remote computer, over a single encrypted TCP connection. Used this way, you can use SSH to log in to the Raspberry Pi. While running on the Pi, or any other computer or virtual machine on the LAN, you have direct access to everything on the LAN.
+SSH ("secure shell") is a program originally intended for login to a terminal session on  a remote computer, over a single encrypted TCP connection. Used this way, you can use SSH to log in to the Raspberry Pi. While running on the Pi, or any other computer or virtual machine on either LAN, you have direct access to everything on both LANs.
 
-That single TCP connection doesn't have to be a login session on the Raspberry Pi. It can be configured to run any program on the Pi. In particular, it can be set to run SSH on the Pi and connect to another computer on the LAN. That session, in turn, can be a terminal login session or anything else. Using this capability to create a terminal login session, you can log on to any computer or VM on the private LAN.
+That single TCP connection doesn't have to be a login session on the Raspberry Pi. It can be configured to run any program on the Pi. In particular, it can be set to run SSH on the Pi and connect to another computer on the LAN. That session, in turn, can be a terminal login session or anything else. Using this capability to create a terminal login session, you can log on to any computer or VM on the private LANs, or to any development board that's currently configured to support SSH logins.
 
 SSH can also be configured to create any number of additional encrypted TCP connections, to the Raspberry Pi or to any other host on the LAN. These extra connections are called _SSH tunnels_, and they exist only for the duration of the SSH session. An SSH tunnel creates a numbered port on your local computer that acts like a specific numbered port on the remote computer. Another program running on your local computer can then be configured to use the tunneled port through the loopback address 127.0.0.1 as if it were the remote port. This could be any program that uses a TCP connection. For example, we'll see how to set up Microsoft Remote Desktop to get GUI access to a Windows VM on the LAN.
 
@@ -99,7 +116,7 @@ Wireguard is a relatively new way to implement virtual private networks (VPN). I
 
 The Wireguard VPN can be turned on and off on demand, but it can also be left on all the time, even when connectivity is not available. You can even plug in to a different Internet connection and your VPN will seamlessly continue to work. Wireguard is fast and has low overhead.
 
-A VPN-style connection offers some advantages for some kinds of remote lab work. If you wish, you can run test scenarios on your own local computer, and it would have direct access to all the test equipment. You might use this to prototype tests that will eventually run on a lab computer, or to run one-off tests more conveniently. Of course, if performance is critical you may still need to run on an appropriately-configured VM that's physically in the remote lab.
+A VPN-style connection offers some advantages for some kinds of remote lab work. If you wish, you can run test scenarios on your own local computer, and it would have direct access to all the test equipment. You might use this to prototype tests that will eventually run on a lab computer, or to run one-off tests more conveniently. Of course, if performance is critical you may still need to run on an appropriately-configured VM that's physically in the remote lab, or even directly on a processor within the target hardware.
 
 Much of what you can do with the VPN can also be done with SSH, but not everything. For instance, the VXI-11 protocol underlies the VISA instrument control protocol used by most of the remote lab test equipment. VXI-11 requires access to arbitrary TCP ports, so you have no way to configure them in advance as required by SSH. This is no problem if you're running on a lab computer or VM, and it's also no problem for remote access over a Wireguard VPN.
 
@@ -112,13 +129,13 @@ The Raspberry Pi ori-west, the Windows PC Aperture, the Unraid server Chonc, and
 
 The Raspberry Pi ori-south, the Unraid server Chubb, and all the network-capable test equipment in the Little Rock lab are connected to TBD switches.
 
-Everything on the network is assigned a static IP address. These addresses are in the 10.73.1.x block in San Diego and the 10.73.2.x block in Little Rock. These addresses are not directly routable on the Internet. All access to the private LAN from outside the labs is mediated by the Raspberry Pi, known by the domain name `sandiego.openresearch.institute` or `littlerock.openresearch.institute` respectively. This domain name goes through a dynamic IP provider so that sandiego.openresearch.institute or littlerock.openresearch.institute will always refer to the Raspberry Pi at the corresponding lab, even if the local ISP changes its IP address.
+Everything on the network is assigned a static IP address. These addresses are in the 10.73.1.x block in San Diego and the 10.73.2.x block in Little Rock. These addresses are not directly routable on the Internet. All access to the private LAN from outside the labs is mediated by one of the Raspberry Pis, known by the domain name `sandiego.openresearch.institute` or `littlerock.openresearch.institute` respectively. These domain names go through a dynamic IP provider so that sandiego.openresearch.institute or littlerock.openresearch.institute will always refer to the Raspberry Pi at the corresponding lab, even if the local ISP changes its IP address.
 
-Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like `thing.sandiego.openresearch.institute`, where `thing` is a memorable name for the equipment, usually its model number for test equipment or the host name for computers and virtual machines. If you're running on one of the lab computers, you can abbreviate these names to just `thing` (because they're listed in _/etc/hosts_ or _C:\Windows\System32\drivers\etc\hosts_ as applicable). VMs on the lab PC can support the same shortcut. Likewise, names in the Little Rock lab look like `thing.littlerock.openresearch.institute`.
+Even though the equipment is not directly accessible on the Internet, each item has a DNS host name so you don't need to know the individual IP addresses. All the names for equipment in the San Diego lab look like `thing.sandiego.openresearch.institute`, where `thing` is a memorable name for the equipment, usually its model number for test equipment or the host name for computers and virtual machines. If you're running on one of the lab computers, you can abbreviate these names to just `thing` (because they're listed in _/etc/hosts_ or _C:\Windows\System32\drivers\etc\hosts_ as applicable). VMs on the lab PC can support the same shortcut. Likewise, names in the Little Rock lab look like `thing.littlerock.openresearch.institute` and have similar abbreviations. The idea here is that a test script can be written using the abbreviated names, and that script can run without modification in either lab.
 
 The XS708T Ethernet switch in San Diego is capable of being set up to monitor packets flowing through it by copying those packets to another port for capture. Check with the lab managers [sandiego-lab@openresearch.institute](mailto:sandiego-lab@openresearch.institute) if you need this capability. It is also capable of creating virtual LANs within the lab.
 
-The Wireguard VPN has been designed to make it possible to operate equipment in both labs as part of the same setup, bandwidth permitting. A device in the San Diego lab could talk directly to a device in the Little Rock lab through the VPN.
+The Wireguard VPN has been designed to make it possible to operate equipment in both labs as part of the same setup, bandwidth permitting. A device in the San Diego lab can talk directly to a device in the Little Rock lab through the VPN. Instruments that exist in both labs are given special shortcut names for convenience. For example, the oscilloscope in San Diego, `ds1104.sandiego.openresearch.institute`, known as simply `ds1104` on the San Diego LAN, may be accessed from the Little Rock LAN as `ds1104.sd`. Likewise, `ds1104.littlerock.openresearch.institute` is known as `ds1104` in Little Rock, but `ds1104.lr` in San Diego.
 
 ## Preparations for SSH Access
 
@@ -241,6 +258,8 @@ Typically you will want to install Wireguard on the computer you'll use to devel
 
 ### Command Line Procedures (Linux or macOS)
 
+If you plan to use the Wireguard GUI on macOS, please skip to the next section.
+
 Next, you will need to generate a public/private key pair, Wireguard style. Open a terminal (Linux or macOS) or a Command Prompt (not PowerShell) on Windows. Then do this:
 ```
 wg genkey > private_key  
@@ -333,6 +352,8 @@ Hit Control-C to exit.
 
 ### GUI Procedures (macOS or Windows)
 
+If you're using the command line Wireguard on macOS, please skip this section.
+
 Run the WireGuard program installed from the store.
 
 At the bottom left, look for a plus sign button and click it, then select *Add Empty Tunnel...*. Type in a distinctive name for this tunnel, such as **ori_remote**. Click Save.
@@ -403,8 +424,6 @@ Hit Control-C to exit.
 
 Depending on your network, you might not need the keepalive that's enabled in the configuration file we provide. Try it and see, if you like. Just delete the **PersistentKeepalive** line from the configuration file (or set it to 0), deactivate the tunnel, and reactivate it. If you find that your VPN connection isn't staying up without the keepalive, put that line back in.
 
-If you need equipment in one lab to talk directly to equipment in the other, let us know and we can enable a tunnel to do that.
-
 If you have network-capable test equipment in your own lab and wish to integrate it with the equipment in the ORI lab(s), that's certainly possible. We can help you with Wireguard configurations to get the job done.
 
 ## Windows Remote Desktop Access
@@ -446,7 +465,7 @@ standard Remote Desktop port 3389.
 
 Bring up the SSH session first, then start the Remote Desktop session. After
 you're done with the remote desktop, you will probably want to log out of
-Windows. Whether or not you log out, please disconnect cleanly from within the
+Windows (in the GUI). Whether or not you log out, please disconnect cleanly from within the
 Remote Desktop client program. Then you may exit the SSH session.
 
 
@@ -458,7 +477,7 @@ Configure your Remote Desktop client to connect to
 You don't need to do anything with SSH or use any special port numbers. Bring up
 the Wireguard connection first, if you don't leave it up all the time, and then
 start the Remote Desktop session. After you're done with the remote desktop, you
-will probably want to log out of Windows. Whether or not you log out, please
+will probably want to log out of Windows (in the GUI). Whether or not you log out, please
 disconnect cleanly from within the Remote desktop client program, then you may
 deactivate the Wireguard connection (or leave it up).
 
@@ -524,16 +543,16 @@ to see what VNC servers might already be running (in your account).
 ```
 vncserver -kill :23
 ```
-to stop the VNC server on display `:23` (that is, port 5923). Anybody currently using that VNC server will lose their session.
+to stop the VNC server on display `:23` (that is, port 5923). Anybody currently using that VNC server will lose their session. (Use your own unique number, not 23.)
 ```
 vncserver -localhost no :23
 ```
-to start a new VNC server on display `:23` (that is, port 5923). The `-localhost no` tells the VNC server to accept connections from other machines on the network.
+to start a new VNC server on display `:23` (that is, port 5923). The `-localhost no` tells the VNC server to accept connections from other machines on the network. (Use your own unique number, not 23.)
 
 
 ### VNC using Wireguard
 
-Run the VNC client of your choice. Choose a connection type of VNC (if necessary) and enter the domain name of the VM you wish to connect to, a colon, and the port number you use. Here's an example:
+Run the VNC client of your choice. Choose a connection type of VNC (if necessary) and enter the domain name of the VM you wish to connect to, a colon, and the unique port number you use. Here's an example:
 ```
 chococat.sandiego.openresearch.institute:5923
 ```
@@ -550,13 +569,13 @@ You might see an error about an invalid message type. Try the "Picture Quality" 
 
 Some VNC programs can handle tunneling over SSH by themselves. Others will require you to set up the SSH tunnel manually.
 
-Remmina is one that can handle the SSH tunneling for you, if you use a "connection profile" instead of just entering the info in the Quick Connect bar. Add a connection profile using the icon in the top left corner. Give it a memorable name, perhaps the short name of the VM you're connecting to. Set the Protocol to "Remmina VNC Plugin". Under the Basic tab, set the server to the domain name of the VM you wish to connect to, a colon, and the port number you use. Here's an example:
+Remmina is one that can handle the SSH tunneling for you, if you use a "connection profile" instead of just entering the info in the Quick Connect bar. Add a connection profile using the icon in the top left corner. Give it a memorable name, perhaps the short name of the VM you're connecting to. Set the Protocol to "Remmina VNC Plugin". Under the Basic tab, set the server to the domain name of the VM you wish to connect to, a colon, and the unique port number you use. Here's an example:
 ```
 chococat.sandiego.openresearch.institute:5923
 ```
 Set the Color depth to "True Color (32 bpp)". Set the Quality to what you want, I suggest "Best (slowest)" unless your Internet connection is slow.
 
-Now go to the "SSH Tunnel" tab. Click "Enable SSH tunnel" and choose "Custom". Next to Custom enter `sandiego.openresearch.institute:7322` or `littlerock.openresearch.institute`, whichever is applicable. Under "SSH Authentication", fill in your remote lab user name (maybe your callsign) for Username, and select "Public key (automatic)".
+Now go to the "SSH Tunnel" tab. Click "Enable SSH tunnel" and choose "Custom". Next to Custom enter `sandiego.openresearch.institute:7322` or `littlerock.openresearch.institute:7322`, whichever is applicable. Under "SSH Authentication", fill in your remote lab user name (maybe your callsign) for Username, and select "Public key (automatic)".
 
 Save the profile.
 
