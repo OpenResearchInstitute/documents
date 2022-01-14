@@ -16,4 +16,4 @@ Live FPGA image updates using device tree overlay, participation in Ham Expo in 
 
 ### AmbaSat Re-Spin
 
-Engineering boards have been offered for firmware and software development to survey respondents. Three have been made available out of five produced. AmbaSat is well under budget and significantly ahead on original goals. ORI will formally close out this grant with ARDC in the very near future, but will continue development and publishing all results as they are created. A sounding rocket tests is in planning, and LEO cubesat integration with two teams is under active discussion.
+Engineering boards have been offered for firmware and software development to survey respondents. Three have been made available out of five produced. AmbaSat is well under budget and significantly ahead on original goals. ORI will formally close out this grant with ARDC in the very near future, but will continue development and publishing all results as they are created. A sounding rocket test with the University of Puerto Rico is in planning, and LEO cubesat integration with two teams is under active discussion.
