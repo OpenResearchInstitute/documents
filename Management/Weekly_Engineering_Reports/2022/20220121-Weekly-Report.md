@@ -2,7 +2,7 @@
 
 ### FOSDEM
 
-Submitted a talk to FOSDEM "Introducing the M17 Project". Wrote script, had script reviewed, recorded audio, edited video, rendered video, and uploaded to FOSDEM conference server. 
+Submitted a talk to (Free and Open Source Developers' European Meeting) FOSDEM "Introducing the M17 Project". Wrote script, had script reviewed, recorded audio, edited video, rendered video, and uploaded to FOSDEM conference server. 
 
 ### Cubesat Developer's Workshop
 
