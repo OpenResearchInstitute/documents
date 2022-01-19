@@ -16,7 +16,11 @@ Bruce Perens K6BP is one of the founders of the Open Source movement in software
 
 Progress on integrating custom IP cores with the Analog Devices Hardware Descriptive Language Reference Design. This reference design is from Analog Devices and allows AXI blocks to be intergrated into the ADRV9371 radio board on the zc706. 
 
-Problem with types in ports. STD_LOGIC and STD_LOGIC_VECTOR are the only ones Vivado likes, and not all of the files for dvbs2_encoder module were copied over and the .tcl script that handles wrapping the types in STD_LOGIC and STD_LOGIC_VECTOR was not used properly. Suoto explained that there is a tcl script that adjusts the port definitions. 
+Problem with types in ports. STD_LOGIC and STD_LOGIC_VECTOR are the only ones Vivado likes, and not all of the files for dvbs2_encoder module were copied over and the .tcl script that handles wrapping the types in STD_LOGIC and STD_LOGIC_VECTOR was not used properly. Suoto explained that there is a tcl script that adjusts the port definitions.
+
+This week's FGPA meeting video recording can be found: 
+
+https://youtu.be/tyKPdB_P5IE 
 
 ### NBD Booting by Salvatore
 
