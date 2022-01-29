@@ -10,7 +10,7 @@ https://github.com/phase4ground/dvb_fpga
 
 This project aims to implement RTL components for DVB-S2, initially focusing on the transmission side. Efforts this week resulted in progress integrating the encoder into the ADRV9371+zc706 in Remote Lab West. Multiple issues solved (packaging, IQ bit width) with status by Friday of scripted integration and synthesis in the ADI reference design. Refining integration into the ADI reference design still looks like the best way to go. 
 
-pyadi-iio does not appear to allow feeding input data at the correct level for encoder testing. The pyadi-iio transmit functions deliver symbols directly to the transmitter using the iio interface. We'll have to adjust the approach. 
+pyadi-iio does not appear to allow feeding input data at the correct level for encoder testing. The pyadi-iio transmit functions deliver symbols directly to the transmitter using the iio interface. We want to write an application using the SDK, that sends data to the programmable logic side through direct memory access. 
 
 MATLAB needs an answer about the startup program participation. Package has been sent to the board. This appears to be the only path forward that enables the HDL Coder, GPU Coder, and MATLAB Coder toolboxes. 
 
