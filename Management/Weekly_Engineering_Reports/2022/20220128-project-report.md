@@ -4,7 +4,7 @@ Reminder: please review the pull request at https://github.com/phase4ground/docu
 
 ### DVBS2_ENCODER and FPGA Work
 
-IP block located at: 
+IP block of most of curent focus is located at: 
 
 https://github.com/phase4ground/dvb_fpga
 
@@ -31,3 +31,19 @@ Planning complete, related fundraiser organized (To be announced shortly),
 ### AmbaSat Respin
 
 All boards distributed to firmware team. Trello card moved to "done". Firmware team exploring some options enabled by the new chip. Slack access and meeting scheduling in progress. It is anticipated that there will be a weekly meeting. 
+
+### HamCation Planning
+
+All planning complete. 
+
+ORI Board meeting will be held at HamCation.
+
+### DEFCON Demonstrations
+
+Site selected and village communications established. Multiple talks in multiple villages highly likely. ORI Board meeting will be held at DEFCON. 
+
+### Grant Applications
+
+SBIR search committee met on Tuesday and resolved to participate in Debris Mitigation related grants with NASA. 
+
+Positive feedback received from a machine learning submission, but no award in that round. 
