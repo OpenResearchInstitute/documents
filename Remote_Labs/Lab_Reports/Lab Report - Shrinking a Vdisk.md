@@ -1,6 +1,7 @@
 # Lab Report: Shrinking the VDisk for a Linux VM
 
 2022-01-19 Paul Williamson KB5MU
+updated 2022-02-16
 
 The remote lab Unraid servers, Chonc in San Diego and Chubb in Little Rock, are each equipped with a very large disk **array** (32 TB) and a smaller set of two fast SSD drives (1 TB) known as the **cache pool**. The cache pool operates at the level of files and directories, and implements only a few simple policies, none of which are what you might expect of a "cache". Each individual disk _share_ has a setting that governs how the cache pool is used for files on that share. The options are:
 
@@ -22,9 +23,9 @@ In our case, we have multiple long-running VMs that need to manipulate large dat
 
 The ***Yes*** policy is no help here, because the VM's vdisk is just a single file to the cache system. We don't want it on the array, because that's slow, and we can't leave it on the cache pool if it's going to be big.
 
-So, we need to limit how big the vdisk on each VM can get, so we can leave them on the cache pool for speed. When the VM needs to store large data sets, such as Xilinx developer tools, target root filesystems, or lengthy signal recordings, those files will need to be stored outside the vdisk. This is easily enabled by creating dedicated shares for these purposes, and mounting those shares within the VM's filesystem. VM users will have to manage the allocation of large storage items manually by placing them in the parts of the filesystem that are within those mount points.
+So, we need to limit how big the vdisk on each VM can get, so we can leave them on the cache pool for speed. When the VM needs to store large data sets, such as ~~Xilinx developer tools,~~ target root filesystems, or lengthy signal recordings, those files will need to be stored outside the vdisk. This is easily enabled by creating dedicated shares for these purposes, and mounting those shares within the VM's filesystem. VM users will have to manage the allocation of large storage items manually by placing them in the parts of the filesystem that are within those mount points.
 
-We have allocated a share named ***tools*** to store large developer tools, such as Xilinx Vitus/Vivado. It is stored on the array, with cache policy ***No***. The hope is that a single copy of these tools will serve all the VMs that need to use them.
+We have allocated a share named ***tools*** to store large developer tools, such as Xilinx Vitus/Vivado. ~~It is stored on the array, with cache policy ***No***.~~ We'd like to store this on the array, but that turns out to be intolerably slow for Vivado, so we store it on the cache pool with policy ***Prefer***. The hope is that a single copy of these tools will serve all the VMs that need to use them.
 
 We have also allocated a share named ***big*** to store any large files that users need. It is stored on the array, with cache policy ***No***. Within ***big***, each user has a subdirectory to manage as they see fit. It is suggested that this subdirectory be symlinked to `~/big` in each user's home directory.
 
