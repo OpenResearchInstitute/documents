@@ -18,7 +18,7 @@ Integrating uplink and downlink will happen as soon as possible.
 
 Next demonstration is DEFCON in Las Vegas, NV in August 2022. 
 
-### Multimedia Beacon
+#### Multimedia Beacon
 
 Baseband is (still) working. Enclosure Number 1 obtained, thanks to SDMG members Dan and Drew. Power amplifier obtained. There's more work required before it's ready to install on a local mountaintop, but the enclosure sets a large number of the mechanical and fitting requirements. The beacon is intended to be upgradeable to a full transponder. 
 
