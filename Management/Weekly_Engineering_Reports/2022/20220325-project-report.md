@@ -4,8 +4,6 @@
 
 #### FPGA
 
-Stand-up meeting video can be found here: _AI insert link_
-
 Thank you to Suoto, Thomas Parry, Leonard Diguez, Anshul Makkar, Evariste, and Paul KB5MU for all of the substantial recent progress on getting our IP up and running over the air. The strategy of using both the PLUTO and the ADRV9371/zc706 in parallel to debug tools issues and some subtle logic errors. 
 
 FPGA implementation of M17 (our uplink protocol) on PYNQ is in progress from WX9O. Find our fork of WX9O's work here: https://github.com/phase4ground/m17-pynq/tree/master
