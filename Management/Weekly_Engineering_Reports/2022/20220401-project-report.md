@@ -15,3 +15,24 @@
 6) Bringing data modes to the M17 Protocol: needs to happen. We need some woodshedding on this very soon.
 
 7) AI/ML at FCC TAC: are propagation models the right path forward? Lots of discussion with Leonard Diguez this past week about the meeting on 23 March. Also - We need to get our guest speakers introduced to the chair ASAP. 
+
+### Reports
+
+#### MATLAB HDL Coder
+Meeting 1 April with training specialists at MATLAB. <notes here!>
+
+A MATLAB HDL Coder example was worked through and presented at the FPGA standup on 29 March. There was a hitch with hw_server and the PLUTO already being assigned, or attached. HDL Coder targets the zcu106. 
+
+#### P4DX FPGA Work
+Phase 4 digital multiplexing transponder (P4DX) Field Programmable Gate Array work was summarized in the FGPA Standup on 29 March 2022. Here's the video link to the meeting recording:
+https://youtu.be/8Q-8SGUbnvo
+
+#### Cubesat Developer's Workshop
+Jay Francis inquired about whether it was in-person or virtual. It is in-person.
+Poster was constructed and a copy can be found insert link to repository location
+
+#### IP over M17
+"Office Hours" on 30 March 2022 5pm US Pacific to talk about data modes and microwave. 
+Link to the meeting on our public calendar can be found here: https://calendar.google.com/event?action=TEMPLATE&tmeid=MDhvb2k0b3RzMzViNDF1dHUwZW9sMTFzZmUgZ3N1aXRlQG9wZW5yZXNlYXJjaC5pbnN0aXR1dGU&tmsrc=gsuite%40openresearch.institute
+
+
