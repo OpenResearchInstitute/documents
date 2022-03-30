@@ -35,4 +35,24 @@ Poster was constructed and a copy can be found insert link to repository locatio
 "Office Hours" on 30 March 2022 5pm US Pacific to talk about data modes and microwave. 
 Link to the meeting on our public calendar can be found here: https://calendar.google.com/event?action=TEMPLATE&tmeid=MDhvb2k0b3RzMzViNDF1dHUwZW9sMTFzZmUgZ3N1aXRlQG9wZW5yZXNlYXJjaC5pbnN0aXR1dGU&tmsrc=gsuite%40openresearch.institute
 
+#### AI/ML at FCC TAC
+
+ORI's remarks for 30 March 2022:
+
+"Without open data sets, and open source algorithms, there is no way to deliver equitable results for the general public. 
+
+The identification of the data sets, and not the ML techniques, should be the regulatory priority. 
+
+We cannot get involved with implementation of ML. We must define what it means to have a successful ML algorithm within the context of telecommunications. 
+
+We have not discussed that yet. 
+
+In other words, we define the objective functions, not the parameters. 
+
+What is the regulatory outcome that  we must deliver in order to satisfy the mission of the FCC? If that can be stated within this group, then we have some real traction on the problem."
+
+We are serving as the co-chair for the Safe Uses of AI/ML sub-working group for 2022. 
+
+We have submitted OSI and IEEE CAI individuals as guest speakers.
+
 
