@@ -6,15 +6,15 @@
 
 2) End-to-End transponder demonstration. Is it working over the air in Remote Lab West?
 
-3) ProFlix DVB-S2/X gear installed in Remote Labs West. Needs to happen to confirm what we’re transmitting can be received by commercial gear.
+- [x] 3) ProFlix DVB-S2/X gear installed in Remote Labs West. Needs to happen to confirm what we’re transmitting can be received by commercial gear.
 
 4) Cubesat Developer’s Workshop - we need a human resource to commit to the show, or else we need to cancel the poster session.
 
 5) HamCation 2023? If you want to see it happen, then get in touch and speak up. We need a team, today, to start organizing an effort. 
 
-6) Bringing data modes to the M17 Protocol: needs to happen. We need some woodshedding on this very soon.
+- [x] 6) Bringing data modes to the M17 Protocol: needs to happen. We need some woodshedding on this very soon.
 
-7) AI/ML at FCC TAC: are propagation models the right path forward? Lots of discussion with Leonard Diguez this past week about the meeting on 23 March. Also - We need to get our guest speakers introduced to the chair ASAP. 
+- [x] 7) AI/ML at FCC TAC: are propagation models the right path forward? Lots of discussion with Leonard Diguez this past week about the meeting on 23 March. Also - We need to get our guest speakers introduced to the chair ASAP. 
 
 ### Reports
 
@@ -29,7 +29,7 @@ https://youtu.be/8Q-8SGUbnvo
 
 #### Cubesat Developer's Workshop
 Jay Francis inquired about whether it was in-person or virtual. It is in-person.
-Poster was constructed and a copy can be found insert link to repository location
+Poster was constructed and a copy can be found AI: insert link here
 
 #### IP over M17
 "Office Hours" on 30 March 2022 5pm US Pacific to talk about data modes and microwave. 
