@@ -35,6 +35,16 @@ Poster was constructed and a copy can be found insert link to repository locatio
 "Office Hours" on 30 March 2022 5pm US Pacific to talk about data modes and microwave. 
 Link to the meeting on our public calendar can be found here: https://calendar.google.com/event?action=TEMPLATE&tmeid=MDhvb2k0b3RzMzViNDF1dHUwZW9sMTFzZmUgZ3N1aXRlQG9wZW5yZXNlYXJjaC5pbnN0aXR1dGU&tmsrc=gsuite%40openresearch.institute
 
+Video is here: https://youtu.be/Am8gl3GxIqY
+
+Consensus on:
+1) Validity of use case for higher bitrate M17 for P4DX uplink.
+2) IP over M17 could use an example (as could all the types in this field), but the type field indicating IPv4 is sufficient for carrying IPv4 within M17. M17 packet is small enough to where IP fragmentation will probably occur. 
+3) M17 over IP is defined in the appendix, it works as implemented in the reflector network, and did not appear to need any additional work.
+4) P4DX could provide a spigot of M17 uplinks over IP, using the protocol in the appendix, as a Groundsat feature. This would not affect the air interface.
+5) We discussed the XOR with random data aspect (covert SPARROW channel here? Yes/maybe if there’s a known message)
+6) Discussed asking for a P4 Type Field Indicator. Smart receivers won’t need this, but it would allow people to move between 9600 bps M17 and higher bitrate M17.
+
 #### AI/ML at FCC TAC
 
 ORI's remarks for 30 March 2022:
@@ -54,5 +64,7 @@ What is the regulatory outcome that  we must deliver in order to satisfy the mis
 We are serving as the co-chair for the Safe Uses of AI/ML sub-working group for 2022. 
 
 We have submitted OSI and IEEE CAI individuals as guest speakers.
+
+Sub-working-group "Safe Uses of AI/ML" had a kickoff session on Thursday 1200 US Pacific. 
 
 
