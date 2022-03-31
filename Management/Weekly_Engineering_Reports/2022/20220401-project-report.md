@@ -61,10 +61,17 @@ In other words, we define the objective functions, not the parameters.
 
 What is the regulatory outcome that  we must deliver in order to satisfy the mission of the FCC? If that can be stated within this group, then we have some real traction on the problem."
 
-We are serving as the co-chair for the Safe Uses of AI/ML sub-working group for 2022. 
+We are serving as the co-chair for the Safe Uses of AI/ML sub-working group of the FCC Technological Advisory Committee for 2022. 
 
 We have submitted OSI and IEEE CAI individuals as guest speakers.
 
 Sub-working-group "Safe Uses of AI/ML" had a kickoff session on Thursday 1200 US Pacific. 
 
+#### ProFlix DVB-S2/X gear installed in Remote Labs
+
+1) DekTec DTA-2132 (receiver) installed in Remote Labs West CHONC. Will be attached to the Windows VM, which also has direct access to the RTX 3080 GPU. StreamXpert license is ready to go on Chonc-Win10.
+
+2) DekTec DTA-2115 (transmitter) installed in Remote Labs West Hello KitTI PC
+
+3) DekTec DTA-2115 (transmitter) previously installed in Remote Labs South CHUBB in November 2021.  
 
