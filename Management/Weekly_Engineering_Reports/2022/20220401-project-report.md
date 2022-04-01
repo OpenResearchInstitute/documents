@@ -74,7 +74,7 @@ We are serving as the co-chair for the Safe Uses of AI/ML sub-working group of t
 
 We have submitted OSI and IEEE CAI individuals as guest speakers.
 
-Sub-working-group "Safe Uses of AI/ML" had a kickoff session on Thursday 1200 US Pacific. 
+Sub-working-group "Safe Uses of AI/ML" had a kickoff session on Thursday 1200 US Pacific. Attending were Adam Drobot, Paul Steinberg (co-chair), Michelle Thompson (co-chair), FCC liasion Martin Doczkat (with associate). Postulating what the FCC should care about, being in "discovery mode", finding best practices, and attempting to define what intersects with the FCC were given as general guidelines. Michelle to meet Monday 4 April with Paul Steinberg to plan out the first tranch of meetings, find a good weekly time and day, and prioritize some guest speakers.  
 
 #### ProFlix DVB-S2/X gear installed in Remote Labs
 
