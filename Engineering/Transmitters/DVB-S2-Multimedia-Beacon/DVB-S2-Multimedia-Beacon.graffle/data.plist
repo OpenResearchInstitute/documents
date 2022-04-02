@@ -36,7 +36,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2021-10-07 19:28:05 +0000</string>
+	<string>2022-04-01 16:18:59 +0000</string>
 	<key>Modifier</key>
 	<string>Michelle Thompson</string>
 	<key>NotesVisible</key>
@@ -435,18 +435,20 @@ For deployment, the BladeRF will need amplification in order to operate the DB6N
 						JIQFWzM2Y10GAAAAHAAAAP/+SABl
 						AGwAdgBlAHQAaQBjAGEATgBlAHUA
 						ZQClDJsAmwGbAJsAhoaXAzuShJiZ
-						BJKckp2ShJaWBk5TTGlua4aShISE
-						BU5TVVJMAJSbAJKElpY7aHR0cHM6
-						Ly93aWtpLmJhdGMub3JnLnVrL2lt
-						YWdlcy80LzQ2L0ZUUy00MzM1X1Nl
-						cmllc19GMi5wZGaGhpKvkrSSmZKz
-						hpcCQZcEU5KEmJkEkpySnZK2koS4
-						mwCShJaWU2h0dHBzOi8vZGF0YXNo
-						ZWV0Lm9jdG9wYXJ0LmNvbS9TVFYw
-						OTEwQURCLVNUTWljcm9lbGVjdHJv
-						bmljcy1kYXRhc2hlZXQtMTYzNDk5
-						NTYucGRmhoaSr5K0kpmSs4aXAoHn
-						AIY=
+						BJKckoSenwAAhKGZDJKikqSSpZKm
+						kqeSqJKpkqqSq5Kskq2SroYAhpKE
+						lpYGTlNMaW5rhpKEhIQFTlNVUkwA
+						lJsAkoSWljtodHRwczovL3dpa2ku
+						YmF0Yy5vcmcudWsvaW1hZ2VzLzQv
+						NDYvRlRTLTQzMzVfU2VyaWVzX0Yy
+						LnBkZoaGkq+StJKZkoSbmwGcg6Cm
+						pj6DaNDQPoNy4eA+AYaGlwJBlwRT
+						koSYmQSSnJK2kriShLqbAJKElpZT
+						aHR0cHM6Ly9kYXRhc2hlZXQub2N0
+						b3BhcnQuY29tL1NUVjA5MTBBREIt
+						U1RNaWNyb2VsZWN0cm9uaWNzLWRh
+						dGFzaGVldC0xNjM0OTk1Ni5wZGaG
+						hpKvkrSSmZK8hpcCgecAhg==
 						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
@@ -461,9 +463,10 @@ For deployment, the BladeRF will need amplification in order to operate the DB6N
 The module inside the MiniTiouner is called a NIM, or network interface module, and often referred to as a \'93tuner\'94, but it is also a demodulator and a decoder. It takes the signal all the way down to an MPEG Transport Stream. \
 \
 Short data sheet on one of the NIM models used with MiniTioune: \
-{\field{\*\fldinst{HYPERLINK "https://wiki.batc.org.uk/images/4/46/FTS-4335_Series_F2.pdf"}}{\fldrslt https://wiki.batc.org.uk/images/4/46/FTS-4335_Series_F2.pdf}}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://wiki.batc.org.uk/images/4/46/FTS-4335_Series_F2.pdf"}}{\fldrslt \cf3 https://wiki.batc.org.uk/images/4/46/FTS-4335_Series_F2.pdf}}\
 \
-Data brief for the demodulator/decoder device in the 4335 NIM: {\field{\*\fldinst{HYPERLINK "https://datasheet.octopart.com/STV0910ADB-STMicroelectronics-datasheet-16349956.pdf"}}{\fldrslt https://datasheet.octopart.com/STV0910ADB-STMicroelectronics-datasheet-16349956.pdf}}\
+Data brief for the demodulator/decoder device in the 4335 NIM: {\field{\*\fldinst{HYPERLINK "https://datasheet.octopart.com/STV0910ADB-STMicroelectronics-datasheet-16349956.pdf"}}{\fldrslt \cf3 https://datasheet.octopart.com/STV0910ADB-STMicroelectronics-datasheet-16349956.pdf}}\
 \
 While the transmitter can produce a variety of transport streams, and the deployed beacon will use both Generic Stream Encapsulation and MPEG transport streams, the demonstration receiver can only receive MPEG transport streams. }</string>
 					</dict>
@@ -519,6 +522,27 @@ While the transmitter can produce a variety of transport streams, and the deploy
 					<dict>
 						<key>Align</key>
 						<integer>0</integer>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKxhEVkItUzIgTXVs
+						dGltZWRpYSBCZWFjb26GhAJpSQEY
+						koSEhAxOU0RpY3Rpb25hcnkAlIQB
+						aQOShJaWB05TQ29sb3KGkoSEhAdO
+						U0NvbG9yAJSEAWMBhARmZmZmgw6E
+						BD6Dke3sPoOkx0c/AYaShJaWEE5T
+						UGFyYWdyYXBoU3R5bGWGkoSEhBdO
+						U011dGFibGVQYXJhZ3JhcGhTdHls
+						ZQCEhBBOU1BhcmFncmFwaFN0eWxl
+						AJSEBENDQFMAAISEhAdOU0FycmF5
+						AJSZAIaBAAKEBFsxZl0khpKElpYG
+						TlNGb250hpKEhIQGTlNGb250HpSZ
+						KIQFWzQwY10GAAAAIAAAAP/+QQB2
+						AGUAbgBpAHIATgBlAHgAdAAtAEIA
+						bwBsAGQAhAFmGpsAmwGbAJsAhoaG
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Bold;}
@@ -602,6 +626,63 @@ While the transmitter can produce a variety of transport streams, and the deploy
 					<dict>
 						<key>Align</key>
 						<integer>0</integer>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBK4FmAUdvYWw6IFB1
+						dCBhIERWQi1TMiBNdWx0aW1lZGlh
+						IEJlYWNvbiBvbiB0aGUgYWlyIGlu
+						IGFzIG1hbnkgdGVycmVzdHJpYWwg
+						bG9jYXRpb25zIGFzIHBvc3NpYmxl
+						LiBDb250ZW50IG9mIHRoZSBiZWFj
+						b24gaXMgYW4gaW1wbGVtZW50YXRp
+						b24gb2YgdGhlIERlZmF1bHQgRGln
+						aXRhbCBEb3dubGluayBhcyBvdXRs
+						aW5lZCBpbiB0aGUgQXJjaGl0ZWN0
+						dXJlIGRvY3VtZW50IGZyb20gT3Bl
+						biBSZXNlYXJjaCBJbnN0aXR1dGUg
+						Zm9yIHRoZSBQaGFzZSA0IFRyYW5z
+						cG9uZGVyIGh0dHBzOi8vZ2l0aHVi
+						LmNvbS9waGFzZTRncm91bmQvZG9j
+						dW1lbnRzL3RyZWUvbWFzdGVyL0Vu
+						Z2luZWVyaW5nL1JlcXVpcmVtZW50
+						cy9BcmNoaXRlY3R1cmWGhAJpSQEF
+						koSEhAxOU0RpY3Rpb25hcnkAlIQB
+						aQOShJaWB05TQ29sb3KGkoSEhAdO
+						U0NvbG9yAJSEAWMBhARmZmZmg2GO
+						jj6DW7a2PoNIxMQ+AYaShJaWEE5T
+						UGFyYWdyYXBoU3R5bGWGkoSEhBdO
+						U011dGFibGVQYXJhZ3JhcGhTdHls
+						ZQCEhBBOU1BhcmFncmFwaFN0eWxl
+						AJSEBENDQFMAAISEhAdOU0FycmF5
+						AJSZDJKEhIQJTlNUZXh0VGFiAJSE
+						AkNmAByGkoSjogA4hpKEo6IAVIaS
+						hKOiAHCGkoSjogCBjACGkoSjogCB
+						qACGkoSjogCBxACGkoSjogCB4ACG
+						koSjogCB/ACGkoSjogCBGAGGkoSj
+						ogCBNAGGkoSjogCBUAGGhgCGkoSW
+						lgZOU0ZvbnSGkoSEhAZOU0ZvbnQe
+						lJkwhAVbNDhjXQYAAAAmAAAA//5I
+						AGUAbAB2AGUAdABpAGMAYQBOAGUA
+						dQBlAC0AQgBvAGwAZAAAAIQBZgyb
+						AJsBmwCbAIaGlwKBBgGShJiZA5KZ
+						koSbmwGcg6Cmpj6DaNDQPoNy4eA+
+						AYaSnJKdkq+ShLGZJIQFWzM2Y10G
+						AAAAHAAAAP/+SABlAGwAdgBlAHQA
+						aQBjAGEATgBlAHUAZQClDJsAmwGb
+						AJsAhoaXA1uShJiZBJKckoSenwAA
+						hKGZDJKikqSSpZKmkqeSqJKpkqqS
+						q5Kskq2SroYAhpKElpYGTlNMaW5r
+						hpKEhIQFTlNVUkwAlJsAkoSWllto
+						dHRwczovL2dpdGh1Yi5jb20vcGhh
+						c2U0Z3JvdW5kL2RvY3VtZW50cy90
+						cmVlL21hc3Rlci9FbmdpbmVlcmlu
+						Zy9SZXF1aXJlbWVudHMvQXJjaGl0
+						ZWN0dXJlhoaSr5K0kpmShJubAZyD
+						oKamPoNo0NA+g3Lh4D4BhoaG
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue-Bold;\f1\fnil\fcharset0 HelveticaNeue;}
@@ -610,7 +691,7 @@ While the transmitter can produce a variety of transport streams, and the deploy
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
 \f0\b\fs24 \cf2 Goal:
-\f1\b0 \cf3  Put a DVB-S2 Multimedia Beacon on the air in as many terrestrial locations as possible. Content of the beacon is an implementation of the Default Digital Downlink as outlined in the Architecture document from Open Research Institute for the Phase 4 Transponder {\field{\*\fldinst{HYPERLINK "https://github.com/phase4ground/documents/tree/master/Engineering/Requirements/Architecture"}}{\fldrslt https://github.com/phase4ground/documents/tree/master/Engineering/Requirements/Architecture}}}</string>
+\f1\b0 \cf3  Put a DVB-S2 Multimedia Beacon on the air in as many terrestrial locations as possible. Content of the beacon is an implementation of the Default Digital Downlink as outlined in the Architecture document from Open Research Institute for the Phase 4 Transponder {\field{\*\fldinst{HYPERLINK "https://github.com/phase4ground/documents/tree/master/Engineering/Requirements/Architecture"}}{\fldrslt \cf3 https://github.com/phase4ground/documents/tree/master/Engineering/Requirements/Architecture}}}</string>
 					</dict>
 				</dict>
 				<dict>
@@ -664,6 +745,27 @@ While the transmitter can produce a variety of transport streams, and the deploy
 					<dict>
 						<key>Align</key>
 						<integer>0</integer>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKxNEb2N1bWVudCBJ
+						bmZvIEJsb2NrhoQCaUkBE5KEhIQM
+						TlNEaWN0aW9uYXJ5AJSEAWkDkoSW
+						lgdOU0NvbG9yhpKEhIQHTlNDb2xv
+						cgCUhAFjAYQEZmZmZoOgpqY+g2jQ
+						0D6DcuHgPgGGkoSWlhBOU1BhcmFn
+						cmFwaFN0eWxlhpKEhIQXTlNNdXRh
+						YmxlUGFyYWdyYXBoU3R5bGUAhIQQ
+						TlNQYXJhZ3JhcGhTdHlsZQCUhARD
+						Q0BTAACEhIQHTlNBcnJheQCUmQCG
+						gQAChARbMWZdJIaShJaWBk5TRm9u
+						dIaShISEBk5TRm9udB6UmSiEBVs0
+						MGNdBgAAACAAAAD//kEAdgBlAG4A
+						aQByAE4AZQB4AHQALQBCAG8AbABk
+						AIQBZhibAJsBmwCbAIaGhg==
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Bold;}
@@ -741,6 +843,66 @@ While the transmitter can produce a variety of transport streams, and the deploy
 							</dict>
 							<key>Text</key>
 							<dict>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KzI8JUNyZWF0
+								b3IlPgpQYXVs
+								IFdpbGxpYW1z
+								b24KaHR0cDov
+								L2pvaG5zY3Vs
+								bGVuLmNvbYaE
+								AmlJATKShISE
+								DE5TRGljdGlv
+								bmFyeQCUhAFp
+								A5KElpYHTlND
+								b2xvcoaShISE
+								B05TQ29sb3IA
+								lIQBYwGEBGZm
+								ZmaDYY6OPoNb
+								trY+g0jExD4B
+								hpKElpYQTlNQ
+								YXJhZ3JhcGhT
+								dHlsZYaShISE
+								F05TTXV0YWJs
+								ZVBhcmFncmFw
+								aFN0eWxlAISE
+								EE5TUGFyYWdy
+								YXBoU3R5bGUA
+								lIQEQ0NAUwIA
+								hISEB05TQXJy
+								YXkAlJkMkoSE
+								hAlOU1RleHRU
+								YWIAlIQCQ2YA
+								HIaShKOiADiG
+								koSjogBUhpKE
+								o6IAcIaShKOi
+								AIGMAIaShKOi
+								AIGoAIaShKOi
+								AIHEAIaShKOi
+								AIHgAIaShKOi
+								AIH8AIaShKOi
+								AIEYAYaShKOi
+								AIE0AYaShKOi
+								AIFQAYaGAIaS
+								hJaWBk5TRm9u
+								dIaShISEBk5T
+								Rm9udB6UmSSE
+								BVszNmNdBgAA
+								ABwAAAD//kgA
+								ZQBsAHYAZQB0
+								AGkAYwBhAE4A
+								ZQB1AGUAhAFm
+								CJsAmwGbAJsA
+								hoaG
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
@@ -812,6 +974,61 @@ http://johnscullen.com}</string>
 							</dict>
 							<key>Text</key>
 							<dict>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KwMxLjKGhAJp
+								SQEDkoSEhAxO
+								U0RpY3Rpb25h
+								cnkAlIQBaQOS
+								hJaWB05TQ29s
+								b3KGkoSEhAdO
+								U0NvbG9yAJSE
+								AWMBhARmZmZm
+								g2GOjj6DW7a2
+								PoNIxMQ+AYaS
+								hJaWEE5TUGFy
+								YWdyYXBoU3R5
+								bGWGkoSEhBdO
+								U011dGFibGVQ
+								YXJhZ3JhcGhT
+								dHlsZQCEhBBO
+								U1BhcmFncmFw
+								aFN0eWxlAJSE
+								BENDQFMCAISE
+								hAdOU0FycmF5
+								AJSZDJKEhIQJ
+								TlNUZXh0VGFi
+								AJSEAkNmAByG
+								koSjogA4hpKE
+								o6IAVIaShKOi
+								AHCGkoSjogCB
+								jACGkoSjogCB
+								qACGkoSjogCB
+								xACGkoSjogCB
+								4ACGkoSjogCB
+								/ACGkoSjogCB
+								GAGGkoSjogCB
+								NAGGkoSjogCB
+								UAGGhgCGkoSW
+								lgZOU0ZvbnSG
+								koSEhAZOU0Zv
+								bnQelJkkhAVb
+								MzZjXQYAAAAc
+								AAAA//5IAGUA
+								bAB2AGUAdABp
+								AGMAYQBOAGUA
+								dQBlAIQBZgib
+								AJsBmwCbAIaG
+								hg==
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
@@ -881,6 +1098,64 @@ http://johnscullen.com}</string>
 							</dict>
 							<key>Text</key>
 							<dict>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								Kx88JU1vZGlm
+								aWNhdGlvbkRh
+								dGUgJWIgJWQs
+								ICVZICU+hoQC
+								aUkBH5KEhIQM
+								TlNEaWN0aW9u
+								YXJ5AJSEAWkD
+								koSWlgdOU0Nv
+								bG9yhpKEhIQH
+								TlNDb2xvcgCU
+								hAFjAYQEZmZm
+								ZoNhjo4+g1u2
+								tj6DSMTEPgGG
+								koSWlhBOU1Bh
+								cmFncmFwaFN0
+								eWxlhpKEhIQX
+								TlNNdXRhYmxl
+								UGFyYWdyYXBo
+								U3R5bGUAhIQQ
+								TlNQYXJhZ3Jh
+								cGhTdHlsZQCU
+								hARDQ0BTAgCE
+								hIQHTlNBcnJh
+								eQCUmQyShISE
+								CU5TVGV4dFRh
+								YgCUhAJDZgAc
+								hpKEo6IAOIaS
+								hKOiAFSGkoSj
+								ogBwhpKEo6IA
+								gYwAhpKEo6IA
+								gagAhpKEo6IA
+								gcQAhpKEo6IA
+								geAAhpKEo6IA
+								gfwAhpKEo6IA
+								gRgBhpKEo6IA
+								gTQBhpKEo6IA
+								gVABhoYAhpKE
+								lpYGTlNGb250
+								hpKEhIQGTlNG
+								b250HpSZJIQF
+								WzM2Y10GAAAA
+								HAAAAP/+SABl
+								AGwAdgBlAHQA
+								aQBjAGEATgBl
+								AHUAZQCEAWYI
+								mwCbAZsAmwCG
+								hoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
@@ -950,6 +1225,61 @@ http://johnscullen.com}</string>
 							</dict>
 							<key>Text</key>
 							<dict>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KwdWRVJTSU9O
+								hoQCaUkBB5KE
+								hIQMTlNEaWN0
+								aW9uYXJ5AJSE
+								AWkDkoSWlgdO
+								U0NvbG9yhpKE
+								hIQHTlNDb2xv
+								cgCUhAFjAYQE
+								ZmZmZoNhjo4+
+								g1u2tj6DSMTE
+								PgGGkoSWlhBO
+								U1BhcmFncmFw
+								aFN0eWxlhpKE
+								hIQXTlNNdXRh
+								YmxlUGFyYWdy
+								YXBoU3R5bGUA
+								hIQQTlNQYXJh
+								Z3JhcGhTdHls
+								ZQCUhARDQ0BT
+								AgCEhIQHTlNB
+								cnJheQCUmQyS
+								hISECU5TVGV4
+								dFRhYgCUhAJD
+								ZgAchpKEo6IA
+								OIaShKOiAFSG
+								koSjogBwhpKE
+								o6IAgYwAhpKE
+								o6IAgagAhpKE
+								o6IAgcQAhpKE
+								o6IAgeAAhpKE
+								o6IAgfwAhpKE
+								o6IAgRgBhpKE
+								o6IAgTQBhpKE
+								o6IAgVABhoYA
+								hpKElpYGTlNG
+								b250hpKEhIQG
+								TlNGb250HpSZ
+								JIQFWzM2Y10G
+								AAAAHAAAAP/+
+								SABlAGwAdgBl
+								AHQAaQBjAGEA
+								TgBlAHUAZQCE
+								AWYImwCbAZsA
+								mwCGhoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
@@ -1019,6 +1349,61 @@ http://johnscullen.com}</string>
 							</dict>
 							<key>Text</key>
 							<dict>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KwVUSVRMRYaE
+								AmlJAQWShISE
+								DE5TRGljdGlv
+								bmFyeQCUhAFp
+								A5KElpYHTlND
+								b2xvcoaShISE
+								B05TQ29sb3IA
+								lIQBYwGEBGZm
+								ZmaDYY6OPoNb
+								trY+g0jExD4B
+								hpKElpYQTlNQ
+								YXJhZ3JhcGhT
+								dHlsZYaShISE
+								F05TTXV0YWJs
+								ZVBhcmFncmFw
+								aFN0eWxlAISE
+								EE5TUGFyYWdy
+								YXBoU3R5bGUA
+								lIQEQ0NAUwIA
+								hISEB05TQXJy
+								YXkAlJkMkoSE
+								hAlOU1RleHRU
+								YWIAlIQCQ2YA
+								HIaShKOiADiG
+								koSjogBUhpKE
+								o6IAcIaShKOi
+								AIGMAIaShKOi
+								AIGoAIaShKOi
+								AIHEAIaShKOi
+								AIHgAIaShKOi
+								AIH8AIaShKOi
+								AIEYAYaShKOi
+								AIE0AYaShKOi
+								AIFQAYaGAIaS
+								hJaWBk5TRm9u
+								dIaShISEBk5T
+								Rm9udB6UmSSE
+								BVszNmNdBgAA
+								ABwAAAD//kgA
+								ZQBsAHYAZQB0
+								AGkAYwBhAE4A
+								ZQB1AGUAhAFm
+								CJsAmwGbAJsA
+								hoaG
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
@@ -1088,6 +1473,61 @@ http://johnscullen.com}</string>
 							</dict>
 							<key>Text</key>
 							<dict>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KwpDUkVBVEVE
+								IEJZhoQCaUkB
+								CpKEhIQMTlNE
+								aWN0aW9uYXJ5
+								AJSEAWkDkoSW
+								lgdOU0NvbG9y
+								hpKEhIQHTlND
+								b2xvcgCUhAFj
+								AYQEZmZmZoNh
+								jo4+g1u2tj6D
+								SMTEPgGGkoSW
+								lhBOU1BhcmFn
+								cmFwaFN0eWxl
+								hpKEhIQXTlNN
+								dXRhYmxlUGFy
+								YWdyYXBoU3R5
+								bGUAhIQQTlNQ
+								YXJhZ3JhcGhT
+								dHlsZQCUhARD
+								Q0BTAgCEhIQH
+								TlNBcnJheQCU
+								mQyShISECU5T
+								VGV4dFRhYgCU
+								hAJDZgAchpKE
+								o6IAOIaShKOi
+								AFSGkoSjogBw
+								hpKEo6IAgYwA
+								hpKEo6IAgagA
+								hpKEo6IAgcQA
+								hpKEo6IAgeAA
+								hpKEo6IAgfwA
+								hpKEo6IAgRgB
+								hpKEo6IAgTQB
+								hpKEo6IAgVAB
+								hoYAhpKElpYG
+								TlNGb250hpKE
+								hIQGTlNGb250
+								HpSZJIQFWzM2
+								Y10GAAAAHAAA
+								AP/+SABlAGwA
+								dgBlAHQAaQBj
+								AGEATgBlAHUA
+								ZQCEAWYImwCb
+								AZsAmwCGhoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
@@ -1157,6 +1597,61 @@ http://johnscullen.com}</string>
 							</dict>
 							<key>Text</key>
 							<dict>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KwREQVRFhoQC
+								aUkBBJKEhIQM
+								TlNEaWN0aW9u
+								YXJ5AJSEAWkD
+								koSWlgdOU0Nv
+								bG9yhpKEhIQH
+								TlNDb2xvcgCU
+								hAFjAYQEZmZm
+								ZoNhjo4+g1u2
+								tj6DSMTEPgGG
+								koSWlhBOU1Bh
+								cmFncmFwaFN0
+								eWxlhpKEhIQX
+								TlNNdXRhYmxl
+								UGFyYWdyYXBo
+								U3R5bGUAhIQQ
+								TlNQYXJhZ3Jh
+								cGhTdHlsZQCU
+								hARDQ0BTAgCE
+								hIQHTlNBcnJh
+								eQCUmQyShISE
+								CU5TVGV4dFRh
+								YgCUhAJDZgAc
+								hpKEo6IAOIaS
+								hKOiAFSGkoSj
+								ogBwhpKEo6IA
+								gYwAhpKEo6IA
+								gagAhpKEo6IA
+								gcQAhpKEo6IA
+								geAAhpKEo6IA
+								gfwAhpKEo6IA
+								gRgBhpKEo6IA
+								gTQBhpKEo6IA
+								gVABhoYAhpKE
+								lpYGTlNGb250
+								hpKEhIQGTlNG
+								b250HpSZJIQF
+								WzM2Y10GAAAA
+								HAAAAP/+SABl
+								AGwAdgBlAHQA
+								aQBjAGEATgBl
+								AHUAZQCEAWYI
+								mwCbAZsAmwCG
+								hoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
@@ -1226,6 +1721,62 @@ http://johnscullen.com}</string>
 							</dict>
 							<key>Text</key>
 							<dict>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								Kww8JURvY3Vt
+								ZW50JT6GhAJp
+								SQEMkoSEhAxO
+								U0RpY3Rpb25h
+								cnkAlIQBaQOS
+								hJaWB05TQ29s
+								b3KGkoSEhAdO
+								U0NvbG9yAJSE
+								AWMBhARmZmZm
+								g2GOjj6DW7a2
+								PoNIxMQ+AYaS
+								hJaWEE5TUGFy
+								YWdyYXBoU3R5
+								bGWGkoSEhBdO
+								U011dGFibGVQ
+								YXJhZ3JhcGhT
+								dHlsZQCEhBBO
+								U1BhcmFncmFw
+								aFN0eWxlAJSE
+								BENDQFMCAISE
+								hAdOU0FycmF5
+								AJSZDJKEhIQJ
+								TlNUZXh0VGFi
+								AJSEAkNmAByG
+								koSjogA4hpKE
+								o6IAVIaShKOi
+								AHCGkoSjogCB
+								jACGkoSjogCB
+								qACGkoSjogCB
+								xACGkoSjogCB
+								4ACGkoSjogCB
+								/ACGkoSjogCB
+								GAGGkoSjogCB
+								NAGGkoSjogCB
+								UAGGhgCGkoSW
+								lgZOU0ZvbnSG
+								koSEhAZOU0Zv
+								bnQelJkkhAVb
+								MzZjXQYAAAAc
+								AAAA//5IAGUA
+								bAB2AGUAdABp
+								AGMAYQBOAGUA
+								dQBlAIQBZgib
+								AJsBmwCbAIaG
+								hg==
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
@@ -1343,6 +1894,114 @@ http://johnscullen.com}</string>
 				<key>kMDItemVersion</key>
 				<string>1.0</string>
 			</dict>
+			<key>VPages</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>ActiveLayerIndex</key>
+			<integer>0</integer>
+			<key>AutoAdjust</key>
+			<true/>
+			<key>BackgroundGraphic</key>
+			<dict>
+				<key>Bounds</key>
+				<string>{{0, 0}, {559.27556705474854, 782.8897705078125}}</string>
+				<key>Class</key>
+				<string>SolidGraphic</string>
+				<key>ID</key>
+				<integer>2</integer>
+				<key>Style</key>
+				<dict>
+					<key>fill</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>b</key>
+							<real>0.86406000000000005</real>
+							<key>g</key>
+							<real>0.95794400000000002</real>
+							<key>r</key>
+							<real>0.98943400000000004</real>
+						</dict>
+					</dict>
+					<key>stroke</key>
+					<dict>
+						<key>Draws</key>
+						<string>NO</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>BaseZoom</key>
+			<integer>0</integer>
+			<key>CanvasOrigin</key>
+			<string>{0, 0}</string>
+			<key>ColumnAlign</key>
+			<integer>0</integer>
+			<key>ColumnSpacing</key>
+			<real>36</real>
+			<key>DisplayScale</key>
+			<string>1.0000 cm = 1.0000 cm</string>
+			<key>GraphicsList</key>
+			<array/>
+			<key>GridInfo</key>
+			<dict>
+				<key>GridSpacing</key>
+				<real>2.8346457481384277</real>
+				<key>MajorGridSpacing</key>
+				<integer>10</integer>
+				<key>ShowsGrid</key>
+				<string>YES</string>
+				<key>SnapsToGrid</key>
+				<string>YES</string>
+			</dict>
+			<key>HPages</key>
+			<integer>1</integer>
+			<key>KeepToScale</key>
+			<false/>
+			<key>Layers</key>
+			<array>
+				<dict>
+					<key>Lock</key>
+					<string>NO</string>
+					<key>Name</key>
+					<string>Layer 1</string>
+					<key>Print</key>
+					<string>YES</string>
+					<key>Slices</key>
+					<string>NO</string>
+					<key>View</key>
+					<string>YES</string>
+				</dict>
+			</array>
+			<key>LayoutInfo</key>
+			<dict>
+				<key>Animate</key>
+				<string>NO</string>
+				<key>circoMinDist</key>
+				<real>18</real>
+				<key>circoSeparation</key>
+				<real>0.0</real>
+				<key>layoutEngine</key>
+				<string>dot</string>
+				<key>neatoLineLength</key>
+				<real>0.20000000298023224</real>
+				<key>neatoSeparation</key>
+				<real>0.0</real>
+				<key>twopiSeparation</key>
+				<real>0.0</real>
+			</dict>
+			<key>Orientation</key>
+			<integer>2</integer>
+			<key>PrintOnePage</key>
+			<false/>
+			<key>RowAlign</key>
+			<integer>1</integer>
+			<key>RowSpacing</key>
+			<real>36</real>
+			<key>SheetTitle</key>
+			<string>Canvas 5</string>
+			<key>UniqueID</key>
+			<integer>5</integer>
 			<key>VPages</key>
 			<integer>1</integer>
 		</dict>
@@ -2471,6 +3130,27 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Align</key>
 						<integer>0</integer>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKxRMaW5rIEJ1ZGdl
+						dCBPdmVydmlld4aEAmlJARSShISE
+						DE5TRGljdGlvbmFyeQCUhAFpA5KE
+						lpYHTlNDb2xvcoaShISEB05TQ29s
+						b3IAlIQBYwGEBGZmZmaDoKamPoNo
+						0NA+g3Lh4D4BhpKElpYQTlNQYXJh
+						Z3JhcGhTdHlsZYaShISEF05TTXV0
+						YWJsZVBhcmFncmFwaFN0eWxlAISE
+						EE5TUGFyYWdyYXBoU3R5bGUAlIQE
+						Q0NAUwAAhISEB05TQXJyYXkAlJkA
+						hoEAAoQEWzFmXSSGkoSWlgZOU0Zv
+						bnSGkoSEhAZOU0ZvbnQelJkohAVb
+						NDBjXQYAAAAgAAAA//5BAHYAZQBu
+						AGkAcgBOAGUAeAB0AC0AQgBvAGwA
+						ZACEAWYYmwCbAZsAmwCGhoY=
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Bold;}
@@ -2547,6 +3227,63 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KxFEQjZOVCBU
+								cmFuc3ZlcnRl
+								coaEAmlJARGS
+								hISEDE5TRGlj
+								dGlvbmFyeQCU
+								hAFpA5KElpYH
+								TlNDb2xvcoaS
+								hISEB05TQ29s
+								b3IAlIQBYwGE
+								BGZmZmaDoKam
+								PoNo0NA+g3Lh
+								4D4BhpKElpYQ
+								TlNQYXJhZ3Jh
+								cGhTdHlsZYaS
+								hISEF05TTXV0
+								YWJsZVBhcmFn
+								cmFwaFN0eWxl
+								AISEEE5TUGFy
+								YWdyYXBoU3R5
+								bGUAlIQEQ0NA
+								UwAAhISEB05T
+								QXJyYXkAlJkM
+								koSEhAlOU1Rl
+								eHRUYWIAlIQC
+								Q2YAHIaShKOi
+								ADiGkoSjogBU
+								hpKEo6IAcIaS
+								hKOiAIGMAIaS
+								hKOiAIGoAIaS
+								hKOiAIHEAIaS
+								hKOiAIHgAIaS
+								hKOiAIH8AIaS
+								hKOiAIEYAYaS
+								hKOiAIE0AYaS
+								hKOiAIFQAYaG
+								AIaShJaWBk5T
+								Rm9udIaShISE
+								Bk5TRm9udB6U
+								mTCEBVs0OGNd
+								BgAAACYAAAD/
+								/kEAdgBlAG4A
+								aQByAE4AZQB4
+								AHQALQBSAGUA
+								ZwB1AGwAYQBy
+								AAAAhAFmDJsA
+								mwGbAJsAhoaG
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -2615,6 +3352,63 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								Kw9EQjZOVCBB
+								bXBsaWZpZXKG
+								hAJpSQEPkoSE
+								hAxOU0RpY3Rp
+								b25hcnkAlIQB
+								aQOShJaWB05T
+								Q29sb3KGkoSE
+								hAdOU0NvbG9y
+								AJSEAWMBhARm
+								ZmZmg6Cmpj6D
+								aNDQPoNy4eA+
+								AYaShJaWEE5T
+								UGFyYWdyYXBo
+								U3R5bGWGkoSE
+								hBdOU011dGFi
+								bGVQYXJhZ3Jh
+								cGhTdHlsZQCE
+								hBBOU1BhcmFn
+								cmFwaFN0eWxl
+								AJSEBENDQFMA
+								AISEhAdOU0Fy
+								cmF5AJSZDJKE
+								hIQJTlNUZXh0
+								VGFiAJSEAkNm
+								AByGkoSjogA4
+								hpKEo6IAVIaS
+								hKOiAHCGkoSj
+								ogCBjACGkoSj
+								ogCBqACGkoSj
+								ogCBxACGkoSj
+								ogCB4ACGkoSj
+								ogCB/ACGkoSj
+								ogCBGAGGkoSj
+								ogCBNAGGkoSj
+								ogCBUAGGhgCG
+								koSWlgZOU0Zv
+								bnSGkoSEhAZO
+								U0ZvbnQelJkw
+								hAVbNDhjXQYA
+								AAAmAAAA//5B
+								AHYAZQBuAGkA
+								cgBOAGUAeAB0
+								AC0AUgBlAGcA
+								dQBsAGEAcgAA
+								AIQBZgybAJsB
+								mwCbAIaGhg==
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -2683,6 +3477,63 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KxZSZWxldmFu
+								dCBTcGVjaWZp
+								Y2F0aW9uhoQC
+								aUkBFpKEhIQM
+								TlNEaWN0aW9u
+								YXJ5AJSEAWkD
+								koSWlgdOU0Nv
+								bG9yhpKEhIQH
+								TlNDb2xvcgCU
+								hAFjAYQEZmZm
+								ZoNhjo4+g1u2
+								tj6DSMTEPgGG
+								koSWlhBOU1Bh
+								cmFncmFwaFN0
+								eWxlhpKEhIQX
+								TlNNdXRhYmxl
+								UGFyYWdyYXBo
+								U3R5bGUAhIQQ
+								TlNQYXJhZ3Jh
+								cGhTdHlsZQCU
+								hARDQ0BTAACE
+								hIQHTlNBcnJh
+								eQCUmQyShISE
+								CU5TVGV4dFRh
+								YgCUhAJDZgAc
+								hpKEo6IAOIaS
+								hKOiAFSGkoSj
+								ogBwhpKEo6IA
+								gYwAhpKEo6IA
+								gagAhpKEo6IA
+								gcQAhpKEo6IA
+								geAAhpKEo6IA
+								gfwAhpKEo6IA
+								gRgBhpKEo6IA
+								gTQBhpKEo6IA
+								gVABhoYAhpKE
+								lpYGTlNGb250
+								hpKEhIQGTlNG
+								b250HpSZKIQF
+								WzQwY10GAAAA
+								IAAAAP/+QQB2
+								AGUAbgBpAHIA
+								TgBlAHgAdAAt
+								AEIAbwBsAGQA
+								hAFmDJsAmwGb
+								AJsAhoaG
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Bold;}
@@ -2753,6 +3604,65 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								Kx9TQk1TIC0g
+								Z29pbmcgdG8g
+								aGF2ZSB0byBt
+								ZWFzdXJlhoQC
+								aUkBH5KEhIQM
+								TlNEaWN0aW9u
+								YXJ5AJSEAWkD
+								koSWlgdOU0Nv
+								bG9yhpKEhIQH
+								TlNDb2xvcgCU
+								hAFjAYQEZmZm
+								ZoOgpqY+g2jQ
+								0D6DcuHgPgGG
+								koSWlhBOU1Bh
+								cmFncmFwaFN0
+								eWxlhpKEhIQX
+								TlNNdXRhYmxl
+								UGFyYWdyYXBo
+								U3R5bGUAhIQQ
+								TlNQYXJhZ3Jh
+								cGhTdHlsZQCU
+								hARDQ0BTAACE
+								hIQHTlNBcnJh
+								eQCUmQyShISE
+								CU5TVGV4dFRh
+								YgCUhAJDZgAc
+								hpKEo6IAOIaS
+								hKOiAFSGkoSj
+								ogBwhpKEo6IA
+								gYwAhpKEo6IA
+								gagAhpKEo6IA
+								gcQAhpKEo6IA
+								geAAhpKEo6IA
+								gfwAhpKEo6IA
+								gRgBhpKEo6IA
+								gTQBhpKEo6IA
+								gVABhoYAhpKE
+								lpYGTlNGb250
+								hpKEhIQGTlNG
+								b250HpSZMIQF
+								WzQ4Y10GAAAA
+								JgAAAP/+QQB2
+								AGUAbgBpAHIA
+								TgBlAHgAdAAt
+								AFIAZQBnAHUA
+								bABhAHIAAACE
+								AWYMmwCbAZsA
+								mwCGhoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -2821,6 +3731,62 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KwcxNS42IGRC
+								hoQCaUkBB5KE
+								hIQMTlNEaWN0
+								aW9uYXJ5AJSE
+								AWkDkoSWlgdO
+								U0NvbG9yhpKE
+								hIQHTlNDb2xv
+								cgCUhAFjAYQE
+								ZmZmZoOgpqY+
+								g2jQ0D6DcuHg
+								PgGGkoSWlhBO
+								U1BhcmFncmFw
+								aFN0eWxlhpKE
+								hIQXTlNNdXRh
+								YmxlUGFyYWdy
+								YXBoU3R5bGUA
+								hIQQTlNQYXJh
+								Z3JhcGhTdHls
+								ZQCUhARDQ0BT
+								AACEhIQHTlNB
+								cnJheQCUmQyS
+								hISECU5TVGV4
+								dFRhYgCUhAJD
+								ZgAchpKEo6IA
+								OIaShKOiAFSG
+								koSjogBwhpKE
+								o6IAgYwAhpKE
+								o6IAgagAhpKE
+								o6IAgcQAhpKE
+								o6IAgeAAhpKE
+								o6IAgfwAhpKE
+								o6IAgRgBhpKE
+								o6IAgTQBhpKE
+								o6IAgVABhoYA
+								hpKElpYGTlNG
+								b250hpKEhIQG
+								TlNGb250HpSZ
+								MIQFWzQ4Y10G
+								AAAAJgAAAP/+
+								QQB2AGUAbgBp
+								AHIATgBlAHgA
+								dAAtAFIAZQBn
+								AHUAbABhAHIA
+								AACEAWYMmwCb
+								AZsAmwCGhoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -2889,6 +3855,64 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KxZOdWFuZCBB
+								bXBsaWZpZXIg
+								QlQtMTAwhoQC
+								aUkBFpKEhIQM
+								TlNEaWN0aW9u
+								YXJ5AJSEAWkD
+								koSWlgdOU0Nv
+								bG9yhpKEhIQH
+								TlNDb2xvcgCU
+								hAFjAYQEZmZm
+								ZoOgpqY+g2jQ
+								0D6DcuHgPgGG
+								koSWlhBOU1Bh
+								cmFncmFwaFN0
+								eWxlhpKEhIQX
+								TlNNdXRhYmxl
+								UGFyYWdyYXBo
+								U3R5bGUAhIQQ
+								TlNQYXJhZ3Jh
+								cGhTdHlsZQCU
+								hARDQ0BTAACE
+								hIQHTlNBcnJh
+								eQCUmQyShISE
+								CU5TVGV4dFRh
+								YgCUhAJDZgAc
+								hpKEo6IAOIaS
+								hKOiAFSGkoSj
+								ogBwhpKEo6IA
+								gYwAhpKEo6IA
+								gagAhpKEo6IA
+								gcQAhpKEo6IA
+								geAAhpKEo6IA
+								gfwAhpKEo6IA
+								gRgBhpKEo6IA
+								gTQBhpKEo6IA
+								gVABhoYAhpKE
+								lpYGTlNGb250
+								hpKEhIQGTlNG
+								b250HpSZMIQF
+								WzQ4Y10GAAAA
+								JgAAAP/+QQB2
+								AGUAbgBpAHIA
+								TgBlAHgAdAAt
+								AFIAZQBnAHUA
+								bABhAHIAAACE
+								AWYMmwCbAZsA
+								mwCGhoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -2959,6 +3983,64 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KxlTbG90dGVk
+								IFdhdmVndWlk
+								ZSBBbnRlbm5h
+								hoQCaUkBGZKE
+								hIQMTlNEaWN0
+								aW9uYXJ5AJSE
+								AWkDkoSWlgdO
+								U0NvbG9yhpKE
+								hIQHTlNDb2xv
+								cgCUhAFjAYQE
+								ZmZmZoOgpqY+
+								g2jQ0D6DcuHg
+								PgGGkoSWlhBO
+								U1BhcmFncmFw
+								aFN0eWxlhpKE
+								hIQXTlNNdXRh
+								YmxlUGFyYWdy
+								YXBoU3R5bGUA
+								hIQQTlNQYXJh
+								Z3JhcGhTdHls
+								ZQCUhARDQ0BT
+								AACEhIQHTlNB
+								cnJheQCUmQyS
+								hISECU5TVGV4
+								dFRhYgCUhAJD
+								ZgAchpKEo6IA
+								OIaShKOiAFSG
+								koSjogBwhpKE
+								o6IAgYwAhpKE
+								o6IAgagAhpKE
+								o6IAgcQAhpKE
+								o6IAgeAAhpKE
+								o6IAgfwAhpKE
+								o6IAgRgBhpKE
+								o6IAgTQBhpKE
+								o6IAgVABhoYA
+								hpKElpYGTlNG
+								b250hpKEhIQG
+								TlNGb250HpSZ
+								MIQFWzQ4Y10G
+								AAAAJgAAAP/+
+								QQB2AGUAbgBp
+								AHIATgBlAHgA
+								dAAtAFIAZQBn
+								AHUAbABhAHIA
+								AACEAWYMmwCb
+								AZsAmwCGhoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3031,6 +4113,63 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KxFCbGFkZVJG
+								IE1pY3JvIDIu
+								MIaEAmlJARGS
+								hISEDE5TRGlj
+								dGlvbmFyeQCU
+								hAFpA5KElpYH
+								TlNDb2xvcoaS
+								hISEB05TQ29s
+								b3IAlIQBYwGE
+								BGZmZmaDoKam
+								PoNo0NA+g3Lh
+								4D4BhpKElpYQ
+								TlNQYXJhZ3Jh
+								cGhTdHlsZYaS
+								hISEF05TTXV0
+								YWJsZVBhcmFn
+								cmFwaFN0eWxl
+								AISEEE5TUGFy
+								YWdyYXBoU3R5
+								bGUAlIQEQ0NA
+								UwAAhISEB05T
+								QXJyYXkAlJkM
+								koSEhAlOU1Rl
+								eHRUYWIAlIQC
+								Q2YAHIaShKOi
+								ADiGkoSjogBU
+								hpKEo6IAcIaS
+								hKOiAIGMAIaS
+								hKOiAIGoAIaS
+								hKOiAIHEAIaS
+								hKOiAIHgAIaS
+								hKOiAIH8AIaS
+								hKOiAIEYAYaS
+								hKOiAIE0AYaS
+								hKOiAIFQAYaG
+								AIaShJaWBk5T
+								Rm9udIaShISE
+								Bk5TRm9udB6U
+								mTCEBVs0OGNd
+								BgAAACYAAAD/
+								/kEAdgBlAG4A
+								aQByAE4AZQB4
+								AHQALQBSAGUA
+								ZwB1AGwAYQBy
+								AAAAhAFmDJsA
+								mwGbAJsAhoaG
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3099,6 +4238,62 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								Kwc4VyAxN2RC
+								hoQCaUkBB5KE
+								hIQMTlNEaWN0
+								aW9uYXJ5AJSE
+								AWkDkoSWlgdO
+								U0NvbG9yhpKE
+								hIQHTlNDb2xv
+								cgCUhAFjAYQE
+								ZmZmZoOgpqY+
+								g2jQ0D6DcuHg
+								PgGGkoSWlhBO
+								U1BhcmFncmFw
+								aFN0eWxlhpKE
+								hIQXTlNNdXRh
+								YmxlUGFyYWdy
+								YXBoU3R5bGUA
+								hIQQTlNQYXJh
+								Z3JhcGhTdHls
+								ZQCUhARDQ0BT
+								AACEhIQHTlNB
+								cnJheQCUmQyS
+								hISECU5TVGV4
+								dFRhYgCUhAJD
+								ZgAchpKEo6IA
+								OIaShKOiAFSG
+								koSjogBwhpKE
+								o6IAgYwAhpKE
+								o6IAgagAhpKE
+								o6IAgcQAhpKE
+								o6IAgeAAhpKE
+								o6IAgfwAhpKE
+								o6IAgRgBhpKE
+								o6IAgTQBhpKE
+								o6IAgVABhoYA
+								hpKElpYGTlNG
+								b250hpKEhIQG
+								TlNGb250HpSZ
+								MIQFWzQ4Y10G
+								AAAAJgAAAP/+
+								QQB2AGUAbgBp
+								AHIATgBlAHgA
+								dAAtAFIAZQBn
+								AHUAbABhAHIA
+								AACEAWYMmwCb
+								AZsAmwCGhoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3169,6 +4364,65 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								Kx8yMDBtVyBv
+								dXRwdXQgcG93
+								ZXIgYXQgMTAg
+								R0h6IFJGhoQC
+								aUkBH5KEhIQM
+								TlNEaWN0aW9u
+								YXJ5AJSEAWkD
+								koSWlgdOU0Nv
+								bG9yhpKEhIQH
+								TlNDb2xvcgCU
+								hAFjAYQEZmZm
+								ZoOgpqY+g2jQ
+								0D6DcuHgPgGG
+								koSWlhBOU1Bh
+								cmFncmFwaFN0
+								eWxlhpKEhIQX
+								TlNNdXRhYmxl
+								UGFyYWdyYXBo
+								U3R5bGUAhIQQ
+								TlNQYXJhZ3Jh
+								cGhTdHlsZQCU
+								hARDQ0BTAACE
+								hIQHTlNBcnJh
+								eQCUmQyShISE
+								CU5TVGV4dFRh
+								YgCUhAJDZgAc
+								hpKEo6IAOIaS
+								hKOiAFSGkoSj
+								ogBwhpKEo6IA
+								gYwAhpKEo6IA
+								gagAhpKEo6IA
+								gcQAhpKEo6IA
+								geAAhpKEo6IA
+								gfwAhpKEo6IA
+								gRgBhpKEo6IA
+								gTQBhpKEo6IA
+								gVABhoYAhpKE
+								lpYGTlNGb250
+								hpKEhIQGTlNG
+								b250HpSZMIQF
+								WzQ4Y10GAAAA
+								JgAAAP/+QQB2
+								AGUAbgBpAHIA
+								TgBlAHgAdAAt
+								AFIAZQBnAHUA
+								bABhAHIAAACE
+								AWYMmwCbAZsA
+								mwCGhoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3241,6 +4495,63 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								Kw8zZEJtIGF0
+								IDcwY20gSUaG
+								hAJpSQEPkoSE
+								hAxOU0RpY3Rp
+								b25hcnkAlIQB
+								aQOShJaWB05T
+								Q29sb3KGkoSE
+								hAdOU0NvbG9y
+								AJSEAWMBhARm
+								ZmZmg6Cmpj6D
+								aNDQPoNy4eA+
+								AYaShJaWEE5T
+								UGFyYWdyYXBo
+								U3R5bGWGkoSE
+								hBdOU011dGFi
+								bGVQYXJhZ3Jh
+								cGhTdHlsZQCE
+								hBBOU1BhcmFn
+								cmFwaFN0eWxl
+								AJSEBENDQFMA
+								AISEhAdOU0Fy
+								cmF5AJSZDJKE
+								hIQJTlNUZXh0
+								VGFiAJSEAkNm
+								AByGkoSjogA4
+								hpKEo6IAVIaS
+								hKOiAHCGkoSj
+								ogCBjACGkoSj
+								ogCBqACGkoSj
+								ogCBxACGkoSj
+								ogCB4ACGkoSj
+								ogCB/ACGkoSj
+								ogCBGAGGkoSj
+								ogCBNAGGkoSj
+								ogCBUAGGhgCG
+								koSWlgZOU0Zv
+								bnSGkoSEhAZO
+								U0ZvbnQelJkw
+								hAVbNDhjXQYA
+								AAAmAAAA//5B
+								AHYAZQBuAGkA
+								cgBOAGUAeAB0
+								AC0AUgBlAGcA
+								dQBsAGEAcgAA
+								AIQBZgybAJsB
+								mwCbAIaGhg==
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3309,6 +4620,62 @@ http://johnscullen.com}</string>
 							<dict>
 								<key>Align</key>
 								<integer>0</integer>
+								<key>RTFD</key>
+								<data>
+								BAtzdHJlYW10
+								eXBlZIHoA4QB
+								QISEhBJOU0F0
+								dHJpYnV0ZWRT
+								dHJpbmcAhIQI
+								TlNPYmplY3QA
+								hZKEhIQITlNT
+								dHJpbmcBlIQB
+								KwlDb21wb25l
+								bnSGhAJpSQEJ
+								koSEhAxOU0Rp
+								Y3Rpb25hcnkA
+								lIQBaQOShJaW
+								B05TQ29sb3KG
+								koSEhAdOU0Nv
+								bG9yAJSEAWMB
+								hARmZmZmg2GO
+								jj6DW7a2PoNI
+								xMQ+AYaShJaW
+								EE5TUGFyYWdy
+								YXBoU3R5bGWG
+								koSEhBdOU011
+								dGFibGVQYXJh
+								Z3JhcGhTdHls
+								ZQCEhBBOU1Bh
+								cmFncmFwaFN0
+								eWxlAJSEBEND
+								QFMAAISEhAdO
+								U0FycmF5AJSZ
+								DJKEhIQJTlNU
+								ZXh0VGFiAJSE
+								AkNmAByGkoSj
+								ogA4hpKEo6IA
+								VIaShKOiAHCG
+								koSjogCBjACG
+								koSjogCBqACG
+								koSjogCBxACG
+								koSjogCB4ACG
+								koSjogCB/ACG
+								koSjogCBGAGG
+								koSjogCBNAGG
+								koSjogCBUAGG
+								hgCGkoSWlgZO
+								U0ZvbnSGkoSE
+								hAZOU0ZvbnQe
+								lJkohAVbNDBj
+								XQYAAAAgAAAA
+								//5BAHYAZQBu
+								AGkAcgBOAGUA
+								eAB0AC0AQgBv
+								AGwAZACEAWYM
+								mwCbAZsAmwCG
+								hoY=
+								</data>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Bold;}
@@ -3470,6 +4837,27 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Align</key>
 						<integer>0</integer>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKw5EYXRhZmxvdyBN
+						b2RlbIaEAmlJAQ6ShISEDE5TRGlj
+						dGlvbmFyeQCUhAFpA5KElpYHTlND
+						b2xvcoaShISEB05TQ29sb3IAlIQB
+						YwGEBGZmZmaDoKamPoNo0NA+g3Lh
+						4D4BhpKElpYQTlNQYXJhZ3JhcGhT
+						dHlsZYaShISEF05TTXV0YWJsZVBh
+						cmFncmFwaFN0eWxlAISEEE5TUGFy
+						YWdyYXBoU3R5bGUAlIQEQ0NAUwAA
+						hISEB05TQXJyYXkAlJkAhoEAAoQE
+						WzFmXSSGkoSWlgZOU0ZvbnSGkoSE
+						hAZOU0ZvbnQelJkohAVbNDBjXQYA
+						AAAgAAAA//5BAHYAZQBuAGkAcgBO
+						AGUAeAB0AC0AQgBvAGwAZACEAWYY
+						mwCbAZsAmwCGhoY=
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Bold;}
@@ -3546,6 +4934,33 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Pad</key>
 						<real>10</real>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKxVUcmFuc3BvcnQg
+						U3RyZWFtIEZpbGWGhAJpSQEVkoSE
+						hAxOU0RpY3Rpb25hcnkAlIQBaQOS
+						hJaWB05TQ29sb3KGkoSEhAdOU0Nv
+						bG9yAJSEAWMBhARmZmZmg6Cmpj6D
+						aNDQPoNy4eA+AYaShJaWEE5TUGFy
+						YWdyYXBoU3R5bGWGkoSEhBdOU011
+						dGFibGVQYXJhZ3JhcGhTdHlsZQCE
+						hBBOU1BhcmFncmFwaFN0eWxlAJSE
+						BENDQFMCAISEhAdOU0FycmF5AJSZ
+						DJKEhIQJTlNUZXh0VGFiAJSEAkNm
+						AByGkoSjogA4hpKEo6IAVIaShKOi
+						AHCGkoSjogCBjACGkoSjogCBqACG
+						koSjogCBxACGkoSjogCB4ACGkoSj
+						ogCB/ACGkoSjogCBGAGGkoSjogCB
+						NAGGkoSjogCBUAGGhgCGkoSWlgZO
+						U0ZvbnSGkoSEhAZOU0ZvbnQelJkw
+						hAVbNDhjXQYAAAAmAAAA//5BAHYA
+						ZQBuAGkAcgBOAGUAeAB0AC0AUgBl
+						AGcAdQBsAGEAcgAAAIQBZgybAJsB
+						mwCbAIaGhg==
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3621,6 +5036,33 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Pad</key>
 						<real>10</real>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKxJUcmFuc21pdCBG
+						bG93Z3JhcGiGhAJpSQESkoSEhAxO
+						U0RpY3Rpb25hcnkAlIQBaQOShJaW
+						B05TQ29sb3KGkoSEhAdOU0NvbG9y
+						AJSEAWMBhARmZmZmgxzraj+DJuRj
+						P4Pmy0s/AYaShJaWEE5TUGFyYWdy
+						YXBoU3R5bGWGkoSEhBdOU011dGFi
+						bGVQYXJhZ3JhcGhTdHlsZQCEhBBO
+						U1BhcmFncmFwaFN0eWxlAJSEBEND
+						QFMCAISEhAdOU0FycmF5AJSZDJKE
+						hIQJTlNUZXh0VGFiAJSEAkNmAByG
+						koSjogA4hpKEo6IAVIaShKOiAHCG
+						koSjogCBjACGkoSjogCBqACGkoSj
+						ogCBxACGkoSjogCB4ACGkoSjogCB
+						/ACGkoSjogCBGAGGkoSjogCBNAGG
+						koSjogCBUAGGhgCGkoSWlgZOU0Zv
+						bnSGkoSEhAZOU0ZvbnQelJkwhAVb
+						NDhjXQYAAAAmAAAA//5BAHYAZQBu
+						AGkAcgBOAGUAeAB0AC0AUgBlAGcA
+						dQBsAGEAcgAAAIQBZgybAJsBmwCb
+						AIaGhg==
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3696,6 +5138,33 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Pad</key>
 						<real>10</real>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKxJCbGFkZVJGIFNp
+						bmsgQmxvY2uGhAJpSQESkoSEhAxO
+						U0RpY3Rpb25hcnkAlIQBaQOShJaW
+						B05TQ29sb3KGkoSEhAdOU0NvbG9y
+						AJSEAWMBhARmZmZmgxzraj+DJuRj
+						P4Pmy0s/AYaShJaWEE5TUGFyYWdy
+						YXBoU3R5bGWGkoSEhBdOU011dGFi
+						bGVQYXJhZ3JhcGhTdHlsZQCEhBBO
+						U1BhcmFncmFwaFN0eWxlAJSEBEND
+						QFMCAISEhAdOU0FycmF5AJSZDJKE
+						hIQJTlNUZXh0VGFiAJSEAkNmAByG
+						koSjogA4hpKEo6IAVIaShKOiAHCG
+						koSjogCBjACGkoSjogCBqACGkoSj
+						ogCBxACGkoSjogCB4ACGkoSjogCB
+						/ACGkoSjogCBGAGGkoSjogCBNAGG
+						koSjogCBUAGGhgCGkoSWlgZOU0Zv
+						bnSGkoSEhAZOU0ZvbnQelJkwhAVb
+						NDhjXQYAAAAmAAAA//5BAHYAZQBu
+						AGkAcgBOAGUAeAB0AC0AUgBlAGcA
+						dQBsAGEAcgAAAIQBZgybAJsBmwCb
+						AIaGhg==
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3771,6 +5240,32 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Pad</key>
 						<real>10</real>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKwtCbGFkZVJGIFNE
+						UoaEAmlJAQuShISEDE5TRGljdGlv
+						bmFyeQCUhAFpA5KElpYHTlNDb2xv
+						coaShISEB05TQ29sb3IAlIQBYwGE
+						BGZmZmaDHOtqP4Mm5GM/g+bLSz8B
+						hpKElpYQTlNQYXJhZ3JhcGhTdHls
+						ZYaShISEF05TTXV0YWJsZVBhcmFn
+						cmFwaFN0eWxlAISEEE5TUGFyYWdy
+						YXBoU3R5bGUAlIQEQ0NAUwIAhISE
+						B05TQXJyYXkAlJkMkoSEhAlOU1Rl
+						eHRUYWIAlIQCQ2YAHIaShKOiADiG
+						koSjogBUhpKEo6IAcIaShKOiAIGM
+						AIaShKOiAIGoAIaShKOiAIHEAIaS
+						hKOiAIHgAIaShKOiAIH8AIaShKOi
+						AIEYAYaShKOiAIE0AYaShKOiAIFQ
+						AYaGAIaShJaWBk5TRm9udIaShISE
+						Bk5TRm9udB6UmTCEBVs0OGNdBgAA
+						ACYAAAD//kEAdgBlAG4AaQByAE4A
+						ZQB4AHQALQBSAGUAZwB1AGwAYQBy
+						AAAAhAFmDJsAmwGbAJsAhoaG
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3846,6 +5341,32 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Pad</key>
 						<real>10</real>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKwlBbXBsaWZpZXKG
+						hAJpSQEJkoSEhAxOU0RpY3Rpb25h
+						cnkAlIQBaQOShJaWB05TQ29sb3KG
+						koSEhAdOU0NvbG9yAJSEAWMBhARm
+						ZmZmgxzraj+DJuRjP4Pmy0s/AYaS
+						hJaWEE5TUGFyYWdyYXBoU3R5bGWG
+						koSEhBdOU011dGFibGVQYXJhZ3Jh
+						cGhTdHlsZQCEhBBOU1BhcmFncmFw
+						aFN0eWxlAJSEBENDQFMCAISEhAdO
+						U0FycmF5AJSZDJKEhIQJTlNUZXh0
+						VGFiAJSEAkNmAByGkoSjogA4hpKE
+						o6IAVIaShKOiAHCGkoSjogCBjACG
+						koSjogCBqACGkoSjogCBxACGkoSj
+						ogCB4ACGkoSjogCB/ACGkoSjogCB
+						GAGGkoSjogCBNAGGkoSjogCBUAGG
+						hgCGkoSWlgZOU0ZvbnSGkoSEhAZO
+						U0ZvbnQelJkwhAVbNDhjXQYAAAAm
+						AAAA//5BAHYAZQBuAGkAcgBOAGUA
+						eAB0AC0AUgBlAGcAdQBsAGEAcgAA
+						AIQBZgybAJsBmwCbAIaGhg==
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3921,6 +5442,33 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Pad</key>
 						<real>10</real>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKxFEQjZOVCBUcmFu
+						c3ZlcnRlcoaEAmlJARGShISEDE5T
+						RGljdGlvbmFyeQCUhAFpA5KElpYH
+						TlNDb2xvcoaShISEB05TQ29sb3IA
+						lIQBYwGEBGZmZmaDHOtqP4Mm5GM/
+						g+bLSz8BhpKElpYQTlNQYXJhZ3Jh
+						cGhTdHlsZYaShISEF05TTXV0YWJs
+						ZVBhcmFncmFwaFN0eWxlAISEEE5T
+						UGFyYWdyYXBoU3R5bGUAlIQEQ0NA
+						UwIAhISEB05TQXJyYXkAlJkMkoSE
+						hAlOU1RleHRUYWIAlIQCQ2YAHIaS
+						hKOiADiGkoSjogBUhpKEo6IAcIaS
+						hKOiAIGMAIaShKOiAIGoAIaShKOi
+						AIHEAIaShKOiAIHgAIaShKOiAIH8
+						AIaShKOiAIEYAYaShKOiAIE0AYaS
+						hKOiAIFQAYaGAIaShJaWBk5TRm9u
+						dIaShISEBk5TRm9udB6UmTCEBVs0
+						OGNdBgAAACYAAAD//kEAdgBlAG4A
+						aQByAE4AZQB4AHQALQBSAGUAZwB1
+						AGwAYQByAAAAhAFmDJsAmwGbAJsA
+						hoaG
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -3996,6 +5544,33 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Pad</key>
 						<real>10</real>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKxlTbG90dGVkIFdh
+						dmVndWlkZSBBbnRlbm5hhoQCaUkB
+						GZKEhIQMTlNEaWN0aW9uYXJ5AJSE
+						AWkDkoSWlgdOU0NvbG9yhpKEhIQH
+						TlNDb2xvcgCUhAFjAYQEZmZmZoMc
+						62o/gybkYz+D5stLPwGGkoSWlhBO
+						U1BhcmFncmFwaFN0eWxlhpKEhIQX
+						TlNNdXRhYmxlUGFyYWdyYXBoU3R5
+						bGUAhIQQTlNQYXJhZ3JhcGhTdHls
+						ZQCUhARDQ0BTAgCEhIQHTlNBcnJh
+						eQCUmQyShISECU5TVGV4dFRhYgCU
+						hAJDZgAchpKEo6IAOIaShKOiAFSG
+						koSjogBwhpKEo6IAgYwAhpKEo6IA
+						gagAhpKEo6IAgcQAhpKEo6IAgeAA
+						hpKEo6IAgfwAhpKEo6IAgRgBhpKE
+						o6IAgTQBhpKEo6IAgVABhoYAhpKE
+						lpYGTlNGb250hpKEhIQGTlNGb250
+						HpSZMIQFWzQ4Y10GAAAAJgAAAP/+
+						QQB2AGUAbgBpAHIATgBlAHgAdAAt
+						AFIAZQBnAHUAbABhAHIAAACEAWYM
+						mwCbAZsAmwCGhoY=
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 AvenirNext-Regular;}
@@ -4118,6 +5693,32 @@ http://johnscullen.com}</string>
 					<dict>
 						<key>Align</key>
 						<integer>2</integer>
+						<key>RTFD</key>
+						<data>
+						BAtzdHJlYW10eXBlZIHoA4QBQISE
+						hBJOU0F0dHJpYnV0ZWRTdHJpbmcA
+						hIQITlNPYmplY3QAhZKEhIQITlNT
+						dHJpbmcBlIQBKwlHTlUKUmFkaW+G
+						hAJpSQEJkoSEhAxOU0RpY3Rpb25h
+						cnkAlIQBaQOShJaWB05TQ29sb3KG
+						koSEhAdOU0NvbG9yAJSEAWMBhARm
+						ZmZmgz6ujT6DJJy2PoNEF8Q+AYaS
+						hJaWEE5TUGFyYWdyYXBoU3R5bGWG
+						koSEhBdOU011dGFibGVQYXJhZ3Jh
+						cGhTdHlsZQCEhBBOU1BhcmFncmFw
+						aFN0eWxlAJSEBENDQFMBAISEhAdO
+						U0FycmF5AJSZDJKEhIQJTlNUZXh0
+						VGFiAJSEAkNmAByGkoSjogA4hpKE
+						o6IAVIaShKOiAHCGkoSjogCBjACG
+						koSjogCBqACGkoSjogCBxACGkoSj
+						ogCB4ACGkoSjogCB/ACGkoSjogCB
+						GAGGkoSjogCBNAGGkoSjogCBUAGG
+						hgCGkoSWlgZOU0ZvbnSGkoSEhAZO
+						U0ZvbnQelJkkhAVbMzZjXQYAAAAc
+						AAAA//5IAGUAbAB2AGUAdABpAGMA
+						YQBOAGUAdQBlAIQBZgqbAJsBmwCb
+						AIaGhg==
+						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
@@ -6668,31 +8269,28 @@ for Transmit}</string>
 						aXRlZCB0byB0aGUgTVBFRyB0cmFu
 						c3BvcnQgc3RyZWFtLoaEAmlJAQSS
 						hISEDE5TRGljdGlvbmFyeQCUhAFp
-						BJKElpYLTlNGb250VHJhaXSGkoSE
-						hAhOU051bWJlcgCEhAdOU1ZhbHVl
-						AJSEASqEhAFxnQKGkoSWlhBOU1Bh
-						cmFncmFwaFN0eWxlhpKEhIQXTlNN
-						dXRhYmxlUGFyYWdyYXBoU3R5bGUA
-						hIQQTlNQYXJhZ3JhcGhTdHlsZQCU
-						hARDQ0BTAgCEhIQHTlNBcnJheQCU
-						mQyShISECU5TVGV4dFRhYgCUhAJD
-						ZgAchpKEpaMAOIaShKWjAFSGkoSl
-						owBwhpKEpaMAgYwAhpKEpaMAgagA
-						hpKEpaMAgcQAhpKEpaMAgeAAhpKE
-						paMAgfwAhpKEpaMAgRgBhpKEpaMA
-						gTQBhpKEpaMAgVABhoYAhpKElpYG
-						TlNGb250hpKEhIQGTlNGb250HpSZ
-						MIQFWzQ4Y10GAAAAJgAAAP/+SABl
-						AGwAdgBlAHQAaQBjAGEATgBlAHUA
-						ZQAtAEIAbwBsAGQAAACEAWYShAFj
-						AKcBpwCnAIaShJaWDk5TT3JpZ2lu
-						YWxGb250hpKyhpcCgY8AkoSYmQSS
-						tJKEs5kkhAVbMzZjXQYAAAAcAAAA
-						//5IAGUAbAB2AGUAdABpAGMAYQBO
-						AGUAdQBlAKYSpwCnAacApwCGkp6S
-						n5KxkraShJaWB05TQ29sb3KGkoSE
-						hAdOU0NvbG9yAJSnAYQEZmZmZoNh
-						jo4+g1u2tj6DSMTEPgGGhoY=
+						ApKElpYQTlNQYXJhZ3JhcGhTdHls
+						ZYaShISEF05TTXV0YWJsZVBhcmFn
+						cmFwaFN0eWxlAISEEE5TUGFyYWdy
+						YXBoU3R5bGUAlIQEQ0NAUwIAhISE
+						B05TQXJyYXkAlJkMkoSEhAlOU1Rl
+						eHRUYWIAlIQCQ2YAHIaShKCfADiG
+						koSgnwBUhpKEoJ8AcIaShKCfAIGM
+						AIaShKCfAIGoAIaShKCfAIHEAIaS
+						hKCfAIHgAIaShKCfAIH8AIaShKCf
+						AIEYAYaShKCfAIE0AYaShKCfAIFQ
+						AYaGAIaShJaWBk5TRm9udIaShISE
+						Bk5TRm9udB6UmTCEBVs0OGNdBgAA
+						ACYAAAD//kgAZQBsAHYAZQB0AGkA
+						YwBhAE4AZQB1AGUALQBCAG8AbABk
+						AAAAhAFmEoQBYwCjAaMAowCGhpcC
+						gY8AkoSYmQOShJaWB05TQ29sb3KG
+						koSEhAdOU0NvbG9yAJSjAYQEZmZm
+						ZoNhjo4+g1u2tj6DSMTEPgGGkpmS
+						mpKskoSumSSEBVszNmNdBgAAABwA
+						AAD//kgAZQBsAHYAZQB0AGkAYwBh
+						AE4AZQB1AGUAohKjAKMBowCjAIaG
+						hg==
 						</data>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
@@ -8437,8 +10035,8 @@ pre-built MPEG sample stream developed for Remote Labs.}</string>
 					<string>Arrow</string>
 					<key>Points</key>
 					<array>
-						<string>{79.479296120006325, 533.28839603159736}</string>
-						<string>{79.595011394638377, 563.7195153785857}</string>
+						<string>{79.395829987615485, 533.28839859198797}</string>
+						<string>{79.423110732859556, 563.71950451870975}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -10372,13 +11970,13 @@ for Transmit}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>3</integer>
+		<integer>1</integer>
 		<key>Expanded_Canvases</key>
 		<array>
 			<string>Block Diagram</string>
 		</array>
 		<key>Frame</key>
-		<string>{{351, 123}, {1878, 1143}}</string>
+		<string>{{402, 192}, {1878, 1143}}</string>
 		<key>ShowInfo</key>
 		<false/>
 		<key>ShowRuler</key>
@@ -10390,9 +11988,9 @@ for Transmit}</string>
 		<key>TopSlabHeight</key>
 		<real>617</real>
 		<key>VisibleRegion</key>
-		<string>{{-169, -40}, {1457.01756214281, 863.15790556804643}}</string>
+		<string>{{-550, -100}, {1661, 984}}</string>
 		<key>Zoom</key>
-		<real>1.1399999856948853</real>
+		<real>1</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
@@ -10414,6 +12012,11 @@ for Transmit}</string>
 				<string>Block Diagram with BOM</string>
 				<real>1.1399999856948853</real>
 				<real>0.56999999284744263</real>
+			</array>
+			<array>
+				<string>Canvas 5</string>
+				<real>1</real>
+				<real>1</real>
 			</array>
 		</array>
 	</dict>
