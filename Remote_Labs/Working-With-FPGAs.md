@@ -1,12 +1,14 @@
 # ORI Remote Labs: Working With FPGAs
 
-DRAFT 2021-07-19 Paul Williamson KB5MU
+DRAFT 2022-04-11 Paul Williamson KB5MU
 
 The remote labs operated by Open Research Institute support development of open source projects using certain Xilinx FPGAs.
 
 You can do much of the development work at home on your own computer, assuming you have enough disk space to spare and a reasonably modern machine. The Xilinx development tools are free to download and use for a subset of basic operations. When you need to use certain advanced components, or when you need to synthesize a bitstream for larger devices, you need a paid-up license. ORI makes available a "floating license" you can use on open source projects. A floating license is one that can be used on any computer anywhere, but only one computer at a time. In order to enforce this restriction, there's a way to obtain the license over the Internet, and release it when you're done actively using it. This document will cover how to set that up.
 
 Another expensive thing you will need to complete your FPGA project is access to a development board for a suitable device. The ORI Remote Lab in San Diego has two development boards set up and available for use: a ZCU106 (Zynq UltraScale+™ MPSoC) and a ZC706 (Zynq-7000 SoC). The ZC706 is equipped with an Analog Devices ADRV9371 wideband RF transceiver board. Each development board is connected to dedicated USB ports associated with a particular Linux virtual machine (VM) running on the lab's high-performance PC. Similar equipment is expected to be available at the Remote Lab East. This document will cover how to get started using the development board with the VM.
+
+In addition, the San Diego lab has an ADALM-PLUTO (aka PlutoSDR) from Analog Devices connected to one of the VMs. The Pluto is a lower-priced platform that shares many characteristics with the target platforms from Xilinx. The idea here is that individual developers may already be familiar with development on the Pluto, and may have one available for local experimentation. It may be easier to get started on Remote Lab projects using the familiar Pluto, and only then transition to the Xilinx platforms.
 
 ## The Floating Vitis (Vivado) License
 
@@ -148,7 +150,7 @@ This process could be automated if it turns out to happen very often. Let us kno
 
 ## Using VMs in the Remote Lab
 
-Each remote lab has a powerful PC that's configured with Unraid as a hypervisor to run virtual machines, and FPGA development boards connected to that machine. Typically an FPGA development board has an Ethernet interface and two USB interfaces.
+Each remote lab has a powerful PC that's configured with Unraid as a hypervisor to run virtual machines, and FPGA development boards connected to that machine. Typically a Xilinx FPGA development board has an Ethernet interface and two USB (serial port) interfaces. (The Pluto board does not have a physical Ethernet interface, but its one USB interface can provide network connectivity.)
 
 The Ethernet interface is configured with a fixed IP address and a domain name like `zc706.sandiego.openresearch.institute`. It can be accessed by any computer on the remote lab's private LAN (including your computer if you have Wireguard set up and enabled). The function of this interface depends on what code you have running on the processor core in the FPGA on the dev board. 
 
@@ -158,49 +160,83 @@ Each development board has many other interfaces, and may be connected to additi
 
 In order to use the equipment in the remote labs, you must first set up access to the labs. This is covered in detail in [Setting Up for Remote Access to ORI Labs](https://github.com/phase4ground/documents/blob/master/Remote_Labs/ORI-Lab-User-Setup.md). This involves some setup on your own computer, and an email sent to sandiego-lab@openresearch.institute. When you send that email, or later when the need arises, include a request to be set up for access to whichever VM you need to use. We will set you up with a login on the VM.
 
-At the San Diego lab, the overall PC is called Chonc, and the VMs for FPGA development are called chococat and keroppi. Chococat is connected to the ZC706 dev board, which is equipped with an Analog Devices ADRV9371 transceiver board. It has a single-port Cygnal UART bridge that shows up as /dev/zc706_uart1. Keroppi is connected to the ZCU106 dev board, which has a four-port Cygnal UART bridge (/dev/zcu106_uart1 through /dev/zcu106_uart4).
+At the San Diego lab, the overall PC is called Chonc, and the VMs for FPGA development are called chococat and keroppi. Chococat is connected to the ZC706 dev board, which is equipped with an Analog Devices ADRV9371 transceiver board. It has a single-port Cygnal UART bridge that shows up as /dev/zc706_uart1. Keroppi is connected to the ZCU106 dev board, which has a four-port Cygnal UART bridge (/dev/zcu106_uart1 through /dev/zcu106_uart4). Keroppi is also connected to the Pluto.
+
+### Vivado and the hw_server
+
+When Vivado needs access to physical hardware, it uses a separate process called `hw_server`. Vivado finds its hw_server process through a TCP port. In the simplest setup, the hw_server process runs on the same host as Vivado and uses the default port number, 3121. Vivado calls this setup a "local server". Vivado can also find a hw_server process running on a different host and/or a different port number, and it calls that a "remote server". There is really nothing special about a local server; it's just a shortcut.
+
+The hw_server process necessarily runs on the host that's physically connected to the target hardware. For the platforms in the Remote Lab, that host is a virtual machine. The hardware connection to any given target is (and must be) dedicated to one particular remote machine.
+
+In a perfect world, the hw_server would be a permanent process running on the VM in the Remote Lab, and users would find it available when needed. In practice, developers may need to actively manage the hw_server, perhaps restarting it when problems arise with the target. When it's your turn to use the target hardware, you will need to start a hw_server for it. When you're done, you should stop your hw_server so that the next user can run their own. Two hw_servers cannot share the same target hardware. Multiple users can access the same hw_server, but only one of them can actually use the attached hardware platform at any given time.
+
+In case only one hardware platform is connected to a VM, by convention we run the hw_server on the default port 3121. It can be thought of as a local server for instances of Vivado running on the VM. This is the case on chococat in San Diego, since only the ZC706 is connected to chococat.
+
+If more than one hardware platform is connected to the VM, things are a little more complicated. This is the case on keroppi in San Diego, since that VM is connected to both the ZCU106 and the Pluto. By default, the hw_server will attach to and own every hardware platform it can find. That's fine if one developer is working with all the hardware, as would be the case in a non-remote lab situation. In our sitation, it's more often the case that one developer is using one hardware platform and a different developer is using another hardware platform. The best way to handle that is to restrict each hw_server process to use only one of the hardware platforms. Each developer manages the hw_server associated with the target hardware they are using. In order to have multiple hw_server processes running on the VM simultaneously, each hw_server will need its own port number.
+
+Below are recommended command lines to use to start hw_server. First, you'll need to _source_ the settings script for the version of Vivado you're using:
+
+```
+. /tools/Xilinx/Vivado/2019.1/settings.sh
+```
+
+To run hw_server on chococat, where there is only one hardware platform connected, and leave hw_server connected to your shell, run simply:
+```
+hw_server
+```
+and leave that shell open while you need the hw_server. Hit ^C to stop it when you're done.
+
+If you prefer to have hw_server run in the background on chococat, then run:
+```
+hw_server -d
+```
+In that case, to stop the hw_server you'll need to kill the process. If you have just the one hw_server process, the easy way is to run:
+```
+killall hw_server
+```
+But if you have multiple hw_server processes and only want to kill one, you'll need to find out its process ID. Run:
+```
+ps aux | grep hw_server
+```
+and find the process ID in the second field of the result. Like this:
+```
+kb5mu     2611  0.0  0.0 149292  5140 ?        Ssl  17:14   0:00 /tools/Xilinx/SDK/2019.1/bin/unwrapped/lnx64.o/hw_server
+```
+where the process ID is 2611. Then use that number like this:
+```
+kill 2611
+```
+
+If you need to kill a hw_server that another developer left running, here's how:
+```
+sudo kill -9 2611
+```
+
+On keroppi, we let the Pluto use the default port. To start the hw_server for the Pluto on keroppi, and leave hw_server connected to your shell, run:
+```
+hw_server -s tcp::3121 -e "set jtag-port-filter Digilent"
+```
+Notice that there are two colons between "tcp" and the port number. You can still add the `-d` flag if you want to run in the background. The `-e "set jtag-port-filter Digilent"` part restricts hw_server to only use hardware targets with the string "Digilent" in their names. That includes the Pluto and does not include any of our Xilinx boards.
+
+To start the hw_server for the ZCU106 on keroppi, and leave hw_server connected to your shell, run:
+```
+hw_server -s tcp::3122 -e "set jtag-port-filter Xilinx" -p 4000
+```
+Notice there are two colons between "tcp" and the port number. You can still add the `-d` flag if you want to run in the background. The `-e "set jtag-port-filter Xilinx"` part restricts hw_server to only use hardware targets with the string "Xilinx" in their names. That includes the ZCU106 and does not include the Pluto. The `-p 4000` part tells hw_server to set up its software debugger (GDB) ports starting from port 4000, instead of the default port 3000, which would conflict with the ports used by the Pluto's hw_server. TBD: how to tell GDB to use these port numbers.
+
+In Vivado when you open a new hardware target, you'll need to select the right hw_server. For the ZC706, if Vivado is running on chococat, you can just choose the "local" server. Otherwise, connect to a "remote" server. The host name can be "chococat" or "keroppi" if Vivado is running on any Remote Lab machine or VM. At home if you're running WireGuard, the host name can be "chococat.sandiego.openresearch.institute" or "keroppi.sandiego.openresearch.institute". If you're at home and not running WireGuard, then you'll have to set up an SSH tunnel. (SSH tunnel details are left as an exercise for the reader; WireGuard is the recommended solution.) Then the port number is 3121 (the default) unless you want to use the ZCU106 on keroppi, in which case it is 3122.
 
 ### Vivado Remote or Local?
 
-Many Vivado operations can be completed without access to the hardware. These can be done on your local computer. You may nonetheless want to run some procedures on a VM in the lab PC, because it's very probably much faster than your home PC. For instance, a large synthesis operation might be quite a bit quicker to run on the VM.
+Aside from the hw_server process described in the previous section, Vivado does not necessarily need to run on any particular computer. You can run Vivado in the Remote Lab VM (chococat or keroppi), and most of us do that, but you can also run Vivado on your own local computer.
 
-Other Vivado operations do require access to the hardware. The most obvious way to handle this is to run Vivado on the VM in the lab PC, which has direct access to the hardware. In this case, you'd use your local computer as a way to remotely view the GUI screen of the VM. That works, but is subject to certain limitations. The virtual screen size of the VM is limited to 1920x1080, and operating a GUI through remote access can be a bit clunky, especially on slow or unreliable Internet connections.
+In theory, the VM in the lab PC should run Vivado with very fast performance, probably faster than your home PC unless you have the latest and greatest hardware. In practice, the VM seems to be slower than it should be, and we're still trying to figure out why.
 
-A better way may be to split Vivado into two pieces. The only part that actually requires access to the hardware is called `hw_server`. It's possible to run hw_server on the VM, and the rest of Vivado on your local computer. In this case, you'd have a local GUI running on your own computer like any other program, and only rely on the network for communication with hw_server. This is likely to be much smoother and more reliable than running the whole Vivado GUI through screen sharing. (We don't have much experience with this yet, so there may be disadvantages we have yet to discover.)
+In order to run Vivado on the lab VM, you need a way to bring Vivado's GUI to your local screen. The recommended way to do that is with VNC. This is covered in detail in [Setting Up for Remote Access to ORI Labs](https://github.com/phase4ground/documents/blob/master/Remote_Labs/ORI-Lab-User-Setup.md). This will work for you as long as you have pretty fast Internet connectivity.
 
-The hw_server function is normally run on port 3121, as part of running Vivado. That's where the "local" hardware targets show up. It seems best to run our hw_server on a different port; we will use 3122. On the VM, this is as simple as:
-```
-hw_server -s TCP::3122
-```
-Notice there are TWO colons between TCP and the port number. If you haven't sourced the settings64.sh script, you may need to specify the complete path to hw_server, like this:
-```
-/tools/Xilinx/Vivado/2020.2/bin/hw_server -s TCP::3122
-```
+It's theoretically possible to run the X11 server on your local machine instead of remoting the whole screen with VNC. In our experience, that doesn't work with all of the features of Vivado. In particular, the help and documentation view fails.
 
-You'll need to start the hw_server on the VM when you need it, and then shut it down when you're done. You can use either an SSH session or a terminal window in a GUI screen sharing session. To shut it down, just come back to the window where hw_server is running and hit Control-C. (If you choose to run hw_server in the background with the `-d` switch, you'll have to explicitly kill its process, by running a command like `killall hw_server`).
-
-Next, establish connectivity between your local computer (where you want to run Vivado) and the VM. As usual, this can be done in two ways. If you're set up for WireGuard, you can just activate the WireGuard connection, and the remote host name will be the VM's name, such as `chococat.sandiego.openresearch.institute`. If you're using SSH tunnels, you need to add a port forward to your SSH configuration, and the remote host name will be `localhost`.
-
-If you're using an SSH port forward, it can be set up on the command line or added to the config file. Here's the command line syntax for the chococat VM, assuming you already have a chococat stanza set up in your `~/.ssh/config` file:
-```
-ssh -L 3122:localhost:3122 chococat
-```
-If you don't want to type all that, you can add this line to the VM's stanza in your `~/.ssh/config` file:
-```
-LocalForward 3122 localhost:3122
-```
-and then you can just type
-```
-ssh chococat
-```
-as usual. It's generally harmless to have this port forward enabled even when you're not using the remote hw_server.
-
-Now run Vivado on your local computer. Open the Hardware Manager (it's in the Flow menu on the welcome screen). Open a new target (from the Tools menu or using the link Vivado offers if you have no target open). Under "Connect to" choose "Remote server". Fill in the port number, 3122. Fill in the host name, either the VM's name for WireGuard or `localhost` for SSH forwarding. Complete the new hardware target wizard, and you should find you can connect to the remote target.
-
-Vivado will remember your remote target for the next session, unless you explicitly delete it, so you don't need to configure the Hardware Manager each time. Just select the remote target and connect to it.
-
-This procedure does not remote the cs_server. I don't know whether we need to worry about that or not.
-
+If network performance is an issue and/or you want to have a very large high-resolution Vivado screen, the best way is probably to run Vivado on your local machine and only run the hw_server on the VM, as described in the previous section. This is likely to be much smoother and more reliable than running the whole Vivado GUI through screen sharing. (We don't have much experience with this yet, so there may be disadvantages we have yet to discover.)
 ### Vivado Licenses on VMs
 
 The remote lab VMs for FPGA development do not have dedicated licenses for the Xilinx tools. Use the procedures described earlier in this document for obtaining a floating license when you need to use the tools in a way that requires a license. Please do use the suggested script, to help ensure that the floating license is not tied up when you're not using it.
