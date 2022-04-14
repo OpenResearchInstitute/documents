@@ -6,9 +6,17 @@
 
 FPGA Stand-up held on 12 April 2022. Link to a video recording of the meeting is below.
 
+https://youtu.be/sg8l2IZoRU0
+
 ##### Downlink Demo for DEFCON
 
+We're now changing the modcod on the fly, over the air, with the PLUTO build. 
+
+SR-1 Pro has been added to the lab. DecTek boardsets are operational. Receiving DecTek on the SR-1 stalls at the transport stream. Subject matter experts are looking at it. 
+
 ##### HDL Coder (target M17 Uplink IP cores)
+
+Bitstream successfully created three different ways, and all three ways fail in testbench simulation after the bitstream is loaded. Operator error or misconfiguration is suspected. Tech support called in to give advice and the entire network setup has been double-checked. We're not far from FPGA-in-the-loop capability through MATLAB. 
 
 #### Potential IMS2023 Participation
 
@@ -21,6 +29,8 @@ We co-chair the AI/ML subworking group on "Safe Uses of AI and ML" and that kick
 We have nominated Aeva Black from OSI as an outside resource. 
 We have nominated Dr. Piero Bonissone as a guest speaker. 
 These nominations are proceeding. 
+
+"Safe Uses of AI and ML" kickoff meeting was a success, and ORI volunteers will be involved in contributing towards reports and advice that will go to the FCC TAC. The TAC advises the US FCC. 
 
 #### Taxes Underway
 
