@@ -32,6 +32,8 @@ These nominations are proceeding.
 
 "Safe Uses of AI and ML" kickoff meeting was a success, and ORI volunteers will be involved in contributing towards reports and advice that will go to the FCC TAC. The TAC advises the US FCC. 
 
+Two additional speakers were contacted and invited to share their views in upcoming committee meetings. 
+
 #### Taxes Underway
 
 Our Dark Horse Accounting accountant is on the job and has everything he needs so far in order to complete the work. 
@@ -43,3 +45,7 @@ As previously discussed, we need to dilute previously received large grants down
 #### Technical Track at Ham Expo September 2022
 
 We have the opportunity to hold our quarterly technical advisory meeting, which often features a list of speakers, at Ham Expo in September 2022. This would be a half-day track. 
+
+#### Technical Assistance
+
+We've been asked to provide software programming support for an open source DVB-S2 project, and have agreed to provide this support. 
