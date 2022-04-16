@@ -49,3 +49,10 @@ We have the opportunity to hold our quarterly technical advisory meeting, which 
 #### Technical Assistance
 
 We've been asked to provide software programming support for an open source DVB-S2 project, and have agreed to provide this support. 
+
+#### Enclosures for Multimedia Beacon
+
+We now have five enclosures for multimedia beacons. Here's a short video tour:
+
+https://youtu.be/DsBvXMD1ZG8
+
