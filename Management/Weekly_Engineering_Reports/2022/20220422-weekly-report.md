@@ -32,7 +32,7 @@ M17 will be at Friedrichshafen this summer, at IMS2023 next year, and everywhere
 
 ### YouTube Channel
 
-If you have not already subscribed to the channel, pleaase do. 
+If you have not already subscribed to the channel, please do. 
 
 https://www.youtube.com/c/OpenResearchInstituteInc
 
