@@ -354,11 +354,9 @@ Hit Control-C to exit.
 
 If you're using the command line Wireguard on macOS, please skip this section.
 
-Run the WireGuard program installed from the store.
+Run the WireGuard program installed from the Mac App Store or from [WireGuard.com](https://www.wireguard.com/install/).
 
-At the bottom left, look for a plus sign button and click it, then select *Add Empty Tunnel...*. Type in a distinctive name for this tunnel, such as **ori_remote**. Click Save.
-
-Make sure your tunnel is selected in the left column, and then copy the Public Key value from the right part of the screen.
+At the bottom left, look for a plus sign button or drop-down arrow and click it, then select *Add Empty Tunnel...*. Type in a distinctive name for this tunnel, such as **ori_remote**. Copy the Public Key value from the screen. Click Save.
 
 Paste this **public key** into an email to [remote-labs@openresearch.institute](mailto:remote-labs@openresearch.institute) and request Wireguard access. Your request will be processed as soon as we can. If you need to set up multiple keys, please request them all at once.
 
