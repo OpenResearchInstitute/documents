@@ -4,6 +4,10 @@
 
 Tuesday's FPGA Stand-up meeting video recording is here: https://youtu.be/c1f5_3J0Ioo
 
+### Components Engineering
+
+47 GHz transponder components engineering proceeding. Advice sought on exact frequency plan within the band for uplink and downlink. RSGB suggests 47.088 as the narrowband activity center. 
+
 ### Event Planning
 
 #### DEFCON will be August 11-13, 2022
