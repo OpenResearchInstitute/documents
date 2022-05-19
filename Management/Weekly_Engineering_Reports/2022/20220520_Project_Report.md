@@ -2,7 +2,7 @@
 
 ### FPGA Work
 
-Tuesday's FPGA Stand-up meeting video recording is here: 
+Tuesday's FPGA Stand-up meeting video recording is here: https://youtu.be/4QQHfSU8y9c
 
 ### Remote Lab South
 
