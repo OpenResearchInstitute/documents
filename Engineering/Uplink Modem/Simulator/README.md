@@ -2,7 +2,7 @@
 
 The baseline Phase 4 voice uplink is a bunch of M17 channels. In order to enable testing of a multichannel receiver implementation, we're working on building an offline simulator that generates a massively multichannel uplink. Here's what we've made so far.
 
-[m17-upsim-1-stream.grc](m17-upsim-1-stream.grc) is a GNU Radio flowgraph that transmits a single M17 stream, taken from a symbol stream file created by `m17-mod -b` from the [m17-cxx-demod](https://github.com/mobilinkd/m17-cxx-demod) reference implementation. This is identical to what we demonstrated at a PARC/IEEE meeting on May 4, 2022. The audio source is an episode of [Amateur Radi Newsline](https://www.arnewsline.org).
+[m17-upsim-1-stream.grc](m17-upsim-1-stream.grc) is a GNU Radio flowgraph that transmits a single M17 stream, taken from a symbol stream file created by `m17-mod -b` from the [m17-cxx-demod](https://github.com/mobilinkd/m17-cxx-demod) reference implementation. This is identical to what we demonstrated at a PARC/IEEE meeting on May 4, 2022. The audio source is an episode of [Amateur Radio Newsline](https://www.arnewsline.org).
 
 [m17-upsim-3-identical-streams.grc](m17-upsim-3-identical-streams.grc) is a GNU Radio flowgraph that transmits a single M17 stream, taken from a premodulated stream file created by `m17-mod` without the `-b` flag, on three adjacent channels, using the *Frequency Shift* block. The audio source is a story taken from [Librivox](https://librivox.org), an archive of free public domain audiobooks.
 
@@ -12,7 +12,8 @@ The baseline Phase 4 voice uplink is a bunch of M17 channels. In order to enable
 
 Steps to build `m17-mod` and friends on Ubuntu 20.04.4 (on the Chonc-A virtual machine in the ORI remote lab):
 
-```sudo apt install sox ffmpeg libcodec2-dev libboost-program-options1.67-dev libgtest-dev
+```
+sudo apt install sox ffmpeg libcodec2-dev libboost-program-options1.67-dev libgtest-dev
 git clone https://github.com/mobilinkd/m17-cxx-demod
 cd m17-cxx-demod
 mkdir build
