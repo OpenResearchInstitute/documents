@@ -8,6 +8,10 @@ The baseline Phase 4 voice uplink is a bunch of M17 channels. In order to enable
 
 [m17-upsim-3-distinct-streams.grc](m17-upsim-3-distinct-streams.grc) is a GNU Radio flowgraph that transmits three distinct M17 streams, each taken from a premodulated stream file created by `m17-mod`, on three adjacent channels, using the *Frequency Shift* block. The audio sources are stories taken from [Librivox](https://librivox.org), an archive of free public domain audiobooks.
 
+[m17-upsim-3-pfb.grc](m17-upsim-3-pfb.grc) is a GNU Radio flowgraph that transmits three distinct M17 streams, each taken from a premodulated stream file created by `m17-mod`, on three adjacent channels, using the *Polyphase Synthesizer* block. The audio sources are stories taken from [Librivox](https://librivox.org), an archive of free public domain audiobooks.
+
+[m17-upsim-9-pfb.grc](m17-upsim-9-pfb.grc) is a GNU Radio flowgraph that transmits nine distinct M17 streams, each taken from a premodulated stream file created by `m17-mod`, on nine adjacent channels, using the *Polyphase Synthesizer* block. The audio sources are stories taken from [Librivox](https://librivox.org), an archive of free public domain audiobooks. This flowgraph runs with an average CPU utilization around 20% on the test laptop, but still transmits dropouts every now and then.
+
 ## Build Notes
 
 Steps to build `m17-mod` and friends on Ubuntu 20.04.4 (on the Chonc-A virtual machine in the ORI remote lab):
@@ -57,3 +61,5 @@ For initial testing of these multichannel uplink flowgraphs, we have been using 
 ## Next Steps
 
 These are just the first prototypes on the way to a multichannel uplink simulation.
+
+We're already up to the point where running this much of the simulation in realtime is a challenge. It'd be nice to identify exactly how the m17-upsim-9-pfb.grc flowgraph is glitching. The long-run solution is probably to run the simulation offline to create one big file of I/Q samples, and later transmit the whole combined uplink from the computed file.
