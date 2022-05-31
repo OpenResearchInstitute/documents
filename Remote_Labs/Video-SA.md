@@ -54,10 +54,12 @@ Now that we're set up to run GUI programs, we can view the spectrum analyzer vid
 One way to do that is to use the program `vlc` to view video from the capture device:
 
 ```
-vlc v4l2:///dev/video0:width=1280:height=720
+vlc v4l2:///dev/video0:width=1280:height=720 &
 ```
 
 In that command line, `v4l2` means _Video for Linux version 2_ and identifies the type of stream to open. `/dev/video0` is the name of the device. If you don't specify the width and height to capture, you'll get an upscaled 1080p version of the video. 1280x720 is the native size of the video from the spectrum analyzer. If you choose some other size, you'll get the closest match that the capture device supports.
+
+The ampersand at the end of the command line is optional. It tells the shell to run VLC in the background, freeing up your terminal for other work.
 
 #### "cannot open device '/dev/video0'"
 
@@ -75,7 +77,19 @@ If your SSH client is based on OpenSSH (most are), you'll very likely see a burs
 [b3a2f140] xcb_x11 generic: using buggy X11 server - SSH proxying?
 ```
 
-You'll also see some messages when VLC starts, and possibly again when you shut it down.
+You'll also see some other messages when VLC starts, and possibly again when you shut it down.
+
+The messages on startup may come out after the terminal prompt, so it might at first glance appear that you didn't get back a terminal prompt. You can just hit return to see a fresh prompt.
+
+### Combining SSH and VLC Steps
+
+If you're using X11 forwarding to your local machine, you can skip the step of logging in to the Raspberry Pi interactively. You can start the video playback right from your own machine's command line, like so:
+
+```
+ssh -X -f ori-west vlc v4l2:///dev/video0:width=1280:height=720
+```
+
+Here the `-f` flag tells SSH to put the program into the background before running the `vlc` command. This releases your local terminal for other tasks. (You don't need an ampersand at the end of the command in this case.)
 
 ### Using VLC
 
@@ -84,6 +98,16 @@ VLC will pop up a GUI window with the spectrum analyzer video in it. Everything 
 If you need a still image screenshot for your records or for documentation, you can make one by choosing `Take Snapshot` from the `Video` menu. A screenshot taken this way won't be quite as crisp as one taken digitally over the remote control interface directly on the instrument, but it will be good enough for most purposes.
 
 When you're done with the video, quit VLC in any of the usual ways.
+
+## Access via VNC
+
+If you're already running a GUI session on the Raspberry Pi via VNC for some other reason, you can include the video capture window within that GUI. The command to start capturing video is the same, you'd just run it from a terminal window within the VNC screen:
+
+```
+vlc v4l2:///dev/video0:width=1280:height=720 &
+```
+
+However, if your VNC screen is already crowded, you can still run the video capture outside of VNC via X11 forwarding, as detailed above. This would be useful if your local machine has two monitors. You might run VNC in full-screen mode on one monitor, and display the video by X11 forwarding in a window on the other monitor.
 
 ## Access via Streaming
 
