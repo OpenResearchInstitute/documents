@@ -59,7 +59,13 @@ vlc v4l2:///dev/video0:width=1280:height=720
 
 In that command line, `v4l2` means _Video for Linux version 2_ and identifies the type of stream to open. `/dev/video0` is the name of the device. If you don't specify the width and height to capture, you'll get an upscaled 1080p version of the video. 1280x720 is the native size of the video from the spectrum analyzer. If you choose some other size, you'll get the closest match that the capture device supports.
 
-### Disregard These Error Messages
+#### "cannot open device '/dev/video0'"
+
+If the device `/dev/video0` cannot be opened, the video capture dongle is probably not plugged in. The device is only present when the dongle is plugged into a USB port on the Raspberry Pi *and* also connected to a video source. If the spectrum analyzer is off, or disconnected from video for some reason, the video device will disappear. Contact the Remote Lab admins (on Slack or by email) and request that the video capture be reconnected.
+
+You will see other devices named `/dev/video10` through `/dev/video16`. These are associated with video features of the Broadcom BCM2835 SoC that is the heart of the Raspberry Pi. They are not able to capture external video, so they are not relevant for our purposes.
+
+#### Disregard These Error Messages
 
 If your SSH client is based on OpenSSH (most are), you'll very likely see a burst of error messages like these:
 
