@@ -2,17 +2,29 @@
 
 ### FPGA Work
 
-Tuesday has a scheduled FPGA Stand-up meeting. 
+Tuesday's FPGA Stand-up meeting video is here: 
+
+https://youtu.be/S-tlfFIEges
+
+Uplink simulator work can be found here:
+
+https://github.com/phase4ground/documents/tree/master/Engineering/Uplink%20Modem/Simulator
+
+Uplink (re)design continues. OPUS high-rate CODEC with RTP being explored. These datastreams will be received and multiplexed onto the downlink. 
 
 #### Encoder
 
-There's a lot going on with the Encoder. Here's a summary. 
+Our encoder is integrated into the reference design from ADI, and is on the PLUTO in Remote Lab West (keroppi). 
+Our encoder has been integrated into the reference design from ADI in Remote Lab UK.
+Our encoder is in the process of being integrated into the reference design from ADI in Remote Lab South.
 
 ### Remote Lab South
 
-Budget allocated; planning continues.
+Budget allocated; planning continues. Some of the Lab equipment in storage in NorCal will arrive at Remote Lab South as soon as practical. 
 
 ### Ribbit Updates
+
+Working; demo on Slack. UX improvements are happening. 
 
 ### FCC TAC 
 
@@ -20,7 +32,7 @@ Next full meeting of the FCC Technological Advisory Committee is early June with
 
 ### Components Engineering
 
-47 GHz transponder components engineering proceeding
+47 GHz transponder components engineering proceeding. Most work has to happen in person at the monthly SBMS meetings. We'll continue to attend these meetings in person whenever possible for at least another year.
 
 ### Grants and Fundraising
 
@@ -38,7 +50,7 @@ M17, OpenRTX, and Evariste's work on FGPA encoder designs for P4DX will all be a
 
 #### DEFCON will be August 11-13, 2022
 
-In-person demonstrations of everything we have working, plus whatever doesn't. 
+In-person demonstrations of everything we have working, plus we discussed whatever doesn't, and why. 
 
 #### Ham Expo will be September 17-18, 2022
 
