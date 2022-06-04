@@ -61,6 +61,18 @@ In that command line, `v4l2` means _Video for Linux version 2_ and identifies th
 
 The ampersand at the end of the command line is optional. It tells the shell to run VLC in the background, freeing up your terminal for other work.
 
+#### What if it's taking forever?
+
+Under some circumstances we don't fully understand yet, forwarding X11 over SSH doesn't really work with VLC capturing video. In that case, skip ahead to the section on running video capture on a VNC screen instead.
+
+#### v4l2 stream error: cannot select input 0: Device or resource busy
+
+If you get a message from VLC saying *Device or resource busy*, the video capture device is probably in use by some other user. Only one user at a time can capture live video from the spectrum analyzer. You can find out who has it busy by running
+```
+ps aux | grep video0
+```
+on ori-west and looking at the first column in the response. Try to coordinate with them to share the video capture facility. If you can't contact them, you can `sudo kill -9 #####`, where ##### is the process number found in the second column in the response above. This forcibly disconnects them from the video capture device.
+
 #### "cannot open device '/dev/video0'"
 
 If the device `/dev/video0` cannot be opened, the video capture dongle is probably not plugged in. The device is only present when the dongle is plugged into a USB port on the Raspberry Pi *and* also connected to a video source. If the spectrum analyzer is off, or disconnected from video for some reason, the video device will disappear. Contact the Remote Lab admins (on Slack or by email) and request that the video capture be reconnected.
