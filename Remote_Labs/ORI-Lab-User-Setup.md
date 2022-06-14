@@ -66,7 +66,8 @@ development board.
 San Diego lab for FPGA development using Xilinx Vivado. This VM also auto-starts
 when Chonc boots, so it should generally always be running. It is connected to a
 Xilinx ZCU106 via five USB serial ports, one connected to the JTAG port and the
-other four connected to UART ports. The ZCU106 is also connect to the lab LAN.
+other four connected to UART ports. At times an ADALM Pluto SDR is also connected.
+The ZCU106 is also connected to the lab LAN.
 
 * An Ubuntu 20.04.2 virtual machine named `chonc-a` is set up in the San Diego lab for general Linux use.
 
@@ -547,7 +548,11 @@ vncserver -localhost no :23
 ```
 to start a new VNC server on display `:23` (that is, port 5923). The `-localhost no` tells the VNC server to accept connections from other machines on the network. (Use your own unique number, not 23.)
 
-
+The above command will create a VNC server that works with screen resolutions up to 1920x1200 pixels. If you have a larger screen and sufficient network bandwidth to handle it, you may wish to run VNC at a higher resolution. For example, the following will set up a VNC server capable of filling the screen on a 4K monitor:
+```
+vncserver -localhost no -geometry 3840x2160 -depth 24 :23
+```
+You may have to right-click the VNC desktop and choose Display Settings in order to select the new resolution.
 ### VNC using Wireguard
 
 Run the VNC client of your choice. Choose a connection type of VNC (if necessary) and enter the domain name of the VM you wish to connect to, a colon, and the unique port number you use. Here's an example:
