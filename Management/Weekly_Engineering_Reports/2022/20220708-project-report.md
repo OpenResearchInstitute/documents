@@ -71,3 +71,9 @@ Details are summarized in the issue https://github.com/phase4ground/adi_adrv9371
 
 Contact Anshul Makkar if you can help with a pull request. 
 
+## FPGA standup meeting video link
+
+https://youtu.be/BNo7NrTrEBk
+
+
+
