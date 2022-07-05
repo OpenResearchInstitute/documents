@@ -45,12 +45,12 @@ Copied all of these over, and error resolved.
 
 encoder/adi_adrv9371_zc706/hdl/projects/common/zc706/zc706_plddr3_mig.prj": no such file or directory
 
-abraxas3d@chococat:~/adi-encoder-test/hdl/projects/common/zc706$ ls
+abraxas3d@chococat:\~/adi-encoder-test/hdl/projects/common/zc706$ ls
 zc706_plddr3_adcfifo_bd.tcl  zc706_plddr3_dacfifo_bd.tcl  zc706_system_bd.tcl
 zc706_plddr3_constr.xdc      zc706_plddr3_mig.prj         zc706_system_constr.xdc
 abraxas3d@chococat:~/adi-encoder-test/hdl/projects/common/zc706$ cd /home/abraxas3d/adi-encoder/adi_adrv9371_zc706/hdl/projects/common/zc706/
 
-abraxas3d@chococat:~/adi-encoder/adi_adrv9371_zc706/hdl/projects/common/zc706$ ls
+abraxas3d@chococat:\~/adi-encoder/adi_adrv9371_zc706/hdl/projects/common/zc706$ ls
 zc706_plddr3_adcfifo_bd.tcl  zc706_plddr3_constr.xdc  zc706_plddr3_dacfifo_bd.tcl  zc706_system_bd.tcl  zc706_system_constr.xdc
 abraxas3d@chococat:~/adi-encoder/adi_adrv9371_zc706/hdl/projects/common/zc706$ 
 
@@ -58,7 +58,7 @@ File was copied over. Error resolved.
 
 ## Hardcoded path:
 
-abraxas3d@chococat:~/adi-encoder/adi_adrv9371_zc706/hdl/projects/adrv9371x/common$ cat adrv9371x_bd.tcl | grep anshul
+abraxas3d@chococat:\~/adi-encoder/adi_adrv9371_zc706/hdl/projects/adrv9371x/common$ cat adrv9371x_bd.tcl | grep anshul
 source /home/anshul/phase4/adi_adrv9371_zc706/dvb_fpga/build/vivado/add_dvbs2_files.tcl
 add_files /home/anshul/phase4/adi_adrv9371_zc706/dvb_fpga/build/vivado/dvbs2_encoder_wrapper.vhd
 abraxas3d@chococat:~/adi-encoder/adi_adrv9371_zc706/hdl/projects/adrv9371x/common$ 
