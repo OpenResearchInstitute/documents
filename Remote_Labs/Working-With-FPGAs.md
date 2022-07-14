@@ -281,6 +281,19 @@ Minicom is more full-featured text-based terminal emulation program. Read `man m
 These instructions are about how to use the zc706 with attached ADRV9371. Analog Devices provides an HDL reference design and petalinux support in order to allow you to incorporate your custom cores into the design and get them working over the air. 
 
 #### Clone the Repository with all the HDL Elements
+Clone the adrv9371-zc706-dvbs2-integ branch of this repository. Make sure you get submodules. 
+```
+https://github.com/phase4ground/adi_adrv9371_zc706/
+```
+Navigate to this directory: adi_adrv9371_zc706/tree/adrv9371-zc706-dvbs2-integ/hdl/projects/adrv9371x/zc706
+
+Assuming all the issues at: https://github.com/phase4ground/adi_adrv9371_zc706/issues/1 are cleared up, type make. 
+
+```
+make
+```
+
+Open the resulting project in Vivado. Export bitstream and xsa file. You will need them to build petalinux and boot the zc706. 
 
 #### Build Petalinux with meta-adi
 
@@ -373,6 +386,98 @@ This specifies the boot image format file option in the GUI. (I believe)
 platform config -prebuilt-data /tftpboot/
 ```				
 This specifies the boot components directory option in the GUI. 
+	
+```
+platform generate
+```
+This builds the platform elements. 
 
-To Do: Check if there's anything else that needs to be done at this point to cover all the options in the GUI. 
+To Do: Double check hard if there's anything else that needs to be done at this point to cover all the options in the GUI. 
 
+#### Build a Linux App in Vitis for Petalinux
+
+Source 2021.1 Vitis.
+
+Start the IDE. 
+
+Select a workspace. 
+
+Create a new platform project. See above workaround if you can't select this menu option in the drop down or in the GUI. 
+
+Here are the instructions if the GUI works for you.
+
+File - new - platform project
+
+End the filename with _plat to make it easy to distinguish between this and other files.
+
+Select: Create from hardware specification
+
+Add the xsa file. 
+
+Operating systen is linux.
+
+Processor for the zc706 is ps7_cortexa9
+
+uncheck Generate boot components. We're going to use what we made in Petalinux.
+
+Click finish to esetablish the preojct structure. This is captured in the .spr file. 
+
+Click Linux on ps7_cortexa9 item to open configuration window. 
+
+Here is where we provide necessary intofmraiton for the platform. 
+
+The following are required: Boot image format file. Boot components directory. 
+
+The rest of the fields are optional. 
+
+Select the _plat file in the explorer window. 
+
+Click hammer to build the platform elements. 
+
+Create a new application project by clicking file - new - application project.
+
+Some recommendations: 
+
+_app as the end of the project name.
+
+_system as the end of the system project. 
+
+Click Next.
+
+Select our platform from the list. It may say "in repository". 
+
+Click Next.
+
+Domain is linux on ps7_cortexa9, language is c, sysroot should be empty. 
+
+Click Next. 
+
+Pick Hello World template and click Finish. 
+
+Expand the src folder in the navigation window to open the helloworld.c file.
+	
+Right click application projec tin explorer and build project. 
+
+Make sure you've booted up the linux image on the target. 
+
+Right click application in explorer and set up a run configuration.
+
+Run as: Run configurations. Pick "single application debug". Double click this.
+
+You have a configuration window and now can set up a connection to the hardware target. 
+
+Click "new" net to connection field.
+
+Name it something memorable for you. Host, if you are on chococat, is 10.73.1.9. Port is 1540. 
+
+Test connection. Debug problems if necessary. 
+
+Ok to create the run config. 
+
+Apply 
+
+Run
+
+Output should be visible in console. 
+
+When you run debug, it halts at the top of the main function. You are in the debugger. You can also simply run on the target, and the code will execute and results show up in the console. 
