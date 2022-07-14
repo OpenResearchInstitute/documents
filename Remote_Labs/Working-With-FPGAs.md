@@ -278,7 +278,70 @@ Minicom is more full-featured text-based terminal emulation program. Read `man m
 
 ### Working on the zc706 and attached ADRV9371 with the Analog Devices HDL Reference Design
 
-These instructions are about how to use the zc706 with attached ADRV9371. Analog Devices provides an HDL reference design and petalinux support in order to allow you to incorporate your custom cores into the design and get them working over the air. This is non-trivial, but achievable. 
+These instructions are about how to use the zc706 with attached ADRV9371. Analog Devices provides an HDL reference design and petalinux support in order to allow you to incorporate your custom cores into the design and get them working over the air. 
+
+#### Clone the Repository with all the HDL Elements
+
+#### Build Petalinux with meta-adi
+
+Following the instructions that start at this link: https://github.com/analogdevicesinc/meta-adi/tree/master/meta-adi-xilinx
+
+Source Petalinux 2021.1.
+
+```
+petalinux-create -t project --template zynq --name <project name>
+```
+This sets up the project directory structure for the right FPGA target.
+
+```
+git clone https://github.com/analogdevicesinc/meta-adi
+```
+
+This fetches everything needed to add the yocto layers of meta-adi to petalinux. We need this, otherwise we do not have the right device tree for all the HDL in the Analog Devices reference design. 
+
+```
+cd <project name>
+petalinux-config --get-hw-description <path to .xsa file exported from Vivado>
+```
+When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. 
+
+```
+echo "KERNEL_TDB=\"<name of the dts file to use from the list in meta-adi>\"" >> project-spec/meta-user/conf/petalinuxbsp.conf
+```
+
+The echo is a fancy way of setting up the petalinuxbsp.conf file. Here's what it should look like after this command. 
+```
+abraxas3d@chococat:~/adi-encoder-meta-adi/integrate-iio/project-spec/meta-user/conf$ cat petalinuxbsp.conf 
+#User Configuration
+
+#OE_TERMINAL = "tmux"
+
+KERNEL_DTB="zynq-zc706-adv7511-adrv9371"
+```
+We proceed with building petalinux.
+
+```
+cd build
+petalinux-build
+```
+	
+####
+
+Boot target. Below is how to use tftpboot. I used this page https://www.instructables.com/Setting-Up-TFTP-Server-for-PetaLinux/ and the Petalinux user guide from Xilinx to set up tftpboot on Chococat with the zc706. Current default state on chococat is that the zc706 is connected over JTAG and tftpboot can be used. 
+	
+```
+petalinux-package --prebuilt --fpga <location of bitfile> --force
+petalinux-boot --jtag --prebuilt 2 --hw_server-url TCP:chococat:3121
+```
+	
+Wait for the prompt on the target.
+```
+Zynq> setenv serverip 10.73.1.93
+Zynq> setenv ipaddr 10.73.1.9 
+Zynq> pxe get
+Zynq> pxe boot
+```
+This should boot petalinux on the zc706. 
 
 #### How to Solve the Problem of Not Being Able to Select "Create Platform Project" in Vitis
 
@@ -305,11 +368,11 @@ Example on TFTP boot system in Remote Labs West:
 ```
 platform config -fsbl-elf /tftpboot/zynq_fsbl.elf
 ```
-This covers the boot image format file in the GUI.
+This specifies the boot image format file option in the GUI. (I believe)
 ```
 platform config -prebuilt-data /tftpboot/
 ```				
-This covers the boot components directory in the GUI. 
+This specifies the boot components directory option in the GUI. 
 
 To Do: Check if there's anything else that needs to be done at this point to cover all the options in the GUI. 
 
