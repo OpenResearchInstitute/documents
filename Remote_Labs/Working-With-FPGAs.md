@@ -285,7 +285,7 @@ Clone the adrv9371-zc706-dvbs2-integ branch of this repository. Make sure you ge
 ```
 https://github.com/phase4ground/adi_adrv9371_zc706/
 ```
-Navigate to this directory: adi_adrv9371_zc706/tree/adrv9371-zc706-dvbs2-integ/hdl/projects/adrv9371x/zc706
+Navigate to this directory: adi_adrv9371_zc706/hdl/projects/adrv9371x/zc706
 
 Assuming all the issues at: https://github.com/phase4ground/adi_adrv9371_zc706/issues/1 are cleared up, type make. 
 
