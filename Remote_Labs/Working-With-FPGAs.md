@@ -289,23 +289,26 @@ Open the xsct console.
 Xilinx Software Command-line Tool (XSCT) is an interactive and scriptable command-line interface to Xilinx Software Development Kit (Vitis, or Xilinx SDK). As with other Xilinx tools, the scripting language for XSCT is based on Tools Command Language, or tcl. 
 
 The following commands are entered into the xsct console. 
-
+```
 platform create -name <name> -hw <path to the xsa file you exported from Vivado> -os linux -proc ps7_cortexa9
-	
-platform active
 
-should return the name of the platform you just created. 
-	
+platform active
+```
+
+This should return the name of the platform you just created. 
+
+```	
 platform config -fsbl-elf <path to zynq_fsbl.elf
+```
 
 Example on TFTP boot system in Remote Labs West:
-
+```
 platform config -fsbl-elf /tftpboot/zynq_fsbl.elf
-
+```
 This covers the boot image format file in the GUI.
-
+```
 platform config -prebuilt-data /tftpboot/
-				
+```				
 This covers the boot components directory in the GUI. 
 
 To Do: Check if there's anything else that needs to be done at this point to cover all the options in the GUI. 
