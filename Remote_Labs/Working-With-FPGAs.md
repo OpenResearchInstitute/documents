@@ -298,7 +298,7 @@ platform active
 This should return the name of the platform you just created. 
 
 ```	
-platform config -fsbl-elf <path to zynq_fsbl.elf
+platform config -fsbl-elf <path to zynq_fsbl.elf>
 ```
 
 Example on TFTP boot system in Remote Labs West:
