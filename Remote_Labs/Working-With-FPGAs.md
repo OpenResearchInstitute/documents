@@ -289,7 +289,8 @@ Make sure you do all the steps involving Vivado in a terminal where you have sou
 Make sure you have a Vivado license available before proceeding. If you're using ORI's floating license, that means setting up the SSH tunnel to the license server and setting the environment variable `XILINXD_LICENSE_FILE` appropriately, in that same terminal.
 
 #### Clone the Repository with all the HDL Elements
-Clone the adrv9371-zc706-dvbs2-integ branch of this repository. Make sure you get submodules. 
+Clone the _appropriate_ branch of this repository. Check the README.md or check on Slack to get the right branch. Make sure you get submodules. 
+
 ```
 git clone --branch adrv9371-zc706-dvbs2-integ --single-branch --recurse-submodules -j8 https://github.com/phase4ground/adi_adrv9371_zc706.git
 ```
