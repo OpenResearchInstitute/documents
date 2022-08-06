@@ -398,7 +398,7 @@ Note that the IP address set with setenv at the Zync> prompt does not stick. By 
 #### How to Solve the Problem of Not Being Able to Select "Create Platform Project" in Vitis
 
 Source the version of Vitis you need to work with.
-Open Vitis (from the command line, say `vitis`).pla
+Open Vitis (from the command line, type `vitis`).
 Open the xsct console (in the Xilinx menu).
 
 Xilinx Software Command-line Tool (XSCT) is an interactive and scriptable command-line interface to Xilinx Software Development Kit (Vitis, or Xilinx SDK). As with other Xilinx tools, the scripting language for XSCT is based on Tools Command Language, or tcl. 
@@ -457,13 +457,13 @@ Operating systen is linux.
 
 Processor for the zc706 is ps7_cortexa9
 
-uncheck Generate boot components. We're going to use what we made in Petalinux.
+Uncheck Generate boot components. We're going to use what we made in Petalinux.
 
 Click finish to esetablish the preojct structure. This is captured in the .spr file. 
 
 Click Linux on ps7_cortexa9 item to open configuration window. 
 
-Here is where we provide necessary intofmraiton for the platform. 
+Here is where we provide necessary information for the platform. 
 
 The following are required: Boot image format file. Boot components directory. 
 
@@ -509,7 +509,7 @@ You have a configuration window and now can set up a connection to the hardware 
 
 Click "new" next to connection field.
 
-Name it something memorable for you. Host, if you are on chococat, is 10.73.1.9. Port can probably be left at the default. 
+Name it something memorable for you. Host, if you are on chococat, is 10.73.1.9. Port is left at the default. 
 
 Test connection. Debug problems if necessary. 
 
@@ -521,8 +521,8 @@ Run
 
 Output should be visible in the console within Vitis IDE. 
 
-To run in the debugger, click the little bug icon in the toolbar.
+To run in the debugger, click little bug icon in the toolbar (your run configuration should be here).
 
-When you run debug, it halts at the top of the main function. You are in the debugger. You can also simply run on the target, and the code will execute and results show up in the console. 
-
-On the target, your executable file is now in `/mnt/sd-mmcblk0p1`. You can run it from the serial console if you like.
+When you run debug, it halts at the top of the main function. You are in the debugger. 
+	
+You can also run on the target, and the code will execute and results show up in the console. On the target, your executable file should be in `/mnt/sd-mmcblk0p1`. 
