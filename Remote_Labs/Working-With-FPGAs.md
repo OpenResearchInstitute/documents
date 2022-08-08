@@ -347,6 +347,40 @@ abraxas3d@chococat:~/adi-encoder-meta-adi/integrate-iio/project-spec/meta-user/c
 
 KERNEL_DTB="zynq-zc706-adv7511-adrv9371"
 ```
+
+DRAFT Do we need to add Linux Driver support? DRAFT
+
+Configure kernel with “make menuconfig” 
+
+```
+Linux Kernel Configuration
+	Device Drivers  --->
+	<*>     Industrial I/O support --->
+	    --- Industrial I/O support
+	    -*-   Enable ring buffer support within IIO
+	    -*-     Industrial I/O lock free software ring
+	    -*-   Enable triggered sampling support
+
+	          *** Analog to digital converters ***
+	    [--snip--]
+
+		-*- Analog Devices High-Speed AXI ADC driver core
+		< > Analog Devices AD9361, AD9364 RF Agile Transceiver driver
+		<*> Analog Devices AD9371 RF Transceiver driver
+		< > Analog Devices AD6676 Wideband IF Receiver driver
+		< > Analog Devices AD9467, AD9680, etc. high speed ADCs
+		< > Analog Devices Motor Control (AD-FMCMOTCON) drivers
+		< > Generic FFT driver
+		<*> Generic AXI JESD204B configuration driver
+
+	    [--snip--]
+
+	Frequency Synthesizers DDS/PLL  --->
+    		Direct Digital Synthesis  --->
+	 		<*> Analog Devices CoreFPGA AXI DDS driver
+```
+
+
 We proceed with building petalinux.
 
 ```
