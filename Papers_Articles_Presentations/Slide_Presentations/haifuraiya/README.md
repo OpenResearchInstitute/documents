@@ -6,5 +6,8 @@
 
 LibreCube Open Source Satellite repository: https://gitlab.com/librecube
 
+8 August 2022 Update and Q&A: https://youtu.be/qTW0z4NtMJM
+
+
 
 
