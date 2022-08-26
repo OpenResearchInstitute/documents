@@ -2,7 +2,7 @@
 
 ## Propulsion Technical Repository
 
-https://github.com/phase4space/propulsion_subsystem_haifuraiya
+https://github.com/phase4space/propulsion_subsystem_haifuraiya/tree/6.3c
 
 ## Video Recordings
 
