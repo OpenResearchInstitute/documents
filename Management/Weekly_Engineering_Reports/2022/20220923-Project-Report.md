@@ -90,3 +90,7 @@ Progress reported on MQTT build for the downlink.
 
 Simple FSK receiver design described at weekly meeting. Video recording link here: https://youtu.be/CohOaRs0RYA
 
+## Haifuraiya
+
+We met with JAMSAT about the Open Source HEO proposal at their monthly membership meeting for September. The proposal will be in the JAMSAT Journal next issue or so, translated. Best place to track published work for the project is https://github.com/phase4ground/documents/tree/master/Papers_Articles_Presentations/Slide_Presentations/haifuraiya
+
