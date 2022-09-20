@@ -88,7 +88,7 @@ Progress reported on MQTT build for the downlink.
 
 ### Uplink Receiver
 
-Simple FSK receiver design described at weekly meeting. Video recording link here: https://youtu.be/CohOaRs0RYA
+Simple FSK receiver design described at weekly meeting. Video recording link here: https://youtu.be/CohOaRs0RYA (last week) and https://www.youtube.com/watch?v=Cg-FXbU_Vys (this week). 
 
 ## Haifuraiya
 
