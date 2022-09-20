@@ -50,7 +50,7 @@ Time:
    PDT: September 18, 2022, 9:00 am
    UTC: September 18, 2022, 4:00 pm
 
-Haifuraiya is an open source highly elliptical orbit amateur satellite project proposal. This presentation will walk through the high level project proposal. The project features a digital microwave multiplexing transceiver with a failover transponder mode, has an international volunteer team open to community participants, and complies with debris mitigation guidance from the United States Federal Communications Commission.
+Haifuraiya is an open source highly elliptical orbit amateur satellite project proposal. This presentation will walk through the high-level project proposal. The project features a digital microwave multiplexing transceiver with a failover transponder mode, has an international volunteer team open to community participants, and complies with debris mitigation guidance from the United States Federal Communications Commission.
 
 #### User Authentication for Amateur Satellites
 Presentors:
@@ -69,7 +69,7 @@ After a brief discussion of the reasons why user authentication is needed on an 
 
 Each Gallery had a Q&A tab, a poster or document, links to any papers, and a link to any associated video presentations. 
 
-#### Ribbit, a diestributed digital messaging platform
+#### Ribbit, a distributed digital messaging platform
 
 #### Opulent Voice - High Bitrate Digital Voice and Data
 
