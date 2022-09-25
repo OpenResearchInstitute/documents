@@ -16,6 +16,8 @@ LibreCube Open Source Satellite repository: https://gitlab.com/librecube
 
 25 August 2022 Orbit Discussion: https://youtu.be/MG8B8CbXkG8
 
+18 September 2022 Ham Expo Presentation: https://youtu.be/MTk7kyO7eqw
+
 
 
 
