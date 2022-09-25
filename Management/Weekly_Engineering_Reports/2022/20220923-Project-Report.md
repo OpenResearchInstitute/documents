@@ -94,3 +94,29 @@ Simple FSK receiver design described at weekly meeting. Video recording link her
 
 We met with JAMSAT about the Open Source HEO proposal at their monthly membership meeting for September. The proposal will be in the JAMSAT Journal next issue or so, translated. Best place to track published work for the project is https://github.com/phase4ground/documents/tree/master/Papers_Articles_Presentations/Slide_Presentations/haifuraiya
 
+### Power Bus
+
+Power systems, power budget, and power dissipation determinations are in progress. Thank you to Thomas Parry, Michael KA2ZEV, and Samudra for contributions this past week that move us closer to building engineering versions of the hardware.
+
+| Sources in Power Plant | 
+| ---------------------- |
+| Supercapacitors        | 
+| Rechargeable Batteries | 
+| Solar Panels           | 
+| Power Controller       |
+
+#### Supercapacitors
+
+Supercapacitors will be included in the Power Plant. 
+
+#### Rechargeable Batteries
+
+Battery packs from Nickel Metal Hydride cells will be created. These will be used as the initial battery packs for the engineering model. This work will complete the Cell Matching project. 
+
+#### Solar Panels
+
+Flexible panels from Northrup Grumman will be modeled and quoted.
+
+#### Power Controller
+
+Possible starting point is here https://gitlab.com/librespacefoundation/upsat/upsat-eps-hardware and https://gitlab.com/librespacefoundation/upsat/upsat-eps-software. 
