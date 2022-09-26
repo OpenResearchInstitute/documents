@@ -2,7 +2,15 @@
 
 ## Presentations
 
-Ribbit will be at RATPAC on 20 October 2022.
+Ribbit was at DEFCON. Ribbet was at Ham Expo. 
+
+Ribbit will now be at RATPAC!
+
+If you could please save the date for 20 October 2022 at 6pm US Pacific, then Pierre et al will present and take Q&A in the emergency communications track Radio Amateur Training Planning and Activities Committee (RATPAC). 
+
+This is an all-volunteer group that puts on two presentations a week about amateur radio. Wednesday nights are general interest, and Thursday nights are emergency communications. 
+
+Find out more at https://sites.google.com/view/ratpac
 
 ## FPGA 
 
