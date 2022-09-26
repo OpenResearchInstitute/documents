@@ -119,4 +119,5 @@ Flexible panels from Northrup Grumman will be modeled and quoted.
 
 #### Power Controller
 
-Possible starting point is here https://gitlab.com/librespacefoundation/upsat/upsat-eps-hardware and https://gitlab.com/librespacefoundation/upsat/upsat-eps-software. 
+Possible starting point is here https://gitlab.com/librespacefoundation/upsat/upsat-eps-hardware and https://gitlab.com/librespacefoundation/upsat/upsat-eps-software and Satellite Solar Power Budget tool here https://gitlab.com/librespacefoundation/satellite-solar-power-budget
+
