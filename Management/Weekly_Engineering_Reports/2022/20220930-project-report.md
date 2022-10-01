@@ -2,7 +2,7 @@
 
 ## Presentations
 
-Ribbit was at DEFCON. Ribbet was at Ham Expo. 
+Ribbit was at DEFCON. Ribbit was at Ham Expo. 
 
 Ribbit will now be at RATPAC!
 
