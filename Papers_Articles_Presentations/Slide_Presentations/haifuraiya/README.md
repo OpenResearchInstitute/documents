@@ -1,5 +1,7 @@
 # Haifuraiya Proposal
 
+Open Source Highly Elliptical Orbit Amateur Communications Satellite Project
+
 Please visit https://www.openresearch.institute/getting-started/ to join the mailing list and Slack account. 
 
 ## Propulsion Technical Repository
