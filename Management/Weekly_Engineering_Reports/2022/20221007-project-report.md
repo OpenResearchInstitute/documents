@@ -12,6 +12,8 @@ This is an all-volunteer group that puts on two presentations a week about amate
 
 Find out more at https://sites.google.com/view/ratpac
 
+Ribbit will also be featured as the program presentation at GARS on 14 March 2023. 
+
 ## FPGA 
 
 ### Downlink Transmitter
