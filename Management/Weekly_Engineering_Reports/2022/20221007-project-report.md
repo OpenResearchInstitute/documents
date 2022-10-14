@@ -57,7 +57,7 @@ When no traffic is present, test patterns will be sent. The purpose of the test 
 |27| 32APSK 8/9 | 33.4555 | 30.8315 | 
 |28| 32APSK 9/10 | 33.8808 | 31.2235 |
 
-One full cycle of the pattern sent (using the index) would be 1 2 1 3 1 4 1 5 1 6 1 7 1 8 1 9 1 10 1 11 1 12 1 13 1 14 1 15 1 16 1 17 1 18 1 19 1 20 1 21
+One full cycle of the pattern sent (using the index) would be 1 2 1 3 1 4 1 5 1 6 1 7 1 8 1 9 1 10 1 11 1 12 1 13 1 14 1 15 1 16 1 17 1 18 1 19 1 20 1 21 1 22 1 23 1 24 1 25 1 26 1 27 1 28
 
 A certificate of highest bitrate reception achieved could be designed. There are several ways to do this. However, first, we need to get successful transmission of the test patterns in order without any extra mechanism. 
 
