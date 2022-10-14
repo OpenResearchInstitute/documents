@@ -18,6 +18,51 @@ Ribbit will also be featured as the program presentation at GARS on 14 March 202
 
 ### Downlink Transmitter
 
+#### Default Digital Downlink (Triple-D) Chart
+
+Example modulation and encoding combinations for Triple-D are below. 
+
+- [ ] Review List
+
+When no traffic is present, test patterns will be sent. The purpose of the test patterns will be to provide modulation and coding combinations for receiver testing and tuning. The test patterns will be sent in increasing order of bitrate, with the lowest bitrate test pattern sent every other slot. Alternating the easiest test pattern with all the others in order ensures that nearly any receiver has something to constantly listen to and tune towards. 
+
+| Index | Modcod | Bitrate Mbps | TS Bitrate Mbps |
+|---|--------|----------|--------|
+|1| QPSK 1/4 | 3.6588 | 3.3718 |
+|2| QPSK 1/3 | 4.9552 | 4.5666 |
+|3| QPSK 2/5 | 5.9924 | 5.5224 |
+|4| QPSK 1/2 | 7.4074 | 6.8264 |
+|5| QPSK 3/5 | 9.1030 | 8.3898 |
+|6| QPSK 2/3 | 10.1409 | 9.3455 |
+|7| QPSK 3/4 |11.4373 | 10.5403 |
+|8| QPSK 4/5 | 12.2152 | 11.2571 |
+|9| QPSK 5/6 | 12.7338 | 11.735 |
+|10| QPSK 8/9 | 13.598 | 12.5315 |
+|11| 8PSK 3/5 | 13.6118 | 12.5442 |
+|12| QPSK 9/10 | 13.7709 | 12.6908 | 
+|13| 8PSK 2/3 | 15.1625 | 13.9732 | 
+|14| 8PSK 3/4 | 17.1008 | 15.7596 |
+|15| 8PSK 5/6 | 19.0392 | 17.5459 |
+|16| 16APSK 2/3 | 20.1518 | 18.5713 |
+|17| 8PSK 8/9 | 20.3315 | 18.7369 |
+|18| 8PSK 9/10 | 20.5899 | 18.975 |
+|19| 16APSK 3/4 | 22.728 | 20.9454 |
+|20| 16APSK 4/5 | 24.2738 | 22.3699 |
+|21| 16APSK 5/6 | 25.3043 | 23.3196 |
+|22| 16APSK 8/9 | 27.0217 | 24.9024 |
+|23| 16APSK 9/10 | 27.3652 | 25.219 |
+|24| 32APSK 3/4 | 28.1395 | 25.9325 |
+|25| 32APSK 4/5 | 30.0532 | 27.6961 |
+|26| 32APSK 5/6 | 31.3291 | 28.8719 |
+|27| 32APSK 8/9 | 33.4555 | 30.8315 | 
+|28| 32APSK 9/10 | 33.8808 | 31.2235 |
+
+One full cycle of the pattern sent (using the index) would be 1 2 1 3 1 4 1 5 1 6 1 7 1 8 1 9 1 10 1 11 1 12 1 13 1 14 1 15 1 16 1 17 1 18 1 19 1 20 1 21 1 22 1 23 1 24 1 25 1 26 1 27 1 28
+
+A certificate of highest bitrate reception achieved could be designed. There are several ways to do this. However, first, we need to get successful transmission of the test patterns in order without any extra mechanism. 
+
+Test patterns at the above bitrates were generated using simple video files from Adobe Premiere. 
+
 
 ### Uplink Receiver
 
