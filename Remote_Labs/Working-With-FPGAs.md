@@ -348,9 +348,15 @@ abraxas3d@chococat:~/adi-encoder-meta-adi/integrate-iio/project-spec/meta-user/c
 KERNEL_DTB="zynq-zc706-adv7511-adrv9371"
 ```
 
-DRAFT Do we need to add Linux Driver support? DRAFT
+Configure kernel with 
 
-Configure kernel with “make menuconfig” 
+```
+petalinux-config -c kernel
+```
+
+Make sure the right components are checked. We have found they usually are. You're looking for hardware drivers and support for the 9361 or 9371, depending on the target hardware, and JESD204B. 
+
+Here is an early example. Yours may differ. Ask on Slack for help.
 
 ```
 Linux Kernel Configuration
