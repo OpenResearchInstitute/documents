@@ -40,7 +40,7 @@ Power systems, power budget, and power dissipation determinations are in progres
 
 #### Rechargeable Batteries
 
-Battery packs from Nickel Metal Hydride cells will be created. These will be used as the initial battery packs for the engineering model. This work will complete the Cell Matching project. 
+Battery packs from Nickel Metal Hydride cells will be created. These will be used as the initial battery packs for the engineering model. This work will complete the Cell Matching project. There is a new weekly meeting on Friday 1100-1200 to get this completed. Thank you to Lab Tech One for stepping up here. 
 
 #### Solar Panels
 
