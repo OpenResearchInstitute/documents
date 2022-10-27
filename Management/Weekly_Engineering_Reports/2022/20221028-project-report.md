@@ -4,7 +4,9 @@
 
 Ribbit presented on the evening of 20 October to RATPAC. The talk was very well received and the presentation can be viewesd at: https://www.youtube.com/watch?v=TGzgIjEt9wA
 
-Help us crack 1000 views. 
+Help us crack 2000 views!
+
+ORI will be at San Bernardino Microwave Society in early November 2022 for a presentation. 
 
 ## FPGA 
 
@@ -18,7 +20,13 @@ We've been working very hard to get the encoder reliably working. There's a lot 
 
 Opulent Voice forward error correction article *has been accepted for publication in QEX*. 
 
-Opulent Voice will be on a sounding rocket in collaboration with the University of Puerto Rico. Work is resuming after the hurricane interruption, with students joining #opulent-voice on Slack. 
+### Sounding Rockets
+
+1) Opulent Voice will be on a sounding rocket in collaboration with the University of Puerto Rico. Work is resuming after the hurricane interruption, with students joining #opulent-voice on Slack.
+
+2) SOAR Sub-orbital Amateur Radio October 27 2022 Update:
+3) 
+FCC STA application work continues.  The FCC has asked for some clarifications and additional details, which we have been working through.  None of the requests/responses have been viewed as show-stoppers at this point.
 
 ## Haifuraiya
 
