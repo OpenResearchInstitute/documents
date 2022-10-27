@@ -2,9 +2,12 @@
 
 ## Presentations
 
-Ribbit presented on the evening of 20 October to RATPAC. The talk was very well received and the presentation can be viewesd at: https://www.youtube.com/watch?v=TGzgIjEt9wA
+Ribbit presented on the evening of 20 October to RATPAC. The talk was very well received and the presentation can be viewed at: https://www.youtube.com/watch?v=TGzgIjEt9wA
+Following the talk, about 35 people contacted us to share their experience with the tech demo app, with all finding the technology very useful for EmComms. Many requested a mailing list to stay informed. The Dev Team is growing with Neil joining this week with skills in server development & web applications.
+Also thanks to Paul & Jason to register the domain and get a draft website started: we can be found at ribbitradio.org
+The website will continue to evolve in the coming weeks.
 
-Help us crack 2000 views!
+Help us crack 2000 views on YouTube!
 
 ORI will be at San Bernardino Microwave Society in early November 2022 for a presentation. 
 
