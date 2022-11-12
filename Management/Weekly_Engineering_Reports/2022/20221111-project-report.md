@@ -45,3 +45,11 @@ You can see a combination of the behaviors shown above.
 ### Conclusion
 
 All tests appear to be passing.
+
+### Encoder Standalone Implementation with Embiggener
+
+Integration completed. Synthesis completed. Implementation passed. 
+
+### Reference Design with Modified Encoder
+
+Integration completed. Synthesis completed. 
