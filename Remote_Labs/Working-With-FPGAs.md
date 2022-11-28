@@ -144,9 +144,24 @@ If the tunnels belong to another user, you should try to coordinate with them (e
 
 ### Updating Your SSH Public Keys
 
-If you need to update the SSH public keys you use, go ahead and register the new key(s) on GitHub as before. Before you can use the new key(s) with the license server, you will need to notify us so we can update the license server.
+If you need to update the SSH public keys you use, go ahead and register the new key(s) on GitHub as before. You can also remove any keys you no longer want. Before you can use the new key(s) with the license server, you will need to notify us so we can update the license server.
 
 This process could be automated if it turns out to happen very often. Let us know if you anticipate changing your SSH keys frequently.
+
+***GitHub will expire your SSH keys*** if you do not use them ***on GitHub*** for a year. That won't remove your access to the license server, because the license server stores your public keys when we update your registration. However, if we update your registration again, any keys that GitHub has expired (or you have removed from GitHub manually) will also disappear from the license server. Be sure to check your list of SSH keys on GitHub carefully before notifying us to update the license server. You can check on the web by using the same procedure as before:
+
+1. Log into your GitHub account on the web.
+
+2. On the GitHub page, click on your avatar (in the upper right corner) and select Settings.
+
+3. In the left column, click on "SSH and GPG keys".
+
+That will show only the SHA256 hash of each key, with whatever identifying information you provided to GitHub when you registered it. If you need to see the public keys themselves, you can see these at
+
+```
+https://github.com/USERNAME.keys
+```
+where you replace USERNAME with your GitHub user name. (Yes, anybody can see your public keys that way.)
 
 ## Using VMs in the Remote Lab
 
