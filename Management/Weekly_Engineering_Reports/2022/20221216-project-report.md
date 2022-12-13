@@ -6,17 +6,33 @@
 
 Open source, and then maintain a particular codebase we have been made aware of. This may involve lawyers. 
 
+13 December 2022 phone consultation resulted in two action items, which were executed later in the day. 
+
 ### FCC TAC Report
+
+ORI's representation on the US Federal Communications Commission Technological Advisory Council (TAC) concludd with the final quarterly meeting held 8 December 2022 in Washington DC. All of the recommendations from the Working Group and Sub-Working Group (ORI co-chaired the SWG) were unanimously approved. Thank you to everyone that helped ORI stick up for open source and the amateur radio service at the FCC in 2022. We have been encouraged to apply to be part of TAC in 2023. 
 
 ## FPGA
 
 ### Downlink
 
+FGPA Meeting videos published. We are caught up for 2022.
+
+6 December 2022: https://youtu.be/St7SQBMltkA
+
+13 December 2022: https://youtu.be/QWD_J6d2qVY
+
 #### COBS Decoder Integration
+
+Integration with the reference design started 13 December 2022. 
 
 #### Default Digital Downlink
 
+The file was updated with Evariste's input on 13 December 2022. 
+
 #### Multiplexing
+
+Good feedback about QoS was received from the list. Thank you to everyone participating in this discussion. 
 
 ### Uplink
 
@@ -26,7 +42,10 @@ Open source, and then maintain a particular codebase we have been made aware of.
 
 ### UPR 
 
+Shipment of the amplifiers to University of Puerto Rico was more difficult than expected, with the shipment refused and returned, even though the address was correct.  
 ### AmbaSat Respin
+
+The STA was approved, which is very good news. Thank you to Jay Francis and several people from the San Diego Microwave Group that helped review the application and provided useful advice. 
 
 ## Ribbit
 
@@ -42,5 +61,5 @@ We'd like to keep the number of people on our Board of Directors at 5, or more. 
 
 ## Winter Holiday
 
-Our Winter Holiday is from 16 December 2022 until 8 January 2023. The executive team will be meeting to review ORI direction for 2023 in late December 2022. There may be reduced staff on some engineering teams. 
+Our Winter Holiday is from 16 December 2022 until 9 January 2023. The executive team will be meeting to review ORI direction for 2023 in late December 2022. There may be reduced staff on some engineering teams. 
 
