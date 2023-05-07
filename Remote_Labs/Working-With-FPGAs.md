@@ -291,6 +291,42 @@ To exit the terminal emulation, hit `Control-A` and then `k`, then `y` to confir
 
 Minicom is more full-featured text-based terminal emulation program. Read `man minicom` to learn more.
 
+### Working on the zcu106 and attached ADRV9002 with the Analog Devices HDL Reference Design and Petalinux
+
+These instructions are about how to use the zcu106 with attached ADRV9002. Analog Devices provides an HDL reference design and a version of buildroot linux with LibIIO in order to allow you to incorporate your custom cores int the design and get them working over the air. 
+
+#### Get set up to use Vivado 2021.1
+```
+source /tools/Xilinx/Vivado/2021.1/settings64.sh
+```
+Make sure you do all the steps involving Vivado in a terminal where you have sourced the right settings64.sh.
+
+Make sure you have a Vivado license available before proceeding. If you're using ORI's floating license, that means setting up the SSH tunnel to the license server and setting the environment variable `XILINXD_LICENSE_FILE` appropriately, in that same terminal.
+
+#### Clone the Repository with all the HDL Elements
+Clone the _appropriate_ branch of this repository directly from Analog Devices github. To use Vivado 2021.1, get [ at](https://github.com/analogdevicesinc/hdl/tree/hdl_2021_r1) 
+
+Navigate to AI and replace the xdc file with the one for the zcu106. You download the zcu106 design constraints file directly from Xilinx, or get it from ORI Slack in the #neptune channel. Find it on a pinned post. 
+
+Navigate to this directory: adi_adrv9371_zc706/hdl/projects/adrv9001/zcu102
+
+```
+make
+```
+(about x hours, xxxMB used so far)
+
+Open the resulting project `adi_adrv9371-zc706/hdl/projects/xxxxxxxxxxxx` in Vivado. Export bitstream and xsa file (`File->Export->Export Bitstream File...` and `File->Export->Export Hardware...`. Choose the `Include bitstream` option when you export hardware, even though you have a separate bitstream file too.). You will need them to build petalinux and boot the zcu106.
+
+
+
+
+
+
+### Working on the zcu106 and attached ADRV9002 with the Analog Devices HDL Reference Design and MATLAB/Simulink
+
+
+
+
 ### Working on the zc706 and attached ADRV9371 with the Analog Devices HDL Reference Design
 
 These instructions are about how to use the zc706 with attached ADRV9371. Analog Devices provides an HDL reference design and petalinux support in order to allow you to incorporate your custom cores into the design and get them working over the air.
