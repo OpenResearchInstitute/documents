@@ -1,0 +1,26 @@
+# Kuyper Linux Installation
+
+To create an installation of ADI Kuyper Linux on an SD card
+for one of the Xilinx dev boards:
+
+Refer to https://wiki.analog.com/resources/tools-software/linux-software/kuiper-linux
+https://github.com/analogdevicesinc/adi-kuiper-gen/releases
+
+On macOS, you can just use Balena Etcher to write the SD card.
+
+Don't forget to set the board's DIP switches to boot from SD!
+
+After booting, if the filesystem is smaller than the card you used, say:
+raspi-config --expand-rootfs
+and reboot.
+
+To assign a static IP address, edit /etc/network/interfaces and add:
+
+interface eth0
+static ip_address=10.73.1.9/24
+static routers=10.73.1.1
+static domain_name_servers=192.168.2.2
+
+Adjust to suit local network. IP address should match a domain name.
+Routers should match the remote lab LAN. DNS should match the remote
+lab LAN.
