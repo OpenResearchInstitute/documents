@@ -14,7 +14,7 @@ After booting, if the filesystem is smaller than the card you used, say:
 raspi-config --expand-rootfs
 and reboot.
 
-To assign a static IP address, edit /etc/network/interfaces and add:
+To assign a static IP address, edit /etc/dhcpcd.conf and add:
 
 interface eth0
 static ip_address=10.73.1.9/24
