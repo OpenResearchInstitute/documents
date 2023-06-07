@@ -468,7 +468,6 @@ We proceed with building petalinux.
 cd build
 petalinux-build
 ```
-(21.5 minutes (depends on downloads), total usage is now up to 22GB!)
 
 Look carefully at the last few lines of output from petalinux-build. If it says `INFO: Failed to copy built images to tftp dir: /tftpboot` then somebody else's files are probably already in the /tftpboot directory. Coordinate on Slack. As root, go there and move the other user's files and directory `pxelinux.cfg` aside into a new directory. If you still have trouble writing to /tftpboot, run `groups` in your terminal and check that you're a member of the tftp group. If not, use `sudo adduser <you> tftp` to add yourself. You'll need to close your terminal, open a new one, and re-source the Vivado and Petalinux settings scripts.
 
