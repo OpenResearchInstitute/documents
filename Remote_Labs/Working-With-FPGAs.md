@@ -291,9 +291,12 @@ To exit the terminal emulation, hit `Control-A` and then `k`, then `y` to confir
 
 Minicom is more full-featured text-based terminal emulation program. Read `man minicom` to learn more.
 
-### Working on the zc706 and attached ADRV9371 with the Analog Devices HDL Reference Design
+### Working on the zcu106 and attached ADRV9002 with the Analog Devices HDL Reference Design and MATLAB/Simulink
+TBD
 
-These instructions are about how to use the zc706 with attached ADRV9371. Analog Devices provides an HDL reference design and petalinux support in order to allow you to incorporate your custom cores into the design and get them working over the air.
+### Working on the zc706 and attached ADRV9009 with the Analog Devices HDL Reference Design and Petalinux
+
+These instructions are about how to use the zc706 with attached ADRV9009. Analog Devices provides an HDL reference design and a version of buildroot linux with LibIIO in order to allow you to incorporate your custom cores int the design and get them working over the air. 
 
 #### Get set up to use Vivado 2021.1
 ```
@@ -304,36 +307,66 @@ Make sure you do all the steps involving Vivado in a terminal where you have sou
 Make sure you have a Vivado license available before proceeding. If you're using ORI's floating license, that means setting up the SSH tunnel to the license server and setting the environment variable `XILINXD_LICENSE_FILE` appropriately, in that same terminal.
 
 #### Clone the Repository with all the HDL Elements
-Clone the _appropriate_ branch of this repository. Check the README.md or check on Slack to get the right branch. Make sure you get submodules. 
+Clone the _appropriate_ branch of this repository directly from Analog Devices github. To use Vivado 2021.1, get [ at](https://github.com/analogdevicesinc/hdl/tree/hdl_2021_r1) 
+
+Navigate to this directory: ../hdl/projects/adrv9009/zc706 and type "make"
 
 ```
-git clone --branch adrv9371-zc706-dvbs2-integ --single-branch --recurse-submodules -j8 https://github.com/phase4ground/adi_adrv9371_zc706.git
+abraxas3d@chococat:~/haifuraiya/basic_build/hdl/projects/adrv9009/zc706$ time make
+Building axi_clkgen library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/axi_clkgen/axi_clkgen_ip.log] ... OK
+Building util_cdc library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/util_cdc/util_cdc_ip.log] ... OK
+Building util_axis_fifo library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/util_axis_fifo/util_axis_fifo_ip.log] ... OK
+Building axi_dmac library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/axi_dmac/axi_dmac_ip.log] ... OK
+Building axi_hdmi_tx library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/axi_hdmi_tx/axi_hdmi_tx_ip.log] ... OK
+Building axi_spdif_tx library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/axi_spdif_tx/axi_spdif_tx_ip.log] ... OK
+Building axi_sysid library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/axi_sysid/axi_sysid_ip.log] ... OK
+Building ad_ip_jesd204_tpl_adc library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/jesd204/ad_ip_jesd204_tpl_adc/ad_ip_jesd204_tpl_adc_ip.log] ... OK
+Building ad_ip_jesd204_tpl_dac library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/jesd204/ad_ip_jesd204_tpl_dac/ad_ip_jesd204_tpl_dac_ip.log] ... OK
+Building axi_jesd204_common library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/jesd204/axi_jesd204_common/axi_jesd204_common_ip.log] ... OK
+Building axi_jesd204_rx library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/jesd204/axi_jesd204_rx/axi_jesd204_rx_ip.log] ... OK
+Building axi_jesd204_tx library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/jesd204/axi_jesd204_tx/axi_jesd204_tx_ip.log] ... OK
+Building jesd204_common library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/jesd204/jesd204_common/jesd204_common_ip.log] ... OK
+Building jesd204_rx library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/jesd204/jesd204_rx/jesd204_rx_ip.log] ... OK
+Building jesd204_tx library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/jesd204/jesd204_tx/jesd204_tx_ip.log] ... OK
+Building sysid_rom library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/sysid_rom/sysid_rom_ip.log] ... OK
+Building util_cpack2 library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/util_pack/util_cpack2/util_cpack2_ip.log] ... OK
+Building util_upack2 library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/util_pack/util_upack2/util_upack2_ip.log] ... OK
+Building interface definitions [/home/abraxas3d/haifuraiya/basic_build/hdl/library/interfaces/interfaces_ip.log] ... OK
+Building axi_adxcvr library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/xilinx/axi_adxcvr/axi_adxcvr_ip.log] ... OK
+Building axi_dacfifo library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/xilinx/axi_dacfifo/axi_dacfifo_ip.log] ... OK
+Building util_adxcvr library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/xilinx/util_adxcvr/util_adxcvr_ip.log] ... OK
+Building adrv9009_zc706 project [/home/abraxas3d/haifuraiya/basic_build/hdl/projects/adrv9009/zc706/adrv9009_zc706_vivado.log] ... OK
+
+real	216m35.082s
+user	85m50.629s
+sys	22m58.664s
 ```
-(about 7 seconds and 26MB of disk space)
 
-Navigate to this directory: adi_adrv9371_zc706/hdl/projects/adrv9371x/zc706
-
-Assuming all the issues at: https://github.com/phase4ground/adi_adrv9371_zc706/issues/1 are cleared up, type make. 
-
-```
-make
-```
-(about 2.5 hours, 930MB used so far)
-
-Open the resulting project `adi_adrv9371-zc706/hdl/projects/adrv9371x/zc706/adrv9371x_zc706.xpr` in Vivado. Export bitstream and xsa file (`File->Export->Export Bitstream File...` and `File->Export->Export Hardware...`. Choose the `Include bitstream` option when you export hardware, even though you have a separate bitstream file too.). You will need them to build petalinux and boot the zc706.
+Open the resulting project `adrv9009_zc706.xpr` in Vivado. Export bitstream and xsa file (`File->Export->Export Bitstream File...` and `File->Export->Export Hardware...`. Choose the `Include bitstream` option when you export hardware, even though you have a separate bitstream file too.). You will need them to build petalinux and boot the zcu106.
 
 #### Build Petalinux with meta-adi
 
 Following the instructions that start at this link: https://github.com/analogdevicesinc/meta-adi/tree/master/meta-adi-xilinx
 
 Source Petalinux 2021.1.
+For example:
 
-Optionally, make a separate directory for your Petalinux and cd to that directory.
+```
+abraxas3d@chococat:~/haifuraiya/basic_build/petalinux$ source ~/petalinux2021.1/settings.sh 
+PetaLinux environment set to '/home/abraxas3d/petalinux2021.1'
+WARNING: This is not a supported OS
+INFO: Checking free disk space
+INFO: Checking installed tools
+INFO: Checking installed development libraries
+INFO: Checking network and other services
+```
+
+You will probably want to make a separate directory for your Petalinux and cd to that directory.
 
 ```
 petalinux-create -t project --template zynq --name <project name>
 ```
-This sets up the project directory structure for the right FPGA target.
+This sets up the project directory structure for the right FPGA target. Use zynq for zc706. Use zynqmp for zcu102 if you are using that development board. These instructions default to the zc706, which has a 7000 series Zynq chip and not an Ultrascale+.
 
 ```
 git clone https://github.com/analogdevicesinc/meta-adi
@@ -341,11 +374,35 @@ git clone https://github.com/analogdevicesinc/meta-adi
 
 This fetches everything needed to add the yocto layers of meta-adi to petalinux. We need this, otherwise we do not have the right device tree for all the HDL in the Analog Devices reference design. 
 
+Check out the branch that corresponds to the tool version being used. For example, 2021_R1 for 2021.1. 
+
 ```
 cd <project name>
 petalinux-config --get-hw-description <path to .xsa file exported from Vivado>
 ```
 When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. Go to DTG Settings and set MACHINE_NAME to `zc706`.
+
+Expect to see something like this:
+
+```
+abraxas3d@chococat:~/haifuraiya/basic_build/petalinux/basic_build$ petalinux-config --get-hw-description ~/haifuraiya/basic_build/hdl/projects/adrv9009/zc706/system_top_plain.xsa 
+[INFO] Sourcing buildtools
+INFO: Getting hardware description...
+INFO: Renaming system_top_plain.xsa to system.xsa
+[INFO] Generating Kconfig for project
+[INFO] Menuconfig project
+
+
+*** End of the configuration.
+*** Execute 'make' to start the build or try 'make help'.
+
+[INFO] Sourcing build environment
+[INFO] Generating kconfig for Rootfs
+[INFO] Silentconfig rootfs
+[INFO] Generating plnxtool conf
+[INFO] Generating workspace directory
+abraxas3d@chococat:~/haifuraiya/basic_build/petalinux/basic_build$ 
+```
 
 If you want the target to have its official fixed IP address, and you should, in petalinux-config go to `Subsystem AUTO Hardware Settings` and choose `Ethernet Settings`. Deselect `Obtain IP address automatically` by cursoring to it and hitting the space bar. Then set the `Static IP address` to `10.73.1.9`, the `Static IP netmask` to `255.255.255.0`, and the `Static IP gateway` to `10.73.1.1`. Hit SAVE and take the default location.
 
@@ -360,7 +417,7 @@ abraxas3d@chococat:~/adi-encoder-meta-adi/integrate-iio/project-spec/meta-user/c
 
 #OE_TERMINAL = "tmux"
 
-KERNEL_DTB="zynq-zc706-adv7511-adrv9371"
+KERNEL_DTB="zynq-zc706-adv7511-adrv9009"
 ```
 
 Configure kernel with 
@@ -369,36 +426,39 @@ Configure kernel with
 petalinux-config -c kernel
 ```
 
-Make sure the right components are checked. We have found they usually are. You're looking for hardware drivers and support for the 9361 or 9371, depending on the target hardware, and JESD204B. 
+Make sure the right components are checked. We have found they usually are. You're looking for hardware drivers and support for the 9009, depending on the target hardware, and JESD204B. 
 
-Here is an early example. Yours may differ. Ask on Slack for help.
+Here is an early example. Yours may differ. Ask on Slack for help if any of this goes sideways.
 
 ```
 Linux Kernel Configuration
 	Device Drivers  --->
-	<*>     Industrial I/O support --->
-	    --- Industrial I/O support
-	    -*-   Enable ring buffer support within IIO
-	    -*-     Industrial I/O lock free software ring
-	    -*-   Enable triggered sampling support
+		-*- Industrial I/O support  --->
+			--- Industrial I/O support  
+			-*-   Enable buffer support within IIO                            
+  			-*-     IIO callback buffer used for push in-kernel interfaces   
+  			-*-     Industrial I/O DMA buffer infrastructure                  
+  			-*-     Industrial I/O DMA buffer integration with DMAEngine      
+  			-*-     Industrial I/O HW buffering                               
+  			-*-     Industrial I/O buffering based on kfifo  
+			-*-     Industrial I/O triggered buffer support       
+  			-*-   Enable IIO configuration via configfs 
+			-*-   Enable triggered sampling support 
+  			(2)     Maximum number of consumers per trigger        
+ 			-*-   Enable software IIO device support                   
+ 			-*-   Enable software triggers support                     
+			-*-   Enable triggered events support                   
+  			      Accelerometers  --->     
+  			      Analog to digital converters  --->               
+	    [--snip--]
+				-*- Analog Devices ADRV9001/ADRV9002 RF Transceiver driver       
+            			[*]   Enables verbose error reports                              
+           			[*]   Enables ARM verbose error messages                         
+           			[*]   Causes the API to validate all the input parameters 
+          			-*- Analog Devices ADRV9009/ADRV9008 RF Transceiver driver   
 
-	          *** Analog to digital converters ***
 	    [--snip--]
 
-		-*- Analog Devices High-Speed AXI ADC driver core
-		< > Analog Devices AD9361, AD9364 RF Agile Transceiver driver
-		<*> Analog Devices AD9371 RF Transceiver driver
-		< > Analog Devices AD6676 Wideband IF Receiver driver
-		< > Analog Devices AD9467, AD9680, etc. high speed ADCs
-		< > Analog Devices Motor Control (AD-FMCMOTCON) drivers
-		< > Generic FFT driver
-		<*> Generic AXI JESD204B configuration driver
-
-	    [--snip--]
-
-	Frequency Synthesizers DDS/PLL  --->
-    		Direct Digital Synthesis  --->
-	 		<*> Analog Devices CoreFPGA AXI DDS driver
 ```
 
 
@@ -408,7 +468,6 @@ We proceed with building petalinux.
 cd build
 petalinux-build
 ```
-(21.5 minutes (depends on downloads), total usage is now up to 22GB!)
 
 Look carefully at the last few lines of output from petalinux-build. If it says `INFO: Failed to copy built images to tftp dir: /tftpboot` then somebody else's files are probably already in the /tftpboot directory. Coordinate on Slack. As root, go there and move the other user's files and directory `pxelinux.cfg` aside into a new directory. If you still have trouble writing to /tftpboot, run `groups` in your terminal and check that you're a member of the tftp group. If not, use `sudo adduser <you> tftp` to add yourself. You'll need to close your terminal, open a new one, and re-source the Vivado and Petalinux settings scripts.
 
@@ -458,7 +517,7 @@ Open the xsct console (in the Xilinx menu).
 
 Xilinx Software Command-line Tool (XSCT) is an interactive and scriptable command-line interface to Xilinx Software Development Kit (Vitis, or Xilinx SDK). As with other Xilinx tools, the scripting language for XSCT is based on Tools Command Language, or tcl. 
 
-The following commands are entered into the xsct console. 
+The following commands are entered into the xsct console for a zc706. The commands for the zcu102 are different, because the processor is different.
 ```
 platform create -name <name> -hw <path to the xsa file you exported from Vivado> -os linux -proc ps7_cortexa9
 
@@ -514,7 +573,7 @@ Processor for the zc706 is ps7_cortexa9
 
 Uncheck Generate boot components. We're going to use what we made in Petalinux.
 
-Click finish to esetablish the preojct structure. This is captured in the .spr file. 
+Click finish to establish the project structure. This is captured in the .spr file. 
 
 Click Linux on ps7_cortexa9 item to open configuration window. 
 
