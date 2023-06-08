@@ -300,7 +300,7 @@ These instructions are about how to use the zcu102 with attached ADRV9002. Analo
 
 #### Get set up to use Vivado 2019.1 or 2021.1
 
-We may have to use 2019.1 to harmonize with the version of Vivado that Mathworks Buildroot needed for this station, in order to use HDL Coder. We may be able to use 2021.1. As of the time of this writing, it wasn't clear.
+We may have to use 2019.1 to harmonize with the version of Vivado that Mathworks Buildroot needed for this station, in order to use HDL Coder. We may be able to use 2021.1. As of the time of this writing, it wasn't clear. You will see 2021.1 in the rest of the instructions. 
 
 ```
 source /tools/Xilinx/Vivado/20xx.1/settings64.sh
@@ -322,6 +322,8 @@ Open the resulting project `adrv9001_zcu102.xpr` in Vivado. Export bitstream and
 #### Build Petalinux with meta-adi
 
 Following the instructions that start at this link: https://github.com/analogdevicesinc/meta-adi/tree/master/meta-adi-xilinx
+
+This page is important because it has a table of the device tree source file names that correspond to the hardware combinations. You need this below. 
 
 Source Petalinux 2021.1.
 For example:
@@ -372,7 +374,9 @@ Now, change into your new project directory and configure petalinux with the hdf
 cd <project name>
 petalinux-config --get-hw-description <path to .xsa file exported from Vivado>
 ```
-When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. Go to DTG Settings and set MACHINE_NAME to `zcu102`.
+When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. 
+
+Go to DTG Settings and set MACHINE_NAME to `zcu102-rev1.0`. This is important. See this page: https://support.xilinx.com/s/question/0D52E00006hprNsSAI/error-petalinux-build?language=en_US
 
 Expect to see something like this:
 
