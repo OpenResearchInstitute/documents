@@ -469,12 +469,22 @@ petalinux-build
 ```
 
 Look carefully at the last few lines of output from petalinux-build. If it says `INFO: Failed to copy built images to tftp dir: /tftpboot` then somebody else's files are probably already in the /tftpboot directory. Coordinate on Slack. As root, go there and move the other user's files and directory `pxelinux.cfg` aside into a new directory. If you still have trouble writing to /tftpboot, run `groups` in your terminal and check that you're a member of the tftp group. If not, use `sudo adduser <you> tftp` to add yourself. You'll need to close your terminal, open a new one, and re-source the Vivado and Petalinux settings scripts.
+	
+```
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 5599 tasks of which 3902 didn't need to be rerun and all succeeded.
+INFO: Successfully copied built images to tftp dir: /tftpboot
+[INFO] Successfully built project
+abraxas3d@chococat:~/neptune/petalinux/basic_build/build$ 
+```
 
-####
+#### Boot target. 
+	
+Below is how to use tftpboot. I used this page https://www.instructables.com/Setting-Up-TFTP-Server-for-PetaLinux/ and the Petalinux user guide from Xilinx to set up tftpboot on Keroppi with the zcu102. Current default state on keroppi is that the zcu102 is connected over JTAG and tftpboot can be used.
 
-Boot target. Below is how to use tftpboot. I used this page https://www.instructables.com/Setting-Up-TFTP-Server-for-PetaLinux/ and the Petalinux user guide from Xilinx to set up tftpboot on Keroppi with the zcu102. Current default state on keroppi is that the zcu102 is connected over JTAG and tftpboot can be used.
-
-Building with petalinux is done on chococat. But the zcu102 is connected to keroppi. The reason for this is because a custom glibc had to be made on keroppi to fix a MATLAB bug. Simulink won't run without this patch from Mathworks. Unfortunately, it has side effects. One of those side effects is that petalinux won't run. There is probably a better way to compartmentalize this, but we haven't found it or done it yet. So, here is how to move the files built on chococat to the /tftpboot folder on keroppi:
+Building with petalinux is done on chococat. But the zcu102 is connected to keroppi. The reason for building on chococat (or some other non-keroppi machine) is because a custom glibc had to be installed on keroppi to fix a MATLAB bug. Simulink won't run without this patch from Mathworks. Unfortunately, this patch has side effects. One of those side effects is that petalinux won't run on keroppi, becuase dependences cannot be installed. There is probably a better way to compartmentalize this, but we haven't found it or done it yet. Can you help? Welcome aboard! 
+	
+So, here is how to move the files built on chococat and put in that /tftpboot directory to the /tftpboot directory on keroppi:
 	
 ```
 abraxas3d@chococat:/tftpboot$ nano TEST_FILE
