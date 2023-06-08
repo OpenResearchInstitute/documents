@@ -291,12 +291,374 @@ To exit the terminal emulation, hit `Control-A` and then `k`, then `y` to confir
 
 Minicom is more full-featured text-based terminal emulation program. Read `man minicom` to learn more.
 
-### Working on the zcu106 and attached ADRV9002 with the Analog Devices HDL Reference Design and MATLAB/Simulink
+### Working on the zcu102 (zcu106 TBD) and attached ADRV9002 with the Analog Devices HDL Reference Design and MATLAB/Simulink
 TBD
+
+### Working on the zcu102 and attached ADRV9002 with the Analog Devices HDL Reference Design and Petalinux
+
+These instructions are about how to use the zcu102 with attached ADRV9002. Analog Devices provides an HDL reference design and a version of Petalinux with LibIIO in order to allow you to incorporate your custom cores into the design and get them working over the air. 
+
+#### Get set up to use Vivado 2019.1 or 2021.1
+
+We may have to use 2019.1 to harmonize with the version of Vivado that Mathworks Buildroot needed for this station, in order to use HDL Coder. We may be able to use 2021.1. As of the time of this writing, it wasn't clear.
+
+```
+source /tools/Xilinx/Vivado/20xx.1/settings64.sh
+```
+Make sure you do all the steps involving Vivado in a terminal where you have sourced the right settings64.sh.
+
+Make sure you have a Vivado license available before proceeding. If you're using ORI's floating license, that means setting up the SSH tunnel to the license server and setting the environment variable `XILINXD_LICENSE_FILE` appropriately, in that same terminal.
+
+#### Clone the Repository with all the HDL Elements
+Clone the _appropriate_ branch of this repository directly from Analog Devices github. To use Vivado 2019.1, to harmonize with Mathworks Buildroot, get [ at](https://github.com/analogdevicesinc/hdl/tree/hdl_2019_r1) To use Vivado 2021.1, which we are using with the zc706 and adrv9009, then get get [ at](https://github.com/analogdevicesinc/hdl/tree/hdl_2021_r1)
+
+Navigate to this directory: ../hdl/projects/adrv9001/zcu102 and type "make CMOS_LVDS_N=0"
+
+The adrv9001 is not a typo. The adrv9001 and adrv9002 are in a family of boards. The HDL for the adrv9001 and adrv9002 is the same. The adrv9002 does not have JESD204B drivers. It has either CMOS or LVDS drivers. You choose one or the other at compile time. We are choosing LVDS with 0 and we could choose CMOS with 1. 
+
+Open the resulting project `adrv9001_zcu102.xpr` in Vivado. Export bitstream and either xsa or hdf file (`File->Export->Export Hardware...`. Choose the `Include bitstream` option when you export hardware). You will need both to build petalinux and boot the zcu102.
+
+
+#### Build Petalinux with meta-adi
+
+Following the instructions that start at this link: https://github.com/analogdevicesinc/meta-adi/tree/master/meta-adi-xilinx
+
+Source Petalinux 2021.1.
+For example:
+
+```
+abraxas3d@chococat:~/neptune/basic_build/petalinux$ source ~/petalinux2021.1/settings.sh 
+PetaLinux environment set to '/home/abraxas3d/petalinux2021.1'
+WARNING: This is not a supported OS
+INFO: Checking free disk space
+INFO: Checking installed tools
+INFO: Checking installed development libraries
+INFO: Checking network and other services
+```
+
+You will probably want to make a separate directory for your Petalinux and cd to that directory.
+
+```
+petalinux-create -t project --template zynqMP --name <project name>
+
+```
+For example,
+
+```
+abraxas3d@chococat:~/neptune/petalinux$ petalinux-create -t project --template zynqMP --name basic_build
+INFO: Create project: basic_build
+INFO: New project successfully created in /home/abraxas3d/neptune/petalinux/basic_build
+```
+
+This sets up the project directory structure for the right FPGA target. Use zynqMP for zcu102 if you are using this Ultrascale+ board.
+
+```
+git clone https://github.com/analogdevicesinc/meta-adi
+```
+
+This fetches everything needed to add the yocto layers of meta-adi to petalinux. We need this, otherwise we do not have the right device tree for all the HDL in the Analog Devices reference design. 
+
+Check out the branch that corresponds to the tool version being used. For example, 
+
+```
+abraxas3d@chococat:~/neptune/petalinux/meta-adi$ git checkout 2021_R1
+branch '2021_R1' set up to track 'origin/2021_R1'.
+Switched to a new branch '2021_R1'
+```
+
+Now, change into your new project directory and configure petalinux with the hdf or xsa file you exported from Vivado
+
+```
+cd <project name>
+petalinux-config --get-hw-description <path to .xsa file exported from Vivado>
+```
+When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. Go to DTG Settings and set MACHINE_NAME to `zcu102`.
+
+Expect to see something like this:
+
+```
+abraxas3d@chococat:~/neptune/petalinux/basic_build$ petalinux-config --get-hw-description /home/abraxas3d/neptune/petalinux/hdl/projects/adrv9001/zcu102/system_top_basic.xsa 
+[INFO] Sourcing buildtools
+INFO: Getting hardware description...
+INFO: Renaming system_top_basic.xsa to system.xsa
+[INFO] Generating Kconfig for project
+[INFO] Menuconfig project
+
+
+*** End of the configuration.
+*** Execute 'make' to start the build or try 'make help'.
+
+[INFO] Extracting yocto SDK to components/yocto. This may take time!
+[INFO] Sourcing build environment
+[INFO] Generating kconfig for Rootfs
+[INFO] Silentconfig rootfs
+[INFO] Generating plnxtool conf
+[INFO] Adding user layers
+[INFO] Generating workspace directory
+abraxas3d@chococat:~/neptune/petalinux/basic_build$ 
+```
+
+If you want the target to have its official fixed IP address, and you should, in petalinux-config go to `Subsystem AUTO Hardware Settings` and choose `Ethernet Settings`. Deselect `Obtain IP address automatically` by cursoring to it and hitting the space bar. Then set the `Static IP address` to `10.73.1.16`, the `Static IP netmask` to `255.255.255.0`, and the `Static IP gateway` to `10.73.1.1`. Hit SAVE and take the default location.
+
+```
+echo "KERNEL_DTB=\"<name of the dts file to use from the list in meta-adi>\"" >> project-spec/meta-user/conf/petalinuxbsp.conf
+```
+
+The echo is a fancy way of setting up the petalinuxbsp.conf file. Here's what it should look like after this command. 
+
+```
+abraxas3d@chococat:~/adi-encoder-meta-adi/integrate-iio/project-spec/meta-user/conf$ cat petalinuxbsp.conf 
+#User Configuration
+
+#OE_TERMINAL = "tmux"
+
+KERNEL_DTB="zynqmp-zcu102-rev10-adrv9002"
+```
+
+Configure kernel with 
+
+```
+petalinux-config -c kernel
+```
+
+Make sure the right components are checked. We have found they usually are. You're looking for hardware drivers and support for the 9002. 
+
+Here is an early example. Yours may differ. Ask on Slack for help if any of this goes sideways.
+
+```
+Linux Kernel Configuration
+	Device Drivers  --->
+		-*- Industrial I/O support  --->
+			--- Industrial I/O support  
+			-*-   Enable buffer support within IIO                            
+  			-*-     IIO callback buffer used for push in-kernel interfaces   
+  			-*-     Industrial I/O DMA buffer infrastructure                  
+  			-*-     Industrial I/O DMA buffer integration with DMAEngine      
+  			-*-     Industrial I/O HW buffering                               
+  			-*-     Industrial I/O buffering based on kfifo  
+			-*-     Industrial I/O triggered buffer support       
+  			-*-   Enable IIO configuration via configfs 
+			-*-   Enable triggered sampling support 
+  			(2)     Maximum number of consumers per trigger        
+ 			-*-   Enable software IIO device support                   
+ 			-*-   Enable software triggers support                     
+			-*-   Enable triggered events support                   
+  			      Accelerometers  --->     
+  			      Analog to digital converters  --->               
+	    [--snip--]
+				-*- Analog Devices ADRV9001/ADRV9002 RF Transceiver driver       
+            			[*]   Enables verbose error reports                              
+           			[*]   Enables ARM verbose error messages                         
+           			[*]   Causes the API to validate all the input parameters 
+          			-*- Analog Devices ADRV9009/ADRV9008 RF Transceiver driver   
+
+	    [--snip--]
+
+```
+
+
+We proceed with building petalinux.
+
+```
+cd build
+petalinux-build
+```
+
+Look carefully at the last few lines of output from petalinux-build. If it says `INFO: Failed to copy built images to tftp dir: /tftpboot` then somebody else's files are probably already in the /tftpboot directory. Coordinate on Slack. As root, go there and move the other user's files and directory `pxelinux.cfg` aside into a new directory. If you still have trouble writing to /tftpboot, run `groups` in your terminal and check that you're a member of the tftp group. If not, use `sudo adduser <you> tftp` to add yourself. You'll need to close your terminal, open a new one, and re-source the Vivado and Petalinux settings scripts.
+
+####
+
+Boot target. Below is how to use tftpboot. I used this page https://www.instructables.com/Setting-Up-TFTP-Server-for-PetaLinux/ and the Petalinux user guide from Xilinx to set up tftpboot on Keroppi with the zcu102. Current default state on keroppi is that the zcu102 is connected over JTAG and tftpboot can be used.
+
+Building with petalinux is done on chococat. But the zcu102 is connected to keroppi. The reason for this is because a custom glibc had to be made on keroppi to fix a MATLAB bug. Simulink won't run without this patch from Mathworks. Unfortunately, it has side effects. One of those side effects is that petalinux won't run. There is probably a better way to compartmentalize this, but we haven't found it or done it yet. So, here is how to move the files built on chococat to the /tftpboot folder on keroppi:
+	
+```
+abraxas3d@chococat:/tftpboot$ nano TEST_FILE
+abraxas3d@chococat:/tftpboot$ ls
+abraxas3d  adiboot  salvy  TEST_FILE
+abraxas3d@chococat:/tftpboot$ 
+
+abraxas3d@keroppi:/tftpboot$ scp abraxas3d@chococat:/tftpboot/* .
+abraxas3d@chococat's password:
+scp: /tftpboot/abraxas3d: not a regular file
+scp: /tftpboot/adiboot: not a regular file
+scp: /tftpboot/salvy: not a regular file
+TEST_FILE                                                             100%   20    36.0KB/s   00:00
+abraxas3d@keroppi:/tftpboot$ ls
+abraxas3d  TEST_FILE
+```
+
+Make sure there's a hw_server process running.
+
+Monitor the serial console of the target. This may be /dev/ttyUSB1 or /dev/ttyUSB2. If you can't use either port, somebody else may have the console port open.
+```
+screen /dev/ttyUSB1 115200
+```
+
+Now go for the boot:
+```
+petalinux-package --prebuilt --fpga <location of bitfile> --force
+petalinux-boot --jtag --prebuilt 2 --hw_server-url TCP:keroppi:3121
+```
+
+If you get `Will not program bitstream on the target` then you might have forgotten to choose the `Include bitstream` option when you exported the XSA file.
+
+If you get a warning about your $XTERM and `Inappropriate ioctl for device.` you can ignore it.
+
+If you get a `Memory read error` OR `No supported FPGA device found` then type `reboot` at the serial console prompt and wait for it to finish. It won't actually reboot and return to the prompt. Then retry the `petalinux-boot` command.
+
+Watch the messages from petalinux-boot. Make sure it confirms that it is downloading the bitstream to the target.
+
+On the target's serial console, watch for the `Zynq>` prompt.
+There may be a bunch of messages claiming that the TFTP server died. Don't worry about that. Just wait for it to stop and display the `Zynq>` prompt.
+
+```
+Zynq> setenv serverip 10.73.1.94
+Zynq> setenv ipaddr 10.73.1.16 
+Zynq> pxe get
+Zynq> pxe boot
+```
+This should boot petalinux on the zc706.
+
+Note that the IP address set with setenv at the Zync> prompt does not stick. By default, the Linux system you built will use DHCP and get its own address. You can find out what address was assigned with `ip addr` on the serial console. If you followed the recommended procedure in petalinux-config above, it should already be set to `10.73.1.9`.
+
+#### How to Solve the Problem of Not Being Able to Select "Create Platform Project" in Vitis
+
+Source the version of Vitis you need to work with.
+Open Vitis (from the command line, type `vitis`).
+Open the xsct console (in the Xilinx menu).
+
+Xilinx Software Command-line Tool (XSCT) is an interactive and scriptable command-line interface to Xilinx Software Development Kit (Vitis, or Xilinx SDK). As with other Xilinx tools, the scripting language for XSCT is based on Tools Command Language, or tcl. 
+
+The following commands are entered into the xsct console for a zc706. The commands for the zcu102 are different, because the processor is different.
+```
+platform create -name <name> -hw <path to the xsa file you exported from Vivado> -os linux -proc ps7_cortexa9
+
+platform active
+```
+
+This should return the name of the platform you just created. 
+
+```	
+platform config -fsbl-elf <path to zynq_fsbl.elf>
+```
+
+Example on TFTP boot system in Remote Labs West:
+```
+platform config -fsbl-elf /tftpboot/zynq_fsbl.elf
+```
+This specifies the boot image format file option in the GUI. (I believe)
+```
+platform config -prebuilt-data /tftpboot/
+```				
+This specifies the boot components directory option in the GUI. 
+	
+```
+platform generate
+```
+This builds the platform elements. 
+
+To Do: Double check hard if there's anything else that needs to be done at this point to cover all the options in the GUI. 
+
+#### Build a Linux App in Vitis for Petalinux
+
+Source 2021.1 Vitis.
+
+Start the IDE. 
+
+Select a workspace. 
+
+Create a new platform project. See above workaround if you can't select this menu option in the drop down or in the GUI. 
+
+Here are the instructions if the GUI works for you.
+
+File - new - platform project
+
+End the filename with _plat to make it easy to distinguish between this and other files.
+
+Select: Create from hardware specification
+
+Add the xsa file. 
+
+Operating systen is linux.
+
+Processor for the zc706 is ps7_cortexa9
+
+Uncheck Generate boot components. We're going to use what we made in Petalinux.
+
+Click finish to establish the project structure. This is captured in the .spr file. 
+
+Click Linux on ps7_cortexa9 item to open configuration window. 
+
+Here is where we provide necessary information for the platform. 
+
+The following are required: Boot image format file. Boot components directory. 
+
+The rest of the fields are optional. 
+
+Select the _plat file in the explorer window. 
+
+Click hammer to build the platform elements. 
+
+Create a new application project by clicking file - new - application project.
+
+Click Next.
+
+Select our platform from the list. It may say "in repository". 
+
+Click Next.
+
+Create a name for your project. Some recommendations: 
+
+_app as the end of the project name.
+
+_system as the end of the system project. 
+
+Click Next.
+
+Domain is linux on ps7_cortexa9, language is c, sysroot should be empty. Root FS and Kernel Image can also be left empty.
+
+Click Next. 
+
+Pick Hello World template and click Finish. 
+
+Expand the src folder in the navigation window to open the helloworld.c file. (It might be hiding behind the XSCT window if you left it open.) Double-click the helloworld.c entry.
+	
+Right click your application project in explorer and choose Build. This will take a while as it's building the whole runtime system as well as your code.
+
+Make sure you've booted up the linux image on the target. 
+
+Right click application in explorer and set up a run configuration:
+
+Run as: Run configurations. Pick "single application debug". Double click this.
+
+You have a configuration window and now can set up a connection to the hardware target. 
+
+Click "new" next to connection field.
+
+Name it something memorable for you. Host, if you are on chococat, is 10.73.1.9. Port is left at the default. 
+
+Test connection. Debug problems if necessary. 
+
+Ok to create the run config. 
+
+Apply 
+
+Run
+
+Output should be visible in the console within Vitis IDE. 
+
+To run in the debugger, click little bug icon in the toolbar (your run configuration should be here).
+
+When you run debug, it halts at the top of the main function. You are in the debugger. 
+	
+You can also run on the target, and the code will execute and results show up in the console. On the target, your executable file should be in `/mnt/sd-mmcblk0p1`. 
+
+***
 
 ### Working on the zc706 and attached ADRV9009 with the Analog Devices HDL Reference Design and Petalinux
 
-These instructions are about how to use the zc706 with attached ADRV9009. Analog Devices provides an HDL reference design and a version of buildroot linux with LibIIO in order to allow you to incorporate your custom cores int the design and get them working over the air. 
+These instructions are about how to use the zc706 with attached ADRV9009. Analog Devices provides an HDL reference design and a version of Petalinux with LibIIO in order to allow you to incorporate your custom cores into the design and get them working over the air. 
 
 #### Get set up to use Vivado 2021.1
 ```
