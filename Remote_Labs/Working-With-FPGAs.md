@@ -480,9 +480,17 @@ abraxas3d@chococat:~/neptune/petalinux/basic_build/build$
 
 #### Boot target. 
 	
+We packaged an SD card image like this:
+
+```
+petalinux-package --boot --u-boot images/linux/u-boot.elf --force
+```
+	
 Below is how to use tftpboot. I used this page https://www.instructables.com/Setting-Up-TFTP-Server-for-PetaLinux/ and the Petalinux user guide from Xilinx to set up tftpboot on Keroppi with the zcu102. Current default state on keroppi is that the zcu102 is connected over JTAG and tftpboot can be used.
 
 Building with petalinux is done on chococat. But the zcu102 is connected to keroppi. The reason for building on chococat (or some other non-keroppi machine) is because a custom glibc had to be installed on keroppi to fix a MATLAB bug. Simulink won't run without this patch from Mathworks. Unfortunately, this patch has side effects. One of those side effects is that petalinux won't run on keroppi, becuase dependences cannot be installed. There is probably a better way to compartmentalize this, but we haven't found it or done it yet. Can you help? Welcome aboard! 
+
+Note, the below didn't work because booting over JTAG uses petalinux. The SD card image above was used for development. The below instructions are here in case we can figure out a way around the side effects of the glibc patch. 
 	
 So, here is how to move the files built on chococat and put in that /tftpboot directory to the /tftpboot directory on keroppi:
 	
