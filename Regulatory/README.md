@@ -2,7 +2,7 @@
 
 This Folder contains three sets of documents. 
 
-### First, comments filed with the FCC
+### First, comments filed with the FCC and Other Agencies
 
 Comments are filed when an open source research and development perspective is needed. 
 
