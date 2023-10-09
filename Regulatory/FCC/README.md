@@ -1,3 +1,3 @@
 ## FCC Comments
 
-This folder contains comments filed with the United States Federal Communications Commission.
+This folder contains comments filed with agencies such as the United States Federal Communications Commission.
