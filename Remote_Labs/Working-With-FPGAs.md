@@ -531,18 +531,18 @@ If you get a `Memory read error` OR `No supported FPGA device found` then type `
 
 Watch the messages from petalinux-boot. Make sure it confirms that it is downloading the bitstream to the target.
 
-On the target's serial console, watch for the `Zynq>` prompt.
-There may be a bunch of messages claiming that the TFTP server died. Don't worry about that. Just wait for it to stop and display the `Zynq>` prompt.
+On the target's serial console, watch for the `ZynqMP>` prompt.
+There may be a bunch of messages claiming that the TFTP server died. Don't worry about that. Just wait for it to stop and display the `ZynqMP>` prompt.
 
 ```
-Zynq> setenv serverip 10.73.1.94
-Zynq> setenv ipaddr 10.73.1.16 
-Zynq> pxe get
-Zynq> pxe boot
+ZynqMP> setenv serverip 10.73.1.94
+ZynqMP> setenv ipaddr 10.73.1.16 
+ZynqMP> pxe get
+ZynqMP> pxe boot
 ```
-This should boot petalinux on the zc706.
+This should boot petalinux on the zcu102.
 
-Note that the IP address set with setenv at the Zync> prompt does not stick. By default, the Linux system you built will use DHCP and get its own address. You can find out what address was assigned with `ip addr` on the serial console. If you followed the recommended procedure in petalinux-config above, it should already be set to `10.73.1.9`.
+Note that the IP address set with setenv at the ZyncMP> prompt does not stick. By default, the Linux system you built will use DHCP and get its own address. You can find out what address was assigned with `ip addr` on the serial console. If you followed the recommended procedure in petalinux-config above, it should already be set to `10.73.1.16`.
 
 #### How to Solve the Problem of Not Being Able to Select "Create Platform Project" in Vitis
 
@@ -552,9 +552,9 @@ Open the xsct console (in the Xilinx menu).
 
 Xilinx Software Command-line Tool (XSCT) is an interactive and scriptable command-line interface to Xilinx Software Development Kit (Vitis, or Xilinx SDK). As with other Xilinx tools, the scripting language for XSCT is based on Tools Command Language, or tcl. 
 
-The following commands are entered into the xsct console for a zc706. The commands for the zcu102 are different, because the processor is different.
+The following commands are entered into the xsct console. The commands for the zcu102 are different than the ones we use for our zc706 station, because the processor is different.
 ```
-platform create -name <name> -hw <path to the xsa file you exported from Vivado> -os linux -proc ps7_cortexa9
+platform create -name <name> -hw <path to the xsa file you exported from Vivado> -os linux -proc psu_cortexa53
 
 platform active
 ```
@@ -562,12 +562,12 @@ platform active
 This should return the name of the platform you just created. 
 
 ```	
-platform config -fsbl-elf <path to zynq_fsbl.elf>
+platform config -fsbl-elf <path to zynqmp_fsbl.elf>
 ```
 
 Example on TFTP boot system in Remote Labs West:
 ```
-platform config -fsbl-elf /tftpboot/zynq_fsbl.elf
+platform config -fsbl-elf /tftpboot/zynqmp_fsbl.elf
 ```
 This specifies the boot image format file option in the GUI. (I believe)
 ```
@@ -604,13 +604,13 @@ Add the xsa file.
 
 Operating systen is linux.
 
-Processor for the zc706 is ps7_cortexa9
+Processor for the zcu102 is psu_cortexa53 (psu_cortexa53_0) (quad core)
 
 Uncheck Generate boot components. We're going to use what we made in Petalinux.
 
 Click finish to establish the project structure. This is captured in the .spr file. 
 
-Click Linux on ps7_cortexa9 item to open configuration window. 
+Click Linux on psu_cortexa53 item to open configuration window. 
 
 Here is where we provide necessary information for the platform. 
 
@@ -638,7 +638,7 @@ _system as the end of the system project.
 
 Click Next.
 
-Domain is linux on ps7_cortexa9, language is c, sysroot should be empty. Root FS and Kernel Image can also be left empty.
+Domain is linux on psu_cortexa53, language is c, sysroot should be empty. Root FS and Kernel Image can also be left empty.
 
 Click Next. 
 
@@ -658,7 +658,7 @@ You have a configuration window and now can set up a connection to the hardware 
 
 Click "new" next to connection field.
 
-Name it something memorable for you. Host, if you are on chococat, is 10.73.1.9. Port is left at the default. 
+Name it something memorable for you. Host, if you are on chococat, is 10.73.1.9. Host, if you are on keroppi, is 10.73.1.16. Port is left at the default. 
 
 Test connection. Debug problems if necessary. 
 
@@ -691,7 +691,7 @@ Make sure you do all the steps involving Vivado in a terminal where you have sou
 Make sure you have a Vivado license available before proceeding. If you're using ORI's floating license, that means setting up the SSH tunnel to the license server and setting the environment variable `XILINXD_LICENSE_FILE` appropriately, in that same terminal.
 
 #### Clone the Repository with all the HDL Elements
-Clone the _appropriate_ branch of this repository directly from Analog Devices github. To use Vivado 2021.1, get [ at](https://github.com/analogdevicesinc/hdl/tree/hdl_2021_r1) 
+Clone the _appropriate_ branch of this repository directly from Analog Devices github. For example, to use Vivado 2021.1, you would type `git checkout hdl_2021_r1` 
 
 Navigate to this directory: ../hdl/projects/adrv9009/zc706 and type "make"
 
