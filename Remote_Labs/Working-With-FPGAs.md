@@ -732,7 +732,7 @@ user	85m50.629s
 sys	22m58.664s
 ```
 
-Open the resulting project `adrv9009_zc706.xpr` in Vivado. Export bitstream and xsa file (`File->Export->Export Bitstream File...` and `File->Export->Export Hardware...`. Choose the `Include bitstream` option when you export hardware, even though you have a separate bitstream file too.). You will need them to build petalinux and boot the zcu106.
+Open the resulting project `adrv9009_zc706.xpr` in Vivado. Export bitstream and xsa file (`File->Export->Export Bitstream File...` and `File->Export->Export Hardware...`. Choose the `Include bitstream` option when you export hardware, even though you have a separate bitstream file too.). You will need them to build petalinux and boot the zc706.
 
 #### Build Petalinux with meta-adi
 
