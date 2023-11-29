@@ -310,7 +310,13 @@ Make sure you do all the steps involving Vivado in a terminal where you have sou
 Make sure you have a Vivado license available before proceeding. If you're using ORI's floating license, that means setting up the SSH tunnel to the license server and setting the environment variable `XILINXD_LICENSE_FILE` appropriately, in that same terminal.
 
 #### Clone the Repository with all the HDL Elements
-Clone the _appropriate_ branch of this repository directly from Analog Devices github. To use Vivado 2019.1, to harmonize with Mathworks Buildroot, get [ at](https://github.com/analogdevicesinc/hdl/tree/hdl_2019_r1) To use Vivado 2021.1, which we are using with the zc706 and adrv9009, then get get [ at](https://github.com/analogdevicesinc/hdl/tree/hdl_2021_r1)
+Clone the _appropriate_ branch of this repository directly from Analog Devices github. 
+
+For example, to use Vivado 2019.1, to harmonize with Mathworks Buildroot, type `git clone https://github.com/analogdevicesinc/hdl` and then `git checkout hdl_2019_r1` 
+
+Another example: To use Vivado 2021.1, type `git clone https://github.com/analogdevicesinc/hdl` and then `git checkout hdl_2021_r1`
+
+You may have to inspect or list the branches to get the correct branch name. 
 
 Navigate to this directory: ../hdl/projects/adrv9001/zcu102 and type "make CMOS_LVDS_N=0"
 
@@ -691,7 +697,7 @@ Make sure you do all the steps involving Vivado in a terminal where you have sou
 Make sure you have a Vivado license available before proceeding. If you're using ORI's floating license, that means setting up the SSH tunnel to the license server and setting the environment variable `XILINXD_LICENSE_FILE` appropriately, in that same terminal.
 
 #### Clone the Repository with all the HDL Elements
-Clone the _appropriate_ branch of this repository directly from Analog Devices github. For example, to use Vivado 2021.1, you would type `git checkout hdl_2021_r1` 
+Clone the _appropriate_ branch of this repository directly from Analog Devices github. For example, to use Vivado 2021.1, you would type `git clone https://github.com/analogdevicesinc/hdl` and then `git checkout hdl_2021_r1` 
 
 Navigate to this directory: ../hdl/projects/adrv9009/zc706 and type "make"
 
