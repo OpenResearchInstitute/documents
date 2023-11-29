@@ -691,7 +691,7 @@ Make sure you do all the steps involving Vivado in a terminal where you have sou
 Make sure you have a Vivado license available before proceeding. If you're using ORI's floating license, that means setting up the SSH tunnel to the license server and setting the environment variable `XILINXD_LICENSE_FILE` appropriately, in that same terminal.
 
 #### Clone the Repository with all the HDL Elements
-Clone the _appropriate_ branch of this repository directly from Analog Devices github. To use Vivado 2021.1, get [ at](https://github.com/analogdevicesinc/hdl/tree/hdl_2021_r1) 
+Clone the _appropriate_ branch of this repository directly from Analog Devices github. For example, to use Vivado 2021.1, you would type `git checkout hdl_2021_r1` 
 
 Navigate to this directory: ../hdl/projects/adrv9009/zc706 and type "make"
 
