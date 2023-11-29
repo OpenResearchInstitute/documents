@@ -2,126 +2,167 @@
 
 Of all the instruments in the lab, the RSA5065N Spectrum Analyzer has the largest and richest screen display. The size of the display makes screenshots slow. Moreover, for many lab purposes it's quite revealing to see the spectrum display changing in real time, and not really satisfactory to get only a still screenshot.
 
-The RSA5065N has an HDMI video output port. We have an inexpensive HDMI capture device connected between that HDMI output and a USB port on the Raspberry Pi. With just a little extra setup, you can use this to get a live view of the spectrum analyzer's screen. It won't be quite as quick as the instrument's actual front panel, but will still be more useful than static screenshots.
+The RSA5065N has an HDMI video output port. We have an inexpensive HDMI capture device connected between that HDMI output and a USB port on a Raspberry Pi. With just a little extra setup, you can use this to get a live view of the spectrum analyzer's screen. It won't be quite as quick as the instrument's actual front panel, but will still be more useful than static screenshots.
 
 Unfortunately, none of the other instruments has a video output port, so this only works on the spectrum analyzer.
 
-## Access via X11 Forwarding
+## Previous Versions of This Document
 
-One way to get access to the spectrum analyzer video feed is to run a video viewer on the Raspberry Pi. A plain SSH session only gives you access to a text terminal, though. The solution is to forward the Pi's GUI through your SSH session to your local screen. There are two steps: run an X11 server on your local machine, and forward X11 through SSH.
+Previous versions of this document described how to access the video by running VLC remotely on the main Raspberry Pi in the lab. That method has been replaced by a more reliable and efficient method. We've also moved the video capture device from the main Raspberry Pi to a dedicated one, named `labvideo.sandiego.openresearch.institute`.
 
-Go ahead and set this up now, even if you're not excited about looking at the spectrum analyzer video feed. There will be other cases where you want GUI access to the remote lab computers.
+## Streaming Video Access
 
-### Running X11 on Your Local Machine
+We split the job of displaying the captured video into two parts. The first part runs on the dedicated Raspberry Pi `labvideo`. It uses the program `ffmpeg` to convert the captured HDMI video data into a unicast UDP video stream, which it sends over the Wireguard network to your local computer. The second part runs on your local computer. It uses the companion program `ffplay` to receive the UDP stream and display it. This way, only the video data itself travels across the network, and error recovery is built in to the ffmpeg programs.
 
-If your local machine is running Linux with a GUI desktop, congratulations! You're almost done with this step. Edit `/etc/ssh/sshd_config` and look for (or add) a line for `X11Forwarding`. Set it to `yes` and save the file.
+To make this two-stage process as convenient as possible, we use a little shell script to bring up both parts. One version of the script works on Linux and on macOS. A separate version is for Windows PowerShell. Download the script that matches your system, and put it somewhere convenient. On Linux or macOS, you will need to make it executable:
 
-If your local machine is running macOS, you need to install
-[Xquartz](https://www.xquartz.org/) (unless you already have). Edit `/etc/ssh/sshd_config` and look for (or add) a line for `X11Forwarding`. Set it to `yes` and save the file. Depending on macOS version and probably Xquartz version, you may need to manually start Xquartz before starting your SSH session.
-
-If your local machine is running Windows, you need to install an X11 server such as
-[Xming](https://sourceforge.net/projects/xming/). You will need to manually start the server before starting your SSH session.
-
-### Forwarding X11 over SSH
-
-I'm going to assume you're already running SSH and able to access the Raspberry Pi in the remote lab. If not, check out [Setting Up for Remote Access to ORI Labs](ORI-Lab-User-Setup.md) for some guidance.
-
-If you invoke SSH from the command line (Linux, macOS), just add `-X` to the command line. It will look something like this:
-```
-ssh -X ori-west
+```bash
+chmod +x video.sh
 ```
 
-If you invoke SSH from a GUI (PuTTY on Windows), enable X forwarding in new or saved SSH sessions by selecting Enable X11 forwarding in the "PuTTY Configuration" window (Connection > SSH > X11).
+### `video.sh` Script for Linux or macOS
 
-### Simple Test of X11 Forwarding
+This script was developed on Ubuntu 20.04 and macOS Sonoma 14.0. Some of the trickier bits may not be entirely portable across different versions. Let us know if you run into any such problems.
 
-I like to verify that X11 forwarding is working in the simplest way possible, before jumping into something fancy. One way to do this is to run the toy program `xeyes`.
+```bash
+#!/usr/bin/env bash
 
-Open an SSH session to the Raspberry Pi with X11 forwarding enabled.
+# You must be connected to remote lab West using Wireguard.
+# See Remote_Labs/ORI-Lab-User-Setup.md for more info.
 
-Type `xeyes` at the command prompt.
+# You must have a ~/.ssh/config entry for host labvideo:
+# Host labvideo
+#     HostName labvideo.sandiego.openresearch.institute
+#     User labvideo
+#     Port 22
 
-Immediately you should see a new window pop up on your local screen. The window background should be transparent, and there should be two large cartoon eyeballs. If you move the mouse around, the pupils in these eyeballs should follow the mouse cursor around. This works all the time on Linux (where the whole GUI is in X11) but only while an X11 window has focus on other systems.
+# You must have ffplay available on the path.
+# sudo apt install ffmpeg
 
-If that didn't work, nothing else is likely to work with X11, so take the time to debug it.
 
-When you're done with Xeyes, you can exit it by hitting Ctrl-C in the terminal.
+if [[ $OSTYPE == 'linux'* ]]; then
+  myip=$(ip route get 10.73.1.1 | sed -n '/src/{s/.*src *\([^ ]*\).*/\1/p;q}')
+elif [[ $OSTYPE == 'darwin'* ]]; then
+  interface=$(route get 10.73.1.1 | grep interface: | sed s/"interface: "//)
+  myip=$(ifconfig $interface | grep --only-matching "10\\.73\\.\\d\\+\\.\\d\\+ --" | awk '{print $1}')
+else
+  myip=10.73.0.N	# replace N with your unique number!
+fi
+myport=57373
 
-### Viewing the Video
+# make sure the IP address is plausible
+if [[ ! $myip =~ ^10.73.0.[0-9]+$ ]]; then
+	echo "Implausible IP address $myip -- is Wireguard up?"
+	exit 1
+fi
 
-Now that we're set up to run GUI programs, we can view the spectrum analyzer video.
-
-One way to do that is to use the program `vlc` to view video from the capture device:
-
-```
-vlc v4l2:///dev/video0:width=1280:height=720 &
-```
-
-In that command line, `v4l2` means _Video for Linux version 2_ and identifies the type of stream to open. `/dev/video0` is the name of the device. If you don't specify the width and height to capture, you'll get an upscaled 1080p version of the video. 1280x720 is the native size of the video from the spectrum analyzer. If you choose some other size, you'll get the closest match that the capture device supports.
-
-The ampersand at the end of the command line is optional. It tells the shell to run VLC in the background, freeing up your terminal for other work.
-
-#### What if it's taking forever?
-
-Under some circumstances we don't fully understand yet, forwarding X11 over SSH doesn't really work with VLC capturing video. In that case, skip ahead to the section on running video capture on a VNC screen instead.
-
-#### v4l2 stream error: cannot select input 0: Device or resource busy
-
-If you get a message from VLC saying *Device or resource busy*, the video capture device is probably in use by some other user. Only one user at a time can capture live video from the spectrum analyzer. You can find out who has it busy by running
-```
-ps aux | grep video0
-```
-on ori-west and looking at the first column in the response. Try to coordinate with them to share the video capture facility. If you can't contact them, you can `sudo kill -9 #####`, where ##### is the process number found in the second column in the response above. This forcibly disconnects them from the video capture device.
-
-#### "cannot open device '/dev/video0'"
-
-If the device `/dev/video0` cannot be opened, the video capture dongle is probably not plugged in. The device is only present when the dongle is plugged into a USB port on the Raspberry Pi *and* also connected to a video source. If the spectrum analyzer is off, or disconnected from video for some reason, the video device will disappear. Contact the Remote Lab admins (on Slack or by email) and request that the video capture be reconnected.
-
-You will see other devices named `/dev/video10` through `/dev/video16`. These are associated with video features of the Broadcom BCM2835 SoC that is the heart of the Raspberry Pi. They are not able to capture external video, so they are not relevant for our purposes.
-
-#### Disregard These Error Messages
-
-If your SSH client is based on OpenSSH (most are), you'll very likely see a burst of error messages like these:
-
-```
-[b3a2f140] xcb generic error: shared memory server-side error: X11 error 10
-[b3a2f140] xcb generic error: same error on retry: X11 error 10
-[b3a2f140] xcb_x11 generic: using buggy X11 server - SSH proxying?
+ssh -f labvideo ffmpeg -hide_banner -loglevel error -s 1280x720 -i /dev/video0 -f mpegts udp://${myip}:${myport}
+echo Sending video to ${myip}:${myport}, type q into video window to quit \(or ^C here\).
+ffplay -hide_banner -nostats -loglevel fatal -i udp://localhost:${myport}
+ssh labvideo pkill -e -f "ffmpeg.*udp://${myip}:${myport}"
+wait
 ```
 
-You'll also see some other messages when VLC starts, and possibly again when you shut it down.
+### `video.ps1` Script for Windows PowerShell
 
-The messages on startup may come out after the terminal prompt, so it might at first glance appear that you didn't get back a terminal prompt. You can just hit return to see a fresh prompt.
+This script was developed on Windows 11 with PowerShell 7.3.9.
 
-### Combining SSH and VLC Steps
+```powershell
+# for PowerShell
 
-If you're using X11 forwarding to your local machine, you can skip the step of logging in to the Raspberry Pi interactively. You can start the video playback right from your own machine's command line, like so:
+# You must be connected to remote lab West using Wireguard.
+
+# You must have a ~/.ssh/config entry for host labvideo:
+# Host labvideo
+#     HostName labvideo.sandiego.openresearch.institute
+#     User labvideo
+#     Port 22
+
+# You must have the program ffplay.exe installed on the PATH.
+
+$myip = Get-NetIPAddress | Where-Object { ($_.IPAddress.Length -Ge 9) -and ($_.IPAddress.SubString(0,8) -Eq "10.73.0.") } | select -ExpandProperty IPAddress
+$myport = 57373
+
+# make sure the IP address is plausible
+$last_octet = [int]($myip -Split "\.",4)[3]
+if ( ($last_octet -lt 1) -or ($last_octet -ge 255))
+{
+	echo "Implausible IP address $myip -- is Wireguard up?"
+	return
+}
+
+Start-Process -FilePath "ssh" -ArgumentList "labvideo ffmpeg -hide_banner -loglevel error -s 1280x720 -i /dev/video0 -f mpegts udp://${myip}:${myport}" -WindowStyle Hidden
+
+echo "Sending video to ${myip}:${myport}, type q into video window to quit"
+
+& 'ffplay.exe' -hide_banner -nostats -loglevel fatal -i udp://labvideo.sandiego.openresearch.institute:${myport}
+ 
+ssh labvideo pkill -e -f "ffmpeg.*udp://${myip}:${myport}"
+```
+
+
+### Prerequisites
+
+* Your computer must be connected to the San Diego remote lab over Wireguard. If not, check out [Setting Up for Remote Access to ORI Labs](ORI-Lab-User-Setup.md) for some guidance.
+
+* Your computer must have `ffplay` installed and on the path. On Linux or macOS, `ffplay` is usually part of the `ffmpeg` package, which will be available from your usual package manager. On macOS, that would be [Homebrew](https://brew.sh). On Windows, download from one of the providers listed on [ffmpeg.org](https://ffmpeg.org/download.html), extract, and copy `ffplay.exe` to a directory on the path (or add the `bin` directory where you extracted the files to the path).
+
+* Your computer must be able to `ssh` in to `labvideo` as user `labvideo` with no password (and no public key pair, either). This is accomplished by putting an entry into your `~/.ssh/config` file, like this one:
 
 ```
-ssh -X -f ori-west vlc v4l2:///dev/video0:width=1280:height=720
+Host labvideo
+    HostName labvideo.sandiego.openresearch.institute
+    User labvideo
+    Port 22
 ```
 
-Here the `-f` flag tells SSH to put the program into the background before running the `vlc` command. This releases your local terminal for other tasks. (You don't need an ampersand at the end of the command in this case.)
+* If your computer runs Linux or macOS, the bash script `video.sh` above should take care of everything. If your computer runs Windows, the PowerShell script `video.ps1` above should take care of everything. If your computer runs something else, we haven't yet worked out the details for you.
 
-### Using VLC
+### Script Walkthrough
 
-VLC will pop up a GUI window with the spectrum analyzer video in it. Everything is more or less self-explanatory.
+The script starts with some warnings about the prerequisites. Then it spends a few lines trying to find out your computer's IP address on the remote lab Wireguard LAN. I couldn't find a way that worked on both Linux and macOS, so these two cases are handled separately in the bash script. There's a third case in the bash script where you just type the IP address into the script, replacing N with your assigned unique number as described in [Setting Up for Remote Access to ORI Labs](ORI-Lab-User-Setup.md).
 
-If you need a still image screenshot for your records or for documentation, you can make one by choosing `Take Snapshot` from the `Video` menu. A screenshot taken this way won't be quite as crisp as one taken digitally over the remote control interface directly on the instrument, but it will be good enough for most purposes.
+Next, the script uses an `ssh` connection to run the program `ffmpeg` on the Raspberry Pi `labvideo` in the remote lab.
+* `-hide_banner -loglevel error` suppress some unnecessary output from `ffmpeg`.
+* `-s 1280x720` sets the video resolution of the stream. 1280x720 pixels is the native size of the spectrum analyzer's screen, so it results in the sharpest output. You can use a lower resolution if you need to save some network bandwidth.
+* `-i /dev/video0` tells `ffmpeg` where to get its input: from the video capture device.
+* `-f mpegts` tells `ffmpeg` what format of video stream to create.
+* `udp://${myip}:${myport}` tells `ffmpeg` where to send the video stream and how. It will send using the protocol `UDP`, to the specified port on the Wireguard IP address of your computer.
 
-When you're done with the video, quit VLC in any of the usual ways.
+The script outputs a message to let you know what's happening.
 
-## Access via VNC
+Then the script runs `ffplay` on your local computer.
+* `-hide_banner -nostats -loglevel fatal` suppress some unnecessary output from `ffplay`. The loglevel filter is set very high, so that only fatal error messages come out, because otherwise it's very typical to have a steady stream of non-fatal errors. You can't do much about those errors, so there's no point in seeing them. You will probably see some noisy artifacts on the screen from time to time, due to these errors.
+* `-i udp://localhost:${myport}` tells `ffplay` how and where to receive the video stream. It comes in using the protocol `UDP`, directly to your computer's IP address, on the specified port. In the PowerShell script, we have to put the Raspberry Pi's address there instead of `localhost`.
 
-If you're already running a GUI session on the Raspberry Pi via VNC for some other reason, you can include the video capture window within that GUI. The command to start capturing video is the same, you'd just run it from a terminal window within the VNC screen:
+At this point, after a short delay, the video window should pop up and begin displaying the spectrum analyzer's screen. Leave the terminal window open, and go about your business. When you're done with the spectrum analyzer display, you can end the session by selecting the video window and pressing `q` for quit. Or, you can type control-C on the original terminal window (on Linux or macOS) or close the original terminal window (on Windows).
 
+Lastly, the script uses another `ssh` connection to stop the `ffmpeg` program running on `labvideo`. It uses the program `pkill` with a matching expression that will only kill programs matching your IP address and port number. This prevents your shutdown from disrupting any other instances of `ffmpeg` that may be running.
+
+### Multiple Simultaneous Users Not Supported
+
+Unfortunately, the Raspberry Pi's video system only allows one program to use the video capture device at a time, so we don't support multiple users on the spectrum analyzer video. Supporting several users would be possible with some trickery, but we haven't tried to implement that. If the need arises, we can look into it. Since the spectrum analyzer has to be hooked up and configured for each user's needs, we expect that one remote video user at a time will be sufficient.
+
+If someone is already using the remote video when you run the script, it will say
 ```
-vlc v4l2:///dev/video0:width=1280:height=720 &
+/dev/video0: Device or resource busy
 ```
 
-However, if your VNC screen is already crowded, you can still run the video capture outside of VNC via X11 forwarding, as detailed above. This would be useful if your local machine has two monitors. You might run VNC in full-screen mode on one monitor, and display the video by X11 forwarding in a window on the other monitor.
+and hang. It won't automatically recover when the other session ends. You will have hit control-C in the terminal window to shut it down (or close the terminal window on Windows). You can try again any time; it doesn't disrupt the other user's session at all.
 
-## Access via Streaming
+Try to coordinate with the other user to work out a time sharing arrangement. If the other user is not available to shut down their video session, you can force quit their open session like this:
+```bash
+ssh labvideo killall ffmpeg
+```
 
-It would probably use network bandwidth more efficiently if we streamed the spectrum analyzer video from the lab to a program running on your local machine. We don't have that set up yet, but this document will be updated if and when we do.
+The other user will see their video freeze, since the UDP stream has ended. They can recover by typing `q` for quit into the frozen video window, or Control-C into the terminal window on Linux or macOS, or closing the terminal window on Windows.
 
+### Remote Video on Other Platforms
+
+If you would like to access the remote video using a device other than Linux, macOS, or Windows, it may be possible, but we haven't worked out the details yet.
+
+If you run [WSL2](https://learn.microsoft.com/en-us/windows/wsl/about) on a Windows machine, the instructions for Linux above will probably work for you. Note that your Wireguard installation will need to be inside the WSL machine in order for the networking to work. The remote lab LAN IP address does not pass through from Windows to WSL.
+
+## Security Note
+
+The Raspberry Pi `labvideo` is configured to accept a login without any password or public key for the username `labvideo`. This is generally terrible security practice, but since this machine is only available over the Wireguard LAN, and access to that is controlled, and the `labvideo` machine doesn't host anything else, we consider this configuration acceptable. It makes setting up your access to stream the spectrum analyzer video easier than a more conventional locked-down configuration.
