@@ -548,6 +548,10 @@ ZynqMP> pxe boot
 ```
 This should boot petalinux on the zcu102.
 
+Default login is:
+`root`
+`analog`
+
 Note that the IP address set with setenv at the ZyncMP> prompt does not stick. By default, the Linux system you built will use DHCP and get its own address. You can find out what address was assigned with `ip addr` on the serial console. If you followed the recommended procedure in petalinux-config above, it should already be set to `10.73.1.16`.
 
 #### How to Solve the Problem of Not Being Able to Select "Create Platform Project" in Vitis
@@ -896,6 +900,10 @@ Zynq> pxe get
 Zynq> pxe boot
 ```
 This should boot petalinux on the zc706.
+
+Default login is:
+`root`
+`analog`
 
 Note that the IP address set with setenv at the Zync> prompt does not stick. By default, the Linux system you built will use DHCP and get its own address. You can find out what address was assigned with `ip addr` on the serial console. If you followed the recommended procedure in petalinux-config above, it should already be set to `10.73.1.9`.
 
