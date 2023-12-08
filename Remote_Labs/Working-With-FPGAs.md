@@ -776,6 +776,8 @@ petalinux-config --get-hw-description <path to .xsa file exported from Vivado>
 ```
 When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. Go to DTG Settings and set MACHINE_NAME to `zc706`.
 
+If you want the target to have its official fixed IP address, and you should, in petalinux-config go to `Subsystem AUTO Hardware Settings` and choose `Ethernet Settings`. Deselect `Obtain IP address automatically` by cursoring to it and hitting the space bar. Then set the `Static IP address` to `10.73.1.9`, the `Static IP netmask` to `255.255.255.0`, and the `Static IP gateway` to `10.73.1.1`. Hit SAVE and take the default location.
+
 Expect to see something like this:
 
 ```
@@ -798,7 +800,7 @@ INFO: Renaming system_top_plain.xsa to system.xsa
 abraxas3d@chococat:~/haifuraiya/basic_build/petalinux/basic_build$ 
 ```
 
-If you want the target to have its official fixed IP address, and you should, in petalinux-config go to `Subsystem AUTO Hardware Settings` and choose `Ethernet Settings`. Deselect `Obtain IP address automatically` by cursoring to it and hitting the space bar. Then set the `Static IP address` to `10.73.1.9`, the `Static IP netmask` to `255.255.255.0`, and the `Static IP gateway` to `10.73.1.1`. Hit SAVE and take the default location.
+Next, specify the device tree source file. 
 
 ```
 echo "KERNEL_DTB=\"<name of the dts file to use from the list in meta-adi>\"" >> project-spec/meta-user/conf/petalinuxbsp.conf
