@@ -380,11 +380,15 @@ Now, change into your new project directory and configure petalinux with the hdf
 cd <project name>
 petalinux-config --get-hw-description <path to .xsa file exported from Vivado>
 ```
-When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. 
+When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. 
+
+Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. 
 
 Go to DTG Settings and set MACHINE_NAME to `zcu102-rev1.0`. This is important. See this page: https://support.xilinx.com/s/question/0D52E00006hprNsSAI/error-petalinux-build?language=en_US
 
-Expect to see something like this:
+If you want the target to have its official fixed IP address, and you should, in petalinux-config go to `Subsystem AUTO Hardware Settings` and choose `Ethernet Settings`. Deselect `Obtain IP address automatically` by cursoring to it and hitting the space bar. Then set the `Static IP address` to `10.73.1.16`, the `Static IP netmask` to `255.255.255.0`, and the `Static IP gateway` to `10.73.1.1`. Hit SAVE and take the default location.
+
+Save and exit. Expect to see something like this:
 
 ```
 abraxas3d@chococat:~/neptune/petalinux/basic_build$ petalinux-config --get-hw-description /home/abraxas3d/neptune/petalinux/hdl/projects/adrv9001/zcu102/system_top_basic.xsa 
@@ -408,7 +412,7 @@ INFO: Renaming system_top_basic.xsa to system.xsa
 abraxas3d@chococat:~/neptune/petalinux/basic_build$ 
 ```
 
-If you want the target to have its official fixed IP address, and you should, in petalinux-config go to `Subsystem AUTO Hardware Settings` and choose `Ethernet Settings`. Deselect `Obtain IP address automatically` by cursoring to it and hitting the space bar. Then set the `Static IP address` to `10.73.1.16`, the `Static IP netmask` to `255.255.255.0`, and the `Static IP gateway` to `10.73.1.1`. Hit SAVE and take the default location.
+Next, edit a configuration file to point at the correct device tree source. 
 
 ```
 echo "KERNEL_DTB=\"<name of the dts file to use from the list in meta-adi>\"" >> project-spec/meta-user/conf/petalinuxbsp.conf
