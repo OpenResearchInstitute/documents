@@ -696,16 +696,18 @@ You can also run on the target, and the code will execute and results show up in
 
 These instructions are about how to use the zc706 with attached ADRV9009. Analog Devices provides an HDL reference design and a version of Petalinux with LibIIO in order to allow you to incorporate your custom cores into the design and get them working over the air. 
 
-#### Get set up to use Vivado 2021.1
+#### Get set up to use Vivado 2022.2
 ```
-source /tools/Xilinx/Vivado/2021.1/settings64.sh
+source /tools/Xilinx/Vivado/2022.2/settings64.sh
 ```
 Make sure you do all the steps involving Vivado in a terminal where you have sourced the right settings64.sh.
 
 Make sure you have a Vivado license available before proceeding. If you're using ORI's floating license, that means setting up the SSH tunnel to the license server and setting the environment variable `XILINXD_LICENSE_FILE` appropriately, in that same terminal.
 
+2022.2 was chosen because that's the version that works with the Transceiver Evaluation Software version that we have from ADI. There is no access to earlier versions of this utility, which is the only way to program the registers of radio frequency integrated circuit (RFIC) on the ADRV9009. 
+
 #### Clone the Repository with all the HDL Elements
-Clone the _appropriate_ branch of this repository directly from Analog Devices github. For example, to use Vivado 2021.1, you would type `git clone https://github.com/analogdevicesinc/hdl` and then `git checkout hdl_2021_r1` 
+Clone the _appropriate_ branch of this repository directly from Analog Devices github. For example, to use Vivado 2022.2, you would type `git clone https://github.com/analogdevicesinc/hdl` and then `git checkout hdl_2022_r2` 
 
 Navigate to this directory: ../hdl/projects/adrv9009/zc706 and type "make"
 
@@ -735,9 +737,9 @@ Building axi_dacfifo library [/home/abraxas3d/haifuraiya/basic_build/hdl/library
 Building util_adxcvr library [/home/abraxas3d/haifuraiya/basic_build/hdl/library/xilinx/util_adxcvr/util_adxcvr_ip.log] ... OK
 Building adrv9009_zc706 project [/home/abraxas3d/haifuraiya/basic_build/hdl/projects/adrv9009/zc706/adrv9009_zc706_vivado.log] ... OK
 
-real	216m35.082s
-user	85m50.629s
-sys	22m58.664s
+real	310m48.799s
+user	71m47.307s
+sys	31m6.947s
 ```
 
 Open the resulting project `adrv9009_zc706.xpr` in Vivado. Export bitstream and xsa file (`File->Export->Export Bitstream File...` and `File->Export->Export Hardware...`. Choose the `Include bitstream` option when you export hardware, even though you have a separate bitstream file too.). You will need them to build petalinux and boot the zc706.
@@ -746,13 +748,12 @@ Open the resulting project `adrv9009_zc706.xpr` in Vivado. Export bitstream and 
 
 Following the instructions that start at this link: https://github.com/analogdevicesinc/meta-adi/tree/master/meta-adi-xilinx
 
-Source Petalinux 2021.1.
+Source Petalinux 2022.2.
 For example:
 
 ```
-abraxas3d@chococat:~/haifuraiya/basic_build/petalinux$ source ~/petalinux2021.1/settings.sh 
-PetaLinux environment set to '/home/abraxas3d/petalinux2021.1'
-WARNING: This is not a supported OS
+abraxas3d@chococat:~/haifuraiya/challenge_coin/hdl/projects/adrv9009/zc706$ source /tools/Xilinx/PetaLinux/2022.2/bin/settings.sh
+PetaLinux environment set to '/tools/Xilinx/PetaLinux/2022.2/bin'
 INFO: Checking free disk space
 INFO: Checking installed tools
 INFO: Checking installed development libraries
@@ -772,7 +773,7 @@ git clone https://github.com/analogdevicesinc/meta-adi
 
 This fetches everything needed to add the yocto layers of meta-adi to petalinux. We need this, otherwise we do not have the right device tree for all the HDL in the Analog Devices reference design. 
 
-Check out the branch that corresponds to the tool version being used. For example, 2021_R1 for 2021.1. 
+Check out the branch that corresponds to the tool version being used. For example, 2022_R2 for 2022.2. 
 
 ```
 cd <project name>
@@ -953,7 +954,7 @@ To Do: Double check hard if there's anything else that needs to be done at this 
 
 #### Build a Linux App in Vitis for Petalinux
 
-Source 2021.1 Vitis.
+Source 2022.2 Vitis.
 
 Start the IDE. 
 
