@@ -821,6 +821,34 @@ abraxas3d@chococat:~/adi-encoder-meta-adi/integrate-iio/project-spec/meta-user/c
 KERNEL_DTB="zynq-zc706-adv7511-adrv9009"
 ```
 
+#### adi_adrv9025.h: No such file or directory _solution_
+
+Summary of the problem can be found here https://github.com/analogdevicesinc/meta-adi/issues/138
+
+This specific example represents a class of problems in actively developed open source code. Active branches, like the 2022.2 branch at the time this was written, can have bugs introduced by frequent changes, even when techniques like continuous integration are used. This is an example of a particular bug fix, but is also a model for how to get around problems that may not be of your making.
+
+To avoid this missing file problem , we looked for the last successful build of the target image that we had. This image was dated 29 November 2023. We identified the git commit we wanted to use. 
+
+https://github.com/analogdevicesinc/linux/commit/a208d243ce47b2fe30d28f51bbcb1167c71f5b2b
+
+After you have done petalinux-config --get-hw-description = <path-to-xsa-file>, then you are going to use petalinux-devtool to modify the bitbake recipes in the build. You can use `petalinux-devtool status` to give you a high level summary of any recipes that might active.
+
+```
+petalinux-devtool modify linux-xlnx
+cd <petalinux-project>/components/yocto/workspace/sources/linux-xlnx
+```
+
+We use the power of git to configure what is going to be built. We can specify a branch or a commit hash to be used in the build.
+
+```
+git checkout a208d243ce47b2fe30d28f51bbcb1167c71f5b2b
+```
+check with `git branch`
+
+When you petalinux-build, this recipe you have modified will be used instead of the default, which gets whatever is the most recent in the remote repository. 
+
+#### Configure the Kernel
+
 Configure kernel with 
 
 ```
@@ -829,7 +857,7 @@ petalinux-config -c kernel
 
 Make sure the right components are checked. We have found they usually are. You're looking for hardware drivers and support for the 9009, depending on the target hardware, and JESD204B. 
 
-Here is an early example. Yours may differ. Ask on Slack for help if any of this goes sideways.
+Here is an early example. Yours may differ. Ask on Slack for help if any of this goes sideways. 
 
 ```
 Linux Kernel Configuration
@@ -872,9 +900,22 @@ petalinux-build
 
 Look carefully at the last few lines of output from petalinux-build. If it says `INFO: Failed to copy built images to tftp dir: /tftpboot` then somebody else's files are probably already in the /tftpboot directory. Coordinate on Slack. As root, go there and move the other user's files and directory `pxelinux.cfg` aside into a new directory. If you still have trouble writing to /tftpboot, run `groups` in your terminal and check that you're a member of the tftp group. If not, use `sudo adduser <you> tftp` to add yourself. You'll need to close your terminal, open a new one, and re-source the Vivado and Petalinux settings scripts.
 
-####
+#### Produce a sysroot file so we have iio.h in Vitis
 
-Boot target. Below is how to use tftpboot. I used this page https://www.instructables.com/Setting-Up-TFTP-Server-for-PetaLinux/ and the Petalinux user guide from Xilinx to set up tftpboot on Chococat with the zc706. Current default state on chococat is that the zc706 is connected over JTAG and tftpboot can be used.
+```
+petalinux-build --sdk
+petalinux-package --sysroot
+```
+
+This creates a sysroot file at `/<petalinux-project-name>/images/linux/sdk/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/`
+
+You will need to put this path in Vitis as the sysroot in the Create New Application configuration screen. 
+
+This propagates sysroot to all the places that Vitis will need in order for the cross-compiler to find libraries and files. If you get `iio.h not found`, for example, when building a project in Vitis, including the sysroot may solve that and several other problems. 
+
+#### Boot target. 
+
+Below is how to use tftpboot. I used this page https://www.instructables.com/Setting-Up-TFTP-Server-for-PetaLinux/ and the Petalinux user guide from Xilinx to set up tftpboot on Chococat with the zc706. Current default state on chococat is that the zc706 is connected over JTAG and tftpboot can be used.
 
 Make sure there's a hw_server process running.
 
@@ -948,11 +989,11 @@ This specifies the boot components directory option in the GUI.
 ```
 platform generate
 ```
-This builds the platform elements. 
+This builds the platform elements. You are ready to create a system application and user application in Vitis with the hardware platform created in Vivado.
 
-To Do: Double check hard if there's anything else that needs to be done at this point to cover all the options in the GUI. 
+_Skip to Create New Application in Vitis_
 
-#### Build a Linux App in Vitis for Petalinux
+#### Build a Linux App in Vitis for Petalinux Using the GUI
 
 Source 2022.2 Vitis.
 
@@ -992,6 +1033,8 @@ Select the _plat file in the explorer window.
 
 Click hammer to build the platform elements. 
 
+#### Create New Application in Vitis
+
 Create a new application project by clicking file - new - application project.
 
 Click Next.
@@ -1008,7 +1051,11 @@ _system as the end of the system project.
 
 Click Next.
 
-Domain is linux on ps7_cortexa9, language is c, sysroot should be empty. Root FS and Kernel Image can also be left empty.
+Domain is linux on ps7_cortexa9, language is c.
+
+sysroot gets the path to the file you created with petalinux-build --sdk and petalinux-package --sysroot. See above for an explanation about sysroot creation. 
+
+Root FS and Kernel Image can also be left empty.
 
 Click Next. 
 
@@ -1017,6 +1064,10 @@ Pick Hello World template and click Finish.
 Expand the src folder in the navigation window to open the helloworld.c file. (It might be hiding behind the XSCT window if you left it open.) Double-click the helloworld.c entry.
 	
 Right click your application project in explorer and choose Build. This will take a while as it's building the whole runtime system as well as your code.
+
+Are you using libraries like iio or math? Then right click on your application, properties in the context menu, libraries under the linker, and in the Libraries window in the upper right press the plus button. One library listing per line. You will probably need to type in `iio` and `m`. Other libraries that are in the sysroot that you might include will go here. Remember to apply the changes at the bottom right of the screen. 
+
+#### Run Configuration
 
 Make sure you've booted up the linux image on the target. 
 
@@ -1044,4 +1095,4 @@ To run in the debugger, click little bug icon in the toolbar (your run configura
 
 When you run debug, it halts at the top of the main function. You are in the debugger. 
 	
-You can also run on the target, and the code will execute and results show up in the console. On the target, your executable file should be in `/mnt/sd-mmcblk0p1`. 
+You can also run on the target, and the code will execute and results show up in the console. On the target, your executable file should be on the target at a place like `/mnt/sd-mmcblk0p1`. 
