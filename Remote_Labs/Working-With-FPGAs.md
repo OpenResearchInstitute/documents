@@ -380,7 +380,7 @@ Now, change into your new project directory and configure petalinux with the hdf
 cd <project name>
 petalinux-config --get-hw-description <path to .xsa file exported from Vivado>
 ```
-When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. 
+When running the petalinux-config --get-hw-description= path-to-xsa-file , a configuration menu will come up. 
 
 Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. 
 
@@ -779,7 +779,7 @@ Check out the branch that corresponds to the tool version being used. For exampl
 cd <project name>
 petalinux-config --get-hw-description <path to .xsa file exported from Vivado>
 ```
-When running the petalinux-config --get-hw-description=<path to xsa file>, a configuration menu will come up. Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. Go to DTG Settings and set MACHINE_NAME to `zc706`.
+When running the petalinux-config --get-hw-description = path to xsa file, a configuration menu will come up. Go to Yocto Settings->User layers and add the meta-adi-xilinx and meta-adi-core layers. These are from the meta-adi directory clone. Add core first, and xilinx second. Use an absolute path, not one starting with a tilde (~). Then hit SAVE and take the default location. Go to DTG Settings and set MACHINE_NAME to `zc706`.
 
 If you want the target to have its official fixed IP address, and you should, in petalinux-config go to `Subsystem AUTO Hardware Settings` and choose `Ethernet Settings`. Deselect `Obtain IP address automatically` by cursoring to it and hitting the space bar. Then set the `Static IP address` to `10.73.1.9`, the `Static IP netmask` to `255.255.255.0`, and the `Static IP gateway` to `10.73.1.1`. Hit SAVE and take the default location.
 
@@ -827,11 +827,11 @@ Summary of the problem can be found here https://github.com/analogdevicesinc/met
 
 This specific example represents a class of problems in actively developed open source code. Active branches, like the 2022.2 branch at the time this was written, can have bugs introduced by frequent changes, even when techniques like continuous integration are used. This is an example of a particular bug fix, but is also a model for how to get around problems that may not be of your making.
 
-To avoid this missing file problem , we looked for the last successful build of the target image that we had. This image was dated 29 November 2023. We identified the git commit we wanted to use. 
+To avoid this missing file problem, we looked for the last successful build of the target image that we had. This image was dated 29 November 2023. We identified the git commit we wanted to use. 
 
 https://github.com/analogdevicesinc/linux/commit/a208d243ce47b2fe30d28f51bbcb1167c71f5b2b
 
-After you have done petalinux-config --get-hw-description = <path-to-xsa-file>, then you are going to use petalinux-devtool to modify the bitbake recipes in the build. You can use `petalinux-devtool status` to give you a high level summary of any recipes that might active.
+After you have done petalinux-config --get-hw-description = path-to-xsa-file, then you are going to use petalinux-devtool to modify the bitbake recipes in the build. You can use `petalinux-devtool status` to give you a high level summary of any recipes that might active.
 
 ```
 petalinux-devtool modify linux-xlnx
@@ -907,7 +907,7 @@ petalinux-build --sdk
 petalinux-package --sysroot
 ```
 
-This creates a sysroot file at `/<petalinux-project-name>/images/linux/sdk/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/`
+This creates a sysroot file at `/petalinux-project-name/images/linux/sdk/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/`
 
 You will need to put this path in Vitis as the sysroot in the Create New Application configuration screen. 
 
