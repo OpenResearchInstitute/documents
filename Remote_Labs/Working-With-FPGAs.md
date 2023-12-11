@@ -827,7 +827,7 @@ Summary of the problem can be found here https://github.com/analogdevicesinc/met
 
 This specific example represents a class of problems in actively developed open source code. Active branches, like the 2022.2 branch at the time this was written, can have bugs introduced by frequent changes, even when techniques like continuous integration are used. This is an example of a particular bug fix, but is also a model for how to get around problems that may not be of your making.
 
-To avoid this missing file problem , we looked for the last successful build of the target image that we had. This image was dated 29 November 2023. We identified the git commit we wanted to use. 
+To avoid this missing file problem, we looked for the last successful build of the target image that we had. This image was dated 29 November 2023. We identified the git commit we wanted to use. 
 
 https://github.com/analogdevicesinc/linux/commit/a208d243ce47b2fe30d28f51bbcb1167c71f5b2b
 
