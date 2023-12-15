@@ -281,6 +281,8 @@ That document mentions, but does not recommend, setting up screen sharing using 
 
 It's common to use a UART on the dev board to output test results or to control the application running on the dev board. Sometimes all you need at the other end is a dumb terminal emulation. On the VMs you can use `screen` or `minicom` for this.
 
+See [Working With PetaLinux Target Terminals](Working-With-Target-Terminals.md) for a more complete treatment of terminal access to the dev boards.
+
 Screen is the simpler of the two options. All you need to do is put the device name and the baud rate on the command line, like this:
 
 ```
