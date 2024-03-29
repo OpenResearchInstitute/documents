@@ -4,6 +4,10 @@
 
 >ORI 8 November 2023 Abraxas3d error messages from API Mismatch problem, SD card creation
 
+## General Guidelines
+For new block integration to go smoothly, and in order to take advantage of the ADI-specific environment and build macros, it's recommend to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/<blockname>, where they are automatically picked up by the top level build, and editing the Makefile and <block>_ip.tcl in that directory along the lines as that presented in the following guide:
+https://wiki.analog.com/resources/fpga/docs/hdl/creating_new_ip_guide
+
 ## Files that Need to be Modified
 
 There is at least one file that will need to be modified in order to add our custom logic to the Analog Devices HDL reference design. 
@@ -89,6 +93,24 @@ Above are commands that connect a clock to our IP Instance, set an IP block para
 It is important to assign addresses to all the AXI modules in the design. This is how we are able to access CPU registers to communicate with our blocks.  
 
 `ad_cpu_interconnect 0x44AC0000 dvbs2_encoder_wrapper_0`
+
+Note that the axi interface should strictly match the interface of other blocks so as to stitch into the axi interconnect correctly.
+You may likely need to add the following command to have the busses treated as such and not as individual inputs or outputs per bit.
+
+set_param ips.enableInterfaceArrayInference false
+
+
+
+## Timing Constraints
+
+Particular timing constraint considerations for the block may need to be configured via hdl/projects/adrv9009/zc706/system_constr.xdc
+for example, the need to treat the axi as asynchronous from the polyphase filter system clock and hence no timing arc between regimes is specified in that file as:
+
+set_false_path -from [get_clocks clk_fpga_0] -to [get_clocks mmcm_clk_0_s_1]
+set_false_path -from [get_clocks mmcm_clk_0_s_1] -to [get_clocks clk_fpga_0]
+
+Here the clock identifiers may need to be tracked down within vivado, tracing clock regimes to their source and using a report_clocks command to determine the
+logical clock name associated with that root.
 
 ## Commands Specific to the DVB Encoder
 
