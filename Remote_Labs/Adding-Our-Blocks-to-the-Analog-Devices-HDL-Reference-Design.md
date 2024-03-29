@@ -5,7 +5,7 @@
 >ORI 8 November 2023 Abraxas3d error messages from API Mismatch problem, SD card creation
 
 ## General Guidelines
-For new block integration to go smoothly, and in order to take advantage of the ADI-specific environment and build macros, it's recommend to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/<blockname>, where they are automatically picked up by the top level build, and editing the Makefile and <block>_ip.tcl in that directory along the lines as that presented in the following guide:
+For new block integration to go smoothly, and in order to take advantage of the ADI-specific environment and build macros, it's recommend to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/blockname, where they are automatically picked up by the top level build, and editing the Makefile and blockname_ip.tcl in that directory along the lines as that presented in the following guide:
 https://wiki.analog.com/resources/fpga/docs/hdl/creating_new_ip_guide
 
 ## Files that Need to be Modified
