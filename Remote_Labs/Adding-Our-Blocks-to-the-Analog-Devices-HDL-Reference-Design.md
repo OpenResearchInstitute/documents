@@ -507,6 +507,26 @@ ad_connect  util_ad9371_rx_os_cpack/packed_fifo_wr axi_ad9371_rx_os_dma/fifo_wr
 
 ad_connect  $sys_dma_resetn axi_ad9371_rx_os_dma/m_dest_axi_aresetn
 
+# ===================================== PFB ===============================
+
+set_param ips.enableInterfaceArrayInference false
+
+ad_ip_instance pfb_wrapper pfb_wrap_0
+
+ad_connect  axi_adrv9009_rx_clkgen/clk_0 pfb_wrap_0/clk
+ad_connect  adrv9009_rx_device_clk_rstgen/peripheral_reset pfb_wrap_0/sync_reset
+
+
+ad_connect util_adrv9009_rx_cpack/packed_fifo_wr_en pfb_wrap_0/packed_fifo_wr_en
+ad_connect util_adrv9009_rx_cpack/packed_fifo_wr_data pfb_wrap_0/packed_fifo_wr_data
+ad_connect util_adrv9009_rx_cpack/packed_fifo_wr_overflow pfb_wrap_0/packed_fifo_wr_overflow
+ad_connect util_adrv9009_rx_cpack/packed_fifo_wr_sync pfb_wrap_0/packed_fifo_wr_sync
+
+ad_connect axi_adrv9009_rx_dma/fifo_wr_en pfb_wrap_0/fifo_wr_en
+ad_connect axi_adrv9009_rx_dma/fifo_wr_din pfb_wrap_0/fifo_wr_data
+ad_connect axi_adrv9009_rx_dma/fifo_wr_overflow pfb_wrap_0/fifo_wr_overflow
+ad_connect axi_adrv9009_rx_dma/fifo_wr_sync pfb_wrap_0/fifo_wr_sync
+
 # interconnect (cpu)
 
 ad_cpu_interconnect 0x44A00000 rx_ad9371_tpl_core
@@ -524,6 +544,7 @@ ad_cpu_interconnect 0x44A50000 axi_ad9371_rx_os_xcvr
 ad_cpu_interconnect 0x43C20000 axi_ad9371_rx_os_clkgen
 ad_cpu_interconnect 0x44AB0000 axi_ad9371_rx_os_jesd
 ad_cpu_interconnect 0x7c440000 axi_ad9371_rx_os_dma
+ad_cpu_interconnect 0x7c480000 pfb_wrap_0
 
 # gt uses hp3, and 100MHz clock for both DRP and AXI4
 
