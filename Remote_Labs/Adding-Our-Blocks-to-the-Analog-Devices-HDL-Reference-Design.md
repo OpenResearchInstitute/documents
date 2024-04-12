@@ -6,6 +6,8 @@
 
 >ORI 29 March 2024 keaston successful integration of IP with HDL Reference Design
 
+>ORI 12 April 2024 Abraxas3d documented how to integrate IP into PLUTO HDL Reference Design 
+
 ## General Guidelines
 For new block integration to go smoothly, and in order to take advantage of the ADI-specific environment and build macros, it's recommend to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/blockname, where they are automatically picked up by the top level build, and editing the Makefile and blockname_ip.tcl in that directory along the lines as that presented in the following guide:
 https://wiki.analog.com/resources/fpga/docs/hdl/creating_new_ip_guide
@@ -151,6 +153,74 @@ I found this web page useful in terms of describing "what is what" in the refere
 https://wiki.analog.com/resources/fpga/docs/hdl/porting_project_quick_start_guide
 
 We aren't "porting" a reference design to a new fpga dev board, but we are modifying the radio card dev board file - in our case, the adrv9009_bd.tcl 
+
+## Integrating Custom IP into the PLUTO SDR HDL Reference Design
+### Steps Required to add the Opulent Voice Transmitter and Receiver Blocks
+
+Set up the environment for working with the HDL Reference Design. In our case, this means sourcing the setup script for the Version of Vivado that we're using. Depending on the size of the target, one may need to check out a license for Vivado. In this case, that step is not necessary. 
+
+```source /tools/Xilinx/Vivado/2022.2/settings64.sh
+
+In a working directory, clone the hardware description language reference design from Analog Devices.
+
+```
+abraxas3d@chococat:~$ cd documentation-friday/
+abraxas3d@chococat:~/documentation-friday$ git clone https://github.com/analogdevicesinc/hdl
+Cloning into 'hdl'...
+remote: Enumerating objects: 85282, done.
+remote: Counting objects: 100% (3636/3636), done.
+remote: Compressing objects: 100% (1502/1502), done.
+remote: Total 85282 (delta 2277), reused 2952 (delta 1870), pack-reused 81646
+Receiving objects: 100% (85282/85282), 32.10 MiB | 15.65 MiB/s, done.
+Resolving deltas: 100% (60702/60702), done.
+abraxas3d@chococat:~/documentation-friday$ 
+```
+
+There are a large number of branches in this repository. We need the correct branch that matches the Pluto hardware. For other targets that we use, the branch is named after the specific version of Vivado used. However, that does not appear to be the case for the PLUTO SDR. 
+
+First, move into the checked out repository root directory. This is where the .git directory is located, and is where git commands, such as listing branches and checking in and out code, will work. 
+
+```abraxas3d@chococat:~/documentation-friday$ cd hdl
+
+Next, list all the branches that have "pluto" in their title. 
+
+```
+abraxas3d@chococat:~/documentation-friday/hdl$ git branch -a | grep pluto
+  remotes/origin/dev_pluto_ng_cmos
+  remotes/origin/dev_pluto_ng_gpio_reorder
+  remotes/origin/dev_pluto_ng_mipi
+  remotes/origin/pluto_phaser
+  remotes/origin/pluto_phaser_sim
+  remotes/origin/pluto_phaser_sync
+  remotes/origin/plutosdr-fw-v038_m2k-fw-v032
+abraxas3d@chococat:~/documentation-friday/hdl$ 
+```
+
+We need the last one, plutosdr-fw-v038_m2k-fw-v032. Next, we designate this branch as the one we're going to be working with. 
+
+```
+abraxas3d@chococat:~/documentation-friday/hdl$ git checkout plutosdr-fw-v038_m2k-fw-v032 
+branch 'plutosdr-fw-v038_m2k-fw-v032' set up to track 'origin/plutosdr-fw-v038_m2k-fw-v032'.
+Switched to a new branch 'plutosdr-fw-v038_m2k-fw-v032'
+abraxas3d@chococat:~/documentation-friday/hdl$ 
+```
+
+Next we need to build this design. We navigate to the place in the directory structure that corresponds to our hardware. If we were working with the zc706 and an ADRV9009, we'd go to ```/documentation-friday/hdl/projects/adrv9009/zc706
+
+For the PLUTO SDR, we go to ```/documentation-friday/hdl/projects/pluto
+
+We make the design. This runs a series of scripts and makefiles. It also creates a Vivado project for the entire design, using whichever version of Vivado is in our environment. That version comes from the source command we did before we cloned the HDL repository. 
+
+Here is the directory contents before we run make:
+```
+abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ ls
+Makefile  Readme.md  system_bd.tcl  system_constr.xdc  system_project.tcl  system_top.v
+```
+
+Here's the output of the make command. I use ```time make``` simply to find out how long these builds take. PLUTO takes a relatively short amount of time compared to some of the other hardware combinations. 
+
+
+
 
 
 
