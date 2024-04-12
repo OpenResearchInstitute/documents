@@ -157,9 +157,9 @@ We aren't "porting" a reference design to a new fpga dev board, but we are modif
 ## Integrating Custom IP into the PLUTO SDR HDL Reference Design
 ### Steps Required to add the Opulent Voice Transmitter and Receiver Blocks
 
-Set up the environment for working with the HDL Reference Design. In our case, this means sourcing the setup script for the Version of Vivado that we're using. Depending on the size of the target, one may need to check out a license for Vivado. In this case, that step is not necessary. 
+First, set up the environment for working with the HDL Reference Design. In our case, this means sourcing the setup script for the Version of Vivado that we want to use for the build. (Depending on the size of the target FPGA, one may also need to check out a license for Vivado. For the PLUTO SDR, checking out a license is not necessary)
 
-```source /tools/Xilinx/Vivado/2022.2/settings64.sh
+`source /tools/Xilinx/Vivado/2022.2/settings64.sh`
 
 In a working directory, clone the hardware description language reference design from Analog Devices.
 
@@ -180,7 +180,7 @@ There are a large number of branches in this repository. We need the correct bra
 
 First, move into the checked out repository root directory. This is where the .git directory is located, and is where git commands, such as listing branches and checking in and out code, will work. 
 
-```abraxas3d@chococat:~/documentation-friday$ cd hdl
+`abraxas3d@chococat:~/documentation-friday$ cd hdl`
 
 Next, list all the branches that have "pluto" in their title. 
 
@@ -196,7 +196,7 @@ abraxas3d@chococat:~/documentation-friday/hdl$ git branch -a | grep pluto
 abraxas3d@chococat:~/documentation-friday/hdl$ 
 ```
 
-We need the last one, plutosdr-fw-v038_m2k-fw-v032. Next, we designate this branch as the one we're going to be working with. 
+We need the last one, `plutosdr-fw-v038_m2k-fw-v032`. Next, we designate this branch as the one we're going to be working with. 
 
 ```
 abraxas3d@chococat:~/documentation-friday/hdl$ git checkout plutosdr-fw-v038_m2k-fw-v032 
@@ -205,11 +205,11 @@ Switched to a new branch 'plutosdr-fw-v038_m2k-fw-v032'
 abraxas3d@chococat:~/documentation-friday/hdl$ 
 ```
 
-Next we need to build this design. We navigate to the place in the directory structure that corresponds to our hardware. If we were working with the zc706 and an ADRV9009, we'd go to ```/documentation-friday/hdl/projects/adrv9009/zc706
+Next we need to build this design. We navigate to the place in the directory structure that corresponds to our hardware. If we were working with the zc706 and an ADRV9009, we'd go to `/documentation-friday/hdl/projects/adrv9009/zc706`
 
-For the PLUTO SDR, we go to ```/documentation-friday/hdl/projects/pluto
+For the PLUTO SDR, we go to `/documentation-friday/hdl/projects/pluto`
 
-We make the design. This runs a series of scripts and makefiles. It also creates a Vivado project for the entire design, using whichever version of Vivado is in our environment. That version comes from the source command we did before we cloned the HDL repository. 
+We make the design. We haven't added any of our hardware yet. We're just building the reference design transceiver as-is. We run a series of scripts and makefiles. This process also creates a Vivado project for the entire design, using whichever version of Vivado is in our environment. The version of Vivado comes from the source command we did before we cloned the HDL repository. 
 
 Here is the directory contents before we run make:
 ```
@@ -217,7 +217,7 @@ abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ ls
 Makefile  Readme.md  system_bd.tcl  system_constr.xdc  system_project.tcl  system_top.v
 ```
 
-Here's the output of the make command. I use ```time make``` simply to find out how long these builds take. PLUTO takes a relatively short amount of time compared to some of the other hardware combinations. 
+Here's the output of the make command. I use `time make` simply to find out how long these builds take. PLUTO takes a relatively short amount of time compared to some of the other hardware combinations. 
 
 
 
