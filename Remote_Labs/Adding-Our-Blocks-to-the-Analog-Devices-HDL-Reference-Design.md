@@ -156,6 +156,7 @@ We aren't "porting" a reference design to a new fpga dev board, but we are modif
 
 ## Integrating Custom IP into the PLUTO SDR HDL Reference Design
 ### Steps Required to add the Opulent Voice Transmitter and Receiver Blocks
+#### Setting up the HDL Reference Design for Editing
 
 First, set up the environment for working with the HDL Reference Design. In our case, this means sourcing the setup script for the Version of Vivado that we want to use for the build. (Depending on the size of the target FPGA, one may also need to check out a license for Vivado. For the PLUTO SDR, checking out a license is not necessary)
 
@@ -218,6 +219,49 @@ Makefile  Readme.md  system_bd.tcl  system_constr.xdc  system_project.tcl  syste
 ```
 
 Here's the output of the make command. I use `time make` simply to find out how long these builds take. PLUTO takes a relatively short amount of time compared to some of the other hardware combinations. 
+
+```
+abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ time make
+Building axi_ad9361 library [/home/abraxas3d/documentation-friday/hdl/library/axi_ad9361/axi_ad9361_ip.log] ... OK
+Building util_cdc library [/home/abraxas3d/documentation-friday/hdl/library/util_cdc/util_cdc_ip.log] ... OK
+Building util_axis_fifo library [/home/abraxas3d/documentation-friday/hdl/library/util_axis_fifo/util_axis_fifo_ip.log] ... OK
+Building axi_dmac library [/home/abraxas3d/documentation-friday/hdl/library/axi_dmac/axi_dmac_ip.log] ... OK
+Building axi_tdd library [/home/abraxas3d/documentation-friday/hdl/library/axi_tdd/axi_tdd_ip.log] ... OK
+Building util_cpack2 library [/home/abraxas3d/documentation-friday/hdl/library/util_pack/util_cpack2/util_cpack2_ip.log] ... OK
+Building util_upack2 library [/home/abraxas3d/documentation-friday/hdl/library/util_pack/util_upack2/util_upack2_ip.log] ... OK
+Building pluto project [/home/abraxas3d/documentation-friday/hdl/projects/pluto/pluto_vivado.log] ... OK
+
+real	127m25.982s
+user	32m34.364s
+sys	15m5.450s
+abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ 
+```
+
+Here's the contents of our project directory after the make command. 
+
+```
+abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ ls
+axi_ad9361_delay.log  pluto.gen            pluto.runs  pluto_vivado.log  system_bd.tcl       system_top.v      vivado.jou
+Makefile              pluto.hw             pluto.sdk   pluto.xpr         system_constr.xdc   timing_impl.log   vivado.log
+pluto.cache           pluto.ip_user_files  pluto.srcs  Readme.md         system_project.tcl  timing_synth.log
+abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ 
+```
+From here, we launch Vivado (we type "vivado") and then open `pluto.xpr`, the pluto xilinx project file. 
+
+From the graphical user interface, we can open the block diagram and look at the way the blocks of the transceiver design are put together. We can look at many other reports and build artifacts. We are in the default or "stock" state of the Pluto design. 
+
+#### Adding Logic to the Transmitter
+
+Our transmitter blocks are placed in between the digital to analog converter direct memory access controller block and the transmitter channel unpacker block. We will call these blocks the DAC_DMA and UPACK. These two transmitter chain blocks are connected to each other by an AXI stream interface. Each of them has a reset and a clock. 
+
+Our theory of operation here is that the IQ sample stream coming out of the DAC_DMA can be modified by a block. Every time that we get a new sample from memory, it's then clocked into our block, changes are made, and then it's clocked out to the UPACK. The IQ samples then proceed on their way to the transmitter. 
+
+The master port of the DAC_DMA connects to the slave port of the UPACK. We disconnect these wires, and interpose our new block (AXI_OPV4UPR) in between them. The master port of the DAC_DMA goes to the slave port of the AXI_OPV4UPR, and the master port of AXI_OPVUPR goes to the slave port of the UPACK.
+
+ 
+
+In the HDL Reference design, blocks are connected with tcl scripts. The tcl script that instantiates the blocks and connects their ports is in the project directory and is called system_bd.tcl. 
+
 
 
 
