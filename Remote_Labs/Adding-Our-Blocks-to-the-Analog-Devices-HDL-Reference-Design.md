@@ -258,10 +258,62 @@ Our theory of operation here is that the IQ sample stream coming out of the DAC_
 
 The master port of the DAC_DMA connects to the slave port of the UPACK. We disconnect these wires, and interpose our new block (AXI_OPV4UPR) in between them. The master port of the DAC_DMA goes to the slave port of the AXI_OPV4UPR, and the master port of AXI_OPVUPR goes to the slave port of the UPACK.
 
- 
-
 In the HDL Reference design, blocks are connected with tcl scripts. The tcl script that instantiates the blocks and connects their ports is in the project directory and is called system_bd.tcl. 
 
+First, we instantiate our "intellectual property" (IP), and then we connect it up.
+
+We'll add these commands that achieve this functionality towards the bottom of the file, right above the section designated `# interconnects`. ad_ip_instance has the module name first and the instance name second. ad_connect has "from" port and then "to" port. The block name is separated from the signal name with a slash. 
+
+Commands added:
+```
+ad_ip_instance axi_opv4upr axi_opv4upr_0
+
+ad_connect tx_upack/s_axis axi_opv4upr_0/m_axis
+ad_connect axi_ad9361_dac_dma/m_axis axi_opv4upr/s_axis
+```
+
+(We currently do not have a CPU interface but we will be adding one later. For right now, we are focusing on getting the AXI stream, clock, and resets connected properly)
+
+Now that we have our connections listed in this board level file, the next line we look at is `ad_connect tx_upack/s_axis  axi_ad9361_dac_dma/m_axis`
+
+This is a connection we are going to comment out, because we have interposed our block between these two blocks (see above). We leave the clock and resets for DAC_DMA and UPACK where they are. We leave the inputs to the DAC_DMA and the outputs of the UPACK as they are.
+
+Comment out this connection:
+`#ad_connect tx_upack/s_axis  axi_ad9361_dac_dma/m_axis`
+
+We're going to use the same clock that the UPACK block uses. We set up that connection by adding this:
+`ad_connect  axi_ad9361/l_clk axi_opv4upr_0/s_axis_aclk`
+
+We're going to use the same reset that the UPACK block uses. We set up that connection by adding this:
+`ad_connect  logic_or_1/Res  axi_opv4upr_0/reset`
+
+If we run make at this point, we will get an error because we've referred to a block instance that doesn't exist. While we have to have the instance added and the ports connected up in this file, we are definitely not done yet. 
+
+The next place we need to go is the /hdl/library/ directory further back in the hierarchy. Here's the contents of this library directory. 
+
+```
+/home/abraxas3d/documentation-friday/hdl/library
+abraxas3d@chococat:~/documentation-friday/hdl/library$ ls
+ad463x_data_capture  axi_ad9684           axi_generic_adc     axi_sysid     util_axis_fifo       util_gmii_to_rgmii
+axi_ad5766           axi_ad9739a          axi_gpreg           axi_tdd       util_axis_fifo_asym  util_hbm
+axi_ad7606x          axi_ad9783           axi_hdmi_rx         cn0363        util_axis_resize     util_i2c_mixer
+axi_ad7616           axi_ad9963           axi_hdmi_tx         common        util_axis_upscale    util_mfifo
+axi_ad7768           axi_adaq8092         axi_i2s_adi         cordic_demod  util_bsplit          util_mii_to_rmii
+axi_ad777x           axi_adc_decimate     axi_intr_monitor    data_offload  util_cdc             util_pack
+axi_ad9122           axi_adc_trigger      axi_laser_driver    intel         util_cic             util_pad
+axi_ad9250           axi_adrv9001         axi_logic_analyzer  interfaces    util_dacfifo         util_pulse_gen
+axi_ad9265           axi_clkgen           axi_ltc2387         jesd204       util_dec256sinc24b   util_rfifo
+axi_ad9361           axi_clock_monitor    axi_pulse_gen       Makefile      util_delay           util_sigma_delta_spi
+axi_ad9434           axi_dac_interpolate  axi_pwm_gen         scripts       util_do_ram          util_tdd_sync
+axi_ad9467           axi_dmac             axi_rd_wr_combiner  spi_engine    util_extract         util_var_fifo
+axi_ad9625           axi_fan_control      axi_spdif_rx        sysid_rom     util_fir_dec         util_wfifo
+axi_ad9671           axi_fmcadc5_sync     axi_spdif_tx        util_adcfifo  util_fir_int         xilinx
+abraxas3d@chococat:~/documentation-friday/hdl/library$ 
+```
+
+Each of these directories contains the information about the block that the make process needs to build the design. 
+
+Let's look at the contents of the directories of the blocks we are connecting ours up to, the DAC DMA and the UPACK. There's information in there that may help us build up our directory. 
 
 
 
