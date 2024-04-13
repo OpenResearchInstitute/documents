@@ -282,7 +282,7 @@ Comment out this connection:
 `#ad_connect tx_upack/s_axis  axi_ad9361_dac_dma/m_axis`
 
 We're going to use the same clock that the UPACK block uses. We set up that connection by adding this:
-`ad_connect  axi_ad9361/l_clk axi_opv4upr_0/s_axis_aclk`
+`ad_connect  axi_ad9361/l_clk axi_opv4upr_0/clk`
 
 We're going to use the same reset that the UPACK block uses. We set up that connection by adding this:
 `ad_connect  logic_or_1/Res  axi_opv4upr_0/reset`
@@ -420,6 +420,7 @@ adi_add_bus "m_axis" "master" \
     {"m_axis_valid" "TVALID"} \
     {"m_axis_data" "TDATA"} \
   ]
+adi_add_bus_clock "clk" "m_axis" 
 
 
 adi_add_bus "s_axis" "slave" \
@@ -429,7 +430,8 @@ adi_add_bus "s_axis" "slave" \
     {"s_axis_valid" "TVALID"} \
     {"s_axis_data" "TDATA"} \
   ]
-adi_add_bus_clock "s_axis_clk" "s_axis" "reset"
+adi_add_bus_clock "clk" "s_axis" "reset"
+
 ```
 
 The entire axi_opv4upr_ip.tcl file is:
@@ -457,7 +459,7 @@ adi_add_bus "m_axis" "master" \
     {"m_axis_valid" "TVALID"} \
     {"m_axis_data" "TDATA"} \
   ]
-
+adi_add_bus_clock "clk" "m_axis" 
 
 
 adi_add_bus "s_axis" "slave" \
@@ -467,7 +469,8 @@ adi_add_bus "s_axis" "slave" \
     {"s_axis_valid" "TVALID"} \
     {"s_axis_data" "TDATA"} \
   ]
-adi_add_bus_clock "s_axis_clk" "s_axis" "reset"
+adi_add_bus_clock "clk" "s_axis" "reset"
+
 
 ipx::save_core [ipx::current_core]
 ```
@@ -522,7 +525,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 entity axi_opv4upr is
-    Port ( s_axis_aclk : in STD_LOGIC;
+    Port ( clk         : in STD_LOGIC;
            reset       : in STD_LOGIC;
            m_axis_data : out STD_LOGIC_VECTOR (63 downto 0);
            s_axis_data : in STD_LOGIC_VECTOR (63 downto 0);
@@ -555,11 +558,11 @@ begin
  
     -- processes    
  
-    pass_data : process (reset, s_axis_aclk)
+    pass_data : process (reset, clk)
     begin
         if reset = '1' then
             m_axis_valid_i <= '0';
-        elsif rising_edge(s_axis_aclk) then
+        elsif rising_edge(clk) then
             if s_axis_valid_i = '0' then
             -- clock signal happens and invalid data at input
             -- pass the input data through to the output.
@@ -591,9 +594,6 @@ ERROR: [BD 5-7] Error: running create_bd_cell  -type ip -name axi_opv4upr_0 .
 ERROR: [Common 17-39] 'create_bd_cell' failed due to earlier errors.
 ```
 
-
-
-
 The final piece is the component.xml file. We go to our block project in Vivado and use the IP Packager tool to create it. Now we can place our block in the system block diagram.
 
 We move the component.xml file to the /library/axi_opv4upr directory. Until we figure out how to export this file without the wrong directory locations embedded in it (help needed) then we hand-edit the component.xml file to point to the axi_opv4upr.vhd file sitting right by it. 
@@ -618,7 +618,7 @@ ERROR: ad_connect: Cannot connect non-interface to interface: tx_upack/s_axis (b
 ```
 
 
-
+(need help - this is a roadblock)
 
 
 
