@@ -580,16 +580,42 @@ begin
 end Behavioral;
 ```
 
-What happens if we run `make` at this point? 
+What happens if we run `make` at this point, without the compoent.xml file? No surprise, it still fails. 
+
+```
+connect_bd_net /logic_or_1/Res /tx_upack/reset
+## ad_ip_instance axi_opv4upr axi_opv4upr_0
+WARNING: [Coretcl 2-175] No Catalog IPs found
+ERROR: [BD 41-74] Exec TCL: Please specify VLNV when creating IP cell axi_opv4upr_0
+ERROR: [BD 5-7] Error: running create_bd_cell  -type ip -name axi_opv4upr_0 .
+ERROR: [Common 17-39] 'create_bd_cell' failed due to earlier errors.
+```
 
 
 
 
-The final piece is the component.xml file. We go to our block project in Vivado and use the IP Packager tool to create it.
+The final piece is the component.xml file. We go to our block project in Vivado and use the IP Packager tool to create it. Now we can place our block in the system block diagram.
 
-This is where we need some help, as the IP Packager creates extra directories along with the component.xml file. This isn't a file that's simple to hand write. It needs to be automated.
+We move the component.xml file to the /library/axi_opv4upr directory. Until we figure out how to export this file without the wrong directory locations embedded in it (help needed) then we hand-edit the component.xml file to point to the axi_opv4upr.vhd file sitting right by it. 
 
+When we packaged our IP, we included the testbench file axi_opv4upr_tb.vhd and the waveform configuration file. Instead of fighting things, we went ahead and included the testbench and the stimulus file in the library block. We also included the simple stimulus file so that if someone wanted to take the source code from the library directory and run the testbench, they could do so. 
 
+We run make and get a new error:
+
+```
+## ad_ip_instance axi_opv4upr axi_opv4upr_0
+## ad_connect tx_upack/s_axis axi_opv4upr_0/m_axis
+ERROR: ad_connect: Cannot connect non-interface to interface: tx_upack/s_axis (bd_intf_pin) <-/-> axi_opv4upr_0/m_axis (newnet)
+    while executing
+"error "ERROR: ad_connect: Cannot connect non-interface to interface: $name_a ($type_a) <-/-> $name_b ($type_b)""
+    invoked from within
+"if {!([string first intf $type_a]+1) != !([string first intf $type_b]+1)} {
+    error "ERROR: ad_connect: Cannot connect non-interface to interface: $..."
+    (procedure "ad_connect" line 8)
+    invoked from within
+"ad_connect tx_upack/s_axis axi_opv4upr_0/m_axis"
+    (file "system_bd.tcl" line 354)
+```
 
 
 
