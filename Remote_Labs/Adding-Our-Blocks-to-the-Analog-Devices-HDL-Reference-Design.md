@@ -250,7 +250,7 @@ From here, we launch Vivado (we type "vivado") and then open `pluto.xpr`, the pl
 
 From the graphical user interface, we can open the block diagram and look at the way the blocks of the transceiver design are put together. We can look at many other reports and build artifacts. We are in the default or "stock" state of the Pluto design. 
 
-#### Adding Logic to the Transmitter
+#### Adding A Block to the Transmitter
 
 Our transmitter blocks are placed in between the digital to analog converter direct memory access controller block and the transmitter channel unpacker block. We will call these blocks the DAC_DMA and UPACK. These two transmitter chain blocks are connected to each other by an AXI stream interface. Each of them has a reset and a clock. 
 
@@ -289,6 +289,26 @@ We're going to use the same reset that the UPACK block uses. We set up that conn
 
 If we run make at this point, we will get an error because we've referred to a block instance that doesn't exist. While we have to have the instance added and the ports connected up in this file, we are definitely not done yet. 
 
+```
+abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ make
+Building pluto project [/home/abraxas3d/documentation-friday/hdl/projects/pluto/pluto_vivado.log] ... FAILED
+For details see /home/abraxas3d/documentation-friday/hdl/projects/pluto/pluto_vivado.log
+
+../scripts/project-xilinx.mk:100: recipe for target 'pluto.sdk/system_top.xsa' failed
+make: *** [pluto.sdk/system_top.xsa] Error 1
+abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ 
+```
+Here's the relevant portion of the log file:
+```
+connect_bd_net /logic_or_1/Res /tx_upack/reset
+## ad_ip_instance axi_opv4upr axi_opv4upr_0
+WARNING: [Coretcl 2-175] No Catalog IPs found
+ERROR: [BD 41-74] Exec TCL: Please specify VLNV when creating IP cell axi_opv4upr_0
+ERROR: [BD 5-7] Error: running create_bd_cell  -type ip -name axi_opv4upr_0 .
+ERROR: [Common 17-39] 'create_bd_cell' failed due to earlier errors.
+```
+Make can't find our IP in the "catalog". create_bd_cell is called by ad_ip_instance, and fails, because there is nothing in the library named axi_op4upr. Let's fix that. 
+
 The next place we need to go is the /hdl/library/ directory further back in the hierarchy. Here's the contents of this library directory. 
 
 ```
@@ -311,9 +331,268 @@ axi_ad9671           axi_fmcadc5_sync     axi_spdif_tx        util_adcfifo  util
 abraxas3d@chococat:~/documentation-friday/hdl/library$ 
 ```
 
-Each of these directories contains the information about the block that the make process needs to build the design. 
+Each of these directories contains the information about the circuits that the make process needs to build the design. First, let's add our IP to the Makefile in library. We add it in two places, the "clean" and "clean all" lists. 
 
-Let's look at the contents of the directories of the blocks we are connecting ours up to, the DAC DMA and the UPACK. There's information in there that may help us build up our directory. 
+Here's what that looks like:
+
+```
+clean:
+	$(MAKE) -C ad463x_data_capture clean
+	$(MAKE) -C axi_opv4upr clean
+	$(MAKE) -C axi_ad5766 clean
+	$(MAKE) -C axi_ad7606x clean
+```
+and, lower down:
+```
+clean-all:clean
+lib:
+	$(MAKE) -C ad463x_data_capture
+	$(MAKE) -C axi_opv4upr
+	$(MAKE) -C axi_ad5766
+```
+
+Next, make our block directory under library. Move in there and let's start constructing the necessary files. 
+
+```
+abraxas3d@chococat:~/documentation-friday/hdl/library$ mkdir axi_opv4upr
+abraxas3d@chococat:~/documentation-friday/hdl/library$ cd axi_opv4upr/
+abraxas3d@chococat:~/documentation-friday/hdl/library/axi_opv4upr$ 
+```
+
+Let's look at the contents of the directories of the blocks we are connecting ours up to, the DAC DMA and the UPACK. There's information in there that may help us build up our directory.
+
+Here's the DAC DMA directory. 
+
+```
+abraxas3d@chococat:~/documentation-friday/hdl/library/axi_dmac$ ls
+address_generator.v      axi_dmac.ip_user_files       axi_dmac.v            dmac_2d_transfer.v    splitter.v
+axi_dmac_burst_memory.v  axi_dmac_pkg_sv.ttcl         axi_dmac.xpr          gui                   src_axi_mm.v
+axi_dmac.cache           axi_dmac_regmap_request.v    axi_register_slice.v  inc_id.vh             src_axi_stream.v
+axi_dmac_constr.sdc      axi_dmac_regmap.v            bd                    Makefile              src_fifo_inf.v
+axi_dmac_constr.ttcl     axi_dmac_reset_manager.v     component.xml         request_arb.v         tb
+axi_dmac.hw              axi_dmac_resize_dest.v       data_mover.v          request_generator.v   vivado.jou
+axi_dmac_hw.tcl          axi_dmac_resize_src.v        dest_axi_mm.v         response_generator.v  vivado.log
+axi_dmac_ip.log          axi_dmac_response_manager.v  dest_axi_stream.v     response_handler.v    xgui
+axi_dmac_ip.tcl          axi_dmac_transfer.v          dest_fifo_inf.v       resp.vh
+abraxas3d@chococat:~/documentation-friday/hdl/library/axi_dmac$ 
+```
+
+There's a lot in there. This is a complex block that does a lot of things and has several different types of interfaces. It has the AXI streaming inteface we are going to connect to, it has an interface to memory, and it has an interface to the CPU in order for it to be configured and controlled via register reads and writes. 
+
+Our block is simpler in structure and has fewer files than this one, but we need the same types of things that are in this directory. These are talked about on the ADI wiki website discussed at the top of this document (https://wiki.analog.com/resources/fpga/docs/hdl/creating_new_ip_guide). We will have an axi_opv4upr_ip.tcl, a Makefile, and our source code axi_opv4upr.vhd. We also need a component.xml file, which we get from the process of packaging our IP. This is a process done in Vivado. This xml file contains (at the least) information that is necessary for our block to show up in the board diagram graphical user interface. 
+
+Let's look at the UPACK block library directory contents. Note that the UPACK diretory is a subdirectory of a library directory. This is because there are multiple variants of the pack/unpack block, and the designers probably wanted to keep all of them together to make the directory structure cleaner. We could choose to do the same with our transmit and receive blocks by having an OPV directory and then transmit and receive subdirectories. 
+
+```
+abraxas3d@chococat:~/documentation-friday/hdl/library/util_pack/util_upack2$ pwd
+/home/abraxas3d/documentation-friday/hdl/library/util_pack/util_upack2
+abraxas3d@chococat:~/documentation-friday/hdl/library/util_pack/util_upack2$ ls
+component.xml      util_upack2.hw      util_upack2_ip.log         util_upack2.v    vivado.log
+Makefile           util_upack2_hw.tcl  util_upack2_ip.tcl         util_upack2.xpr  xgui
+util_upack2.cache  util_upack2_impl.v  util_upack2.ip_user_files  vivado.jou
+abraxas3d@chococat:~/documentation-friday/hdl/library/util_pack/util_upack2$ 
+```
+Here we see the same types of files. We have a component.xml, source files, a util_upack2_ip.tcl, and a Makefile. 
+
+The _ip.tcl files in these two directories have commands that set up the AXI stream interface as a bus. This is how we get the collapsing/expanding effect in our block diagram. Let's follow the lead of the blocks we're connecting to, and try to set our block up as a bus. This way, it's a single line to connect the AXI stream interface in the system_bd.tcl file to connect two blocks together, intead of multiple single connections. 
+
+In util_upack2_ip.tcl, there's a command that sets up a bus. 
+
+```
+adi_add_bus "s_axis" "slave" \
+  "xilinx.com:interface:axis_rtl:1.0" \
+  "xilinx.com:interface:axis:1.0" \
+  [list {"s_axis_ready" "TREADY"} \
+    {"s_axis_valid" "TVALID"} \
+    {"s_axis_data" "TDATA"} \
+  ]
+adi_add_bus_clock "clk" "s_axis" "reset"
+```
+Note that the clk and reset signals below the bus appear to be set here, and not in the system_bd.tcl file. (?)
+
+So, in our axi_opv4upr_ip.tcl file, we have the commands we were instructed to include from the wiki, and also a set of re-written adi_add_bus commands, using util_upack2 as a model.
+
+```
+adi_add_bus "m_axis" "master" \
+  "xilinx.com:interface:axis_rtl:1.0" \
+  "xilinx.com:interface:axis:1.0" \
+  [list {"m_axis_ready" "TREADY"} \
+    {"m_axis_valid" "TVALID"} \
+    {"m_axis_data" "TDATA"} \
+  ]
+
+
+adi_add_bus "s_axis" "slave" \
+  "xilinx.com:interface:axis_rtl:1.0" \
+  "xilinx.com:interface:axis:1.0" \
+  [list {"s_axis_ready" "TREADY"} \
+    {"s_axis_valid" "TVALID"} \
+    {"s_axis_data" "TDATA"} \
+  ]
+adi_add_bus_clock "s_axis_clk" "s_axis" "reset"
+```
+
+The entire axi_opv4upr_ip.tcl file is:
+
+```
+source ../../scripts/adi_env.tcl
+source $ad_hdl_dir/library/scripts/adi_ip_xilinx.tcl
+
+adi_ip_create axi_opv4upr
+
+
+adi_ip_files axi_opv4upr [list \
+        "axi_opv4upr.vhd"]
+
+# use this command if we have AXI lite for register controls
+#adi_ip_properties axi_opv4upr
+
+# use this command if we do not use AXI for register control
+adi_ip_properties_lite axi_opv4upr
+
+adi_add_bus "m_axis" "master" \
+  "xilinx.com:interface:axis_rtl:1.0" \
+  "xilinx.com:interface:axis:1.0" \
+  [list {"m_axis_ready" "TREADY"} \
+    {"m_axis_valid" "TVALID"} \
+    {"m_axis_data" "TDATA"} \
+  ]
+
+
+
+adi_add_bus "s_axis" "slave" \
+  "xilinx.com:interface:axis_rtl:1.0" \
+  "xilinx.com:interface:axis:1.0" \
+  [list {"s_axis_ready" "TREADY"} \
+    {"s_axis_valid" "TVALID"} \
+    {"s_axis_data" "TDATA"} \
+  ]
+adi_add_bus_clock "s_axis_clk" "s_axis" "reset"
+
+ipx::save_core [ipx::current_core]
+```
+
+Our Makefile here is as simple as we can make it (pun intended). 
+
+```
+####################################################################################
+## Copyright (c) 2018 - 2023 Analog Devices, Inc.
+### SPDX short identifier: BSD-1-Clause
+## Auto-generated, but was modified
+####################################################################################
+
+LIBRARY_NAME := axi_opv4upr
+
+GENERIC_DEPS += axi_opv4upr.vhd
+
+XILINX_DEPS += axi_opv4upr_ip.tcl
+
+include ../../scripts/library.mk
+```
+
+Our (dummy or do-little) block source code is:
+
+```
+----------------------------------------------------------------------------------
+-- Company: Open Research Institute, Inc.
+-- Engineer: Ken Easton, Abraxas3d, Paul Williamson, Rose Easton
+--
+-- Create Date: 04/06/2024 11:46:41 PM
+-- Design Name: OPV4UPR
+-- Module Name: passthrough - Behavioral
+-- Project Name: Opulent Voice for University of Puerto Rico
+-- Target Devices: PLUTO SDR etc.
+-- Tool Versions: 2022.2
+-- Description: a block inserted into the transmit chain that makes modifications
+-- to the stream of IQ values coming from DMA
+--
+-- Dependencies:
+--
+-- Revision:
+-- controlled in Git
+-- Additional Comments:
+--
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+entity axi_opv4upr is
+    Port ( s_axis_aclk : in STD_LOGIC;
+           reset       : in STD_LOGIC;
+           m_axis_data : out STD_LOGIC_VECTOR (63 downto 0);
+           s_axis_data : in STD_LOGIC_VECTOR (63 downto 0);
+           s_axis_ready : out STD_LOGIC;
+           s_axis_valid : in STD_LOGIC;
+           m_axis_valid : out STD_LOGIC;
+           m_axis_ready : in STD_LOGIC);
+end axi_opv4upr;
+
+architecture Behavioral of axi_opv4upr is
+-- internal copies of the signals we are going to use
+           signal output_data    :  STD_LOGIC_VECTOR (63 downto 0);
+           signal input_data     :  STD_LOGIC_VECTOR (63 downto 0);
+           signal s_axis_valid_i :  STD_LOGIC;
+           signal m_axis_valid_i :  STD_LOGIC;
+  -- constant 64 bit value of all zeros
+           signal all_zeros      : STD_LOGIC_VECTOR(input_data'range) := (others => '0');
+           signal all_ones       : STD_LOGIC_VECTOR(input_data'range) := (others => '1');
+begin
+-- asynchronous assignments-- pass along the data
+    m_axis_data <= output_data;
+    input_data <= s_axis_data;
+    -- get the axis_ready signal we get from upack and pass it along to DMA
+    s_axis_ready <= m_axis_ready;
+    -- receive axis_valid on our slave port
+    s_axis_valid_i <= s_axis_valid;
+    -- present our axis_valid on our master port
+    m_axis_valid <= m_axis_valid_i;    
+ 
+ 
+    -- processes    
+ 
+    pass_data : process (reset, s_axis_aclk)
+    begin
+        if reset = '1' then
+            m_axis_valid_i <= '0';
+        elsif rising_edge(s_axis_aclk) then
+            if s_axis_valid_i = '0' then
+            -- clock signal happens and invalid data at input
+            -- pass the input data through to the output.
+                output_data <= input_data;
+        -- and then send the input data to the output data
+                m_axis_valid_i <= '0';
+        -- indicate to the channel unpacker that this is invalid data (just for fun)
+            else 
+                    -- clock signal happens and valid data at input
+        -- overwrite the fetched value from DMA with all 1s.
+                output_data <= all_ones;
+        -- and then send the input data to the output data
+                m_axis_valid_i <= '1';
+        -- indicate to the channel unpacker we have valid data
+            end if;
+        end if;
+    end process pass_data;
+end Behavioral;
+```
+
+What happens if we run `make` at this point? 
+
+
+
+
+The final piece is the component.xml file. We go to our block project in Vivado and use the IP Packager tool to create it.
+
+This is where we need some help, as the IP Packager creates extra directories along with the component.xml file. This isn't a file that's simple to hand write. It needs to be automated.
+
+
+
+
+
 
 
 
