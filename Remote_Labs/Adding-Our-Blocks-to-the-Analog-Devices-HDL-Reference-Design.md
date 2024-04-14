@@ -299,6 +299,7 @@ make: *** [pluto.sdk/system_top.xsa] Error 1
 abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ 
 ```
 Here's the relevant portion of the log file:
+
 ```
 connect_bd_net /logic_or_1/Res /tx_upack/reset
 ## ad_ip_instance axi_opv4upr axi_opv4upr_0
@@ -632,7 +633,7 @@ This resulted in warnings such as the one below, for each of the six connections
 ```
 ## ad_connect axi_ad9361_dac_dma/m_axis_data axi_opv4upr_0/s_axis_data
 WARNING: [BD 41-1306] The connection to interface pin </axi_ad9361_dac_dma/m_axis_data> is being overridden by the user with net <axi_ad9361_dac_dma_m_axis_data>. This pin will not be connected as a part of interface connection <m_axis>.
-``
+```
 
 Help needed here. We'd like to have an interface connection, and following the way it was done in the blocks we're connecting to didn't work.
 
