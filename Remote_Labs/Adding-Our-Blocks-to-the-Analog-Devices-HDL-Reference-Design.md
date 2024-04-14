@@ -6,7 +6,7 @@
 
 >ORI 29 March 2024 keaston successful integration of IP with HDL Reference Design
 
->ORI 12 April 2024 Abraxas3d documented how to integrate IP into PLUTO HDL Reference Design 
+>ORI 12 April 2024 Abraxas3d documented [how to integrate IP into PLUTO HDL Reference Design] (https://github.com/OpenResearchInstitute/documents/blob/master/Remote_Labs/Adding-Our-Blocks-to-the-Analog-Devices-HDL-Reference-Design.md#integrating-custom-ip-into-the-pluto-sdr-hdl-reference-design)
 
 ## General Guidelines
 For new block integration to go smoothly, and in order to take advantage of the ADI-specific environment and build macros, it's recommend to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/blockname, where they are automatically picked up by the top level build, and editing the Makefile and blockname_ip.tcl in that directory along the lines as that presented in the following guide:
@@ -210,7 +210,7 @@ Next we need to build this design. We navigate to the place in the directory str
 
 For the PLUTO SDR, we go to `/documentation-friday/hdl/projects/pluto`
 
-We make the design. We haven't added any of our hardware yet. We're just building the reference design transceiver as-is. We run a series of scripts and makefiles. This process also creates a Vivado project for the entire design, using whichever version of Vivado is in our environment. The version of Vivado comes from the source command we did before we cloned the HDL repository. 
+We make the design. We haven't added any of our hardware yet. We're just building the reference design transceiver as-is. Running make runs a series of scripts and makefiles. This process also creates a Vivado project for the entire design, using whichever version of Vivado is in our environment. The version of Vivado comes from the source command we did before we cloned the HDL repository. 
 
 Here is the directory contents before we run make:
 ```
@@ -218,7 +218,7 @@ abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ ls
 Makefile  Readme.md  system_bd.tcl  system_constr.xdc  system_project.tcl  system_top.v
 ```
 
-Here's the output of the make command. I use `time make` simply to find out how long these builds take. PLUTO takes a relatively short amount of time compared to some of the other hardware combinations. 
+Here's the output of the make command. I use `time make` simply to find out how long these builds take. PLUTO takes a relatively short amount of time compared to some of the other hardware combinations in Remote Lab.
 
 ```
 abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ time make
@@ -382,7 +382,7 @@ There's a lot in there. This is a complex block that does a lot of things and ha
 
 Our block is simpler in structure and has fewer files than this one, but we need the same types of things that are in this directory. These are talked about on the ADI wiki website discussed at the top of this document (https://wiki.analog.com/resources/fpga/docs/hdl/creating_new_ip_guide). We will have an axi_opv4upr_ip.tcl, a Makefile, and our source code axi_opv4upr.vhd. We also need a component.xml file, which we get from the process of packaging our IP. This is a process done in Vivado. This xml file contains (at the least) information that is necessary for our block to show up in the board diagram graphical user interface. 
 
-Let's look at the UPACK block library directory contents. Note that the UPACK diretory is a subdirectory of a library directory. This is because there are multiple variants of the pack/unpack block, and the designers probably wanted to keep all of them together to make the directory structure cleaner. We could choose to do the same with our transmit and receive blocks by having an OPV directory and then transmit and receive subdirectories. 
+Let's look at the UPACK block library directory contents. Note that the UPACK directory is a subdirectory of a library directory. This is because there are multiple variants of the pack/unpack block, and the designers probably wanted to keep all of them together to make the directory structure cleaner. We could choose to do the same with our transmit and receive blocks by having an OPV directory and then transmit and receive subdirectories. 
 
 ```
 abraxas3d@chococat:~/documentation-friday/hdl/library/util_pack/util_upack2$ pwd
@@ -584,7 +584,7 @@ begin
 end Behavioral;
 ```
 
-What happens if we run `make` at this point, without the compoent.xml file? No surprise, it still fails. 
+What happens if we run `make` at this point, without the component.xml file? No surprise, it still fails. 
 
 ```
 connect_bd_net /logic_or_1/Res /tx_upack/reset
