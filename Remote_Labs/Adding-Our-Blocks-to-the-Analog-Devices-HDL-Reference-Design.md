@@ -269,7 +269,7 @@ Commands added:
 ad_ip_instance axi_opv4upr axi_opv4upr_0
 
 ad_connect tx_upack/s_axis axi_opv4upr_0/m_axis
-ad_connect axi_ad9361_dac_dma/m_axis axi_opv4upr/s_axis
+ad_connect axi_ad9361_dac_dma/m_axis axi_opv4upr_0/s_axis
 ```
 
 (We currently do not have a CPU interface but we will be adding one later. For right now, we are focusing on getting the AXI stream, clock, and resets connected properly)
