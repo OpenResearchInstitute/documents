@@ -617,11 +617,58 @@ ERROR: ad_connect: Cannot connect non-interface to interface: tx_upack/s_axis (b
     (file "system_bd.tcl" line 354)
 ```
 
+Matthew Wishek wrties, 
 
-(need help - this is a roadblock)
+"The issue is related to the I/Os on axi_opv4upr are not defined as bd_intf_ports/pin or bd_ports/pins.
 
+Reviewing the axi_tdd block shows an approach that would work. In that block a BD wrapper is created which instantiates the axi_tdd block. The wrapper has the requisite create_bd_intf_pin/ports commands.
 
+Reviewing the axi_dmac block I don't see  create_bd_intf_pins/ports or create_bd_pins/ports commands anywhere, so it isn't clear how that is happening, but it is happening. But, I have been able to confirm that axi_dmac ports are of the bd_pin/port and/or bd_intf_pin/port."
 
+We connected the individual elements of the AXI streaming bus together. 
+
+This resulted in warnings such as the one below, for each of the six connections (axis_data, axis_ready, axis_valid on both slave and master ports). 
+
+```
+## ad_connect axi_ad9361_dac_dma/m_axis_data axi_opv4upr_0/s_axis_data
+WARNING: [BD 41-1306] The connection to interface pin </axi_ad9361_dac_dma/m_axis_data> is being overridden by the user with net <axi_ad9361_dac_dma_m_axis_data>. This pin will not be connected as a part of interface connection <m_axis>.
+``
+
+Help needed here. We'd like to have an interface connection, and following the way it was done in the blocks we're connecting to didn't work.
+
+And, a new error:
+
+```
+## ad_connect axi_ad9361/l_clk axi_opv4upr_0/clk
+ERROR: [BD 41-85] Exec TCL - Illegal Name: The name 'axi_opv4upr_0/clk' contains illegal characters. It must only contain alphanumeric characters and '_' 
+ERROR: [BD 5-4] Error: running connect_bd_net.
+ERROR: [Common 17-39] 'connect_bd_net' failed due to earlier errors.
+
+    while executing
+"connect_bd_net -net $name_b $obj_a"
+    ("bd_pin,newnet" arm line 2)
+    invoked from within
+"switch $type_a,$type_b {
+    newnet,newnet {
+      error "ERROR: ad_connect: Cannot create connection between two new nets: $name_a <-/-> $name_b"
+   ..."
+    (procedure "ad_connect" line 12)
+    invoked from within
+"ad_connect axi_ad9361/l_clk axi_opv4upr_0/clk"
+    (file "system_bd.tcl" line 368)
+
+    while executing
+"source system_bd.tcl"
+    (procedure "adi_project_create" line 129)
+    invoked from within
+"adi_project_create pluto 0 {} "xc7z010clg225-1""
+    (file "system_project.tcl" line 5)
+INFO: [Common 17-206] Exiting Vivado at Sun Apr 14 20:11:11 2024...
+```
+
+Retyping the command twice didn't resolve the error. It is all alphanumeric or underscores in the name.
+
+Help needed here. 
 
 
 
