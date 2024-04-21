@@ -675,6 +675,8 @@ To get past the "cannot connect interface to non-inteface" error, we connected t
 
 Here are the excerpted commands from system_bd.tcl file. We have successfully interposed a block on the transmit side. Now we need to build the pluto firmware with the new bitfile and test it. "Export Hardware" from Vivado, and "Include Bitstream" in order to get this file. 
 
+When updating the source code for the block in the library, the system_bd.tcl file has to be touched, or project make will not restart. 
+
 ```
 # Opulent Voice for University of Puerto Rico
 
