@@ -714,6 +714,17 @@ adi_ip_properties_lite axi_opv4upr
 ipx::save_core [ipx::current_core]
 ```
 
+After these files are updated, make at the project level is run. For the Pluto, typical project build results are below. 
+
+```
+abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ time make
+Building pluto project [/home/abraxas3d/documentation-friday/hdl/projects/pluto/pluto_vivado.log] ... OK
+
+real	61m13.971s
+user	18m21.787s
+sys	7m0.981s
+abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ 
+```
 
 
 
