@@ -669,7 +669,49 @@ INFO: [Common 17-206] Exiting Vivado at Sun Apr 14 20:11:11 2024...
 
 Retyping the command twice didn't resolve the error. It is all alphanumeric or underscores in the name.
 
-Help needed here. 
+This error turned out to be a stale component.xml file. If you chanage your block source code, be sure to replace the component.xml file. If there is a mismatch in the port names, then you will most likely get the error above. 
+
+To get past the "cannot connect interface to non-inteface" error, we connected the individual s_axis and m_axis pins. This is done in the system_bd.tcl file. 
+
+Here are the excerpted commands from system_bd.tcl file. We have successfully interposed a block on the transmit side. Now we need to build the pluto firmware with the new bitfile and test it. "Export Hardware" from Vivado, and "Include Bitstream" in order to get this file. 
+
+```
+# Opulent Voice for University of Puerto Rico
+
+ad_ip_instance axi_opv4upr axi_opv4upr_0
+
+ad_connect axi_ad9361_dac_dma/m_axis_data axi_opv4upr_0/s_axis_data
+ad_connect axi_ad9361_dac_dma/m_axis_ready axi_opv4upr_0/s_axis_ready
+ad_connect axi_ad9361_dac_dma/m_axis_valid axi_opv4upr_0/s_axis_valid
+ad_connect tx_upack/s_axis_data axi_opv4upr_0/m_axis_data
+ad_connect tx_upack/s_axis_valid axi_opv4upr_0/m_axis_valid
+ad_connect tx_upack/s_axis_ready axi_opv4upr_0/m_axis_ready
+
+ad_connect axi_ad9361/l_clk axi_opv4upr_0/clk
+ad_connect logic_or_1/Res axi_opv4upr_0/reset
+```
+
+
+Here are the final axi_opv4upr_ip.tcl commands. 
+
+```
+source ../../scripts/adi_env.tcl
+source $ad_hdl_dir/library/scripts/adi_ip_xilinx.tcl
+
+adi_ip_create axi_opv4upr
+
+adi_ip_files axi_opv4upr [list \
+	"axi_opv4upr.vhd"]
+
+# use this command if we have AXI lite for register controls
+#adi_ip_properties axi_opv4upr
+
+# use this command if we do not use AXI for register control
+adi_ip_properties_lite axi_opv4upr
+
+ipx::save_core [ipx::current_core]
+```
+
 
 
 
