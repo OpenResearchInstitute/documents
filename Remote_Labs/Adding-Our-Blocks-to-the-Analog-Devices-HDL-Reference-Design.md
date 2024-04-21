@@ -491,7 +491,7 @@ GENERIC_DEPS += axi_opv4upr.vhd
 
 XILINX_DEPS += axi_opv4upr_ip.tcl
 
-include ../../scripts/library.mk
+include ../scripts/library.mk
 ```
 
 Our (dummy or do-little) block source code is:
