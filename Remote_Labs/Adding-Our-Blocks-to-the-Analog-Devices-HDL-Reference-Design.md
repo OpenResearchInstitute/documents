@@ -726,6 +726,88 @@ sys	7m0.981s
 abraxas3d@chococat:~/documentation-friday/hdl/projects/pluto$ 
 ```
 
+### Updating the PLUTO Firmware with new HDL
+
+This is a Work log for PLUTO HDL modifications 
+
+source of instructions`https://wiki.analog.com/university/tools/pluto/devs/embedded_code`
+
+But! We had to get x86_64 instead of i686 version of the cross compiler, because we are on a 64 bit OS and not a 32 bit OS. 
+
+Set the path:
+
+`export PATH=/usr/local/bin/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin:$PATH`
+
+`arm-linux-gnueabihf-gcc -mfloat-abi=hard  --sysroot=$HOME/pluto-0.38.sysroot -std=gnu99 -g -o pluto_stream ad9361-iiostream.c -lpthread -liio -lm -Wall -Wextra``scp pluto_stream root@pluto.local:/tmp/pluto_stream`
+
+`ssh -t root@pluto.local /tmp/pluto_stream`
+
+Refer to the HDL Reference design project we modified with our custom IP above.
+
+```
+abraxas3d@keroppi:~/pluto-opv-transmitter/hdl/projects/pluto$ time make
+Building axi_tdd library [/home/abraxas3d/pluto-opv-transmitter/hdl/library/axi_tdd/axi_tdd_ip.log] ... OK
+Building util_cpack2 library [/home/abraxas3d/pluto-opv-transmitter/hdl/library/util_pack/util_cpack2/util_cpack2_ip.log] ... OK
+Building util_upack2 library [/home/abraxas3d/pluto-opv-transmitter/hdl/library/util_pack/util_upack2/util_upack2_ip.log] ... OK
+Building pluto project [/home/abraxas3d/pluto-opv-transmitter/hdl/projects/pluto/pluto_vivado.log] ... OK
+real	107m50.934s
+user	24m13.667s
+sys	13m49.347s
+```
+
+The plan was that once we updated bitfile and xsa that then we can update the firmware for Pluto.
+
+Get sources for firmware
+
+`git clone --recursive https://github.com/analogdevicesinc/plutosdr-fw.git`
+
+prerequisites - set vivado version
+
+`source /tools/Xilinx/Vivado/2022.2/settings64.sh`
+
+Set the environmental variables to point to the right places. Let's try 2022.2 with stock firmware first. This is the same version we used to make our custom IP.
+
+```
+export CROSS_COMPILE=arm-linux-gnueabihf-
+export PATH=$PATH:/tools/Xilinx/Vitis/2022.2/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin
+export VIVADO_SETTINGS=/tools/Xilinx/Vivado/2022.2/settings64.sh
+```
+
+Make "stock" firmware image. Type "make" in firmware directory.
+
+We had to sudo apt install libmpc-dev. It was a missing dependency.
+
+```
+legal-info/legal-info.sha256
+legal-info/buildroot.config
+rm linux/arch/arm/boot/dts/zynq-pluto-sdr-revc.dtb
+linux/arch/arm/boot/dts/zynq-pluto-sdr.dtb
+linux/arch/arm/boot/dts/zynq-pluto-sdr-revb.dtb
+real	228m11.127s
+user	67m39.744s
+sys	26m7.405s
+```
+
+Test stock firmware image.
+
+Next, get the xsa and bit files from our modified HDL reference design. This is an export from Vivado. 
+
+Travis writes:
+```
+The Makefile method does not expect you are using an HDF file generated externally. If you want to use it you will need to modify this stage: https://github.com/analogdevicesinc/plutosdr-fw/blob/master/Makefile#L135 to copy your prebuilt HDF into the relevant directory.
+
+If you do not understand Makefiles it would likely be easier to just follow the individual steps below the automated process. If you have already run the unchanged Makefile this would also be faster since you have the dependent pieces already.
+
+You just need to change the pluto.frm file. Follow from "Build FPGA Hardware Description File" through "Build Firmware FRM image".If it's not clear, the mkimage tool will consume zImage (the kernel), root.cpio.gz (userspace), and system_top.bit. This is your main entrypoint for your new bitstream.
+
+-Travis
+```
+
+The script calls out an hdf file, but support for that format from Xilinx was dropped long ago.
+
+So, we will try and use our xsa file instead of the hdf file.
+
+
 
 
 ## Appendix A: Modified TCL File
