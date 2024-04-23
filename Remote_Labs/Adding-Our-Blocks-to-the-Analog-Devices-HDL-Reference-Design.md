@@ -8,6 +8,8 @@
 
 >ORI 12 April 2024 Abraxas3d documented [how to integrate IP into PLUTO HDL Reference Design] (https://github.com/OpenResearchInstitute/documents/blob/master/Remote_Labs/Adding-Our-Blocks-to-the-Analog-Devices-HDL-Reference-Design.md#integrating-custom-ip-into-the-pluto-sdr-hdl-reference-design)
 
+>ORI 22 April 2024 Abraxas3d documented [Updating the PLUTO Firmware with New HDL] (https://github.com/OpenResearchInstitute/documents/blob/master/Remote_Labs/Adding-Our-Blocks-to-the-Analog-Devices-HDL-Reference-Design.md#updating-the-pluto-firmware-with-new-hdl)
+
 ## General Guidelines
 For new block integration to go smoothly, and in order to take advantage of the ADI-specific environment and build macros, it's recommend to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/blockname, where they are automatically picked up by the top level build, and editing the Makefile and blockname_ip.tcl in that directory along the lines as that presented in the following guide:
 https://wiki.analog.com/resources/fpga/docs/hdl/creating_new_ip_guide
