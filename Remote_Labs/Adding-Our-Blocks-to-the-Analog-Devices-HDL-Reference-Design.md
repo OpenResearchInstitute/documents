@@ -830,12 +830,16 @@ https://wiki.analog.com/university/tools/pluto/building_the_image
 
 #### Build FPGA Hardware Description File
 `source /opt/Xilinx/Vivado/2021.2/settings64.sh`
+
 `make -C hdl/projects/pluto`
+
 `cp hdl/projects/pluto/pluto.sdk/system_top.hdf build/system_top.hdf`
 
 #### Build FPGA First Stage Bootloader (FSBL)
 `source /opt/Xilinx/Vivado/2021.2/settings64.sh`
+
 `xsdk -batch -source scripts/create_fsbl_project.tcl`
+
 `cp build/sdk/hw_0/system_top.bit build/system_top.bit`
 
 #### Build multi component FIT image (Flattened Image Tree)
@@ -843,11 +847,14 @@ https://wiki.analog.com/university/tools/pluto/building_the_image
 
 #### Build Firmware DFU image
 `cp build/pluto.itb build/pluto.itb.tmp`
+
 `dfu-suffix -a build/pluto.itb.tmp -v 0x0456 -p 0xb673`
+
 `mv build/pluto.itb.tmp build/pluto.dfu`
 
 #### Build Firmware FRM image
 `md5sum build/pluto.itb | cut -d ' ' -f 1 > build/pluto.frm.md5`
+
 `cat build/pluto.itb build/pluto.frm.md5 > build/pluto.frm`
 
 
