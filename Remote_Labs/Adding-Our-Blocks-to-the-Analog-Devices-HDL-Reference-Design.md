@@ -742,7 +742,9 @@ Set the path:
 
 `export PATH=/usr/local/bin/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin:$PATH`
 
-`arm-linux-gnueabihf-gcc -mfloat-abi=hard  --sysroot=$HOME/pluto-0.38.sysroot -std=gnu99 -g -o pluto_stream ad9361-iiostream.c -lpthread -liio -lm -Wall -Wextra``scp pluto_stream root@pluto.local:/tmp/pluto_stream`
+`arm-linux-gnueabihf-gcc -mfloat-abi=hard  --sysroot=$HOME/pluto-0.38.sysroot -std=gnu99 -g -o pluto_stream ad9361-iiostream.c -lpthread -liio -lm -Wall -Wextra`
+
+`scp pluto_stream root@pluto.local:/tmp/pluto_stream`
 
 `ssh -t root@pluto.local /tmp/pluto_stream`
 
