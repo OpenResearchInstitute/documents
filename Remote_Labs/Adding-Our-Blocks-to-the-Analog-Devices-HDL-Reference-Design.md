@@ -857,7 +857,7 @@ https://wiki.analog.com/university/tools/pluto/building_the_image
 
 `cat build/pluto.itb build/pluto.frm.md5 > build/pluto.frm`
 
-
+Now that we have an updated pluto.frm file, we update the PLUTO SDR by moving the pluto.frm file to the device and install it with the update_frm.sh utility.
 
 
 ## Integrating Custom IP into the PLUTO SDR HDL Reference Design using Out of Tree Module Method
