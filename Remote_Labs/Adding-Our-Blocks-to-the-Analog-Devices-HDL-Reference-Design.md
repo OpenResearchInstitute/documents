@@ -798,18 +798,58 @@ Next, get the xsa and bit files from our modified HDL reference design. This is 
 
 Travis writes:
 ```
-The Makefile method does not expect you are using an HDF file generated externally. If you want to use it you will need to modify this stage: https://github.com/analogdevicesinc/plutosdr-fw/blob/master/Makefile#L135 to copy your prebuilt HDF into the relevant directory.
+The Makefile method does not expect you are using an HDF file generated externally. 
+If you want to use it you will need to modify this stage: 
+https://github.com/analogdevicesinc/plutosdr-fw/blob/master/Makefile#L135 
+to copy your prebuilt HDF into the relevant directory.
 
-If you do not understand Makefiles it would likely be easier to just follow the individual steps below the automated process. If you have already run the unchanged Makefile this would also be faster since you have the dependent pieces already.
+If you do not understand Makefiles it would likely be easier to just follow the 
+individual steps below the automated process. If you have already run the 
+unchanged Makefile this would also be faster since you have the dependent pieces already.
 
-You just need to change the pluto.frm file. Follow from "Build FPGA Hardware Description File" through "Build Firmware FRM image".If it's not clear, the mkimage tool will consume zImage (the kernel), root.cpio.gz (userspace), and system_top.bit. This is your main entrypoint for your new bitstream.
+You just need to change the pluto.frm file. Follow from 
+"Build FPGA Hardware Description File" through "Build Firmware FRM image".
+
+If it's not clear, the mkimage tool will consume zImage (the kernel), 
+root.cpio.gz (userspace), and system_top.bit. 
+This is your main entrypoint for your new bitstream.
 
 -Travis
 ```
 
 The script calls out an hdf file, but support for that format from Xilinx was dropped long ago.
 
-So, we will try and use our xsa file instead of the hdf file.
+So, we will try and use our xsa file instead of the hdf file. 
+
+The steps Travis is referring to are on this page:
+
+https://wiki.analog.com/university/tools/pluto/building_the_image
+
+
+#### Build FPGA Hardware Description File
+source /opt/Xilinx/Vivado/2021.2/settings64.sh
+make -C hdl/projects/pluto
+cp hdl/projects/pluto/pluto.sdk/system_top.hdf build/system_top.hdf
+
+#### Build FPGA First Stage Bootloader (FSBL)
+source /opt/Xilinx/Vivado/2021.2/settings64.sh
+xsdk -batch -source scripts/create_fsbl_project.tcl
+cp build/sdk/hw_0/system_top.bit build/system_top.bit
+
+#### Build multi component FIT image (Flattened Image Tree)
+u-boot-xlnx/tools/mkimage -f scripts/pluto.its build/pluto.itb
+
+#### Build Firmware DFU image
+cp build/pluto.itb build/pluto.itb.tmp
+dfu-suffix -a build/pluto.itb.tmp -v 0x0456 -p 0xb673
+mv build/pluto.itb.tmp build/pluto.dfu
+
+#### Build Firmware FRM image
+md5sum build/pluto.itb | cut -d ' ' -f 1 > build/pluto.frm.md5
+cat build/pluto.itb build/pluto.frm.md5 > build/pluto.frm
+
+
+
 
 ## Integrating Custom IP into the PLUTO SDR HDL Reference Design using Out of Tree Module Method
 Here is a set of instructions for getting this minimum shift keying (MSK) transceiver implementation to work on a PLUTO SDR using an out of tree module approach. The pluto_msk repository is an example of this method. 
