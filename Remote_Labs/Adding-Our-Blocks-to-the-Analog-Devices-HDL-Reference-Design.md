@@ -10,8 +10,8 @@
 
 >ORI 22 April 2024 Abraxas3d documented [Updating the PLUTO Firmware with New HDL](https://github.com/OpenResearchInstitute/documents/blob/master/Remote_Labs/Adding-Our-Blocks-to-the-Analog-Devices-HDL-Reference-Design.md#updating-the-pluto-firmware-with-new-hdl)
 
-## General Guidelines
-For new block integration to go smoothly, and in order to take advantage of the ADI-specific environment and build macros, it's recommend to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/blockname, where they are automatically picked up by the top level build, and editing the Makefile and blockname_ip.tcl in that directory along the lines as that presented in the following guide:
+## Library Block Method
+In order to take advantage of the ADI-specific environment and build macros, one way to integrate IP into the HDL Reference Design is to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/blockname, where they are automatically picked up by the top level build, and editing the Makefile and blockname_ip.tcl in that directory along the lines as that presented in the following guide:
 https://wiki.analog.com/resources/fpga/docs/hdl/creating_new_ip_guide
 
 ## Files that Need to be Modified
@@ -156,7 +156,7 @@ https://wiki.analog.com/resources/fpga/docs/hdl/porting_project_quick_start_guid
 
 We aren't "porting" a reference design to a new fpga dev board, but we are modifying the radio card dev board file - in our case, the adrv9009_bd.tcl 
 
-## Integrating Custom IP into the PLUTO SDR HDL Reference Design
+## Integrating Custom IP into the PLUTO SDR HDL Reference Design using Library Block Method
 ### Steps Required to add the Opulent Voice Transmitter and Receiver Blocks
 #### Setting up the HDL Reference Design for Editing
 
@@ -809,6 +809,67 @@ The script calls out an hdf file, but support for that format from Xilinx was dr
 
 So, we will try and use our xsa file instead of the hdf file.
 
+## Integrating Custom IP into the PLUTO SDR HDL Reference Design using Out of Tree Module Method
+Here is a set of instructions for getting this minimum shift keying (MSK) transceiver implementation to work on a PLUTO SDR using an out of tree module approach. The pluto_msk repository is an example of this method. 
+
+Clone the pluto_msk repository.
+
+```
+git clone --recursive https://github.com/OpenResearchInstitute/pluto_msk.git
+```
+
+The repository should clone to the latest stable PLUTO firmware release commit. Here is an example of how to change to another branch of the hdl reference design. hdl_2022_r2 was used for VHDL development. Don't change branches of hdl unless you have to.
+
+```
+/pluto_msk/hdl$ git checkout hdl_2022_r2 
+Previous HEAD position was 1978df298 axi_dac_interpolate: Improve the ctrl logic
+branch 'hdl_2022_r2' set up to track 'origin/hdl_2022_r2'.
+Switched to a new branch 'hdl_2022_r2'
+```
+
+If you are working on ORI virtual machine, then source the version of Vivado needed as follows. 
+
+```$ source /tools/Xilinx/Vivado/2022.2/settings.sh```
+
+You can check which version of Vivado is currently being used as follows. 
+
+```
+$ which vivado
+/tools/Xilinx/Vivado/2022.2/bin/vivado
+```
+Change directories to the PLUTO project directory and run make. 
+
+```
+/hdl/projects/pluto$ make
+```
+A useful log file for information, warnings, and errors is pluto_vivado.log
+
+This repository is organized as an out of tree module. The source files do not have to be installed in the /library directory. What we do instead is to expand the number of places that Vivado looks for the information needed to build the modules. 
+
+Key lines in system_bd.tcl are:
+
+https://github.com/OpenResearchInstitute/pluto_msk/blob/942aa516f8cc30af73a5a0c9ce3f8266012989e8/projects/pluto/system_bd.tcl#L7-19
+
+```
+set_property ip_repo_paths [list $ad_hdl_dir/library ../../library]  [current_fileset]
+update_ip_catalog
+```
+The ip_repo_paths property lets us create a custom IP catalog for use with Vivado. It defines the path to one or more directories containing user-defined intellectual property (IP), like our blocks. The specified directories, and any sub-directories, are searched for files to add to the Vivado IP catalog. The property is assigned to the current fileset of the current project. 
+
+ip_repo_paths will look for a <component>.xml file, where <component> is the name of the IP to add to the catalog. This XML file lists the files that define the module. Subdirectories are searched through. We don't have to list out each individual module's <component>.xml.
+
+Where does our component.xml file come from? It's create by the msk_top_ip.tcl file. A version can be found here:
+https://github.com/OpenResearchInstitute/pluto_msk/blob/main/library/msk_top_ip.tcl
+
+Setting the ip_repo_paths property needs to be followed by update_ip_catalog. 
+
+Example syntax:
+
+```
+set_property IP_REPO_PATHS {c:/Data/Designs C:/myIP} [current_fileset]
+update_ip_catalog
+```
+Running make in the project directory should be all that one has to do in order to build the HDL reference design with custom IP. 
 
 
 
