@@ -857,7 +857,383 @@ https://wiki.analog.com/university/tools/pluto/building_the_image
 
 `cat build/pluto.itb build/pluto.frm.md5 > build/pluto.frm`
 
-Now that we have an updated pluto.frm file, we update the PLUTO SDR by moving the pluto.frm file to the device and install it with the update_frm.sh utility.
+### Example of Modifying the PLUTO Firmware with New XSA and BIT Files
+
+git clone --recursive https://github.com/analogdevicesinc/plutosdr-fw.git
+
+cd plutosdr-fw
+
+abraxas3d@chococat:~/plutosdr-fw$ grep -i REQUIRED_VIVADO_VERSION $(find ./ -name "adi*.tcl") | grep set
+./hdl/scripts/adi_env.tcl:set required_vivado_version "2022.2"
+./hdl/scripts/adi_env.tcl:  set required_vivado_version $::env(REQUIRED_VIVADO_VERSION)
+./hdl/scripts/adi_env.tcl:  set required_vivado_version $REQUIRED_VIVADO_VERSION
+
+abraxas3d@chococat:~/plutosdr-fw$ find /tools/Xilinx/ -name vivado -executable -type f | xargs file | grep ELF
+find: ‘/tools/Xilinx/Vitis/2020.2/data/emulation/qemu/unified_qemu_v5_0/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
+find: ‘/tools/Xilinx/Vitis/2020.1/data/emulation/qemu/zynq/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
+find: ‘/tools/Xilinx/Vitis/2020.1/data/emulation/qemu/versal/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
+find: ‘/tools/Xilinx/Vitis/2020.1/data/emulation/qemu/unified_qemu/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
+find: ‘/tools/Xilinx/Vitis/2020.1/data/emulation/qemu/unified_qemu_v4_2/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
+
+CTRL+C out of that
+
+make sure /usr/local/bin has gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf
+If not, then download it from releases.linaro.org and expand.
+
+/usr/local/bin$ sudo tar -xf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz
+
+abraxas3d@chococat:~/plutosdr-fw$ export PATH=/usr/local/bin/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin:$PATH
+
+abraxas3d@chococat:~/plutosdr-fw$ export CROSS_COMPILE=arm-linux-gnueabihf-
+abraxas3d@chococat:~/plutosdr-fw$ PATH=$PATH:/tools/Xilinx/Vitis/2022.2/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin
+abraxas3d@chococat:~/plutosdr-fw$ VIVADO_SETTINGS=/tools/Xilinx/Vivado/2022.2/settings64.sh
+
+confirm compiler version in path:
+
+abraxas3d@chococat:~/plutosdr-fw$ arm-linux-gnueabihf-gcc --version
+arm-linux-gnueabihf-gcc (Linaro GCC 7.2-2017.11) 7.2.1 20171011
+Copyright © 2017 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Got the sysroot downloaded and we know where it is.
+
+run make
+
+ Finished prerequisites of target file 'all'.
+Must remake target 'all'.
+Successfully remade target file 'all'.
+Removing intermediate files...
+rm linux/arch/arm/boot/dts/zynq-pluto-sdr-revc.dtb linux/arch/arm/boot/dts/zynq-pluto-sdr.dtb linux/arch/arm/boot/dts/zynq-pluto-sdr-revb.dtb
+
+real	168m19.600s
+user	75m17.146s
+sys	22m20.636s
+
+
+abraxas3d@chococat:~/plutosdr-fw/build$ ls -l
+total 547924
+-rw-rw-r-- 1 abraxas3d abraxas3d       294 Jul 23 04:24 aie_primitive.json
+-rw-rw-r-- 1 abraxas3d abraxas3d        69 Jul 23 04:42 boot.bif
+-rw-rw-r-- 1 abraxas3d abraxas3d    454388 Jul 23 04:42 boot.bin
+-rw-rw-r-- 1 abraxas3d abraxas3d    454404 Jul 23 04:42 boot.dfu
+-rw-rw-r-- 1 abraxas3d abraxas3d    586517 Jul 23 04:42 boot.frm
+-rw-rw-r-- 1 abraxas3d abraxas3d 481737035 Jul 23 04:43 legal-info-v0.38-1-g4b42.tar.gz
+-rw-rw-r-- 1 abraxas3d abraxas3d    651338 Jul 23 02:00 LICENSE.html
+-rw-rw-r-- 1 abraxas3d abraxas3d  12113203 Jul 23 04:42 pluto.dfu
+-rw-rw-r-- 1 abraxas3d abraxas3d  12113220 Jul 23 04:42 pluto.frm
+-rw-rw-r-- 1 abraxas3d abraxas3d        33 Jul 23 04:42 pluto.frm.md5
+-rw-rw-r-- 1 abraxas3d abraxas3d  12113187 Jul 23 04:42 pluto.itb
+-rw-rw-r-- 1 abraxas3d abraxas3d  23279251 Jul 23 04:42 plutosdr-fw-v0.38-1-g4b42.zip
+-rw-rw-r-- 1 abraxas3d abraxas3d    606580 Jul 23 04:42 plutosdr-jtag-bootstrap-v0.38-1-g4b42.zip
+-rw-rw-r-- 1 abraxas3d abraxas3d    451111 Jul 23 04:24 ps7_init.c
+-rw-rw-r-- 1 abraxas3d abraxas3d    451715 Jul 23 04:24 ps7_init_gpl.c
+-rw-rw-r-- 1 abraxas3d abraxas3d      4283 Jul 23 04:24 ps7_init_gpl.h
+-rw-rw-r-- 1 abraxas3d abraxas3d      3679 Jul 23 04:24 ps7_init.h
+-rw-rw-r-- 1 abraxas3d abraxas3d   2428124 Jul 23 04:24 ps7_init.html
+-rw-rw-r-- 1 abraxas3d abraxas3d     31486 Jul 23 04:24 ps7_init.tcl
+-rw-r--r-- 1 abraxas3d abraxas3d   6645745 Jul 23 02:08 rootfs.cpio.gz
+drwxrwxr-x 6 abraxas3d abraxas3d      4096 Jul 23 04:27 sdk
+-rw-rw-r-- 1 abraxas3d abraxas3d    964428 Jul 23 04:24 system_top.bit
+-rw-rw-r-- 1 abraxas3d abraxas3d    749946 Jul 23 04:23 system_top.xsa
+-rwxrwxr-x 1 abraxas3d abraxas3d    449440 Jul 23 04:42 u-boot.elf
+-rw-rw---- 1 abraxas3d abraxas3d    131072 Jul 23 04:42 uboot-env.bin
+-rw-rw---- 1 abraxas3d abraxas3d    131088 Jul 23 04:42 uboot-env.dfu
+-rw-rw-r-- 1 abraxas3d abraxas3d      7066 Jul 23 04:42 uboot-env.txt
+-rwxrwxr-x 1 abraxas3d abraxas3d   4430768 Jul 23 01:58 zImage
+-rw-rw-r-- 1 abraxas3d abraxas3d     22143 Jul 23 02:08 zynq-pluto-sdr.dtb
+-rw-rw-r-- 1 abraxas3d abraxas3d     22219 Jul 23 02:08 zynq-pluto-sdr-revb.dtb
+-rw-rw-r-- 1 abraxas3d abraxas3d     24014 Jul 23 02:09 zynq-pluto-sdr-revc.dtb
+
+
+There's a script that lets us test firmware in ramboot. 
+
+abraxas3d@chococat:~$ git clone https://github.com/analogdevicesinc/plutosdr_scripts
+Cloning into 'plutosdr_scripts'...
+remote: Enumerating objects: 1883, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 1883 (delta 2), reused 7 (delta 2), pack-reused 1873
+Receiving objects: 100% (1883/1883), 1.78 MiB | 5.32 MiB/s, done.
+Resolving deltas: 100% (1353/1353), done.
+
+
+The pluto needs to be in DFU mode to run this script. 
+
+Here is how you do that.
+
+abraxas3d@keroppi:~$ ssh root@pluto.local
+root@pluto.local's password:
+Welcome to:
+______ _       _        _________________
+| ___ \ |     | |      /  ___|  _  \ ___ \
+| |_/ / |_   _| |_ ___ \ `--.| | | | |_/ /
+|  __/| | | | | __/ _ \ `--. \ | | |    /
+| |   | | |_| | || (_) /\__/ / |/ /| |\ \
+\_|   |_|\__,_|\__\___/\____/|___/ \_| \_|v0.34
+https://wiki.analog.com/university/tools/pluto
+# pluto_reboot ram
+#
+
+Now, run the script to boot an image in RAM, to test without making permanent changes. 
+
+abraxas3d@keroppi:/big/abraxas3d/plutosdr-fw-stock$ sudo ~/plutosdr_scripts/pluto_ramboot
+Found Pluto SDR in dfu mode and downloading ./build/pluto.dfu
+successfully downloaded
+
+Copy over our streaming example and run it to prove the build image works with IIO. 
+
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ scp pluto_stream root@pluto.local:/tmp/pluto_stream
+root@pluto.local's password:
+pluto_stream                                                                                                                      100%   26KB   6.5MB/s   00:00
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ ssh -t root@pluto.local /tmp/pluto_stream
+root@pluto.local's password:
+* Acquiring IIO context
+* Acquiring AD9361 streaming devices
+* Configuring AD9361 for streaming
+* Acquiring AD9361 phy channel 0
+* Acquiring AD9361 RX lo channel
+* Acquiring AD9361 phy channel 0
+* Acquiring AD9361 TX lo channel
+* Initializing AD9361 IIO streaming channels
+* Enabling IIO streaming channels
+* Creating non-cyclic IIO buffers with 1 MiS
+* Starting IO streaming (press CTRL+C to cancel)
+	RX     1.05 MSmp, TX     1.05 MSmp
+	RX     2.10 MSmp, TX     2.10 MSmp
+	RX     3.15 MSmp, TX     3.15 MSmp
+	RX     4.19 MSmp, TX     4.19 MSmp
+	RX     5.24 MSmp, TX     5.24 MSmp
+^CWaiting for process to finish... Got signal 2
+	RX     6.29 MSmp, TX     6.29 MSmp
+* Destroying buffers
+* Disabling streaming channels
+* Destroying context
+Connection to pluto.local closed.
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$
+
+
+Build FPGA Hardware Description File
+
+abraxas3d@chococat:~/plutosdr-fw$ source /tools/Xilinx/Vivado/2022.2/settings64.sh
+abraxas3d@chococat:~/plutosdr-fw$ which vivado
+/tools/Xilinx/Vivado/2022.2/bin/vivado
+abraxas3d@chococat:~/plutosdr-fw$ cp ~/documentation-friday3/pluto_msk/projects/pluto/pluto.sdk/system_top.xsa build/system_top.xsa
+
+Build FPGA First Stage Bootloader (FSBL)
+
+xsdk -batch -source scripts/create_fsbl_project.tcl (did not find xsdk)
+abraxas3d@chococat:~/plutosdr-fw$ cp ~/documentation-friday3/pluto_msk/projects/pluto/pluto.runs/impl_1/system_top.bit build/system_top.bit
+
+Build Multicomponent Flattened Image Tree
+
+u-boot-xlnx/tools/mkimage -f scripts/pluto.its build/pluto.itb
+
+abraxas3d@chococat:~/plutosdr-fw$ u-boot-xlnx/tools/mkimage -f scripts/pluto.its build/pluto.itb
+scripts/pluto.its:18.9-24.5: Warning (unit_address_vs_reg): /images/fdt@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:26.9-32.5: Warning (unit_address_vs_reg): /images/fdt@2: node has a unit name, but no reg or ranges property
+scripts/pluto.its:34.9-40.5: Warning (unit_address_vs_reg): /images/fdt@3: node has a unit name, but no reg or ranges property
+scripts/pluto.its:42.10-52.5: Warning (unit_address_vs_reg): /images/fpga@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:49.11-51.6: Warning (unit_address_vs_reg): /images/fpga@1/hash@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:54.18-66.5: Warning (unit_address_vs_reg): /images/linux_kernel@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:63.11-65.6: Warning (unit_address_vs_reg): /images/linux_kernel@1/hash@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:67.13-77.5: Warning (unit_address_vs_reg): /images/ramdisk@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:74.11-76.6: Warning (unit_address_vs_reg): /images/ramdisk@1/hash@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:83.12-89.5: Warning (unit_address_vs_reg): /configurations/config@0: node has a unit name, but no reg or ranges property
+scripts/pluto.its:93.12-99.5: Warning (unit_address_vs_reg): /configurations/config@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:101.12-107.5: Warning (unit_address_vs_reg): /configurations/config@2: node has a unit name, but no reg or ranges property
+scripts/pluto.its:109.12-115.5: Warning (unit_address_vs_reg): /configurations/config@3: node has a unit name, but no reg or ranges property
+scripts/pluto.its:117.12-123.5: Warning (unit_address_vs_reg): /configurations/config@4: node has a unit name, but no reg or ranges property
+scripts/pluto.its:125.12-131.5: Warning (unit_address_vs_reg): /configurations/config@5: node has a unit name, but no reg or ranges property
+scripts/pluto.its:133.12-139.5: Warning (unit_address_vs_reg): /configurations/config@6: node has a unit name, but no reg or ranges property
+scripts/pluto.its:142.12-148.5: Warning (unit_address_vs_reg): /configurations/config@7: node has a unit name, but no reg or ranges property
+scripts/pluto.its:150.12-156.5: Warning (unit_address_vs_reg): /configurations/config@8: node has a unit name, but no reg or ranges property
+scripts/pluto.its:158.12-164.5: Warning (unit_address_vs_reg): /configurations/config@9: node has a unit name, but no reg or ranges property
+scripts/pluto.its:166.13-172.5: Warning (unit_address_vs_reg): /configurations/config@10: node has a unit name, but no reg or ranges property
+FIT description: Configuration to load fpga before Kernel
+Created:         Tue Jul 23 14:41:05 2024
+ Image 0 (fdt@1)
+  Description:  zynq-pluto-sdr
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    22143 Bytes = 21.62 kB = 0.02 MB
+  Architecture: ARM
+ Image 1 (fdt@2)
+  Description:  zynq-pluto-sdr-revb
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    22219 Bytes = 21.70 kB = 0.02 MB
+  Architecture: ARM
+ Image 2 (fdt@3)
+  Description:  zynq-pluto-sdr-revc
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    24014 Bytes = 23.45 kB = 0.02 MB
+  Architecture: ARM
+ Image 3 (fpga@1)
+  Description:  FPGA
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         FPGA Image
+  Compression:  uncompressed
+  Data Size:    1012512 Bytes = 988.78 kB = 0.97 MB
+  Load Address: 0x0f000000
+  Hash algo:    md5
+  Hash value:   0ebccbe34b52f21fd8ef627f4c015929
+ Image 4 (linux_kernel@1)
+  Description:  Linux
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         Kernel Image
+  Compression:  uncompressed
+  Data Size:    4430768 Bytes = 4326.92 kB = 4.23 MB
+  Architecture: ARM
+  OS:           Linux
+  Load Address: 0x00008000
+  Entry Point:  0x00008000
+  Hash algo:    md5
+  Hash value:   e3dd26f2186b69b4dacf757361a01baa
+ Image 5 (ramdisk@1)
+  Description:  Ramdisk
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         RAMDisk Image
+  Compression:  gzip compressed
+  Data Size:    6645745 Bytes = 6489.99 kB = 6.34 MB
+  Architecture: ARM
+  OS:           Linux
+  Load Address: unavailable
+  Entry Point:  unavailable
+  Hash algo:    md5
+  Hash value:   67d18bb09033f217aa4dad08b6815e47
+ Default Configuration: 'config@0'
+ Configuration 0 (config@0)
+  Description:  Linux with fpga RevA
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@1
+  FPGA:         fpga@1
+ Configuration 1 (config@1)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 2 (config@2)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 3 (config@3)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 4 (config@4)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 5 (config@5)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 6 (config@6)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 7 (config@7)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 8 (config@8)
+  Description:  Linux with fpga RevC
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@3
+  FPGA:         fpga@1
+ Configuration 9 (config@9)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 10 (config@10)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+abraxas3d@chococat:~/plutosdr-fw$ 
+
+Build Firmware DFU Image
+
+cp build/pluto.itb build/pluto.itb.tmp
+
+abraxas3d@chococat:~/plutosdr-fw$ cp build/pluto.itb build/pluto.itb.tmp
+abraxas3d@chococat:~/plutosdr-fw$ dfu-suffix -a build/pluto.itb.tmp -v 0x0456 -p 0xb673
+dfu-suffix (dfu-util) 0.9
+
+Copyright 2011-2012 Stefan Schmidt, 2013-2014 Tormod Volden
+This program is Free Software and has ABSOLUTELY NO WARRANTY
+Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+Suffix successfully added to file
+
+abraxas3d@chococat:~/plutosdr-fw$ mv build/pluto.itb.tmp build/pluto.dfu
+abraxas3d@chococat:~/plutosdr-fw$ 
+
+Build Firmware FRM Image
+
+abraxas3d@chococat:~/plutosdr-fw$ md5sum build/pluto.itb | cut -d ' ' -f 1 > build/pluto.frm.md5
+abraxas3d@chococat:~/plutosdr-fw$ cat build/pluto.itb build/pluto.frm.md5 > build/pluto.frm
+abraxas3d@chococat:~/plutosdr-fw$ 
+
+Build artifacts were copied over to keroppi so that the PLUTO SDR could be used.
+
+abraxas3d@keroppi:/big/abraxas3d/plutosdr-fw-opv$ sudo ~/plutosdr_scripts/pluto_ramboot
+Found Pluto SDR in dfu mode and downloading ./build/pluto.dfu
+successfully downloaded
+
+PLUTO Rebooted
+
+stream example copied over and ran
+
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ scp pluto_stream root@pluto.local:/tmp/pluto_stream
+root@pluto.local's password:
+pluto_stream                                                                                                                      100%   26KB   7.1MB/s   00:00
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ ssh -t root@pluto.local /tmp/pluto_stream
+root@pluto.local's password:
+* Acquiring IIO context
+* Acquiring AD9361 streaming devices
+* Configuring AD9361 for streaming
+* Acquiring AD9361 phy channel 0
+* Acquiring AD9361 RX lo channel
+* Acquiring AD9361 phy channel 0
+* Acquiring AD9361 TX lo channel
+* Initializing AD9361 IIO streaming channels
+* Enabling IIO streaming channels
+* Creating non-cyclic IIO buffers with 1 MiS
+* Starting IO streaming (press CTRL+C to cancel)
+Error refilling buf -110
+* Destroying buffers
+* Disabling streaming channels
+* Destroying context
+Connection to pluto.local closed.
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$
+
+This means that the process works and that the new firmware works as expected. 
+
+Now that we have an updated pluto.frm file, and we're confident about our image using the ramboot feature, we can update the PLUTO SDR by moving the pluto.frm file to the device and install it with the update_frm.sh utility.
 
 
 ## Integrating Custom IP into the PLUTO SDR HDL Reference Design using Out of Tree Module Method
