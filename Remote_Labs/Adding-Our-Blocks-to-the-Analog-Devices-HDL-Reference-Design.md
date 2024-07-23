@@ -859,58 +859,59 @@ https://wiki.analog.com/university/tools/pluto/building_the_image
 
 ### Example of Modifying the PLUTO Firmware with New XSA and BIT Files
 
-git clone --recursive https://github.com/analogdevicesinc/plutosdr-fw.git
+`git clone --recursive https://github.com/analogdevicesinc/plutosdr-fw.git`
 
-cd plutosdr-fw
+`cd plutosdr-fw`
 
+```
 abraxas3d@chococat:~/plutosdr-fw$ grep -i REQUIRED_VIVADO_VERSION $(find ./ -name "adi*.tcl") | grep set
 ./hdl/scripts/adi_env.tcl:set required_vivado_version "2022.2"
 ./hdl/scripts/adi_env.tcl:  set required_vivado_version $::env(REQUIRED_VIVADO_VERSION)
 ./hdl/scripts/adi_env.tcl:  set required_vivado_version $REQUIRED_VIVADO_VERSION
-
-abraxas3d@chococat:~/plutosdr-fw$ find /tools/Xilinx/ -name vivado -executable -type f | xargs file | grep ELF
-find: ‘/tools/Xilinx/Vitis/2020.2/data/emulation/qemu/unified_qemu_v5_0/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
-find: ‘/tools/Xilinx/Vitis/2020.1/data/emulation/qemu/zynq/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
-find: ‘/tools/Xilinx/Vitis/2020.1/data/emulation/qemu/versal/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
-find: ‘/tools/Xilinx/Vitis/2020.1/data/emulation/qemu/unified_qemu/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
-find: ‘/tools/Xilinx/Vitis/2020.1/data/emulation/qemu/unified_qemu_v4_2/sysroots/aarch64-xilinx-linux/home/root’: Permission denied
-
-CTRL+C out of that
+```
 
 make sure /usr/local/bin has gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf
 If not, then download it from releases.linaro.org and expand.
 
-/usr/local/bin$ sudo tar -xf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz
+`/usr/local/bin$ sudo tar -xf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz`
 
-abraxas3d@chococat:~/plutosdr-fw$ export PATH=/usr/local/bin/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin:$PATH
+`abraxas3d@chococat:~/plutosdr-fw$ export PATH=/usr/local/bin/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin:$PATH`
 
+```
 abraxas3d@chococat:~/plutosdr-fw$ export CROSS_COMPILE=arm-linux-gnueabihf-
 abraxas3d@chococat:~/plutosdr-fw$ PATH=$PATH:/tools/Xilinx/Vitis/2022.2/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin
 abraxas3d@chococat:~/plutosdr-fw$ VIVADO_SETTINGS=/tools/Xilinx/Vivado/2022.2/settings64.sh
+```
 
 confirm compiler version in path:
 
+```
 abraxas3d@chococat:~/plutosdr-fw$ arm-linux-gnueabihf-gcc --version
 arm-linux-gnueabihf-gcc (Linaro GCC 7.2-2017.11) 7.2.1 20171011
 Copyright © 2017 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
 
 Got the sysroot downloaded and we know where it is.
 
 run make
 
- Finished prerequisites of target file 'all'.
+```
+Finished prerequisites of target file 'all'.
 Must remake target 'all'.
 Successfully remade target file 'all'.
 Removing intermediate files...
 rm linux/arch/arm/boot/dts/zynq-pluto-sdr-revc.dtb linux/arch/arm/boot/dts/zynq-pluto-sdr.dtb linux/arch/arm/boot/dts/zynq-pluto-sdr-revb.dtb
+```
 
 real	168m19.600s
 user	75m17.146s
 sys	22m20.636s
 
+What do we have in the build directory?
 
+```
 abraxas3d@chococat:~/plutosdr-fw/build$ ls -l
 total 547924
 -rw-rw-r-- 1 abraxas3d abraxas3d       294 Jul 23 04:24 aie_primitive.json
@@ -944,10 +945,13 @@ drwxrwxr-x 6 abraxas3d abraxas3d      4096 Jul 23 04:27 sdk
 -rw-rw-r-- 1 abraxas3d abraxas3d     22143 Jul 23 02:08 zynq-pluto-sdr.dtb
 -rw-rw-r-- 1 abraxas3d abraxas3d     22219 Jul 23 02:08 zynq-pluto-sdr-revb.dtb
 -rw-rw-r-- 1 abraxas3d abraxas3d     24014 Jul 23 02:09 zynq-pluto-sdr-revc.dtb
+```
 
+Ok looks good so far.
 
 There's a script that lets us test firmware in ramboot. 
 
+```
 abraxas3d@chococat:~$ git clone https://github.com/analogdevicesinc/plutosdr_scripts
 Cloning into 'plutosdr_scripts'...
 remote: Enumerating objects: 1883, done.
@@ -956,12 +960,13 @@ remote: Compressing objects: 100% (8/8), done.
 remote: Total 1883 (delta 2), reused 7 (delta 2), pack-reused 1873
 Receiving objects: 100% (1883/1883), 1.78 MiB | 5.32 MiB/s, done.
 Resolving deltas: 100% (1353/1353), done.
+```
 
-
-The pluto needs to be in DFU mode to run this script. 
+Note! The pluto needs to be in DFU mode to run this script. 
 
 Here is how you do that.
 
+```
 abraxas3d@keroppi:~$ ssh root@pluto.local
 root@pluto.local's password:
 Welcome to:
@@ -974,15 +979,19 @@ ______ _       _        _________________
 https://wiki.analog.com/university/tools/pluto
 # pluto_reboot ram
 #
+```
 
 Now, run the script to boot an image in RAM, to test without making permanent changes. 
 
+```
 abraxas3d@keroppi:/big/abraxas3d/plutosdr-fw-stock$ sudo ~/plutosdr_scripts/pluto_ramboot
 Found Pluto SDR in dfu mode and downloading ./build/pluto.dfu
 successfully downloaded
+```
 
 Copy over our streaming example and run it to prove the build image works with IIO. 
 
+```
 abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ scp pluto_stream root@pluto.local:/tmp/pluto_stream
 root@pluto.local's password:
 pluto_stream                                                                                                                      100%   26KB   6.5MB/s   00:00
@@ -1011,24 +1020,32 @@ root@pluto.local's password:
 * Destroying context
 Connection to pluto.local closed.
 abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$
-
+```
 
 Build FPGA Hardware Description File
 
+```
 abraxas3d@chococat:~/plutosdr-fw$ source /tools/Xilinx/Vivado/2022.2/settings64.sh
 abraxas3d@chococat:~/plutosdr-fw$ which vivado
 /tools/Xilinx/Vivado/2022.2/bin/vivado
 abraxas3d@chococat:~/plutosdr-fw$ cp ~/documentation-friday3/pluto_msk/projects/pluto/pluto.sdk/system_top.xsa build/system_top.xsa
+```
 
 Build FPGA First Stage Bootloader (FSBL)
 
-xsdk -batch -source scripts/create_fsbl_project.tcl (did not find xsdk)
+`xsdk -batch -source scripts/create_fsbl_project.tcl`
+
+(did not find xsdk!)
+
+```
 abraxas3d@chococat:~/plutosdr-fw$ cp ~/documentation-friday3/pluto_msk/projects/pluto/pluto.runs/impl_1/system_top.bit build/system_top.bit
+```
 
 Build Multicomponent Flattened Image Tree
 
-u-boot-xlnx/tools/mkimage -f scripts/pluto.its build/pluto.itb
+`u-boot-xlnx/tools/mkimage -f scripts/pluto.its build/pluto.itb`
 
+```
 abraxas3d@chococat:~/plutosdr-fw$ u-boot-xlnx/tools/mkimage -f scripts/pluto.its build/pluto.itb
 scripts/pluto.its:18.9-24.5: Warning (unit_address_vs_reg): /images/fdt@1: node has a unit name, but no reg or ranges property
 scripts/pluto.its:26.9-32.5: Warning (unit_address_vs_reg): /images/fdt@2: node has a unit name, but no reg or ranges property
@@ -1174,11 +1191,13 @@ Created:         Tue Jul 23 14:41:05 2024
   FDT:          fdt@2
   FPGA:         fpga@1
 abraxas3d@chococat:~/plutosdr-fw$ 
+```
 
 Build Firmware DFU Image
 
-cp build/pluto.itb build/pluto.itb.tmp
+`cp build/pluto.itb build/pluto.itb.tmp`
 
+```
 abraxas3d@chococat:~/plutosdr-fw$ cp build/pluto.itb build/pluto.itb.tmp
 abraxas3d@chococat:~/plutosdr-fw$ dfu-suffix -a build/pluto.itb.tmp -v 0x0456 -p 0xb673
 dfu-suffix (dfu-util) 0.9
@@ -1188,26 +1207,30 @@ This program is Free Software and has ABSOLUTELY NO WARRANTY
 Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
 
 Suffix successfully added to file
+```
 
-abraxas3d@chococat:~/plutosdr-fw$ mv build/pluto.itb.tmp build/pluto.dfu
-abraxas3d@chococat:~/plutosdr-fw$ 
+`abraxas3d@chococat:~/plutosdr-fw$ mv build/pluto.itb.tmp build/pluto.dfu`
 
 Build Firmware FRM Image
 
+```
 abraxas3d@chococat:~/plutosdr-fw$ md5sum build/pluto.itb | cut -d ' ' -f 1 > build/pluto.frm.md5
 abraxas3d@chococat:~/plutosdr-fw$ cat build/pluto.itb build/pluto.frm.md5 > build/pluto.frm
-abraxas3d@chococat:~/plutosdr-fw$ 
+```
 
 Build artifacts were copied over to keroppi so that the PLUTO SDR could be used.
 
+```
 abraxas3d@keroppi:/big/abraxas3d/plutosdr-fw-opv$ sudo ~/plutosdr_scripts/pluto_ramboot
 Found Pluto SDR in dfu mode and downloading ./build/pluto.dfu
 successfully downloaded
+```
 
 PLUTO Rebooted
 
 stream example copied over and ran
 
+```
 abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ scp pluto_stream root@pluto.local:/tmp/pluto_stream
 root@pluto.local's password:
 pluto_stream                                                                                                                      100%   26KB   7.1MB/s   00:00
@@ -1230,6 +1253,7 @@ Error refilling buf -110
 * Destroying context
 Connection to pluto.local closed.
 abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$
+```
 
 This means that the process works and that the new firmware works as expected. 
 
