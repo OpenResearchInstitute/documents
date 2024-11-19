@@ -20,5 +20,5 @@ Ham Expo in March 2021, _Remote Labs for P4XT Engineering Development_.
 ## Lab Notes
 
 * [Getting Screenshots](Getting%20Screenshots.md) (Python scripting tutorial)
-* [Spectrum Analyzer Video](Video-SA.md) (using X11 forwarding)
+* [Spectrum Analyzer Video](Video-SA.md) (using video streaming)
 * [Creating a Linux VM](new-Linux-VM-on-Chonc.txt) (Lab Manager's notes)

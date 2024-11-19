@@ -2,7 +2,7 @@
 
 Of all the instruments in the lab, the RSA5065N Spectrum Analyzer has the largest and richest screen display. The size of the display makes screenshots slow. Moreover, for many lab purposes it's quite revealing to see the spectrum display changing in real time, and not really satisfactory to get only a still screenshot.
 
-The RSA5065N has an HDMI video output port. We have an inexpensive HDMI capture device connected between that HDMI output and a USB port on a Raspberry Pi. With just a little extra setup, you can use this to get a live view of the spectrum analyzer's screen. It won't be quite as quick as the instrument's actual front panel, but will still be more useful than static screenshots.
+The RSA5065N has an HDMI video output port. We have an inexpensive HDMI capture device connected between that HDMI output and a USB port on a Raspberry Pi. With just a little extra setup, you can use this to get a live view of the spectrum analyzer's screen. It won't be quite as quick as the instrument's actual front panel, but will still be far more useful than static screenshots.
 
 Unfortunately, none of the other instruments has a video output port, so this only works on the spectrum analyzer.
 
