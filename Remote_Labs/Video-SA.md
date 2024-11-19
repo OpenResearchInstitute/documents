@@ -1,5 +1,17 @@
 # ORI Remote Labs: Spectrum Analyzer Video
 
+## You Probably Don't Need Video Streaming Anymore
+
+As of firmware version 00.03.06 of the RSA5065N Spectrum Analyzer, there is a much better way to remotely access the instrument. It now supports an internal web page that not only displays the screen in real time, but also allows full control of the instrument through the browser. If you already have Wireguard set up, you can just access http://rsa5065n.sandiego.openresearch.institute and go. (Note: http not https)
+
+One special trick you need: in order to access functions that would require pressing physical buttons on the front panel of the spectrum analyzer, use the on-screen button in the top row that looks like four buttons.
+
+Now that you can control the spectrum analyzer and not just view its screen, there is a possibility that you might interfere with other users. Please be aware of this possibility and coordinate on Slack if in doubt.
+
+That said, the video stream from `labvideo.sandiego.openresearch.institute` remains available and you can still use that if you prefer. Read on for more details.
+
+## Original Introduction
+
 Of all the instruments in the lab, the RSA5065N Spectrum Analyzer has the largest and richest screen display. The size of the display makes screenshots slow. Moreover, for many lab purposes it's quite revealing to see the spectrum display changing in real time, and not really satisfactory to get only a still screenshot.
 
 The RSA5065N has an HDMI video output port. We have an inexpensive HDMI capture device connected between that HDMI output and a USB port on a Raspberry Pi. With just a little extra setup, you can use this to get a live view of the spectrum analyzer's screen. It won't be quite as quick as the instrument's actual front panel, but will still be far more useful than static screenshots.
