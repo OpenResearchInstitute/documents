@@ -601,4 +601,4 @@ Not recommended. If you insist, details can be found in [Setting Up for X11 Forw
 
 ## Support
 
-You can always email the lab managers at [remote-labs@openresearch.institute](mailto:remote-labs@openresearch.institute) with any questions or suggestions. You can also find us, more often than not, in the **Phase 4 Ground** Slack in the **remote_labs** channel.
+You can always email the lab managers at [remote-labs@openresearch.institute](mailto:remote-labs@openresearch.institute) with any questions or suggestions. You can also find us, more often than not, in Slack in the **remote_labs** channel.

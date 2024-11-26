@@ -10,8 +10,12 @@
 
 >ORI 22 April 2024 Abraxas3d documented [Updating the PLUTO Firmware with New HDL](https://github.com/OpenResearchInstitute/documents/blob/master/Remote_Labs/Adding-Our-Blocks-to-the-Analog-Devices-HDL-Reference-Design.md#updating-the-pluto-firmware-with-new-hdl)
 
-## General Guidelines
-For new block integration to go smoothly, and in order to take advantage of the ADI-specific environment and build macros, it's recommend to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/blockname, where they are automatically picked up by the top level build, and editing the Makefile and blockname_ip.tcl in that directory along the lines as that presented in the following guide:
+>ORI 22 July 2024 Abraxas3d documented [Integrating Custom IP into the PLUTO HDL Reference Design Using Out of Tree Module Method](https://github.com/OpenResearchInstitute/documents/blob/master/Remote_Labs/Adding-Our-Blocks-to-the-Analog-Devices-HDL-Reference-Design.md#integrating-custom-ip-into-the-pluto-sdr-hdl-reference-design-using-out-of-tree-module-method)
+
+>ORI 29 July 2024 Abraxas3d documented [Example of How to Build and Update New PLUTO Firmware](https://github.com/OpenResearchInstitute/documents/blob/master/Remote_Labs/Adding-Our-Blocks-to-the-Analog-Devices-HDL-Reference-Design.md#example-of-modifying-the-pluto-firmware-with-new-xsa-and-bit-files)
+
+## Library Block Method
+In order to take advantage of the ADI-specific environment and build macros, one way to integrate IP into the HDL Reference Design is to make new blocks look like other blocks in the adi build tree. This is accomplished by installing new blocks should at hdl/library/blockname, where they are automatically picked up by the top level build, and editing the Makefile and blockname_ip.tcl in that directory along the lines as that presented in the following guide:
 https://wiki.analog.com/resources/fpga/docs/hdl/creating_new_ip_guide
 
 ## Files that Need to be Modified
@@ -156,7 +160,7 @@ https://wiki.analog.com/resources/fpga/docs/hdl/porting_project_quick_start_guid
 
 We aren't "porting" a reference design to a new fpga dev board, but we are modifying the radio card dev board file - in our case, the adrv9009_bd.tcl 
 
-## Integrating Custom IP into the PLUTO SDR HDL Reference Design
+## Integrating Custom IP into the PLUTO SDR HDL Reference Design using Library Block Method
 ### Steps Required to add the Opulent Voice Transmitter and Receiver Blocks
 #### Setting up the HDL Reference Design for Editing
 
@@ -740,7 +744,9 @@ Set the path:
 
 `export PATH=/usr/local/bin/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin:$PATH`
 
-`arm-linux-gnueabihf-gcc -mfloat-abi=hard  --sysroot=$HOME/pluto-0.38.sysroot -std=gnu99 -g -o pluto_stream ad9361-iiostream.c -lpthread -liio -lm -Wall -Wextra``scp pluto_stream root@pluto.local:/tmp/pluto_stream`
+`arm-linux-gnueabihf-gcc -mfloat-abi=hard  --sysroot=$HOME/pluto-0.38.sysroot -std=gnu99 -g -o pluto_stream ad9361-iiostream.c -lpthread -liio -lm -Wall -Wextra`
+
+`scp pluto_stream root@pluto.local:/tmp/pluto_stream`
 
 `ssh -t root@pluto.local /tmp/pluto_stream`
 
@@ -796,19 +802,527 @@ Next, get the xsa and bit files from our modified HDL reference design. This is 
 
 Travis writes:
 ```
-The Makefile method does not expect you are using an HDF file generated externally. If you want to use it you will need to modify this stage: https://github.com/analogdevicesinc/plutosdr-fw/blob/master/Makefile#L135 to copy your prebuilt HDF into the relevant directory.
+The Makefile method does not expect you are using an HDF file generated externally. 
+If you want to use it you will need to modify this stage: 
+https://github.com/analogdevicesinc/plutosdr-fw/blob/master/Makefile#L135 
+to copy your prebuilt HDF into the relevant directory.
 
-If you do not understand Makefiles it would likely be easier to just follow the individual steps below the automated process. If you have already run the unchanged Makefile this would also be faster since you have the dependent pieces already.
+If you do not understand Makefiles it would likely be easier to just follow the 
+individual steps below the automated process. If you have already run the 
+unchanged Makefile this would also be faster since you have the dependent pieces already.
 
-You just need to change the pluto.frm file. Follow from "Build FPGA Hardware Description File" through "Build Firmware FRM image".If it's not clear, the mkimage tool will consume zImage (the kernel), root.cpio.gz (userspace), and system_top.bit. This is your main entrypoint for your new bitstream.
+You just need to change the pluto.frm file. Follow from 
+"Build FPGA Hardware Description File" through "Build Firmware FRM image".
+
+If it's not clear, the mkimage tool will consume zImage (the kernel), 
+root.cpio.gz (userspace), and system_top.bit. 
+This is your main entrypoint for your new bitstream.
 
 -Travis
 ```
 
 The script calls out an hdf file, but support for that format from Xilinx was dropped long ago.
 
-So, we will try and use our xsa file instead of the hdf file.
+So, we will try and use our xsa file instead of the hdf file. 
 
+The steps Travis is referring to are on this page:
+
+https://wiki.analog.com/university/tools/pluto/building_the_image
+
+
+#### Build FPGA Hardware Description File
+`source /opt/Xilinx/Vivado/2021.2/settings64.sh`
+
+`make -C hdl/projects/pluto`
+
+`cp hdl/projects/pluto/pluto.sdk/system_top.hdf build/system_top.hdf`
+
+#### Build FPGA First Stage Bootloader (FSBL)
+`source /opt/Xilinx/Vivado/2021.2/settings64.sh`
+
+`xsdk -batch -source scripts/create_fsbl_project.tcl`
+
+`cp build/sdk/hw_0/system_top.bit build/system_top.bit`
+
+#### Build multi component FIT image (Flattened Image Tree)
+`u-boot-xlnx/tools/mkimage -f scripts/pluto.its build/pluto.itb`
+
+#### Build Firmware DFU image
+`cp build/pluto.itb build/pluto.itb.tmp`
+
+`dfu-suffix -a build/pluto.itb.tmp -v 0x0456 -p 0xb673`
+
+`mv build/pluto.itb.tmp build/pluto.dfu`
+
+#### Build Firmware FRM image
+`md5sum build/pluto.itb | cut -d ' ' -f 1 > build/pluto.frm.md5`
+
+`cat build/pluto.itb build/pluto.frm.md5 > build/pluto.frm`
+
+### Example of Modifying the PLUTO Firmware with New XSA and BIT Files
+
+`git clone --recursive https://github.com/analogdevicesinc/plutosdr-fw.git`
+
+`cd plutosdr-fw`
+
+```
+abraxas3d@chococat:~/plutosdr-fw$ grep -i REQUIRED_VIVADO_VERSION $(find ./ -name "adi*.tcl") | grep set
+./hdl/scripts/adi_env.tcl:set required_vivado_version "2022.2"
+./hdl/scripts/adi_env.tcl:  set required_vivado_version $::env(REQUIRED_VIVADO_VERSION)
+./hdl/scripts/adi_env.tcl:  set required_vivado_version $REQUIRED_VIVADO_VERSION
+```
+
+make sure /usr/local/bin has gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf
+If not, then download it from releases.linaro.org and expand.
+
+`/usr/local/bin$ sudo tar -xf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz`
+
+`abraxas3d@chococat:~/plutosdr-fw$ export PATH=/usr/local/bin/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin:$PATH`
+
+```
+abraxas3d@chococat:~/plutosdr-fw$ export CROSS_COMPILE=arm-linux-gnueabihf-
+abraxas3d@chococat:~/plutosdr-fw$ PATH=$PATH:/tools/Xilinx/Vitis/2022.2/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin
+abraxas3d@chococat:~/plutosdr-fw$ VIVADO_SETTINGS=/tools/Xilinx/Vivado/2022.2/settings64.sh
+```
+
+confirm compiler version in path:
+
+```
+abraxas3d@chococat:~/plutosdr-fw$ arm-linux-gnueabihf-gcc --version
+arm-linux-gnueabihf-gcc (Linaro GCC 7.2-2017.11) 7.2.1 20171011
+Copyright © 2017 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+Got the sysroot downloaded and we know where it is.
+
+run make
+
+```
+Finished prerequisites of target file 'all'.
+Must remake target 'all'.
+Successfully remade target file 'all'.
+Removing intermediate files...
+rm linux/arch/arm/boot/dts/zynq-pluto-sdr-revc.dtb linux/arch/arm/boot/dts/zynq-pluto-sdr.dtb linux/arch/arm/boot/dts/zynq-pluto-sdr-revb.dtb
+```
+
+real	168m19.600s
+user	75m17.146s
+sys	22m20.636s
+
+What do we have in the build directory?
+
+```
+abraxas3d@chococat:~/plutosdr-fw/build$ ls -l
+total 547924
+-rw-rw-r-- 1 abraxas3d abraxas3d       294 Jul 23 04:24 aie_primitive.json
+-rw-rw-r-- 1 abraxas3d abraxas3d        69 Jul 23 04:42 boot.bif
+-rw-rw-r-- 1 abraxas3d abraxas3d    454388 Jul 23 04:42 boot.bin
+-rw-rw-r-- 1 abraxas3d abraxas3d    454404 Jul 23 04:42 boot.dfu
+-rw-rw-r-- 1 abraxas3d abraxas3d    586517 Jul 23 04:42 boot.frm
+-rw-rw-r-- 1 abraxas3d abraxas3d 481737035 Jul 23 04:43 legal-info-v0.38-1-g4b42.tar.gz
+-rw-rw-r-- 1 abraxas3d abraxas3d    651338 Jul 23 02:00 LICENSE.html
+-rw-rw-r-- 1 abraxas3d abraxas3d  12113203 Jul 23 04:42 pluto.dfu
+-rw-rw-r-- 1 abraxas3d abraxas3d  12113220 Jul 23 04:42 pluto.frm
+-rw-rw-r-- 1 abraxas3d abraxas3d        33 Jul 23 04:42 pluto.frm.md5
+-rw-rw-r-- 1 abraxas3d abraxas3d  12113187 Jul 23 04:42 pluto.itb
+-rw-rw-r-- 1 abraxas3d abraxas3d  23279251 Jul 23 04:42 plutosdr-fw-v0.38-1-g4b42.zip
+-rw-rw-r-- 1 abraxas3d abraxas3d    606580 Jul 23 04:42 plutosdr-jtag-bootstrap-v0.38-1-g4b42.zip
+-rw-rw-r-- 1 abraxas3d abraxas3d    451111 Jul 23 04:24 ps7_init.c
+-rw-rw-r-- 1 abraxas3d abraxas3d    451715 Jul 23 04:24 ps7_init_gpl.c
+-rw-rw-r-- 1 abraxas3d abraxas3d      4283 Jul 23 04:24 ps7_init_gpl.h
+-rw-rw-r-- 1 abraxas3d abraxas3d      3679 Jul 23 04:24 ps7_init.h
+-rw-rw-r-- 1 abraxas3d abraxas3d   2428124 Jul 23 04:24 ps7_init.html
+-rw-rw-r-- 1 abraxas3d abraxas3d     31486 Jul 23 04:24 ps7_init.tcl
+-rw-r--r-- 1 abraxas3d abraxas3d   6645745 Jul 23 02:08 rootfs.cpio.gz
+drwxrwxr-x 6 abraxas3d abraxas3d      4096 Jul 23 04:27 sdk
+-rw-rw-r-- 1 abraxas3d abraxas3d    964428 Jul 23 04:24 system_top.bit
+-rw-rw-r-- 1 abraxas3d abraxas3d    749946 Jul 23 04:23 system_top.xsa
+-rwxrwxr-x 1 abraxas3d abraxas3d    449440 Jul 23 04:42 u-boot.elf
+-rw-rw---- 1 abraxas3d abraxas3d    131072 Jul 23 04:42 uboot-env.bin
+-rw-rw---- 1 abraxas3d abraxas3d    131088 Jul 23 04:42 uboot-env.dfu
+-rw-rw-r-- 1 abraxas3d abraxas3d      7066 Jul 23 04:42 uboot-env.txt
+-rwxrwxr-x 1 abraxas3d abraxas3d   4430768 Jul 23 01:58 zImage
+-rw-rw-r-- 1 abraxas3d abraxas3d     22143 Jul 23 02:08 zynq-pluto-sdr.dtb
+-rw-rw-r-- 1 abraxas3d abraxas3d     22219 Jul 23 02:08 zynq-pluto-sdr-revb.dtb
+-rw-rw-r-- 1 abraxas3d abraxas3d     24014 Jul 23 02:09 zynq-pluto-sdr-revc.dtb
+```
+
+Ok looks good so far.
+
+There's a script that lets us test firmware in ramboot. 
+
+```
+abraxas3d@chococat:~$ git clone https://github.com/analogdevicesinc/plutosdr_scripts
+Cloning into 'plutosdr_scripts'...
+remote: Enumerating objects: 1883, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 1883 (delta 2), reused 7 (delta 2), pack-reused 1873
+Receiving objects: 100% (1883/1883), 1.78 MiB | 5.32 MiB/s, done.
+Resolving deltas: 100% (1353/1353), done.
+```
+
+Note! The pluto needs to be in DFU mode to run this script. 
+
+Here is how you do that.
+
+```
+abraxas3d@keroppi:~$ ssh root@pluto.local
+root@pluto.local's password:
+Welcome to:
+______ _       _        _________________
+| ___ \ |     | |      /  ___|  _  \ ___ \
+| |_/ / |_   _| |_ ___ \ `--.| | | | |_/ /
+|  __/| | | | | __/ _ \ `--. \ | | |    /
+| |   | | |_| | || (_) /\__/ / |/ /| |\ \
+\_|   |_|\__,_|\__\___/\____/|___/ \_| \_|v0.34
+https://wiki.analog.com/university/tools/pluto
+# pluto_reboot ram
+#
+```
+
+Now, run the script to boot an image in RAM, to test without making permanent changes. 
+
+```
+abraxas3d@keroppi:/big/abraxas3d/plutosdr-fw-stock$ sudo ~/plutosdr_scripts/pluto_ramboot
+Found Pluto SDR in dfu mode and downloading ./build/pluto.dfu
+successfully downloaded
+```
+
+Copy over our streaming example and run it to prove the build image works with IIO. 
+
+```
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ scp pluto_stream root@pluto.local:/tmp/pluto_stream
+root@pluto.local's password:
+pluto_stream                                                                                                                      100%   26KB   6.5MB/s   00:00
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ ssh -t root@pluto.local /tmp/pluto_stream
+root@pluto.local's password:
+* Acquiring IIO context
+* Acquiring AD9361 streaming devices
+* Configuring AD9361 for streaming
+* Acquiring AD9361 phy channel 0
+* Acquiring AD9361 RX lo channel
+* Acquiring AD9361 phy channel 0
+* Acquiring AD9361 TX lo channel
+* Initializing AD9361 IIO streaming channels
+* Enabling IIO streaming channels
+* Creating non-cyclic IIO buffers with 1 MiS
+* Starting IO streaming (press CTRL+C to cancel)
+	RX     1.05 MSmp, TX     1.05 MSmp
+	RX     2.10 MSmp, TX     2.10 MSmp
+	RX     3.15 MSmp, TX     3.15 MSmp
+	RX     4.19 MSmp, TX     4.19 MSmp
+	RX     5.24 MSmp, TX     5.24 MSmp
+^CWaiting for process to finish... Got signal 2
+	RX     6.29 MSmp, TX     6.29 MSmp
+* Destroying buffers
+* Disabling streaming channels
+* Destroying context
+Connection to pluto.local closed.
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$
+```
+
+Build FPGA Hardware Description File
+
+```
+abraxas3d@chococat:~/plutosdr-fw$ source /tools/Xilinx/Vivado/2022.2/settings64.sh
+abraxas3d@chococat:~/plutosdr-fw$ which vivado
+/tools/Xilinx/Vivado/2022.2/bin/vivado
+abraxas3d@chococat:~/plutosdr-fw$ cp ~/documentation-friday3/pluto_msk/projects/pluto/pluto.sdk/system_top.xsa build/system_top.xsa
+```
+
+Build FPGA First Stage Bootloader (FSBL)
+
+`xsdk -batch -source scripts/create_fsbl_project.tcl`
+
+(did not find xsdk!)
+
+```
+abraxas3d@chococat:~/plutosdr-fw$ cp ~/documentation-friday3/pluto_msk/projects/pluto/pluto.runs/impl_1/system_top.bit build/system_top.bit
+```
+
+Build Multicomponent Flattened Image Tree
+
+`u-boot-xlnx/tools/mkimage -f scripts/pluto.its build/pluto.itb`
+
+```
+abraxas3d@chococat:~/plutosdr-fw$ u-boot-xlnx/tools/mkimage -f scripts/pluto.its build/pluto.itb
+scripts/pluto.its:18.9-24.5: Warning (unit_address_vs_reg): /images/fdt@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:26.9-32.5: Warning (unit_address_vs_reg): /images/fdt@2: node has a unit name, but no reg or ranges property
+scripts/pluto.its:34.9-40.5: Warning (unit_address_vs_reg): /images/fdt@3: node has a unit name, but no reg or ranges property
+scripts/pluto.its:42.10-52.5: Warning (unit_address_vs_reg): /images/fpga@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:49.11-51.6: Warning (unit_address_vs_reg): /images/fpga@1/hash@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:54.18-66.5: Warning (unit_address_vs_reg): /images/linux_kernel@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:63.11-65.6: Warning (unit_address_vs_reg): /images/linux_kernel@1/hash@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:67.13-77.5: Warning (unit_address_vs_reg): /images/ramdisk@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:74.11-76.6: Warning (unit_address_vs_reg): /images/ramdisk@1/hash@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:83.12-89.5: Warning (unit_address_vs_reg): /configurations/config@0: node has a unit name, but no reg or ranges property
+scripts/pluto.its:93.12-99.5: Warning (unit_address_vs_reg): /configurations/config@1: node has a unit name, but no reg or ranges property
+scripts/pluto.its:101.12-107.5: Warning (unit_address_vs_reg): /configurations/config@2: node has a unit name, but no reg or ranges property
+scripts/pluto.its:109.12-115.5: Warning (unit_address_vs_reg): /configurations/config@3: node has a unit name, but no reg or ranges property
+scripts/pluto.its:117.12-123.5: Warning (unit_address_vs_reg): /configurations/config@4: node has a unit name, but no reg or ranges property
+scripts/pluto.its:125.12-131.5: Warning (unit_address_vs_reg): /configurations/config@5: node has a unit name, but no reg or ranges property
+scripts/pluto.its:133.12-139.5: Warning (unit_address_vs_reg): /configurations/config@6: node has a unit name, but no reg or ranges property
+scripts/pluto.its:142.12-148.5: Warning (unit_address_vs_reg): /configurations/config@7: node has a unit name, but no reg or ranges property
+scripts/pluto.its:150.12-156.5: Warning (unit_address_vs_reg): /configurations/config@8: node has a unit name, but no reg or ranges property
+scripts/pluto.its:158.12-164.5: Warning (unit_address_vs_reg): /configurations/config@9: node has a unit name, but no reg or ranges property
+scripts/pluto.its:166.13-172.5: Warning (unit_address_vs_reg): /configurations/config@10: node has a unit name, but no reg or ranges property
+FIT description: Configuration to load fpga before Kernel
+Created:         Tue Jul 23 14:41:05 2024
+ Image 0 (fdt@1)
+  Description:  zynq-pluto-sdr
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    22143 Bytes = 21.62 kB = 0.02 MB
+  Architecture: ARM
+ Image 1 (fdt@2)
+  Description:  zynq-pluto-sdr-revb
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    22219 Bytes = 21.70 kB = 0.02 MB
+  Architecture: ARM
+ Image 2 (fdt@3)
+  Description:  zynq-pluto-sdr-revc
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         Flat Device Tree
+  Compression:  uncompressed
+  Data Size:    24014 Bytes = 23.45 kB = 0.02 MB
+  Architecture: ARM
+ Image 3 (fpga@1)
+  Description:  FPGA
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         FPGA Image
+  Compression:  uncompressed
+  Data Size:    1012512 Bytes = 988.78 kB = 0.97 MB
+  Load Address: 0x0f000000
+  Hash algo:    md5
+  Hash value:   0ebccbe34b52f21fd8ef627f4c015929
+ Image 4 (linux_kernel@1)
+  Description:  Linux
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         Kernel Image
+  Compression:  uncompressed
+  Data Size:    4430768 Bytes = 4326.92 kB = 4.23 MB
+  Architecture: ARM
+  OS:           Linux
+  Load Address: 0x00008000
+  Entry Point:  0x00008000
+  Hash algo:    md5
+  Hash value:   e3dd26f2186b69b4dacf757361a01baa
+ Image 5 (ramdisk@1)
+  Description:  Ramdisk
+  Created:      Tue Jul 23 14:41:05 2024
+  Type:         RAMDisk Image
+  Compression:  gzip compressed
+  Data Size:    6645745 Bytes = 6489.99 kB = 6.34 MB
+  Architecture: ARM
+  OS:           Linux
+  Load Address: unavailable
+  Entry Point:  unavailable
+  Hash algo:    md5
+  Hash value:   67d18bb09033f217aa4dad08b6815e47
+ Default Configuration: 'config@0'
+ Configuration 0 (config@0)
+  Description:  Linux with fpga RevA
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@1
+  FPGA:         fpga@1
+ Configuration 1 (config@1)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 2 (config@2)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 3 (config@3)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 4 (config@4)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 5 (config@5)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 6 (config@6)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 7 (config@7)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 8 (config@8)
+  Description:  Linux with fpga RevC
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@3
+  FPGA:         fpga@1
+ Configuration 9 (config@9)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+ Configuration 10 (config@10)
+  Description:  Linux with fpga RevB
+  Kernel:       linux_kernel@1
+  Init Ramdisk: ramdisk@1
+  FDT:          fdt@2
+  FPGA:         fpga@1
+abraxas3d@chococat:~/plutosdr-fw$ 
+```
+
+Build Firmware DFU Image
+
+`cp build/pluto.itb build/pluto.itb.tmp`
+
+```
+abraxas3d@chococat:~/plutosdr-fw$ cp build/pluto.itb build/pluto.itb.tmp
+abraxas3d@chococat:~/plutosdr-fw$ dfu-suffix -a build/pluto.itb.tmp -v 0x0456 -p 0xb673
+dfu-suffix (dfu-util) 0.9
+
+Copyright 2011-2012 Stefan Schmidt, 2013-2014 Tormod Volden
+This program is Free Software and has ABSOLUTELY NO WARRANTY
+Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+Suffix successfully added to file
+```
+
+`abraxas3d@chococat:~/plutosdr-fw$ mv build/pluto.itb.tmp build/pluto.dfu`
+
+Build Firmware FRM Image
+
+```
+abraxas3d@chococat:~/plutosdr-fw$ md5sum build/pluto.itb | cut -d ' ' -f 1 > build/pluto.frm.md5
+abraxas3d@chococat:~/plutosdr-fw$ cat build/pluto.itb build/pluto.frm.md5 > build/pluto.frm
+```
+
+Build artifacts were copied over to keroppi so that the PLUTO SDR could be used.
+
+```
+abraxas3d@keroppi:/big/abraxas3d/plutosdr-fw-opv$ sudo ~/plutosdr_scripts/pluto_ramboot
+Found Pluto SDR in dfu mode and downloading ./build/pluto.dfu
+successfully downloaded
+```
+
+PLUTO Rebooted
+
+stream example copied over and ran
+
+```
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ scp pluto_stream root@pluto.local:/tmp/pluto_stream
+root@pluto.local's password:
+pluto_stream                                                                                                                      100%   26KB   7.1MB/s   00:00
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$ ssh -t root@pluto.local /tmp/pluto_stream
+root@pluto.local's password:
+* Acquiring IIO context
+* Acquiring AD9361 streaming devices
+* Configuring AD9361 for streaming
+* Acquiring AD9361 phy channel 0
+* Acquiring AD9361 RX lo channel
+* Acquiring AD9361 phy channel 0
+* Acquiring AD9361 TX lo channel
+* Initializing AD9361 IIO streaming channels
+* Enabling IIO streaming channels
+* Creating non-cyclic IIO buffers with 1 MiS
+* Starting IO streaming (press CTRL+C to cancel)
+Error refilling buf -110
+* Destroying buffers
+* Disabling streaming channels
+* Destroying context
+Connection to pluto.local closed.
+abraxas3d@keroppi:~/pluto-opv-transmitter/tmp/plutoapp$
+```
+
+This means that the process works and that the new firmware works as expected. 
+
+Now that we have an updated pluto.frm file, and we're confident about our image using the ramboot feature, we can update the PLUTO SDR by moving the pluto.frm file to the device and install it with the update_frm.sh utility.
+
+
+## Integrating Custom IP into the PLUTO SDR HDL Reference Design using Out of Tree Module Method
+Here is a set of instructions for getting this minimum shift keying (MSK) transceiver implementation to work on a PLUTO SDR using an out of tree module approach. The pluto_msk repository is an example of this method. 
+
+Clone the pluto_msk repository.
+
+```
+git clone --recursive https://github.com/OpenResearchInstitute/pluto_msk.git
+```
+
+The repository should clone to the latest stable PLUTO firmware release commit. Here is an example of how to change to another branch of the hdl reference design. hdl_2022_r2 was used for VHDL development. Don't change branches of hdl unless you have to.
+
+```
+/pluto_msk/hdl$ git checkout hdl_2022_r2 
+Previous HEAD position was 1978df298 axi_dac_interpolate: Improve the ctrl logic
+branch 'hdl_2022_r2' set up to track 'origin/hdl_2022_r2'.
+Switched to a new branch 'hdl_2022_r2'
+```
+
+If you are working on ORI virtual machine, then source the version of Vivado needed as follows. 
+
+```$ source /tools/Xilinx/Vivado/2022.2/settings.sh```
+
+You can check which version of Vivado is currently being used as follows. 
+
+```
+$ which vivado
+/tools/Xilinx/Vivado/2022.2/bin/vivado
+```
+Change directories to the PLUTO project directory and run make. 
+
+```
+/hdl/projects/pluto$ make
+```
+A useful log file for information, warnings, and errors is pluto_vivado.log
+
+This repository is organized as an out of tree module. The source files do not have to be installed in the /library directory. What we do instead is to expand the number of places that Vivado looks for the information needed to build the modules. 
+
+Key lines in system_bd.tcl are:
+
+https://github.com/OpenResearchInstitute/pluto_msk/blob/942aa516f8cc30af73a5a0c9ce3f8266012989e8/projects/pluto/system_bd.tcl#L7-19
+
+```
+set_property ip_repo_paths [list $ad_hdl_dir/library ../../library]  [current_fileset]
+update_ip_catalog
+```
+The ip_repo_paths property lets us create a custom IP catalog for use with Vivado. It defines the path to one or more directories containing user-defined intellectual property (IP), like our blocks. The specified directories, and any sub-directories, are searched for files to add to the Vivado IP catalog. The property is assigned to the current fileset of the current project. 
+
+ip_repo_paths will look for a <component>.xml file, where <component> is the name of the IP to add to the catalog. This XML file lists the files that define the module. Subdirectories are searched through. We don't have to list out each individual module's <component>.xml.
+
+Where does our component.xml file come from? It's create by the msk_top_ip.tcl file. A version can be found here:
+https://github.com/OpenResearchInstitute/pluto_msk/blob/main/library/msk_top_ip.tcl
+
+Setting the ip_repo_paths property needs to be followed by update_ip_catalog. 
+
+Example syntax:
+
+```
+set_property IP_REPO_PATHS {c:/Data/Designs C:/myIP} [current_fileset]
+update_ip_catalog
+```
+Running make in the project directory should be all that one has to do in order to build the HDL reference design with custom IP. 
 
 
 
