@@ -4,8 +4,7 @@ This directory includes scripts for controlling the instruments in the ORI Remot
 
 The instruments are connected to the Remote Lab local area network. They can be accessed from any host or virtual host on the network, and also from any host connected to Wireguard. See [ORI Lab User Setup](../ORI-Lab-User-Setup.md) for information on how to connect to the Remote Lab LAN.
 
-Most of the instruments are controlled using [SCPI](https://en.wikipedia.org/wiki/Standard_Commands_for_Programmable_Instruments) commands via [VISA](https://en.wikipedia.org/wiki/Virtual_instrument_software_architecture).
-See also the [Test Equipment Documentation](../Test_Equipment) for information on the commands available for each instrument. Most instruments have a separate "programming manual", rather than including the remote control details in the main user manual.
+Most of the instruments are controlled using [SCPI](https://en.wikipedia.org/wiki/Standard_Commands_for_Programmable_Instruments) commands via [VISA](https://en.wikipedia.org/wiki/Virtual_instrument_software_architecture). See [Getting Screenshots](../Getting%20Screenshots.md) for an introduction to SCPI/VISA programming for Remote Lab instruments. See also the [Test Equipment Documentation](../Test_Equipment) for information on the commands available for each instrument. Most instruments have a separate "programming manual", rather than including the remote control details in the main user manual.
 
 ## Prerequisites for all scripts
 
