@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650">
+  <!-- Background -->
+  <rect width="1000" height="650" fill="#ffffff"/>
+  
+  <!-- Title -->
+  <text x="500" y="40" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">Earth-Venus-Earth Signal Processing and SNR Improvement</text>
+  
+  <!-- Main diagram area border -->
+  <rect x="50" y="80" width="900" height="440" fill="none" stroke="#000000" stroke-width="1" stroke-dasharray="5,2"/>
+  
+  <!-- X axis (processing stages) -->
+  <line x1="100" y1="450" x2="900" y2="450" stroke="#000000" stroke-width="2"/>
+  <text x="500" y="480" font-family="Arial" font-size="14" text-anchor="middle">Processing Stage</text>
+  
+  <!-- Y axis (SNR in dB) -->
+  <line x1="100" y1="450" x2="100" y2="100" stroke="#000000" stroke-width="2"/>
+  <text x="60" y="275" font-family="Arial" font-size="14" text-anchor="middle" transform="rotate(-90, 60, 275)">Signal-to-Noise Ratio (dB)</text>
+  
+  <!-- Y-axis marks and labels -->
+  <line x1="95" y1="450" x2="105" y2="450" stroke="#000000" stroke-width="2"/>
+  <text x="85" y="455" font-family="Arial" font-size="12" text-anchor="end">-80</text>
+  
+  <line x1="95" y1="400" x2="105" y2="400" stroke="#000000" stroke-width="2"/>
+  <text x="85" y="405" font-family="Arial" font-size="12" text-anchor="end">-60</text>
+  
+  <line x1="95" y1="350" x2="105" y2="350" stroke="#000000" stroke-width="2"/>
+  <text x="85" y="355" font-family="Arial" font-size="12" text-anchor="end">-40</text>
+  
+  <line x1="95" y1="300" x2="105" y2="300" stroke="#000000" stroke-width="2"/>
+  <text x="85" y="305" font-family="Arial" font-size="12" text-anchor="end">-20</text>
+  
+  <line x1="95" y1="250" x2="105" y2="250" stroke="#000000" stroke-width="2"/>
+  <text x="85" y="255" font-family="Arial" font-size="12" text-anchor="end">0</text>
+  
+  <line x1="95" y1="200" x2="105" y2="200" stroke="#000000" stroke-width="2"/>
+  <text x="85" y="205" font-family="Arial" font-size="12" text-anchor="end">20</text>
+  
+  <line x1="95" y1="150" x2="105" y2="150" stroke="#000000" stroke-width="2"/>
+  <text x="85" y="155" font-family="Arial" font-size="12" text-anchor="end">40</text>
+  
+  <line x1="95" y1="100" x2="105" y2="100" stroke="#000000" stroke-width="2"/>
+  <text x="85" y="105" font-family="Arial" font-size="12" text-anchor="end">60</text>
+  
+  <!-- Zero dB line (detection threshold) -->
+  <line x1="100" y1="250" x2="900" y2="250" stroke="#FF0000" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="880" y="265" font-family="Arial" font-size="12" text-anchor="end" fill="#FF0000">Detection Threshold (0 dB default)</text>
+  
+  <!-- Noise floor - simplified to just a single reference level -->
+  <line x1="200" y1="250" x2="350" y2="250" stroke="#888888" stroke-width="2" stroke-dasharray="2,2"/>
+  <text x="120" y="230" font-family="Arial" font-size="12" text-anchor="start" fill="#888888">Noise Floor (0 dB in 1 Hz)</text>
+  
+  <!-- Processing Stages (X axis) marks and labels -->
+  <!-- Stage 1: Initial 1 Hz CNR -->
+  <line x1="200" y1="445" x2="200" y2="455" stroke="#000000" stroke-width="2"/>
+  <text x="200" y="495" font-family="Arial" font-size="12" text-anchor="middle">Initial</text>
+  <text x="200" y="510" font-family="Arial" font-size="12" text-anchor="middle">1 Hz CNR</text>
+  
+  <!-- Stage 2: 5 MHz Bandwidth -->
+  <line x1="350" y1="445" x2="350" y2="455" stroke="#000000" stroke-width="2"/>
+  <text x="350" y="495" font-family="Arial" font-size="12" text-anchor="middle">Full</text>
+  <text x="350" y="510" font-family="Arial" font-size="12" text-anchor="middle">Bandwidth</text>
+  
+  <!-- Stage 3: After Coherent Integration -->
+  <line x1="550" y1="445" x2="550" y2="455" stroke="#000000" stroke-width="2"/>
+  <text x="550" y="495" font-family="Arial" font-size="12" text-anchor="middle">After Coherent</text>
+  <text x="550" y="510" font-family="Arial" font-size="12" text-anchor="middle">Integration</text>
+  
+  <!-- Stage 4: After Non-Coherent Integration -->
+  <line x1="750" y1="445" x2="750" y2="455" stroke="#000000" stroke-width="2"/>
+  <text x="750" y="495" font-family="Arial" font-size="12" text-anchor="middle">After Non-Coherent</text>
+  <text x="750" y="510" font-family="Arial" font-size="12" text-anchor="middle">Integration</text>
+  
+  <!-- Signal level at different stages -->
+  <!-- Initial 1 Hz CNR: -8.65 dB -->
+  <circle cx="200" cy="258.65" r="6" fill="#1E90FF"/>
+  <text x="175" y="275" font-family="Arial" font-size="12" text-anchor="end">-8.65 dB</text>
+  
+  <!-- Full 5 MHz Bandwidth: -75.65 dB -->
+  <circle cx="350" cy="425.65" r="6" fill="#1E90FF"/>
+  <text x="315" y="425.65" font-family="Arial" font-size="12" text-anchor="end">-75.65 dB</text>
+  
+  <!-- After Coherent Integration: -7.35 dB -->
+  <circle cx="550" cy="257.35" r="6" fill="#1E90FF"/>
+  <text x="490" y="275" font-family="Arial" font-size="12" text-anchor="end">-7.35 dB</text>
+  
+  <!-- After Non-Coherent Integration: +1.65 dB -->
+  <circle cx="750" cy="248.35" r="6" fill="#1E90FF"/>
+  <!--text x="775" y="248.35" font-family="Arial" font-size="12" text-anchor="start">+1.65 dB</text-->
+  
+  <!-- Processing gain arrows and labels -->
+  <!-- Bandwidth expansion: -67 dB -->
+  <line x1="225" y1="258.65" x2="325" y2="425.65" stroke="#FF6347" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="275" y="320" font-family="Arial" font-size="14" text-anchor="middle" fill="#FF6347">-67 dB</text>
+  <text x="275" y="340" font-family="Arial" font-size="12" text-anchor="middle" fill="#FF6347">Bandwidth Expansion</text>
+  <text x="275" y="355" font-family="Arial" font-size="12" text-anchor="middle" fill="#FF6347">5 MHz vs 1 Hz</text>
+  
+  <!-- Coherent Integration Gain: +68.3 dB -->
+  <line x1="375" y1="425.65" x2="525" y2="257.35" stroke="#228B22" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="450" y="330" font-family="Arial" font-size="14" text-anchor="middle" fill="#228B22">+68.3 dB</text>
+  <text x="450" y="350" font-family="Arial" font-size="12" text-anchor="middle" fill="#228B22">Coherent Processing Gain</text>
+  <text x="450" y="365" font-family="Arial" font-size="12" text-anchor="middle" fill="#228B22">1.34s × 5 MHz</text>
+  
+  <!-- Non-Coherent Integration Gain: +9 dB -->
+  <line x1="575" y1="257.35" x2="725" y2="248.35" stroke="#9932CC" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="625" y="225" font-family="Arial" font-size="14" text-anchor="middle" fill="#9932CC">+7.35 dB</text>
+  <text x="625" y="205" font-family="Arial" font-size="12" text-anchor="middle" fill="#9932CC">Non-Coherent Processing Gain</text>
+  <text x="625" y="190" font-family="Arial" font-size="12" text-anchor="middle" fill="#9932CC">30 (or more) Sequences</text>
+  
+  <!-- SNR path -->
+  <polyline points="200,258.65 350,425.65 550,257.35 750,248.35" fill="none" stroke="#1E90FF" stroke-width="3"/>
+  
+  <!-- Link margin indicator -->
+  <!--line x1="750" y1="250" x2="750" y2="248.35" stroke="#006400" stroke-width="2"/-->
+  <!--text x="800" y="235" font-family="Arial" font-size="12" text-anchor="start" fill="#006400">Link Margin: +1.65 dB</text-->
+  
+  <!-- Legend with revised layout and improved margins - Moved to the right -->
+  <rect x="750" y="90" width="200" height="125" fill="#f8f8f8" stroke="#000000"/>
+  <text x="760" y="110" font-family="Arial" font-size="14" text-anchor="start" font-weight="bold">Legend</text>
+  
+  <!-- Complete redesign of legend with table layout to ensure proper alignment -->
+  <g transform="translate(760, 125)">
+    <!-- First row -->
+    <circle cx="6" cy="8" r="5" fill="#1E90FF"/>
+    <text x="20" y="12" font-family="Arial" font-size="12" text-anchor="start">Signal SNR</text>
+    
+    <!-- Second row -->
+    <line x1="1" y1="28" x2="11" y2="28" stroke="#FF0000" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="20" y="32" font-family="Arial" font-size="12" text-anchor="start">Detection Threshold</text>
+    
+    <!-- Third row -->
+    <line x1="1" y1="48" x2="11" y2="48" stroke="#888888" stroke-width="2" stroke-dasharray="2,2"/>
+    <text x="20" y="52" font-family="Arial" font-size="12" text-anchor="start">Noise Floor</text>
+    
+    <!-- Fourth row -->
+    <polyline points="1,68 11,68" fill="none" stroke="#1E90FF" stroke-width="3"/>
+    <text x="20" y="72" font-family="Arial" font-size="12" text-anchor="start">SNR Path</text>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+    </marker>
+  </defs>
+  
+  <!-- Zadoff-Chu details box with improved margins -->
+  <rect x="100" y="530" width="800" height="95" fill="#f0f0f0" stroke="#000000"/>
+  <text x="110" y="550" font-family="Arial" font-size="14" text-anchor="start" font-weight="bold">Zadoff-Chu Sequence Parameters:</text>
+  
+  <text x="120" y="570" font-family="Arial" font-size="12" text-anchor="start">• Bandwidth: 5 MHz</text>
+  <text x="280" y="570" font-family="Arial" font-size="12" text-anchor="start">• Chip Duration: 200 ns</text> 
+  <text x="470" y="570" font-family="Arial" font-size="12" text-anchor="start">• Sequence Duration: 1.34s</text>
+  <text x="120" y="590" font-family="Arial" font-size="12" text-anchor="start">• Coherent Integration: 1.34s (Doppler limited)</text>
+  <text x="470" y="590" font-family="Arial" font-size="12" text-anchor="start">• Non-Coherent Integration: 8 sequences</text>
+  
+  <text x="120" y="610" font-family="Arial" font-size="12" text-anchor="start">• Perfect Auto-Correlation Properties</text>
+  <text x="400" y="610" font-family="Arial" font-size="12" text-anchor="start">• Constant Envelope for Maximum Power Efficiency</text>
+</svg>
