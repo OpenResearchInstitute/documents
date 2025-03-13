@@ -83,9 +83,9 @@
   <circle cx="550" cy="257.35" r="6" fill="#1E90FF"/>
   <text x="490" y="275" font-family="Arial" font-size="12" text-anchor="end">-7.35 dB</text>
   
-  <!-- After Non-Coherent Integration: +1.65 dB -->
-  <circle cx="750" cy="248.35" r="6" fill="#1E90FF"/>
-  <!--text x="775" y="248.35" font-family="Arial" font-size="12" text-anchor="start">+1.65 dB</text-->
+  <!-- After Non-Coherent Integration: +10 dB (UPDATED VALUE) -->
+  <circle cx="750" cy="240" r="6" fill="#1E90FF"/>
+  <text x="750" y="230" font-family="Arial" font-size="12" text-anchor="middle">+10 dB</text>
   
   <!-- Processing gain arrows and labels -->
   <!-- Bandwidth expansion: -67 dB -->
@@ -100,18 +100,18 @@
   <text x="450" y="350" font-family="Arial" font-size="12" text-anchor="middle" fill="#228B22">Coherent Processing Gain</text>
   <text x="450" y="365" font-family="Arial" font-size="12" text-anchor="middle" fill="#228B22">1.34s × 5 MHz</text>
   
-  <!-- Non-Coherent Integration Gain: +9 dB -->
-  <line x1="575" y1="257.35" x2="725" y2="248.35" stroke="#9932CC" stroke-width="3" marker-end="url(#arrow)"/>
-  <text x="625" y="225" font-family="Arial" font-size="14" text-anchor="middle" fill="#9932CC">+7.35 dB</text>
+  <!-- Non-Coherent Integration Gain: +17.35 dB (UPDATED VALUE) -->
+  <line x1="575" y1="257.35" x2="725" y2="240" stroke="#9932CC" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="625" y="225" font-family="Arial" font-size="14" text-anchor="middle" fill="#9932CC">+17.35 dB</text>
   <text x="625" y="205" font-family="Arial" font-size="12" text-anchor="middle" fill="#9932CC">Non-Coherent Processing Gain</text>
-  <text x="625" y="190" font-family="Arial" font-size="12" text-anchor="middle" fill="#9932CC">30 (or more) Sequences</text>
+  <text x="625" y="190" font-family="Arial" font-size="12" text-anchor="middle" fill="#9932CC">Some number of Sequences for</text>
   
   <!-- SNR path -->
-  <polyline points="200,258.65 350,425.65 550,257.35 750,248.35" fill="none" stroke="#1E90FF" stroke-width="3"/>
+  <polyline points="200,258.65 350,425.65 550,257.35 750,240" fill="none" stroke="#1E90FF" stroke-width="3"/>
   
   <!-- Link margin indicator -->
-  <!--line x1="750" y1="250" x2="750" y2="248.35" stroke="#006400" stroke-width="2"/-->
-  <!--text x="800" y="235" font-family="Arial" font-size="12" text-anchor="start" fill="#006400">Link Margin: +1.65 dB</text-->
+  <line x1="750" y1="250" x2="750" y2="240" stroke="#006400" stroke-width="2"/>
+  <text x="800" y="235" font-family="Arial" font-size="12" text-anchor="start" fill="#006400">Link Margin: +10 dB</text>
   
   <!-- Legend with revised layout and improved margins - Moved to the right -->
   <rect x="750" y="90" width="200" height="125" fill="#f8f8f8" stroke="#000000"/>
@@ -147,11 +147,8 @@
   <rect x="100" y="530" width="800" height="95" fill="#f0f0f0" stroke="#000000"/>
   <text x="110" y="550" font-family="Arial" font-size="14" text-anchor="start" font-weight="bold">Zadoff-Chu Sequence Parameters:</text>
   
-  <text x="120" y="570" font-family="Arial" font-size="12" text-anchor="start">• Bandwidth: 5 MHz</text>
-  <text x="280" y="570" font-family="Arial" font-size="12" text-anchor="start">• Chip Duration: 200 ns</text> 
-  <text x="470" y="570" font-family="Arial" font-size="12" text-anchor="start">• Sequence Duration: 1.34s</text>
   <text x="120" y="590" font-family="Arial" font-size="12" text-anchor="start">• Coherent Integration: 1.34s (Doppler limited)</text>
-  <text x="470" y="590" font-family="Arial" font-size="12" text-anchor="start">• Non-Coherent Integration: 8 sequences</text>
+  <text x="400" y="590" font-family="Arial" font-size="12" text-anchor="start">• Non-Coherent Integration: as many sequences as required to achieve Link Margin</text>
   
   <text x="120" y="610" font-family="Arial" font-size="12" text-anchor="start">• Perfect Auto-Correlation Properties</text>
   <text x="400" y="610" font-family="Arial" font-size="12" text-anchor="start">• Constant Envelope for Maximum Power Efficiency</text>
