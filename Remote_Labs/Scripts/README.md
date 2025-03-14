@@ -43,3 +43,6 @@ Like `all_screen.py` except it doesn't use a subdirectory.
 
 ### `sa_peak.py`
 Reads the frequency of a peak value from the RSA5065N Spectrum Analyzer. Manually set up the spectrum analyzer to focus on a single peak, such as the local oscillator leakage from a connected SDR device. The signal of interest must be consistently the strongest peak on the spectrum analyzer display. For most precise results, use the narrowest practical frequency span and resolution bandwidth settings. Modify the settings at the top of the script to set the nominal frequency of the peak and to control the number of measurements recorded, then run the script. If no errors occur, the script will output the number of lines you specified. Each line will contain a timestamp (in decimal seconds since the Unix epoch) and the difference between the measured peak frequency and the nominal frequency. You can then graph these results or analyze them in any other way.
+
+### `sg_plus1hz.py`
+A simple example that reads the current frequency from the signal generator, adds one Hz to the frequency, and commands the signal generator to tune to the incremented frequency.
