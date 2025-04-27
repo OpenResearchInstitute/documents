@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venus Coherent Processing Visualization</title>
+  <!-- Load React -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  
+  <!-- Load Recharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js"></script>
+  
+  <!-- Load Babel for JSX support -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.21.4/babel.min.js"></script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .chart-container {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 30px;
+    }
+    
+    .slider-container {
+      margin: 30px 0;
+      padding: 0 40px;
+    }
+    
+    .results-panel {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    
+    h2 {
+      color: #444;
+      margin-top: 30px;
+    }
+    
+    #root {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Venus Coherent Processing Visualization</h1>
+  <p><em>This visualization demonstrates how coherent processing reduces Doppler spread in planetary radar applications.</em></p>
+  
+  <div id="root"></div>
+  
+  <script type="text/babel">
+    const { useState } = React;
+    const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = Recharts;
+    
+    function CoherentIntegrationVisualization() {
+      const [selectedIntegrationTime, setSelectedIntegrationTime] = useState(0.5);
+      
+      // Venus radar parameters
+      const radarFrequency = 1299.5; // MHz
+      const fullDopplerSpread = 31.4; // Hz
+      
+      // Generate bandwidth data
+      const bandwidthData = [];
+      for (let t = 0.1; t <= 5; t += 0.1) {
+        bandwidthData.push({
+          integrationTime: t,
+          bandwidth: 1/t,
+          snrImprovement: 10 * Math.log10(fullDopplerSpread / (1/t))
+        });
+      }
+      
+      // Generate spectrum data
+      const spectrumData = [];
+      for (let f = -20; f <= 20; f += 0.2) {
+        // Original Doppler-spread signal
+        const originalAmp = Math.max(0, 1 - Math.pow(Math.abs(f / 15), 6));
+        
+        // Processed spectrum
+        const bw = 1/selectedIntegrationTime;
+        const processedAmp = Math.exp(-Math.pow(f, 2) / (2 * Math.pow(bw/2, 2)));
+        
+        spectrumData.push({
+          frequency: f,
+          original: originalAmp,
+          processed: processedAmp
+        });
+      }
+      
+      const handleSliderChange = (event) => {
+        setSelectedIntegrationTime(parseFloat(event.target.value));
+      };
+      
+      return (
+        <div>
+          <h2>Relationship Between Integration Time and Bandwidth</h2>
+          <div className="chart-container">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                data={bandwidthData}
+                margin={{ top: 5, right: 30, left: 20, bottom: 25 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis 
+                  dataKey="integrationTime" 
+                  label={{ value: 'Integration Time (s)', position: 'bottom', dy: 15 }}
+                  tickFormatter={(value) => value.toFixed(1)}
+                />
+                <YAxis 
+                  yAxisId="left"
+                  label={{ value: 'Bandwidth (Hz)', angle: -90, position: 'insideLeft' }}
+                  tickFormatter={(value) => value.toFixed(1)}
+                />
+                <YAxis 
+                  yAxisId="right"
+                  orientation="right"
+                  label={{ value: 'SNR Improvement (dB)', angle: 90, position: 'insideRight' }}
+                  tickFormatter={(value) => value.toFixed(1)}
+                />
+                <Tooltip 
+                  formatter={(value) => value.toFixed(1)}
+                  labelFormatter={(value) => `Time: ${value.toFixed(1)} s`}
+                />
+                <Legend 
+                  layout="vertical"
+                  verticalAlign="top"
+                  align="right"
+                />
+                <Line 
+                  yAxisId="left"
+                  type="monotone" 
+                  dataKey="bandwidth" 
+                  stroke="#8884d8" 
+                  name="Bandwidth" 
+                  dot={false} 
+                />
+                <Line 
+                  yAxisId="right"
+                  type="monotone" 
+                  dataKey="snrImprovement" 
+                  stroke="#82ca9d" 
+                  name="SNR Improvement" 
+                  dot={false} 
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          
+          <div className="slider-container">
+            <label htmlFor="integration-time" style={{ display: 'block', marginBottom: '10px' }}>
+              <strong>Integration Time: {selectedIntegrationTime.toFixed(1)} seconds</strong>
+            </label>
+            <input
+              id="integration-time"
+              type="range"
+              min="0.1"
+              max="5"
+              step="0.1"
+              value={selectedIntegrationTime}
+              onChange={handleSliderChange}
+              style={{ width: '100%' }}
+            />
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px', fontSize: '0.8rem' }}>
+              <span>0.1s</span>
+              <span>1.0s</span>
+              <span>2.0s</span>
+              <span>3.0s</span>
+              <span>4.0s</span>
+              <span>5.0s</span>
+            </div>
+          </div>
+          
+          <h2>Doppler Spectrum Before and After Coherent Processing</h2>
+          <div className="chart-container">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                data={spectrumData}
+                margin={{ top: 5, right: 30, left: 20, bottom: 25 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis 
+                  dataKey="frequency" 
+                  label={{ value: 'Frequency (Hz)', position: 'bottom', dy: 15 }}
+                  tickFormatter={(value) => value.toFixed(0)}
+                  ticks={[-20, -15, -10, -5, 0, 5, 10, 15, 20]}
+                />
+                <YAxis 
+                  label={{ value: 'Amplitude', angle: -90, position: 'insideLeft' }}
+                  tickFormatter={(value) => value.toFixed(1)}
+                />
+                <Tooltip 
+                  formatter={(value) => value.toFixed(1)}
+                  labelFormatter={(value) => `Frequency: ${value.toFixed(1)} Hz`}
+                />
+                <Legend 
+                  layout="vertical"
+                  verticalAlign="top"
+                  align="right"
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="original" 
+                  stroke="#ff7300" 
+                  name="Original Doppler Spread" 
+                  dot={false} 
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="processed" 
+                  stroke="#82ca9d" 
+                  name="After Coherent Processing" 
+                  dot={false} 
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          
+          <div className="results-panel">
+            <h2>Key Results</h2>
+            <p><strong>Bandwidth after coherent processing:</strong> {(1/selectedIntegrationTime).toFixed(1)} Hz</p>
+            <p><strong>SNR improvement:</strong> {(10 * Math.log10(fullDopplerSpread / (1/selectedIntegrationTime))).toFixed(1)} dB</p>
+            <p style={{ marginTop: '15px' }}><strong>The fundamental relationship is:</strong> B = 1/T</p>
+            <p>Where B is bandwidth (Hz) and T is coherent integration time (seconds)</p>
+            
+            <div style={{ marginTop: '20px', fontSize: '0.9rem' }}>
+              <p><strong>About this visualization:</strong></p>
+              <p>This visualization demonstrates how coherent processing reduces the Doppler spread from Venus's rotation (~31.4 Hz) to a much narrower bandwidth, improving signal-to-noise ratio for planetary radar applications.</p>
+              <p>In March 2025, the Dwingeloo telescope successfully bounced a radio signal off Venus, using coherent processing to detect a signal contained in a small bandwidth (1-2 Hz).</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    
+    ReactDOM.render(<CoherentIntegrationVisualization />, document.getElementById('root'));
+  </script>
+</body>
+</html>
