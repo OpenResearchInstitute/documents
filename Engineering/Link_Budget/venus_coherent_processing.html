@@ -4,15 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Venus Coherent Processing Visualization</title>
-  <!-- Load React -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   
-  <!-- Load Recharts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js"></script>
-  
-  <!-- Load Babel for JSX support -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.21.4/babel.min.js"></script>
+  <!-- Load all dependencies from more reliable CDNs -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/recharts@2.5.0/umd/Recharts.min.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone@7.21.4/babel.min.js"></script>
   
   <style>
     body {
@@ -62,9 +59,11 @@
   <div id="root"></div>
   
   <script type="text/babel">
+    // Access React components
     const { useState } = React;
     const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = Recharts;
     
+    // Main component
     function CoherentIntegrationVisualization() {
       const [selectedIntegrationTime, setSelectedIntegrationTime] = useState(0.5);
       
@@ -73,31 +72,41 @@
       const fullDopplerSpread = 31.4; // Hz
       
       // Generate bandwidth data
-      const bandwidthData = [];
-      for (let t = 0.1; t <= 5; t += 0.1) {
-        bandwidthData.push({
-          integrationTime: t,
-          bandwidth: 1/t,
-          snrImprovement: 10 * Math.log10(fullDopplerSpread / (1/t))
-        });
-      }
+      const generateBandwidthData = () => {
+        const data = [];
+        for (let t = 0.1; t <= 5; t += 0.1) {
+          data.push({
+            integrationTime: t,
+            bandwidth: 1/t,
+            snrImprovement: 10 * Math.log10(fullDopplerSpread / (1/t))
+          });
+        }
+        return data;
+      };
       
       // Generate spectrum data
-      const spectrumData = [];
-      for (let f = -20; f <= 20; f += 0.2) {
-        // Original Doppler-spread signal
-        const originalAmp = Math.max(0, 1 - Math.pow(Math.abs(f / 15), 6));
-        
-        // Processed spectrum
-        const bw = 1/selectedIntegrationTime;
-        const processedAmp = Math.exp(-Math.pow(f, 2) / (2 * Math.pow(bw/2, 2)));
-        
-        spectrumData.push({
-          frequency: f,
-          original: originalAmp,
-          processed: processedAmp
-        });
-      }
+      const generateSpectrumData = (selectedTime) => {
+        const data = [];
+        for (let f = -20; f <= 20; f += 0.2) {
+          // Original Doppler-spread signal
+          const normalizedF = f / 15;
+          const edgeFactor = Math.max(0, 1 - Math.pow(Math.abs(normalizedF), 6));
+          
+          // Processed spectrum
+          const bw = 1/selectedTime;
+          const processedAmp = Math.exp(-Math.pow(f, 2) / (2 * Math.pow(bw/2, 2)));
+          
+          data.push({
+            frequency: f,
+            original: edgeFactor,
+            processed: processedAmp
+          });
+        }
+        return data;
+      };
+      
+      const bandwidthData = generateBandwidthData();
+      const spectrumData = generateSpectrumData(selectedIntegrationTime);
       
       const handleSliderChange = (event) => {
         setSelectedIntegrationTime(parseFloat(event.target.value));
@@ -110,7 +119,7 @@
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={bandwidthData}
-                margin={{ top: 5, right: 30, left: 20, bottom: 25 }}
+                margin={{ top: 20, right: 30, left: 20, bottom: 25 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis 
@@ -187,7 +196,7 @@
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={spectrumData}
-                margin={{ top: 5, right: 30, left: 20, bottom: 25 }}
+                margin={{ top: 20, right: 30, left: 20, bottom: 25 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis 
@@ -244,7 +253,22 @@
       );
     }
     
-    ReactDOM.render(<CoherentIntegrationVisualization />, document.getElementById('root'));
+    // Render the app after the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        const domContainer = document.getElementById('root');
+        const root = ReactDOM.createRoot(domContainer);
+        root.render(React.createElement(CoherentIntegrationVisualization));
+      } catch (error) {
+        console.error('Rendering error:', error);
+        document.getElementById('root').innerHTML = 
+          '<div style="color: red; padding: 20px;">' + 
+          '<h2>Error loading visualization</h2>' + 
+          '<p>There was an error loading the interactive visualization. Error details:</p>' +
+          '<pre>' + error.toString() + '</pre>' +
+          '</div>';
+      }
+    });
   </script>
 </body>
 </html>
