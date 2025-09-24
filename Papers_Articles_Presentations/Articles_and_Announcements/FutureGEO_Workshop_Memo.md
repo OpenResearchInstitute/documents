@@ -418,4 +418,4 @@ The satellite enabled smaller stations and smaller antennas. It is unfortunate t
 
 Documentation of the workshop and “Lessons Learned from QO-100” will be done starting now through the end of 2025. Prototypes are expected to be demonstrated in 2026.
 
-_Edited by Michelle Thompson W5NYV_
+20250924 Draft by Michelle Thompson W5NYV - missing one participant name and seeking edits, corrections, and additions. 
