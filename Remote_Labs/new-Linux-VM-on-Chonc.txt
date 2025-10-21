@@ -51,3 +51,6 @@ dbus-launch --exit-with-session gnome-session &
 download and install Xilinx tools if needed
 
 set up udev rules for devices if needed
+
+if mapping drives, don't forget to create mount points with mkdir and add lines to /etc/fstab
+
