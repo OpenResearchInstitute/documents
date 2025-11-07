@@ -152,13 +152,21 @@ sudo dfu-util -a boot-env.dfu -D ./boot-env.dfu
 
 For a complete transcript of what that looks like, check the wiki page mentioned near the top of this document. The `-a` argument tells it which partition to update, and the `-D` argument tells it to download the specified local file into the Pluto. You probably need to do all three, in the order listed. You might want to try doing just the first one if you were able to get to a u-boot prompt, on the theory that the other two partitions are probably fine. Or just go ahead and do all three.
 
-If all goes well, the Pluto is reloaded with good firmware but still in DFU mode. To exit DFU mode from here, you can add the `-R` command line flag to any valid dfu-util command. There doesn't seem to be any way to use just the -R flag by itself.
+If all goes well, the Pluto is reloaded with good firmware but still in DFU mode.
+
+### Getting Out of DFU Mode
+
+To exit DFU mode from here, you can add the `-R` command line flag to any valid dfu-util command. There doesn't seem to be any way to use just the -R flag by itself.
 
 ```
 sudo dfu-util -R -a boot-env.dfu -U ./junk-copy-of-boot-env.dfu
 ```
 
-I've added the `-R` flag to a harmless command, that copies the smallest partition from the Pluto to your host (`-U`).
+Here I've added the `-R` flag to a harmless command that copies the smallest partition from the Pluto to your host (`-U`). You can delete `junk-copy-of-boot-env.dfu`, and should, since if the file already exists when you try this command again, it will fail.
+
+If somehow you are stuck in DFU mode and `dfu-util` isn't working, you can also reset the CPU remotely using JTAG, if you have it hooked up. Use the steps listed above, but stop after the last `rst` command. The Pluto should be out of DFU mode at that point.
+
+Of course, if you have physical access, you can just power cycle the Pluto by disconnecting and reconnecting the USB cable(s) plugged into the Pluto.
 
 ### Check the Results
 
