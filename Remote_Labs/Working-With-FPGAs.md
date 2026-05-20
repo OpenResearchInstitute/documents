@@ -293,12 +293,329 @@ To exit the terminal emulation, hit `Control-A` and then `k`, then `y` to confir
 
 Minicom is more full-featured text-based terminal emulation program. Read `man minicom` to learn more.
 
-### Working on the zcu102 (zcu106 TBD) and attached ADRV9002 with the Analog Devices HDL Reference Design and MATLAB/Simulink
-TBD
+### Working on the ZCU102 and attached ADRV9002 with the Analog Devices HDL Reference Design and PetaLinux Tools 2022.2
 
-### Working on the zcu102 and attached ADRV9002 with the Analog Devices HDL Reference Design and Petalinux
+These instructions describe how to bring up the ZCU102 with the Analog Devices ADRV9002 RF transceiver under Linux. Analog Devices publishes an HDL reference design (in `analogdevicesinc/hdl`) and a matching Yocto layer (`analogdevicesinc/meta-adi`) that integrates the ADRV9002 device tree, kernel driver, and IIO support into a PetaLinux build.
 
-These instructions are about how to use the zcu102 with attached ADRV9002. Analog Devices provides an HDL reference design and a version of Petalinux with LibIIO in order to allow you to incorporate your custom cores into the design and get them working over the air. 
+#### Why PetaLinux Tools 2022.2 specifically
+
+ADI's `hdl_2022_r2` and `meta-adi` `2022_R2` branches are organized around PetaLinux Tools 2022.2 conventions. AMD has deprecated PetaLinux Tools as of 2024.1 in favor of pure Yocto with `gen-machine-conf`, but that newer flow requires Vivado 2024.x; with the 2022.2-era tool stack, **PetaLinux Tools 2022.2 is the documented happy path**. Pure Yocto with `meta-adi-xilinx` against an ADI reference XSA is undocumented and runs into real obstacles — the `meta-xilinx-tools` PMU/FSBL BSP template hardcodes `axi_intc_0` and a `system-conf.dtsi` PetaLinux convention file that don't exist in ADI reference designs. Save yourself a long whack-a-mole tour; use PetaLinux Tools 2022.2 for this stack.
+
+#### Cross-machine architecture: build host + JTAG host
+
+In the San Diego lab, this work is split across two machines because the ZCU102 is physically connected to keroppi but PetaLinux Tools can't be cleanly installed on keroppi due to glibc patches from a previous Mathworks workflow:
+
+- **mymelody** — PetaLinux build host. The PetaLinux project lives here, `petalinux-build` and `petalinux-boot` run here.
+- **keroppi** — JTAG host. ZCU102 connected via USB JTAG. Runs `hw_server`. Serial console accessible here.
+- **ZCU102** — Static IP `10.73.1.16` (set during `petalinux-config`).
+
+`petalinux-boot --jtag` from mymelody connects to `hw_server` on keroppi via the `--hw_server-url TCP:keroppi:3121` flag. xsdb on mymelody reads the boot artifacts locally and streams them via the network to hw_server on keroppi, which writes them through JTAG to the board. **No file copying to keroppi is required.**
+
+#### Install PetaLinux Tools 2022.2 (one-time setup)
+
+PetaLinux Tools 2022.2 officially supports Ubuntu 18.04 and 20.04. Ubuntu 22.04 works in practice but requires one symlink fix beforehand.
+
+```
+sudo ln -sf /bin/bash /bin/sh
+```
+
+PetaLinux assumes `/bin/sh` is `bash`; on Ubuntu 22.04 it defaults to `dash` and several build steps fail with cryptic errors.
+
+Download `petalinux-v2022.2-10141622-installer.run` from AMD. **Always pass `--dir` to the installer** — without it, the installer scatters files into your home directory:
+
+```
+chmod +x petalinux-v2022.2-10141622-installer.run
+./petalinux-v2022.2-10141622-installer.run --dir ~/petalinux/2022.2
+```
+
+After install, **open a fresh terminal** before sourcing — stale `PETALINUX` and related environment variables from a partial earlier install can persist and cause baffling errors. In the fresh terminal:
+
+```
+source ~/petalinux/2022.2/settings.sh
+which petalinux-create
+```
+
+If `petalinux-create` resolves to the install path you specified, you're good.
+
+#### Build the bitstream and export the XSA
+
+Follow the standard Vivado 2022.2 / `hdl_2022_r2` flow:
+
+```
+source /tools/Xilinx/Vivado/2022.2/settings64.sh
+git clone https://github.com/analogdevicesinc/hdl
+cd hdl
+git checkout hdl_2022_r2
+cd projects/adrv9001/zcu102
+make CMOS_LVDS_N=0
+```
+
+(The `adrv9001` directory is correct — the adrv9001 and adrv9002 share HDL; only CMOS_LVDS_N differs.)
+
+Open `adrv9001_zcu102.xpr` in Vivado, then `File → Export → Export Hardware...` with `Include bitstream` checked. The resulting `system_top.xsa` is what PetaLinux will consume.
+
+#### Create the PetaLinux project
+
+```
+source ~/petalinux/2022.2/settings.sh
+mkdir -p ~/petalinux-projects
+cd ~/petalinux-projects
+petalinux-create -t project --template zynqMP --name haifuraiya
+cd haifuraiya
+```
+
+Use `zynqMP` for the ZCU102 (the Zynq UltraScale+ part is a different template than `zynq` for the ZC706).
+
+#### Clone meta-adi
+
+Clone alongside your project so PetaLinux can reference it by absolute path. Use the `2022_R2` branch to match Vivado/HDL:
+
+```
+cd ~/petalinux-projects
+git clone -b 2022_R2 https://github.com/analogdevicesinc/meta-adi.git
+ls meta-adi/
+# expect: meta-adi-core/  meta-adi-xilinx/  README.md  ...
+```
+
+#### Import the hardware description and add meta-adi layers
+
+```
+cd ~/petalinux-projects/haifuraiya
+petalinux-config --get-hw-description=/path/to/system_top.xsa
+```
+
+A menuconfig screen will open. **You must navigate to add the meta-adi layers — editing config files alone is not sufficient.** From the menuconfig:
+
+- `Yocto Settings` → `User Layers`
+- Add **slot 0**: absolute path to `meta-adi-core`, e.g.
+  `/home/abraxas3d/petalinux-projects/meta-adi/meta-adi-core`
+- Add **slot 1**: absolute path to `meta-adi-xilinx`, e.g.
+  `/home/abraxas3d/petalinux-projects/meta-adi/meta-adi-xilinx`
+
+**Order matters: core first, xilinx second.** Use absolute paths, not tilde paths.
+
+Save and exit. PetaLinux will extract the Yocto SDK, source the build environment, and add the user layers. This takes a few minutes the first time. Expect output ending with:
+
+```
+[INFO] Adding user layers
+[INFO] Generating workspace directory
+```
+
+Verify the layers were saved:
+
+```
+grep USER_LAYER project-spec/configs/config
+```
+
+Should show your meta-adi paths in `CONFIG_USER_LAYER_0` and `CONFIG_USER_LAYER_1`.
+
+#### Set the device tree
+
+```
+echo 'KERNEL_DTB = "zynqmp-zcu102-rev10-adrv9002"' \
+    >> project-spec/meta-user/conf/petalinuxbsp.conf
+```
+
+Verify:
+
+```
+cat project-spec/meta-user/conf/petalinuxbsp.conf
+```
+
+Without this line, the build uses the default zcu102 device tree and the ADRV9002 will not be in the device tree at all. The matching `pl-delete-nodes-zynqmp-zcu102-rev10-adrv9002.dtsi` from meta-adi-xilinx will be picked up automatically because KERNEL_DTB matches.
+
+#### Set static IP (optional but recommended)
+
+```
+petalinux-config
+```
+
+Navigate: `Subsystem AUTO Hardware Settings` → `Ethernet Settings`:
+- Deselect `Obtain IP address automatically` (space bar)
+- `Static IP address`: `10.73.1.16`
+- `Static IP netmask`: `255.255.255.0`
+- `Static IP gateway`: `10.73.1.1`
+
+Save and exit.
+
+#### Build
+
+```
+petalinux-build 2>&1 | tee /tmp/petalinux-build.log
+```
+
+The first build takes 45-90 minutes. Subsequent rebuilds are much faster (Yocto's sstate caches everything).
+
+Expect to see:
+
+```
+Summary: There were N WARNING messages shown.
+INFO: Failed to copy built images to tftp dir: /tftpboot
+[INFO] Successfully built project
+```
+
+The TFTPBOOT warning is benign on a build host that doesn't have `/tftpboot` (mymelody doesn't, keroppi does). Build artifacts go to `images/linux/` regardless.
+
+#### Package boot artifacts
+
+```
+petalinux-package --boot --fsbl --fpga --u-boot --force
+petalinux-package --prebuilt --force
+```
+
+The first command creates `images/linux/BOOT.BIN` (FSBL + PMUFW + bitstream + BL31 + U-Boot all packaged for SD/QSPI boot). The second populates `pre-built/linux/images/`, which is the directory `petalinux-boot --jtag --prebuilt` reads from.
+
+#### Boot over JTAG
+
+Start `hw_server` on keroppi if not already running:
+
+```
+ssh keroppi
+source /tools/Xilinx/Vitis/2022.2/settings64.sh
+hw_server -d
+ps aux | grep hw_server   # confirm one process running
+```
+
+The default PetaLinux command for booting Linux entirely over JTAG is:
+
+```
+petalinux-boot --jtag --prebuilt 3 --hw_server-url TCP:keroppi:3121 --after-connect "targets 1"
+```
+
+The `--after-connect "targets 1"` is required to disambiguate the JTAG chain — ZCU102 has both the xczu9eg ZynqMP (target 1) and an onboard xc7z020 system controller (target 17). Without this flag, xsdb fails with "Multiple FPGA devices found, please use targets command to select one of: 1, 17".
+
+**Known issue:** On this stack (PetaLinux 2022.2 + ADI XSA + ZCU102), the generated xsdb script halts FSBL after a 4-second timer (`after 4000; stop`) with the A53 MMU still enabled. The next `dow u-boot.elf` to DDR 0x8000000 then fails with a translation fault. Workaround:
+
+```
+# Generate the boot script without running it
+petalinux-boot --jtag --prebuilt 3 \
+    --hw_server-url TCP:keroppi:3121 \
+    --after-connect "targets 1" \
+    --tcl /tmp/petalinux-boot.tcl
+```
+
+Edit `/tmp/petalinux-boot.tcl`. Find:
+
+```
+psu_ps_pl_isolation_removal; psu_ps_pl_reset_config
+puts stderr "INFO: Downloading ELF file: ... u-boot.elf ..."
+dow  ".../u-boot.elf"
+```
+
+Insert `rst -processor -clear-registers` between the `psu_ps_pl_*` line and the `dow u-boot.elf` line:
+
+```
+psu_ps_pl_isolation_removal; psu_ps_pl_reset_config
+rst -processor -clear-registers
+puts stderr "INFO: Downloading ELF file: ... u-boot.elf ..."
+dow  ".../u-boot.elf"
+```
+
+Run xsdb directly with the edited script:
+
+```
+xsdb /tmp/petalinux-boot.tcl
+```
+
+Monitor the ZCU102 serial console concurrently:
+
+```
+ssh keroppi
+screen /dev/zcu102_uart1 115200
+```
+
+Expect (over 5-10 minutes — kernel + initramfs stream over USB JTAG):
+
+```
+PMU Firmware 2022.2 ...
+Xilinx Zynq MP First Stage Boot Loader Release 2022.2 ...
+NOTICE: BL31: v2.6(release)...
+U-Boot 2022.04 ...
+Booting Linux on physical CPU 0x0
+...
+[lots of kernel log]
+adrv9002 spi0.0: ...   <- driver probe
+...
+zynqmp-zcu102-rev10-adrv9002 login:
+```
+
+Default login is `root` / `analog` (will be hardened later).
+
+#### Verification — TBD pending boot success
+
+Once at a login prompt:
+
+```
+dmesg | grep -i adrv9002
+iio_info
+```
+
+Expected: ADRV9002 driver probe messages, IIO enumeration listing the ADRV9002 alongside the PS-side AMS sensors.
+
+#### Recovering from a wedged JTAG state
+
+Failed JTAG boots can leave the A53 halted with stale MMU state. Symptoms on a retry are "EDITR timeout" on OCM writes (`0xFFFC0000`) or memory errors very early in the sequence. Recovery options, fastest first:
+
+```
+# Try a system reset via xsdb (use the PSU target, not target 1)
+xsdb << 'EOF'
+connect -url TCP:keroppi:3121
+targets -set -nocase -filter {name =~ "*PSU*"}
+rst -system
+disconnect
+EOF
+```
+
+If hw_server itself becomes unresponsive after a failed boot (`Connection refused` on retry), restart it:
+
+```
+ssh keroppi
+ps aux | grep hw_server
+kill <pid>  # if running
+source /tools/Xilinx/Vitis/2022.2/settings64.sh
+hw_server -d
+```
+
+If both of the above fail, a physical power-cycle of the ZCU102 always works. Coordinate with lab staff if needed.
+
+#### Common pitfalls (reference)
+
+Numbered for easy reference when troubleshooting:
+
+1. **`/bin/sh` is `dash` on Ubuntu** — PetaLinux assumes bash. Fix: `sudo ln -sf /bin/bash /bin/sh`.
+
+2. **PetaLinux installer scatters files** if `--dir` is omitted. Always specify the install directory.
+
+3. **Stale `PETALINUX` environment variables** from earlier failed installs persist in the current shell. Open a fresh terminal after install before sourcing.
+
+4. **User layers must be added via `petalinux-config` menuconfig**, not by hand-editing `project-spec/configs/config`. Editing the file directly does work for verification but the layers are properly registered only when added via the menu.
+
+5. **Layer order matters**: meta-adi-core first (slot 0), meta-adi-xilinx second (slot 1).
+
+6. **`KERNEL_DTB` is required for ADI hardware**. Without the explicit setting in `petalinuxbsp.conf`, the default zcu102 DT is used and the ADRV9002 is invisible to Linux.
+
+7. **TFTPBOOT warning at end of build is harmless** on a build host without `/tftpboot`. Build still succeeds.
+
+8. **`petalinux-package --prebuilt --force` is required after every build** that you want to JTAG-boot via `--prebuilt N`. The prebuilt directory is separate from `images/linux/`.
+
+9. **Multi-FPGA JTAG target ambiguity** — ZCU102 enumerates both xczu9eg (target 1) and onboard xc7z020 system controller (target 17). PetaLinux's xsdb script doesn't auto-pick. Solution: `--after-connect "targets 1"`. Note: hw_server's `-e "set jtag-port-filter Xilinx"` is too broad (both chips match) and `xczu9eg` is too narrow (matches nothing); rely on `--after-connect` instead.
+
+10. **MMU translation fault on `dow u-boot.elf`** — PetaLinux's default JTAG boot script has a bug for this hardware combination: FSBL leaves the A53 with MMU enabled when halted by the script's `after 4000; stop`. Workaround: `--tcl` dump, insert `rst -processor -clear-registers` before the U-Boot `dow`, run xsdb directly.
+
+11. **JTAG board state wedges between failed boot attempts** — A53 stays halted with stale MMU/registers. Recovery: `rst -system` via PSU target, restart hw_server, or power-cycle the board.
+
+12. **`rst -system` is only valid on certain targets** (PSU or processor, not the FPGA-level target 1).
+
+13. **xsdb cosmetic core-dumps on exit** when fed via heredoc are functionally harmless — the commands completed before the dump.
+
+14. **Shell-to-tcl quote escaping is fragile** for `--after-connect` complex filters. Use simple `"targets 1"` for index-based selection, or generate the tcl with `--tcl` and edit it directly for anything more complex.
+
+
+
+
+### ARCHIVED Working on the zcu102 and attached ADRV9002 with the Analog Devices HDL Reference Design and Petalinux 
+
+These instructions are about how to use the zcu102 with attached ADRV9002 with older versions of Vivado. This is not the current procedure. Analog Devices provides an HDL reference design and a version of Petalinux with LibIIO in order to allow you to incorporate your custom cores into the design and get them working over the air. 
 
 #### Get set up to use Vivado 2019.1 or 2021.1
 
