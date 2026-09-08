@@ -1,0 +1,33 @@
+band,station,delta_vs_3cm_db,rf_watts_for_equal_service
+9 cm  (3.402-3.410 GHz),"Chicago, US",-4.5,35.0
+9 cm  (3.402-3.410 GHz),"New York, US",-4.2,38.0
+9 cm  (3.402-3.410 GHz),"Bochum, DE",-4.3,37.0
+9 cm  (3.402-3.410 GHz),"London, GB",-3.8,42.0
+9 cm  (3.402-3.410 GHz),"Madrid, ES",-3.1,49.0
+9 cm  (3.402-3.410 GHz),"Sao Paulo, BR",-4.4,36.0
+9 cm  (3.402-3.410 GHz),"Accra, GH",-5.9,26.0
+9 cm  (3.402-3.410 GHz),"Miami, US",-5.3,30.0
+6 cm  (5.830-5.850 GHz),"Chicago, US",-3.2,48.0
+6 cm  (5.830-5.850 GHz),"New York, US",-3.0,50.0
+6 cm  (5.830-5.850 GHz),"Bochum, DE",-3.1,49.0
+6 cm  (5.830-5.850 GHz),"London, GB",-2.7,54.0
+6 cm  (5.830-5.850 GHz),"Madrid, ES",-2.1,62.0
+6 cm  (5.830-5.850 GHz),"Sao Paulo, BR",-3.2,48.0
+6 cm  (5.830-5.850 GHz),"Accra, GH",-4.3,37.0
+6 cm  (5.830-5.850 GHz),"Miami, US",-3.8,42.0
+3 cm  (10.450-10.500 GHz),"Chicago, US",0.0,100.0
+3 cm  (10.450-10.500 GHz),"New York, US",0.0,100.0
+3 cm  (10.450-10.500 GHz),"Bochum, DE",0.0,100.0
+3 cm  (10.450-10.500 GHz),"London, GB",0.0,100.0
+3 cm  (10.450-10.500 GHz),"Madrid, ES",0.0,100.0
+3 cm  (10.450-10.500 GHz),"Sao Paulo, BR",0.0,100.0
+3 cm  (10.450-10.500 GHz),"Accra, GH",0.0,100.0
+3 cm  (10.450-10.500 GHz),"Miami, US",0.0,100.0
+1.25 cm (24.000-24.050 GHz),"Chicago, US",12.8,1905.0
+1.25 cm (24.000-24.050 GHz),"New York, US",11.9,1549.0
+1.25 cm (24.000-24.050 GHz),"Bochum, DE",12.8,1905.0
+1.25 cm (24.000-24.050 GHz),"London, GB",11.2,1318.0
+1.25 cm (24.000-24.050 GHz),"Madrid, ES",8.7,741.0
+1.25 cm (24.000-24.050 GHz),"Sao Paulo, BR",12.1,1622.0
+1.25 cm (24.000-24.050 GHz),"Accra, GH",15.8,3802.0
+1.25 cm (24.000-24.050 GHz),"Miami, US",14.5,2818.0

@@ -1,0 +1,33 @@
+band,station,esn0_db,modcod,mbps,opv_channels
+9 cm  (3.402-3.410 GHz),"Chicago, US",6.5,QPSK 5/6,13.24,413
+9 cm  (3.402-3.410 GHz),"New York, US",6.8,8PSK 3/5,14.24,445
+9 cm  (3.402-3.410 GHz),"Bochum, DE",5.9,QPSK 3/4,11.9,371
+9 cm  (3.402-3.410 GHz),"London, GB",6.2,QPSK 5/6,13.24,413
+9 cm  (3.402-3.410 GHz),"Madrid, ES",6.8,8PSK 3/5,14.24,445
+9 cm  (3.402-3.410 GHz),"Sao Paulo, BR",7.4,8PSK 3/5,14.24,445
+9 cm  (3.402-3.410 GHz),"Accra, GH",6.8,8PSK 3/5,14.24,445
+9 cm  (3.402-3.410 GHz),"Miami, US",6.9,8PSK 3/5,14.24,445
+6 cm  (5.830-5.850 GHz),"Chicago, US",5.2,QPSK 3/4,11.9,371
+6 cm  (5.830-5.850 GHz),"New York, US",5.6,QPSK 3/4,11.9,371
+6 cm  (5.830-5.850 GHz),"Bochum, DE",4.6,QPSK 2/3,10.58,330
+6 cm  (5.830-5.850 GHz),"London, GB",5.0,QPSK 3/4,11.9,371
+6 cm  (5.830-5.850 GHz),"Madrid, ES",5.8,QPSK 3/4,11.9,371
+6 cm  (5.830-5.850 GHz),"Sao Paulo, BR",6.2,QPSK 3/4,11.9,371
+6 cm  (5.830-5.850 GHz),"Accra, GH",5.1,QPSK 3/4,11.9,371
+6 cm  (5.830-5.850 GHz),"Miami, US",5.4,QPSK 3/4,11.9,371
+3 cm  (10.450-10.500 GHz),"Chicago, US",2.0,QPSK 2/5,6.31,197
+3 cm  (10.450-10.500 GHz),"New York, US",2.5,QPSK 1/2,7.91,247
+3 cm  (10.450-10.500 GHz),"Bochum, DE",1.5,QPSK 2/5,6.31,197
+3 cm  (10.450-10.500 GHz),"London, GB",2.3,QPSK 1/2,7.91,247
+3 cm  (10.450-10.500 GHz),"Madrid, ES",3.7,QPSK 3/5,9.5,297
+3 cm  (10.450-10.500 GHz),"Sao Paulo, BR",3.0,QPSK 1/2,7.91,247
+3 cm  (10.450-10.500 GHz),"Accra, GH",0.8,QPSK 2/5,6.31,197
+3 cm  (10.450-10.500 GHz),"Miami, US",1.6,QPSK 2/5,6.31,197
+1.25 cm (24.000-24.050 GHz),"Chicago, US",-10.8,none - link does not close,0.0,0
+1.25 cm (24.000-24.050 GHz),"New York, US",-9.3,none - link does not close,0.0,0
+1.25 cm (24.000-24.050 GHz),"Bochum, DE",-11.2,none - link does not close,0.0,0
+1.25 cm (24.000-24.050 GHz),"London, GB",-8.8,none - link does not close,0.0,0
+1.25 cm (24.000-24.050 GHz),"Madrid, ES",-5.1,none - link does not close,0.0,0
+1.25 cm (24.000-24.050 GHz),"Sao Paulo, BR",-9.1,none - link does not close,0.0,0
+1.25 cm (24.000-24.050 GHz),"Accra, GH",-14.9,none - link does not close,0.0,0
+1.25 cm (24.000-24.050 GHz),"Miami, US",-12.9,none - link does not close,0.0,0
