@@ -33,7 +33,7 @@ We want neither of these figures. Policy built on either error will be wrong. Sp
 
 ## 2. Approach
 
-A simple flat list of categories invites argument over edge cases. It's difficult to validate or verify a list of brain-stormed categories, even if they come from an experienced individual or group. It's difficult to avoid listing nested or dependent categories as independent categories. It's easy to have inadvertent gaps in a list of categories. In order to produce as high quality a taxonomy as possible, we describe each kind of traffic by using five independent **facets**, and then we name the **classes** that show up in practice. A new kind of traffic gets placed by its facets. Its name can come later. This allows the taxonomy to adjust and adapt to observed reality. 
+A simple flat list of categories invites argument over edge cases. It's difficult to validate or verify a list of brain-stormed categories, even if they come from an experienced individual or group. It's difficult to avoid listing nested or dependent categories as independent categories. It's easy to have inadvertent gaps in a list of categories. In order to produce as high quality a taxonomy as possible, we describe each kind of traffic by using five independent qualities, or **facets**, and then we name the **classes** that emerge from these qualities. A new kind of traffic gets placed by its facets. Its name can come later. This allows the taxonomy to adjust and adapt to observed reality as types of traffic continue to develop over time. The term facets is borrowed from gaming (e.g Dragon) dice and game theory. Choosing the die with the right number of sides makes the game work well. 
 
 | Facet | Question it answers | Possible Values |
 |---|---|---|
