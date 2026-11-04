@@ -63,6 +63,8 @@ A simple flat list of categories invites argument over edge cases. It's difficul
 | **T8** | Continuous sensing streams (smart glasses, wearables, always-listening assistants) | Human or system | Edge or cloud | Device to/from service | **Sustained uplink** | Sometimes |
 | **T9** | Network-internal AI (RAN intelligent controller data, AI-RAN, network telemetry) | Network-internal | Edge or network | Inside the operator's network | Telemetry and control | Operator only |
 
+![AI Traffic Classes Overview](AI_traffic_taxonomy_overview.jpg)
+
 ### Explicitly not AI traffic
 
 **X1. AI-generated content consumed as ordinary media.** An AI-generated video watched on a streaming platform behaves on the network exactly like any other video. It is an **AI content** question, about provenance and labeling. It is not an **AI traffic** question. Counting it as AI traffic inflates the figures and tells a network planner nothing new. 
