@@ -65,3 +65,6 @@ Reads the frequency of a peak value from the RSA5065N Spectrum Analyzer. Manuall
 
 ### `sg_plus1hz.py`
 A simple example that reads the current frequency from the signal generator, adds one Hz to the frequency, and commands the signal generator to tune to the incremented frequency.
+
+### `vck190_powercycle.py`
+Controls the AC power to the VCK190 development board through a USB AC power switch. If the power is on, it is turned off for 30 seconds and then turned back on. If not, the power is just turned on. The USB AC power switch is connected to the chococat VM, and the script is installed in `/usr/local/bin/vck190_powercycle.py`. This remote device does not use SCPI or VISA, just a dead simple serial interface through a built-in FTDI USB to serial adapter.
