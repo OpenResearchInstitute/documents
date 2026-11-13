@@ -6,7 +6,7 @@ The instruments are connected to the Remote Lab local area network. They can be 
 
 Most of the instruments are controlled using [SCPI](https://en.wikipedia.org/wiki/Standard_Commands_for_Programmable_Instruments) commands via [VISA](https://en.wikipedia.org/wiki/Virtual_instrument_software_architecture). See [Getting Screenshots](../Getting%20Screenshots.md) for an introduction to SCPI/VISA programming for Remote Lab instruments. See also the [Test Equipment Documentation](../Test_Equipment) for information on the commands available for each instrument. Most instruments have a separate "programming manual", rather than including the remote control details in the main user manual.
 
-## Prerequisites for all scripts
+## Prerequisites for most scripts
 
 * Python 3
 * pip3 install pyvisa pyvisa-py
@@ -68,3 +68,6 @@ A simple example that reads the current frequency from the signal generator, add
 
 ### `vck190_powercycle.py`
 Controls the AC power to the VCK190 development board through a USB AC power switch. If the power is on, it is turned off for 30 seconds and then turned back on. If not, the power is just turned on. The USB AC power switch is connected to the chococat VM, and the script is installed in `/usr/local/bin/vck190_powercycle.py`. This remote device does not use SCPI or VISA, just a dead simple serial interface through a built-in FTDI USB to serial adapter.
+
+### `vck190_poweroff.py`
+Like `vck190_powercycle.py`, but just turns the power off.
